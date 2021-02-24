@@ -82,6 +82,7 @@ nnoremap <S-Enter> o<Esc>k
 
 
 " FavEx (/Users/ranelpadon/\.vim/plugged/FavEx/favlist)
+
 noremap <Leader>fa :FF<CR>                                                      " fav add
 noremap <Leader>fl :FE<CR>                                                       " fav list
 
@@ -232,11 +233,12 @@ nnoremap l e
 nnoremap gl ge
 nnoremap L E
 nnoremap gL gE
-nnoremap o i
+nnoremap h i
 " next match in search
-"nnoremap s n
+nnoremap s n
+nnoremap ' ;
 " previous match in search
-"nnoremap S N
+nnoremap S N
 " dont save and quit all.
 nnoremap zz :qa!<CR>                                                            " exit when in Normal mode
 " save all, ZZ by default will save the current buffer only and if there are changes only, then will quit
@@ -445,11 +447,11 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> O :call <SID>show_documentation()<CR>
+nnoremap <silent> <leader>o :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
     if (index(['vim','help'], &filetype) >= 0)
