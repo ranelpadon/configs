@@ -129,16 +129,12 @@
             "after": ["l"]
         },
         {
-            "before": ["o"],
+            "before": ["h"],
             "after": ["i"]
         },
         {
-            "before": ["s"],
-            "after": ["n"]
-        },
-        {
-            "before": ["S"],
-            "after": ["N"]
+            "before": ["'"],
+            "after": [";"]
         },
         {
             "before": ["l"],
@@ -209,6 +205,10 @@
         {
             "before": ["e"],
             "after": ["k"]
+        },
+        {
+            "before": ["s"],
+            "after": ["z"]
         }
     ],
     "vim.visualModeKeyBindingsNonRecursive": [
@@ -265,4 +265,6 @@
     "vim.statusBarColors.visualline": ["#c678dd", "#111111"],
     "vim.statusBarColors.visualblock": ["#c678dd", "#111111"],
     "vim.textwidth": 120,
+    "vim.sneak": true,
+    "git.enableStatusBarSync": false,
 }

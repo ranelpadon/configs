@@ -11,7 +11,7 @@ tmux new-window -t Workspace -n "Dev"
 tmux new-window -t Workspace -n "Home"
 
 # Auto-runs
-tmux send-keys -t "Workspace:Vim ETS" "cd ~/dev/ticketflap/ticketing && vim" Enter
+tmux send-keys -t "Workspace:Vim ETS" "cd ~/dev/ticketflap/ticketing && pyenv activate ticketing && vim" Enter
 tmux send-keys -t "Workspace:Vim Vortex" "cd ~/Dropbox/Vortex && vim" Enter
 tmux send-keys -t "Workspace:Vim Configs" "cd ~/dev/configs && vim" Enter
 tmux send-keys -t "Workspace:ETS" "cd ~/dev/ticketflap/ticketing" Enter
