@@ -1,0 +1,268 @@
+{
+    "window.zoomLevel": -1,
+    "terminal.integrated.fontFamily": "MesloLGS NF",
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorStyle": "line",
+    "editor.fontFamily": "Monaco, Menlo, 'Courier New', monospace",
+    "code-runner.fileDirectoryAsCwd": true,
+    "terminal.integrated.cwd": ".",
+    "terminal.integrated.shell.osx": "/usr/local/bin/zsh",
+    "atomKeymap.promptV3Features": true,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.formatOnPaste": false,
+    "workbench.startupEditor": "newUntitledFile",
+    "editor.renderWhitespace": "all",
+    "editor.wrappingIndent": "indent",
+    "editor.rulers": [
+        80
+    ],
+    "notes.base": "/Users/ranelpadon/Dropbox/Vortex",
+    "editor.minimap.enabled": false,
+    "workbench.colorCustomizations": {
+        "activityBarBadge.background": "#5C6BC0",
+        "list.activeSelectionForeground": "#5C6BC0",
+        "list.inactiveSelectionForeground": "#5C6BC0",
+        "list.highlightForeground": "#5C6BC0",
+        "scrollbarSlider.activeBackground": "#5C6BC050",
+        "editorSuggestWidget.highlightForeground": "#5C6BC0",
+        "textLink.foreground": "#5C6BC0",
+        "progressBar.background": "#5C6BC0",
+        "pickerGroup.foreground": "#5C6BC0",
+        "tab.activeBorder": "#5C6BC0",
+        "statusBar.background": "#98c379",
+        "statusBar.noFolderBackground": "#98c379",
+        "statusBar.debuggingBackground": "#98c379",
+        "statusBar.foreground": "#111111"
+    },
+    "python.disableInstallationCheck": true,
+    "editor.fontLigatures": true,
+    "python.terminal.executeInFileDir": true,
+    "code-runner.clearPreviousOutput": true,
+    "workbench.editor.tabSizing": "shrink",
+    "window.nativeTabs": false,
+    "restructuredtext.confPath": "${workspaceRoot}/ticketing/docs/ticketflap/dev/source",
+    "editor.autoIndent":"keep",
+    "editor.wordWrapColumn": 120,
+    "breadcrumbs.enabled": true,
+    "python.jediEnabled": false,
+    "python.autoComplete.extraPaths": [
+        "/Users/ranelpadon/dev/ticketflap/ticketing",
+        "/Users/ranelpadon/dev/ticketflap/ticketing/apps",
+        "/Users/ranelpadon/dev/ticketflap/ticketing/conf"
+    ],
+    "workbench.colorTheme": "One Dark Pro",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "workbench.iconTheme": "file-icons",
+    "workbench.tree.indent": 24,
+    "workbench.tree.renderIndentGuides": "always",
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.activityBar.visible": false,
+    "editor.tabCompletion": "on",
+    "editor.snippetSuggestions": "top",
+    "editor.find.seedSearchStringFromSelection": false,
+    "files.associations": {
+        "*.py.new": "python",
+        "*.py.old": "python",
+        "*.module": "php"
+    },
+    "python.languageServer": "Jedi",
+    "python.terminal.activateEnvironment": false,
+    "python.sortImports.path": "/usr/local/bin/isort",
+    "python.venvPath": "~/.pyenv",
+    "extensions.ignoreRecommendations": true,
+    "python.showStartPage": false,
+    "git.path": "",
+    "python.analysis.extraPaths": [
+        "/Users/ranelpadon/dev/ticketflap/ticketing",
+        "/Users/ranelpadon/dev/ticketflap/ticketing/apps",
+        "/Users/ranelpadon/dev/ticketflap/ticketing/conf"
+    ],
+    "searchEverywhere.shouldInitOnStartup": true,
+    "python.envFile": "${workspaceFolder}/.vscode/.env",
+
+    "vim.leader": "<space>",
+    "vim.smartRelativeLine": true,
+    "vim.hlsearch": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.highlightedyank.enable": true,
+    "vim.highlightedyank.duration": 500,
+    "vim.timeout": 500,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["<C-k>"],
+            "commands": ["editor.action.moveLinesDownAction"]
+        },
+        {
+            "before": ["<C-i>"],
+            "commands": ["editor.action.moveLinesUpAction"]
+        } ,     
+       
+    ],
+    "vim.visualModeKeyBindings": [
+        {
+        "before": [">"],
+        "after": [">", "g", "v"]
+        },
+        {
+        "before": ["<"],
+        "after": ["<", "g", "v"]
+        },
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["k"],
+            "after": ["h"]
+        },
+        {
+            "before": ["n"],
+            "after": ["j"]
+        },
+        {
+            "before": ["e"],
+            "after": ["k"]
+        },
+        {
+            "before": ["i"],
+            "after": ["l"]
+        },
+        {
+            "before": ["o"],
+            "after": ["i"]
+        },
+        {
+            "before": ["s"],
+            "after": ["n"]
+        },
+        {
+            "before": ["S"],
+            "after": ["N"]
+        },
+        {
+            "before": ["l"],
+            "after": ["e"]
+        },
+        {
+            "before": ["g", "l"],
+            "after": ["g", "e"]
+        },
+        {
+            "before": ["L"],
+            "after": ["E"]
+        },
+        {
+            "before": ["g", "L"],
+            "after": ["g", "E"]
+        },
+        {
+            "before": ["<Enter>"],
+            "after": ["O", "<Esc>", "j"]
+        },
+        {
+            "before": ["<Esc>", "<Esc>"],
+            "commands": [":nohl"]
+        },
+        {
+            "before": ["<C-k>"],
+            "commands": ["editor.action.moveLinesDownAction"]
+        },
+        {
+            "before": ["<C-i>"],
+            "commands": ["editor.action.moveLinesUpAction"]
+        },
+        {
+            "before": ["<leader>", "w"],
+            "commands": ["workbench.action.files.save"]
+        },
+        {
+            "before": ["<leader>", "q"],
+            "commands": ["workbench.action.closeActiveEditor"]
+        },
+        {
+            "before": ["<leader>", "e"],
+            "commands": ["workbench.action.toggleSidebarVisibility"]
+        },
+        {
+            "before": ["<leader>", "/"],
+            "commands": ["editor.action.commentLine"]
+        },
+        {
+            "before": ["<leader>", "d"],
+            "commands": ["editor.action.copyLinesDownAction"]
+        },
+        {
+            "before": ["<leader>", "s", "a"],
+            "commands": ["editor.action.selectAll"]
+        },
+        {
+            "before": ["<leader>", "f"],
+            "commands": ["revealInExplorer"]
+        },
+    ],
+    "vim.operatorPendingModeKeyBindingsNonRecursive": [
+        {
+            "before": ["n"],
+            "after": ["j"]
+        },
+        {
+            "before": ["e"],
+            "after": ["k"]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": ["n"],
+            "after": ["j"]
+        },
+        {
+            "before": ["e"],
+            "after": ["k"]
+        },
+        {
+            "before": ["k"],
+            "after": ["h"]
+        },
+        {
+            "before": ["i"],
+            "after": ["l"]
+        },
+        {
+            "before": ["<C-k>"],
+            "commands": ["editor.action.moveLinesDownAction"]
+        },
+        {
+            "before": ["<C-i>"],
+            "commands": ["editor.action.moveLinesUpAction"]
+        },
+        {
+            "before": ["<leader>", "/"],
+            "commands": ["editor.action.commentLine"]
+        },
+        {
+            "before": ["<leader>", "d"],
+            "commands": ["editor.action.copyLinesDownAction"]
+        }
+    ],
+    "vim.handleKeys": {
+        "<C-a>": false,
+        // Copy
+        "<C-c>": false,
+        // Cut
+        "<C-x>": false,
+        // Paste
+        "<C-v>": false,
+        "<C-z>": false,
+        "<C-y>": false,
+        "<C-n>": false,
+        "<C-e>": false
+    },
+    "vim.statusBarColorControl": true,
+    "vim.statusBarColors.normal": ["#98c379", "#111111"],
+    "vim.statusBarColors.insert": ["#61afef", "#111111"],
+    "vim.statusBarColors.visual": ["#c678dd", "#111111"],
+    "vim.statusBarColors.visualline": ["#c678dd", "#111111"],
+    "vim.statusBarColors.visualblock": ["#c678dd", "#111111"],
+    "vim.textwidth": 120,
+}
