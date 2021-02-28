@@ -29,9 +29,9 @@
         "progressBar.background": "#5C6BC0",
         "pickerGroup.foreground": "#5C6BC0",
         "tab.activeBorder": "#5C6BC0",
-        "statusBar.background": "#98c379",
-        "statusBar.noFolderBackground": "#98c379",
-        "statusBar.debuggingBackground": "#98c379",
+        "statusBar.background": "#61afef",
+        "statusBar.noFolderBackground": "#61afef",
+        "statusBar.debuggingBackground": "#61afef",
         "statusBar.foreground": "#111111"
     },
     "python.disableInstallationCheck": true,
