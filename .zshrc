@@ -1032,8 +1032,8 @@ export PATH="/usr/local/opt/node@12/bin:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/ranelpadon/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/ranelpadon/google-cloud-sdk/path.zsh.inc'; fi
-
 # The next line enables shell command completion for gcloud.
+
 if [ -f '/Users/ranelpadon/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ranelpadon/google-cloud-sdk/completion.zsh.inc'; fi
 
 # export TERM="alacritty"
@@ -1065,4 +1065,9 @@ linkify() {
     mv $1 "$1_orig"
     filename="$(basename -- $1)"
     ln -s ~/dev/configs/$filename $1 
+}
+
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[3 q"
 }

@@ -175,7 +175,7 @@
     "command": "workbench.action.showPreviousWindowTab"
   },
   {
-    "key": "ctrl+e",
+    "key": "ctrl+i",
     "command": "workbench.action.nextEditor"
   },
   {
@@ -212,7 +212,8 @@
   },
   {
     "key": "shift+r",
-    "command": "renameFile"
+    "command": "renameFile",
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "shift+5",
@@ -260,14 +261,14 @@
     "when": "filesExplorerFocus && !inputFocus"
   },
   {
-    "key": "space space",
+    "key": "ctrl+t",
     "command": "workbench.explorer.fileView.focus",
-    "when": "editorTextFocus",
+    "when": "editorTextFocus && vim.active && vim.mode == 'Normal'"
   },
   {
-    "key": "space space",
+    "key": "ctrl+t",
     "command": "workbench.action.focusFirstEditorGroup",
-    "when": "filesExplorerFocus",
+    "when": "filesExplorerFocus"
   },
   {
     "key": "cmd+1",
@@ -280,7 +281,6 @@
   {
     "key": "n",
     "command": "list.focusDown",
-    "when": "filesExplorerFocus && !inputFocus"
     "when": "filesExplorerFocus && !inputFocus"
   },
   {
@@ -303,7 +303,28 @@
     "command": "editor.action.clipboardCopyAction"
   },
   {
-    "key": "cmd+c",
-    "command": "-editor.action.clipboardCopyAction"
+    "key": "ctrl+p",
+    "command": "workbench.action.quickOpenNavigatePreviousInFilePicker",
+    "when": "inFilesPicker && inQuickOpen"
+  },
+  {
+    "key": "ctrl+u",
+    "command": "editor.action.moveLinesUpAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+up",
+    "command": "-editor.action.moveLinesUpAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+e",
+    "command": "editor.action.moveLinesDownAction",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+u",
+    "command": "editor.action.moveLinesUpAction",
+    "when": "editorTextFocus"
   }
 ]
