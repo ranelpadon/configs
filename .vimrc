@@ -105,13 +105,21 @@ augroup END
 
 "unmap \fe
 autocmd VimEnter * noremap <Leader>fe :Lex<CR>
-" autocmd VimEnter * noremap u k
 noremap <Leader>e :Lex<CR>
 " Wipe previous netrw buffer
 augroup AutoDeleteNetrwHiddenBuffers
     au!
     au FileType netrw setlocal bufhidden=wipe
 augroup end
+
+
+" FILE PATHS
+" absolute path  (/something/src/foo.txt)
+nnoremap <leader>fpa :let @*=expand("%:p")<CR>
+" relative path  (src/foo.txt)
+nnoremap <leader>fpr :let @*=expand("%")<CR>
+" filename       (foo.txt)
+nnoremap <leader>fpn :let @*=expand("%:t")<CR>
 
 
 " GENERAL CONFIG
@@ -219,9 +227,8 @@ vnoremap <Leader>d :copy '><CR>
 
 " MACRO
 set lazyredraw                                                                  " avoid redrawing screen in running macro since it's expensive
-" need to use the mapped values of n since `j` now refers to `next` search result.
-"let @n="jjI  - \<Esc>kI* \<Esc>kddjj"
-let @n="I  - \<Esc>eI* \<Esc>2ndd"
+" need to use the re-mapped values of j/k as e/u.
+let @n="I  - \<Esc>uI* \<Esc>2edd"
 nnoremap <F1> :g/^https/ norm @n <CR>
 
 
@@ -264,14 +271,10 @@ nnoremap L E
 vnoremap L E
 nnoremap gL gE
 vnoremap gL gE
-" nnoremap h i
-""nnoremap ' ;
-" previous match in search
 nnoremap 'a "a
 nnoremap 'r "r
 nnoremap 's "s
 nnoremap 't "t
-""nnoremap " '
 nnoremap <Leader>h "_
 
 " dont save and quit all.
