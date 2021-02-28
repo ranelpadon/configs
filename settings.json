@@ -113,28 +113,56 @@
     ],
     "vim.normalModeKeyBindingsNonRecursive": [
         {
-            "before": ["k"],
+            "before": ["n"],
             "after": ["h"]
         },
         {
-            "before": ["n"],
-            "after": ["j"]
+            "before": ["e"],
+            "after": ["j", "z", "z"]
         },
         {
-            "before": ["e"],
-            "after": ["k"]
+            "before": ["E"],
+            "after": ["7", "j", "z", "z"]
+        },
+        {
+            "before": ["u"],
+            "after": ["k", "z", "z"]
+        },
+        {
+            "before": ["U"],
+            "after": ["7", "k", "z", "z"]
         },
         {
             "before": ["i"],
             "after": ["l"]
         },
         {
+            "before": ["k"],
+            "after": ["u"]
+        },
+        {
             "before": ["h"],
+            "after": ["o"]
+        },
+        {
+            "before": ["H"],
+            "after": ["O"]
+        },
+        {
+            "before": ["o"],
             "after": ["i"]
         },
         {
-            "before": ["'"],
-            "after": [";"]
+            "before": ["O"],
+            "after": ["I"]
+        },
+        {
+            "before": [";"],
+            "after": [";", "z", "z"]
+        },
+        {
+            "before": [","],
+            "after": [",", "z", "z"]
         },
         {
             "before": ["l"],
@@ -153,6 +181,42 @@
             "after": ["g", "E"]
         },
         {
+            "before": ["m"],
+            "after": ["n", "z", "z"]
+        },
+        {
+            "before": ["M"],
+            "after": ["N", "z", "z"]
+        },
+        {
+            "before": ["p"],
+            "after": ["p", "z", "z"]
+        },
+        {
+            "before": ["P"],
+            "after": ["P", "z", "z"]
+        },
+        {
+            "before": ["'", "a"],
+            "after": ["\"", "a"]
+        },
+        {
+            "before": ["'", "r"],
+            "after": ["\"", "r"]
+        },
+        {
+            "before": ["'", "s"],
+            "after": ["\"", "s"]
+        },
+        {
+            "before": ["'", "t"],
+            "after": ["\"", "t"]
+        },
+        {
+            "before": ["<leader>", "h"],
+            "after": ["\"", "_"]
+        },
+        {
             "before": ["<Enter>"],
             "after": ["O", "<Esc>", "j"]
         },
@@ -161,11 +225,11 @@
             "commands": [":nohl"]
         },
         {
-            "before": ["<C-k>"],
+            "before": ["<C-e>"],
             "commands": ["editor.action.moveLinesDownAction"]
         },
         {
-            "before": ["<C-i>"],
+            "before": ["<C-u>"],
             "commands": ["editor.action.moveLinesUpAction"]
         },
         {
@@ -195,16 +259,16 @@
         {
             "before": ["<leader>", "f"],
             "commands": ["revealInExplorer"]
-        },
+        }
     ],
     "vim.operatorPendingModeKeyBindingsNonRecursive": [
         {
-            "before": ["n"],
-            "after": ["j"]
+            "before": ["e"],
+            "after": ["j", "z", "z"]
         },
         {
-            "before": ["e"],
-            "after": ["k"]
+            "before": ["u"],
+            "after": ["k", "z", "z"]
         },
         {
             "before": ["s"],
@@ -213,15 +277,15 @@
     ],
     "vim.visualModeKeyBindingsNonRecursive": [
         {
-            "before": ["n"],
+            "before": ["e"],
             "after": ["j"]
         },
         {
-            "before": ["e"],
+            "before": ["u"],
             "after": ["k"]
         },
         {
-            "before": ["k"],
+            "before": ["n"],
             "after": ["h"]
         },
         {
@@ -229,11 +293,22 @@
             "after": ["l"]
         },
         {
-            "before": ["<C-k>"],
+            "before": ["l"],
+            "after": ["e"]
+        },
+        {
+            "before": ["L"],
+            "after": ["E"]
+        },        {
+            "before": ["k"],
+            "after": ["u"]
+        },
+        {
+            "before": ["<C-e>"],
             "commands": ["editor.action.moveLinesDownAction"]
         },
         {
-            "before": ["<C-i>"],
+            "before": ["<C-u>"],
             "commands": ["editor.action.moveLinesUpAction"]
         },
         {
@@ -252,11 +327,13 @@
         // Cut
         "<C-x>": false,
         // Paste
-        "<C-v>": false,
+        "<C-v>": true,
         "<C-z>": false,
         "<C-y>": false,
         "<C-n>": false,
-        "<C-e>": false
+        "<C-e>": true,
+        "<C-u>": true,
+        "<C-i>": false,
     },
     "vim.statusBarColorControl": true,
     "vim.statusBarColors.normal": ["#98c379", "#111111"],
@@ -267,4 +344,5 @@
     "vim.textwidth": 120,
     "vim.sneak": true,
     "git.enableStatusBarSync": false,
+    "vim.replaceWithRegister": true,
 }

@@ -485,7 +485,7 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "h"
+                                    "key_code": "j"
                                 },
                                 "to": [
                                     {
@@ -503,7 +503,7 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "j"
+                                    "key_code": "k"
                                 },
                                 "to": [
                                     {
@@ -521,7 +521,7 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "k"
+                                    "key_code": "i"
                                 },
                                 "to": [
                                     {
@@ -558,7 +558,7 @@
                                 ],
                                 "description": "Space-j: S-Enter",
                                 "from": {
-                                    "key_code": "y"
+                                    "key_code": "h"
                                 },
                                 "to": [
                                     {
@@ -599,7 +599,7 @@
                                 ],
                                 "description": "Space-u: Escape",
                                 "from": {
-                                    "key_code": "i"
+                                    "key_code": "y"
                                 },
                                 "to": [
                                     {
@@ -1057,6 +1057,27 @@
                                     }
                                 ],
                                 "from": {
+                                    "key_code": "comma"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "comma",
+                                        "modifiers": [
+                                            "left_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "spacebar-mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
                                     "key_code": "slash"
                                 },
                                 "to": [
@@ -1196,31 +1217,22 @@
                                 "type": "basic"
                             },
                             {
-                                "from": {
-                                    "key_code": "p"
-                                },
-                                "to": [
+                                "conditions": [
                                     {
-                                        "key_code": "p",
-                                        "modifiers": [
-                                            "left_shift"
-                                        ]
+                                        "name": "spacebar-mode",
+                                        "type": "variable_if",
+                                        "value": 1
                                     }
                                 ],
-                                "type": "basic"
-                            },
-                            {
                                 "from": {
-                                    "key_code": "p",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "shift"
-                                        ]
-                                    }
+                                    "pointing_button": "button1"
                                 },
                                 "to": [
                                     {
-                                        "key_code": "p"
+                                        "modifiers": [
+                                            "left_command"
+                                        ],
+                                        "pointing_button": "button1"
                                     }
                                 ],
                                 "type": "basic"
@@ -1310,7 +1322,7 @@
                                 ],
                                 "to_if_alone": [
                                     {
-                                        "key_code": "k",
+                                        "key_code": "l",
                                         "modifiers": [
                                             "left_control"
                                         ]
@@ -1984,7 +1996,6 @@
                                 ],
                                 "type": "basic"
                             }
-
                         ]
                     }
                 ]
@@ -2001,6 +2012,19 @@
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": true,
+                    "simple_modifications": []
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": false,
+                        "is_pointing_device": true,
+                        "product_id": 31494,
+                        "vendor_id": 3141
+                    },
+                    "ignore": false,
+                    "manipulate_caps_lock_led": false,
                     "simple_modifications": []
                 }
             ],

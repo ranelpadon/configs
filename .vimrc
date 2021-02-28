@@ -18,6 +18,9 @@ Plug 'vim-scripts/FavEx'
 set rtp+=/usr/local/opt/fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/vim-slash'
+Plug 'haya14busa/vim-asterisk'
+
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -33,6 +36,8 @@ Plug 'bronson/vim-trailing-whitespace'
 "Plug 'kana/vim-textobj-indent'
 
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'vim-scripts/ReplaceWithRegister'
+" Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 call plug#end()
 
@@ -77,7 +82,7 @@ map <Space> <leader>
 " https://vim.fandom.com/wiki/Insert_newline_without_entering_insert_mode
 " Open a line before the current line (usual case)
 nnoremap <Enter> O<Esc>j
-" Open a line after the current line. 
+" Open a line after the current line.
 nnoremap <S-Enter> o<Esc>k
 
 
@@ -99,6 +104,8 @@ augroup ProjectDrawer
 augroup END
 
 "unmap \fe
+autocmd VimEnter * noremap <Leader>fe :Lex<CR>
+" autocmd VimEnter * noremap u k
 noremap <Leader>e :Lex<CR>
 " Wipe previous netrw buffer
 augroup AutoDeleteNetrwHiddenBuffers
@@ -127,6 +134,18 @@ set autoread                                                                    
 set visualbell                                                                  " flash the screen instead of beeping on errors.
 set title
 set mouse=a                                                                     " allow scroll/resizing in iTerm2 with mouse
+set whichwrap+=<,>,h,l,[,]
+
+
+" MULTI-CURSOR
+" let g:VM_maps = {}
+" let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
+" let g:VM_maps['Find Subword Under'] = '<C-d>'           " replace visual C-n
+map *  <Plug>(asterisk-z*)
+map #  <Plug>(asterisk-z#)
+map g* <Plug>(asterisk-gz*)
+map g# <Plug>(asterisk-gz#)
+let g:asterisk#keeppos = 1
 
 
 " SWAP AND BACKUP
@@ -154,7 +173,7 @@ set nowrap
 set hlsearch                                                                    " highlight matches by default
 set incsearch                                                                   " highlight as you type your search.
 set ignorecase                                                                  " make searches case-insensitive.
-set smartcase                                                                   " unless you type a capital
+set smartcase                                                                   " unless you type a capital, use /\C to force match capitalizations.
 " clear reset highlighting after search
 " https://stackoverflow.com/questions/657447/vim-clear-last-search-highlighting#657457
 nnoremap <silent> <Esc><Esc> :let @/=""<CR>
@@ -183,12 +202,12 @@ colorscheme onedark
 " VISUAL MODE
 vnoremap . :normal.<CR>                                                         " make . work with visually selected lines
 " move block up/down
-nnoremap <C-k> :m .+1<CR>==
-nnoremap <C-i> :m .-2<CR>==
-inoremap <C-k> <Esc>:m .+1<CR>==gi
-inoremap <C-i> <Esc>:m .-2<CR>==gi
-vnoremap <C-k> :m '>+1<CR>gv=gv
-vnoremap <C-i> :m '<-2<CR>gv=gv
+nnoremap <C-e> :m .+1<CR>==
+nnoremap <C-u> :m .-2<CR>==
+inoremap <C-e> <Esc>:m .+1<CR>==gi
+inoremap <C-u> <Esc>:m .-2<CR>==gi
+vnoremap <C-e> :m '>+1<CR>gv=gv
+vnoremap <C-u> :m '<-2<CR>gv=gv
 " Select All: Alt keys in iTerm2 neexd to be unmapped from Esc
 nnoremap <Leader>sa ggVG                                                                " Select all text
 " Duplicate selection (same as NyP and VyP)
@@ -197,48 +216,64 @@ nnoremap <Leader>sa ggVG                                                        
 nnoremap <Leader>d :copy .<CR>
 vnoremap <Leader>d :copy '><CR>
 
+
 " MACRO
 set lazyredraw                                                                  " avoid redrawing screen in running macro since it's expensive
-let @n="jjI  - \<Esc>kI* \<Esc>kddjj"
+" need to use the mapped values of n since `j` now refers to `next` search result.
+"let @n="jjI  - \<Esc>kI* \<Esc>kddjj"
+let @n="I  - \<Esc>eI* \<Esc>2ndd"
+nnoremap <F1> :g/^https/ norm @n <CR>
 
 
 " MISC
 set clipboard^=unnamed,unnamedplus                                              " need to install vim via Homebrew since the Mac version was compiled w/out clipboard integration
 "nnoremap <leader>v :Vexplore<CR>                                                " open file in vertical split
+" Next match in search, Open lines, Insert mode.
+nnoremap m n
+nnoremap M N
+" map the o command first before remapping it!
+nnoremap h o
+nnoremap H O
+nnoremap o i
+nnoremap O I
 " next/down in general
 " onoremap mode is needed so that
 " `c3n` is interpreted as `c3j`.
 " https://medium.com/usevim/operator-pending-mode-a4247d8596b7
-nnoremap n j
-onoremap n j
-vnoremap n j
-""cnoremap n n
-nnoremap e k
-onoremap e k
-vnoremap e k
-" nnoremap n }
-" vnoremap n }
-" nnoremap e {
-" vnoremap e {
-" nnoremap k h
-" vnoremap k h
-" nnoremap n j
-" vnoremap n j
-nnoremap k h
-vnoremap k h
+" autocmd VimEnter * nnoremap n j
+
+nnoremap e j
+nnoremap E 9j
+onoremap e j
+vnoremap e j
+noremap k u
+nnoremap u k
+nnoremap U 9k
+onoremap u k
+vnoremap u k
+nnoremap n h
+vnoremap n h
 nnoremap i l
 vnoremap i l
 " END
 nnoremap l e
+vnoremap l e
 nnoremap gl ge
+vnoremap gl ge
 nnoremap L E
+vnoremap L E
 nnoremap gL gE
-nnoremap h i
-" next match in search
-nnoremap s n
-nnoremap ' ;
+vnoremap gL gE
+" nnoremap h i
+""nnoremap ' ;
 " previous match in search
-nnoremap S N
+nnoremap 'a "a
+nnoremap 'r "r
+nnoremap 's "s
+nnoremap 't "t
+""nnoremap " '
+nnoremap <Leader>h "_
+
 " dont save and quit all.
 nnoremap zz :qa!<CR>                                                            " exit when in Normal mode
 " save all, ZZ by default will save the current buffer only and if there are changes only, then will quit
@@ -250,7 +285,13 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!         
 " comment/uncomment
 vnoremap <Leader>/ :norm gcc<CR>
 noremap <Leader>/ :norm gcc<CR>
+
 nnoremap <Leader>sv :source ~/.vimrc<CR>:echo "Reloaded .vimrc"<CR>
+augroup vimrc     " Source vim configuration upon save
+     autocmd!
+     autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
+augroup END
+
 " remove whitespace
 noremap <Leader>fw :FixWhitespace<CR>
 " whitespace color: https://vim.fandom.com/wiki/Xterm256_color_names_for_console_Vim
@@ -294,12 +335,13 @@ set ttimeoutlen=100
 
 " BUFFERS
 noremap <C-l> :bprev<CR>
-noremap <C-u> :bnext<CR>
+noremap <C-y> :bnext<CR>
 "nnoremap ls :ls<CR>
 "vnoremap ls :ls<CR>
 " save file
 noremap <Leader>w :w!<CR>
-" cycle windows
+noremap <Leader>o :on<CR>
+" cycle windowv
 noremap <Leader><Space> <C-w>w
 " close/delete netrw/buffer
 noremap <Leader>q :bd!<CR>
@@ -319,7 +361,10 @@ noremap <Leader>q :bd!<CR>
 map <Leader>p :Files<CR>
 map <Leader>g :GFiles<CR>
 map <Leader>b :Buffers<CR>
-
+map <Leader>m :Maps<CR>
+map <Leader>fh :History<CR>
+map <Leader>fc :Files ~/dev/configs<CR>
+map <Leader>fv :Files ~/Dropbox/Vortex<CR>
 
 " Git Blame
 map <Leader>gb :BlamerToggle<CR>
@@ -329,7 +374,7 @@ let g:blamer_date_format = '%m/%d/%y'
 
 " Rg
 map <Leader>rg :Rg<CR>
- 
+
 function! RgHelper(query, fullscreen, command_fmt)
     let command_fmt = a:command_fmt . ' --no-heading --line-number --color=always --smart-case -- %s || true' 
     let initial_command = printf(command_fmt, shellescape(a:query))
