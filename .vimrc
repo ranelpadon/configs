@@ -18,9 +18,10 @@ Plug 'vim-scripts/FavEx'
 set rtp+=/usr/local/opt/fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-"Plug 'junegunn/vim-slash'
-Plug 'haya14busa/vim-asterisk'
 
+Plug 'haya14busa/vim-asterisk'
+Plug 'RRethy/vim-tranquille'
+Plug 'justinmk/vim-sneak'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -32,12 +33,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'APZelos/blamer.nvim'
 Plug 'bronson/vim-trailing-whitespace'
 
-"Plug 'kana/vim-textobj-user'
-"Plug 'kana/vim-textobj-indent'
-
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'vim-scripts/ReplaceWithRegister'
-" Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'machakann/vim-highlightedyank'
 
 call plug#end()
 
@@ -145,15 +143,13 @@ set mouse=a                                                                     
 set whichwrap+=<,>,h,l,[,]
 
 
-" MULTI-CURSOR
-" let g:VM_maps = {}
-" let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
-" let g:VM_maps['Find Subword Under'] = '<C-d>'           " replace visual C-n
-map *  <Plug>(asterisk-z*)
-map #  <Plug>(asterisk-z#)
-map g* <Plug>(asterisk-gz*)
-map g# <Plug>(asterisk-gz#)
+" MULTI-CURSOR / STAR SEARCH (auto-selects first occurrence and no jumping)
+map g*  <Plug>(asterisk-z*)
+map g#  <Plug>(asterisk-z#)
+map * <Plug>(asterisk-gz*)
+map # <Plug>(asterisk-gz#)
 let g:asterisk#keeppos = 1
+nmap / g/
 
 
 " SWAP AND BACKUP
@@ -277,6 +273,10 @@ nnoremap 's "s
 nnoremap 't "t
 nnoremap <Leader>h "_
 
+" For the operator pending mode of Vim Sneak
+omap s <Plug>Sneak_s
+omap S <Plug>Sneak_S
+
 " dont save and quit all.
 nnoremap zz :qa!<CR>                                                            " exit when in Normal mode
 " save all, ZZ by default will save the current buffer only and if there are changes only, then will quit
@@ -303,7 +303,7 @@ highlight ExtraWhitespace ctermbg=darkgray guibg=darkgray
 " noremap <Esc> <C-c>
 set ttimeout
 set ttimeoutlen=100
-" redo 
+" redo
 " nnoremap <leader>gr <C-r>
 
 
@@ -313,7 +313,7 @@ set ttimeoutlen=100
 " map <Leader>t :below term<CR>
 " terminal-normal mode to cycle to other windows!
 "tnoremap <C-u> <C-w>N
-" needed to escape terminal insert mode 
+" needed to escape terminal insert mode
 " but conflicts with fzf arrows!!!
 " Caps Lock triggers F7 via Karabiner.
 "tnoremap <f7> <C-w>N
@@ -499,7 +499,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> <leader>o :call <SID>show_documentation()<CR>
+nnoremap <silent> <leader>sd :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
     if (index(['vim','help'], &filetype) >= 0)
@@ -513,3 +513,16 @@ endfunction
 
 " Highlight the symbol and its references when holding the cursor
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+
+" Open browser with the specified link
+function! HandleURI()
+    let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;:]*')
+    echo s:uri
+    if s:uri != ""
+        exec "!open \"" . s:uri . "\""
+    else
+        echo "No URI found in line."
+    endif
+    endfunction
+map <Leader>ob :call HandleURI()<CR><CR>
