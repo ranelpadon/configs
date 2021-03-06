@@ -1,5 +1,4 @@
 {
-    "window.zoomLevel": -1,
     "terminal.integrated.fontFamily": "MesloLGS NF",
     "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.cursorStyle": "line",
@@ -29,9 +28,9 @@
         "progressBar.background": "#5C6BC0",
         "pickerGroup.foreground": "#5C6BC0",
         "tab.activeBorder": "#5C6BC0",
-        "statusBar.background": "#61afef",
-        "statusBar.noFolderBackground": "#61afef",
-        "statusBar.debuggingBackground": "#61afef",
+        "statusBar.background": "#c678dd",
+        "statusBar.noFolderBackground": "#c678dd",
+        "statusBar.debuggingBackground": "#c678dd",
         "statusBar.foreground": "#111111"
     },
     "python.disableInstallationCheck": true,
@@ -345,4 +344,5 @@
     "vim.sneak": true,
     "git.enableStatusBarSync": false,
     "vim.replaceWithRegister": true,
+    "window.zoomLevel": -1,
 }
