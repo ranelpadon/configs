@@ -28,9 +28,9 @@
         "progressBar.background": "#5C6BC0",
         "pickerGroup.foreground": "#5C6BC0",
         "tab.activeBorder": "#5C6BC0",
-        "statusBar.background": "#c678dd",
-        "statusBar.noFolderBackground": "#c678dd",
-        "statusBar.debuggingBackground": "#c678dd",
+        "statusBar.background": "#98c379",
+        "statusBar.noFolderBackground": "#98c379",
+        "statusBar.debuggingBackground": "#98c379",
         "statusBar.foreground": "#111111"
     },
     "python.disableInstallationCheck": true,
@@ -63,7 +63,8 @@
     "files.associations": {
         "*.py.new": "python",
         "*.py.old": "python",
-        "*.module": "php"
+        "*.module": "php",
+        "*.vim": "vimrc"
     },
     "python.languageServer": "Jedi",
     "python.terminal.activateEnvironment": false,

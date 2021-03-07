@@ -975,7 +975,7 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 # `bat`
 # https://github.com/sharkdp/bat
-export BAT_THEME="OneHalfDark"
+export BAT_THEME="TwoDark"
 
 # fzf
 # https://github.com/junegunn/fzf
@@ -1019,6 +1019,8 @@ _fzf_compgen_dir() {
 alias fzfx="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+alias fh='history | fzf'
+
 
 # Remap `Caps Lock` to `delete` key.
 # https://apple.stackexchange.com/questions/7231/how-can-i-rebind-caps-lock-to-delete-backspace
@@ -1045,7 +1047,13 @@ fim() {
 }
 
 
-if [[ $TERM == xterm ]]; then TERM=xterm-256color; fi
+# if [[ $TERM == xterm ]]; then TERM=xterm-256color; fi
+# export COLORTERM="truecolor"
+
+# if [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; then
+#   export COLORTERM="truecolor"
+# fi
+
 
 alias tmuxx='source ~/.config/tmux/tmuxrc.sh'
 
@@ -1067,7 +1075,10 @@ linkify() {
     ln -s ~/dev/configs/$filename $1 
 }
 
-zle-line-init() {
-    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
-    echo -ne "\e[3 q"
-}
+
+# This conflicts with `fzf`'s Ctrl-R for command history.
+# zle-line-init() {
+#     zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+#     echo -ne "\e[3 q"
+# }
+
