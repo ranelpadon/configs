@@ -13,7 +13,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'RRethy/vim-tranquille'
     Plug 'justinmk/vim-sneak'
 
-    "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     Plug 'itchyny/lightline.vim'
     Plug 'mengelbrecht/lightline-bufferline'
