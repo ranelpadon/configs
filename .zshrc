@@ -711,10 +711,14 @@ ts() {
 
 frdb() {
     # should be in docker/ folder!!!!
+    # no need for this now since Homebrew's /usr/local/bin/mysql is ok now!
     # Set this first in root `fabfile.py`
     # local('gunzip < {db_target_file} | /Applications/XAMPP/xamppfiles/bin/mysql {db_connect} {db_target}'.format(
     # fab stop  # since Cmd+C will still leave the `db` container running in the background.
+    # this doesnt work due to CLI error.
     # export PATH="/Applications/XAMPP/xamppfiles/bin:$PATH"
+    # clear the docker compose's autoruns, to free up the MySQL port.
+    dc
     fab create_database:drop=True
     cd ..
     fab local_sync_from_remote_db
@@ -726,6 +730,8 @@ frdbm() {
     # local('gunzip < {db_target_file} | /Applications/XAMPP/xamppfiles/bin/mysql {db_connect} {db_target}'.format(
     # fab stop  # since Cmd+C will still leave the `db` container running in the background.
     # export PATH="/Applications/XAMPP/xamppfiles/bin:$PATH"
+    # clear the docker compose's autoruns, to free up the MySQL port.
+    dc
     fab create_database:drop=True
     cd ..
     fab local_sync_from_remote_db
@@ -1041,9 +1047,14 @@ if [ -f '/Users/ranelpadon/google-cloud-sdk/completion.zsh.inc' ]; then . '/User
 # export TERM="alacritty"
 # export CLICOLOR=1
 
+
 # Fix imports
 fim() {
-  git diff --name-only ets | grep '.py' | xargs isort
+  git diff --name-only ets \
+  | grep '.py' \
+  | grep -v 'migrations/' \
+  | grep -v 'conf/' \
+  | xargs isort
 }
 
 
@@ -1082,3 +1093,8 @@ linkify() {
 #     echo -ne "\e[3 q"
 # }
 
+
+# Open all files with merge conflicts with nvim
+mcn() {
+    git diff --name-only | uniq | xargs nvim
+}

@@ -25,7 +25,7 @@ Plug 'justinmk/vim-sneak'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-"Plug 'voldikss/vim-floaterm'
+Plug 'voldikss/vim-floaterm'
 
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
@@ -159,8 +159,8 @@ set nowritebackup
 set undofile                                                                     " save undo history across sessions
 set undodir=$HOME/.vim/undodir
 " set backupdir=$HOME/.vim/backup//
-"" set noswapfile
-"" set nowb
+set noswapfile
+set nowb
 
 
 " INDENTATION
@@ -198,7 +198,11 @@ set cursorline                                                                  
 
 if (has("termguicolors"))
     set termguicolors
- endif
+endif
+" MacVim
+set guifont=Monaco:h12
+" Hide the annoying scrollbars.
+set guioptions=
 
 colorscheme onedark
 
@@ -324,16 +328,17 @@ set ttimeoutlen=100
 
 
 " FLOATING TERM
-"nnoremap  <silent>  <C-l>  :FloatermToggle<CR>
-"tnoremap  <silent>  <C-l>  <C-\><C-n>:FloatermToggle<CR>
+let g:floaterm_width = 0.8
+let g:floaterm_height = 0.8
+nnoremap  <silent>  <C-Space>  :FloatermToggle<CR>
+tnoremap  <silent>  <C-Space>  <C-\><C-n>:FloatermToggle<CR>
 "nnoremap  <silent>  <C-u>   :FloatermNext<CR>
 "tnoremap  <silent>  <C-u>  <C-\><C-n>:FloatermNext<CR>
 "nnoremap  <silent>  <C-y>  :FloatermNew<CR>
 "tnoremap  <silent>  <C-y>  <C-\><C-n>:FloatermNew<CR>
 "nnoremap  <silent>  <C-j>  :FloatermPrev<CR>
 "tnoremap  <silent>  <C-j>  <C-\><C-n>:FloatermPrev<CR>
-"let g:floaterm_width = 0.8
-"let g:floaterm_height = 0.8
+
 
 
 " BUFFERS

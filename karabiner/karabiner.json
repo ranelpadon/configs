@@ -18,6 +18,26 @@
                     {
                         "description": "Arrow navigation, opening apps, etc.",
                         "manipulators": [
+
+
+                            {
+                                "from": {
+                                    "key_code": "f3"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "4",
+                                        "modifiers": [
+                                            "left_control",
+                                            "left_shift",
+                                            "left_command"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+
+                            
                             {
                                 "from": {
                                     "key_code": "left_shift"
@@ -449,7 +469,7 @@
                                 ],
                                 "type": "basic"
                             },
-                           {
+                            {
                                 "conditions": [
                                     {
                                         "name": "right-option-mode",
@@ -557,9 +577,6 @@
                                 ],
                                 "type": "basic"
                             },
-
-
-
                             {
                                 "from": {
                                     "key_code": "spacebar"
@@ -2018,7 +2035,7 @@
                                 "to_if_held_down": [
                                     {
                                         "halt": true,
-                                        "shell_command": "open -a 'PyCharm.app'"
+                                        "shell_command": "open -a 'Microsoft PowerPoint.app'"
                                     }
                                 ],
                                 "type": "basic"
@@ -2039,7 +2056,7 @@
                                 "to_if_held_down": [
                                     {
                                         "halt": true,
-                                        "shell_command": "open -a 'Activity Monitor.app'"
+                                        "shell_command": "open -a 'Google Chrome.app'"
                                     }
                                 ],
                                 "type": "basic"
@@ -2060,7 +2077,7 @@
                                 "to_if_held_down": [
                                     {
                                         "halt": true,
-                                        "shell_command": "open '/System/Library/PreferencePanes/Network.prefPane'"
+                                        "shell_command": "open -a 'Thonny'"
                                     }
                                 ],
                                 "type": "basic"
@@ -2281,6 +2298,14 @@
                     },
                     "to": {
                         "key_code": "right_command"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "left_shift"
+                    },
+                    "to": {
+                        "key_code": "left_control"
                     }
                 }
             ],

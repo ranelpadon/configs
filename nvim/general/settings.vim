@@ -30,6 +30,7 @@ set timeoutlen=500                      " By default timeoutlen is 1000 ms
 set formatoptions-=cro                  " Stop newline continuation of comments
 set clipboard^=unnamed,unnamedplus      " need to install vim via Homebrew since the Mac version was compiled w/out clipboard integration
 
+set helpheight=100
 set wildmenu
 set wildmode=longest:full,full
 set noerrorbells
