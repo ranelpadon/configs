@@ -2021,27 +2021,6 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "c"
-                                },
-                                "parameters": {
-                                    "basic.to_if_alone_timeout_milliseconds": 181,
-                                    "basic.to_if_held_down_threshold_milliseconds": 181
-                                },
-                                "to_after_key_up": [
-                                    {
-                                        "key_code": "c"
-                                    }
-                                ],
-                                "to_if_held_down": [
-                                    {
-                                        "halt": true,
-                                        "shell_command": "open -a 'Microsoft PowerPoint.app'"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
                                     "key_code": "x"
                                 },
                                 "parameters": {
@@ -2056,7 +2035,7 @@
                                 "to_if_held_down": [
                                     {
                                         "halt": true,
-                                        "shell_command": "open -a 'Google Chrome.app'"
+                                        "shell_command": "open -a 'Microsoft PowerPoint.app'"
                                     }
                                 ],
                                 "type": "basic"
@@ -2072,6 +2051,27 @@
                                 "to_after_key_up": [
                                     {
                                         "key_code": "z"
+                                    }
+                                ],
+                                "to_if_held_down": [
+                                    {
+                                        "halt": true,
+                                        "shell_command": "open -a 'Google Chrome.app'"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "c"
+                                },
+                                "parameters": {
+                                    "basic.to_if_alone_timeout_milliseconds": 181,
+                                    "basic.to_if_held_down_threshold_milliseconds": 181
+                                },
+                                "to_after_key_up": [
+                                    {
+                                        "key_code": "c"
                                     }
                                 ],
                                 "to_if_held_down": [
