@@ -1,83 +1,100 @@
 let g:mapleader = "\<Space>"
 
-syntax enable                           " Enables syntax highlighing
-set hidden                              " Required to keep multiple buffers open multiple buffers
-set nowrap                              " Display long lines as just one line
-set whichwrap+=<,>,[,],h,l              " Continue cursor to the start of new line when it reaches the edge
-set encoding=utf-8                      " The encoding displayed
-set pumheight=10                        " Makes popup menu smaller
-set fileencoding=utf-8                   " The encoding written to file
-set ruler              			        " Show the cursor position all the time
-set cc=120
-set cmdheight=2                         " More space for displaying messages
-set iskeyword+=-                      	" treat dash separated words as a word text object"
-set mouse=a                             " Enable your mouse, allow scroll/resizing in iTerm2 with mouse 
-set t_Co=256                            " Support 256 colors
-set t_ut=
-set conceallevel=0                      " So that I can see `` in markdown files
-set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
-set backspace=indent,eol,start
-set smartindent                         " Makes indenting smart
-set showtabline=2                       " Always show tabs
-set laststatus=2                        " Always display the status line
-set guioptions-=e                       " Don't use GUI tabline
-set showcmd                             " show incomplete commands at the bottom
-set number                              " Line numbers
-set relativenumber                      " show the relative line number
-set background=dark                     " tell vim what the background color looks like
-set updatetime=300                      " Faster completion
-set timeoutlen=500                      " By default timeoutlen is 1000 ms
-set formatoptions-=cro                  " Stop newline continuation of comments
-set clipboard^=unnamed,unnamedplus      " need to install vim via Homebrew since the Mac version was compiled w/out clipboard integration
+let g:is_nvim = has('nvim')
+let g:is_mvim = has('gui_running')
+let g:is_vim = !g:is_nvim && !g:is_mvim
 
-set helpheight=100
-set wildmenu
-set wildmode=longest:full,full
+if g:is_nvim
+    " `highlight.on_yank` is only in Nvim.
+    au TextYankPost * silent! lua vim.highlight.on_yank {higroup='IncSearch', timeout=1000}
+
+    " Substitution preview
+    set inccommand=nosplit
+endif
+
+if g:is_mvim
+    set guifont=Monaco\ Nerd\ Font:h12                                          " Include font icons
+    set guioptions=                                                             " Hide the annoying scrollbars
+endif
+
+if g:is_vim
+    " Inside Tmux, Vim/shell will use the `screen-256color`.
+    set term=xterm-256color                                                     " 8-bit/256 colors in Vim's embedded terminal, error in Nvim
+endif
+
+if !g:is_nvim
+    set nocompatible                                                            " Vim instead of vi
+    syntax on                                                                   " Syntax highlighing
+    set autoindent                                                              " Smart indention
+    filetype on                                                                  " File type detection
+    filetype plugin on                                                           " Load ftplugin hooks for the file type
+    filetype indent on                                                           " Load indent hooks for the file type
+    set autoread                                                                " Re-read files if modified outside Vim
+    set background=dark                                                         " Dark mode
+    set backspace=indent,eol,start                                              " Smart backspace
+    set belloff=all                                                             " No event bells
+    set encoding=utf-8                                                          " File encoding
+    set hlsearch                                                                " Highlight search matches
+    set incsearch                                                               " Highlight as you type your search.
+    set laststatus=2                                                            " Always display the status line
+    set ruler              			                                            " Show the cursor position
+    set showcmd                                                                 " Show the run commands
+    set smarttab                                                                " Smart tabbing based on tab settings
+    set ttyfast                                                                 " Fast scroll
+    set wildmenu                                                                " Command completion menu
+endif
+
+set shortmess+=I                                                                " Disable startup message
+set t_Co=256                                                                    " 8-bit/256 colors in terminal
+set termguicolors                                                               " 24-bit colors for in TUI, use `gui` instead of `cterm` attributes
+
+set fileencoding=utf-8                                                           " The encoding written to file
+set showtabline=2                                                               " Always show tabs, even if there's one file
+set title                                                                       " Filename as window/tab name
+set hidden                                                                      " Required to keep multiple buffers open multiple buffers
+
+set mouse=a                                                                     " Enable mouse in all modes
+set scrolloff=999                                                               " Cursor is always centered vertically
+set number                                                                      " Line numbers
+set relativenumber                                                              " Show the relative line number
+set cursorline                                                                  " Highlight current line
+set colorcolumn=80                                                              " Line wrap/column marker
+set linebreak                                                                   " Break at word boundary
+set iskeyword+=-                      	                                        " Treat dash-separated words as a word text object
+set formatoptions-=cro                                                          " Stop newline continuation of comments
+set whichwrap+=<,>,[,],h,l                                                      " Continue cursor to the start of new line when it reaches the edge
+set nowrap                                                                      " Display long lines as just one line
+set nofoldenable                                                                " Disable folding
+set listchars=tab:▸\ ,eol:¬                                                     " Visualize tabs and newlines
+set conceallevel=0                                                              " To see `` in markdown files
+
+set tabstop=4                                                                   " Tab size in existing files
+set expandtab                                                                   " Tab to spaces conversion in Insert mode
+set softtabstop=4                                                               " Tab key/backspace stops
+set shiftwidth=4                                                                " > indentation size
+set smartindent                                                                 " Newline indention
+
+set ignorecase                                                                  " Make searches case-insensitive
+set smartcase                                                                   " Use /\C to force match capitalizations
+
+set ttimeout                                                                    " Enable `ttimeout` so it could be overriden
+set ttimeoutlen=500                                                             " Faster Esc/Ctrl key detection
+set timeoutlen=500                                                              " Custom key sequences timeout, might affect Emmet if too low.
+set updatetime=100                                                              " Faster auto-completion
+set clipboard^=unnamed,unnamedplus                                              " Via Homebrew since the Mac version was compiled w/out clipboard integration
+
+set cmdheight=2                                                                 " More space for displaying messages
+set pumheight=10                                                                " Makes popup menu smaller
+set helpheight=100                                                              " Display help files in 100 height
+set wildmode=longest:full,full                                                  " Command mode popup
+
 set noerrorbells
-set autoread                            " automatically re-read files if unmodified inside Vim
-set visualbell                          " flash the screen instead of beeping on errors.
-set title
-set lazyredraw                          " avoid redrawing screen in running macro since it's expensive
-"set autochdir                          " Your working directory will always be the same as your working directory
+set visualbell                                                                  " Flash the screen instead of beeping on errors
+set lazyredraw                                                                  " Avoid redrawing screen in macro since it's expensive
 
-" whitespace color: https://vim.fandom.com/wiki/Xterm256_color_names_for_console_Vim
-highlight ExtraWhitespace ctermbg=darkgray guibg=darkgray
-" faster ESC key, need to enable `ttimeout` before it could be overriden.
-set ttimeout
-set ttimeoutlen=100
-
-" INDENTATION
-set autoindent
-filetype plugin indent on                " enable indenting for files
-set tabstop=4                           " existing tab size is 4
-set softtabstop=4                       " OTF tab to space conversion
-set shiftwidth=4                        " > indentation size is 4
-set expandtab                           " auto-converts tabs to spaces
-
-
-" SEARCH
-set hlsearch                            " highlight matches by default
-set incsearch                           " highlight as you type your search.
-set ignorecase                          " make searches case-insensitive.
-set smartcase                           " unless you type a capital, use /\C to force match capitalizations.
-
-
-" SWAP AND BACKUP
+" SHADA (SHAred DAta) file of Nvim is in ~/.local/share/nvim/shada/main.shada
 set directory=$HOME/.config/nvim/swp//
 set nobackup
 set nowritebackup
-set undofile                             " save undo history across sessions
-set undodir=$HOME/.vim/undodir
-
-
-" TEXT RENDERING
-set ttyfast
-set scrolloff=999                       " the cursor is centered vertically if posible (even in search mode?)
-set linebreak                           " break at word boundary
-set listchars=tab:▸\ ,eol:¬             " visualize tabs and newlines
-set cursorline                          " highlight current line
-
-au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
-
-" You can't stop me
-cmap w!! w !sudo tee %
+set undofile                                                                     " Save undo history across sessions
+set undodir=$HOME/.config/nvim/undo
