@@ -1,31 +1,40 @@
 call plug#begin('~/.config/nvim/autoload/plugged')
-
-    Plug 'joshdick/onedark.vim'
-
     " If installed using Homebrew
     set rtp+=/usr/local/opt/fzf
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}
     Plug 'junegunn/fzf.vim'
 
-    Plug 'voldikss/vim-floaterm'
-
-    Plug 'haya14busa/vim-asterisk'
-    Plug 'RRethy/vim-tranquille'
-    Plug 'justinmk/vim-sneak'
-
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'mattn/emmet-vim'
+    Plug 'dense-analysis/ale'
+    Plug 'voldikss/vim-floaterm'
 
     Plug 'itchyny/lightline.vim'
     Plug 'mengelbrecht/lightline-bufferline'
+    Plug 'yggdroot/indentline'
+    Plug 'bronson/vim-trailing-whitespace'
+    Plug 'tpope/vim-commentary'
+
+    Plug 'justinmk/vim-sneak'
+    Plug 'haya14busa/vim-asterisk'
+    Plug 'RRethy/vim-tranquille'
 
     Plug 'jiangmiao/auto-pairs'
-    Plug 'tpope/vim-commentary'
-    Plug 'airblade/vim-gitgutter'
-    Plug 'APZelos/blamer.nvim'
-    Plug 'bronson/vim-trailing-whitespace'
-
+    Plug 'wellle/targets.vim'
     Plug 'michaeljsmith/vim-indent-object'
-    Plug 'vim-scripts/ReplaceWithRegister'
-    Plug 'machakann/vim-highlightedyank'
 
+    if !g:is_nvim
+        Plug 'machakann/vim-highlightedyank'
+    endif
+    Plug 'vim-scripts/ReplaceWithRegister'
+
+    if g:is_nvim
+        Plug 'kdheepak/lazygit.nvim'
+    endif
+    Plug 'airblade/vim-gitgutter'
+    Plug 'rhysd/conflict-marker.vim'
+    Plug 'APZelos/blamer.nvim'
+
+    Plug 'joshdick/onedark.vim'
+    Plug 'tweekmonster/startuptime.vim'
 call plug#end()
