@@ -1,3 +1,3 @@
-" comment/uncomment
+" Toggle comments.
 vnoremap <Leader>/ :norm gcc<CR>
 nnoremap <Leader>/ :norm gcc<CR>
