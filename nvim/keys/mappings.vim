@@ -90,7 +90,7 @@ noremap <Leader>fw :FixWhitespace<CR>
 
 " Clear highlighting after search
 " https://stackoverflow.com/questions/657447/vim-clear-last-search-highlighting#657457
-nnoremap <silent> <Esc><Esc> :let @/ = ""<CR>
+nnoremap <silent> <Esc> :let @/ = ""<CR>
 
 
 " Uncomment this to enable by default:
@@ -152,3 +152,16 @@ function! HandleURI()
     endif
 endfunction
 map <Leader>ob :call HandleURI()<CR><CR>
+
+
+" Extra space color: https://vim.fandom.com/wiki/Xterm256_color_names_for_console_Vim
+highlight ExtraWhitespace ctermbg=7 guibg=#c0c0c0
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=7 guibg=#c0c0c0
+match ExtraWhitespace /\s\+$/
+
+" Remove extra space
+noremap <Leader>fw :FixWhitespace<CR>
+
+
+" Auto-yank mouse selected text
+noremap <LeftRelease> "+y<LeftRelease>
