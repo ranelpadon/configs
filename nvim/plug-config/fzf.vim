@@ -1,6 +1,3 @@
-" FZF
-" Escape using ESC, exit, or C-c! (C-c hard to remap)
-" Terminal up/down using <Space-n>/<Space-e>
 map <Leader>p :Files<CR>
 map <Leader>g :GFiles<CR>
 map <Leader>b :Buffers<CR>
@@ -12,10 +9,16 @@ map <Leader>fv :Files ~/Dropbox/Vortex<CR>
 
 map <Leader>rg :Rg<CR>
 
-" Fix issue in `bat`'s preview colorscheme by inserting `COLORTERM=truecolor`
-" as envvar.
-let $FZF_PREVIEW_COMMAND="COLORTERM=truecolor bat --style=numbers --color=always --line-range :500 {}"
+" Fix issue in `bat`'s preview colorscheme by inserting `COLORTERM=truecolor` as envvar.
+" Fixed already in Neovim's nightly build. But needed in Vim.
+if g:is_vim
+    let $FZF_PREVIEW_COMMAND="COLORTERM=truecolor bat --style=numbers --color=always --line-range :500 {}"
+endif
 
+if g:is_mvim
+    " Quirks of MacVim.
+    let $BAT_THEME="TwoDark"
+endif
 
 " Helper function only.
 function! RgHelper(query, fullscreen, command_fmt)
@@ -77,7 +80,7 @@ noremap <Leader>ra :RgAll<CR>
 " Search All Files with Git Conflicts
 function! RgAllConflictsFzf(query, fullscreen)
     let command_fmt = 'rg --type-add "po:*.po" --type po --type py --type html --type js --type css --type txt'
-    call RgHelper(a:query, a:fullscreen, command_fmt)
+    call RgHelper('>>>>>>>', a:fullscreen, command_fmt)
 endfunction
 command! -nargs=* -bang RgAllConflicts call RgAllConflictsFzf(<q-args>, <bang>0)
 noremap <Leader>rc :RgAllConflicts<CR>
