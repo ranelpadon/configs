@@ -3,3 +3,4 @@ nvim/autoload/
 nvim/swp
 nvim/undo
 nvim/.netrwhist
+nvim/autoload/plug.vim
