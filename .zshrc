@@ -129,7 +129,11 @@ my_gca() {
   git commit -am $1
 } 
 alias gca=my_gca
-  
+
+# git diff ets..release/ets/test/v2.4 apps/backoffice/generic/forms/property_forms.py
+gde() {
+    git diff ets..$1 $2
+}
 # `function` keyword is needed in ZSH?
 # `u` for `undirty`
 gce() {
@@ -224,7 +228,8 @@ gbn() {
 
 # git tag grep
 gtg() {
-  git tag | grep $1
+    git fetch --tags
+    git tag | grep $1 | sort --version-sort | tail
 }
 
 gpl() {
@@ -278,28 +283,32 @@ gcpm() {
   git merge $1
 }
 
-# Check release
-cr() {
-  # limit=2000
-  git diff --name-status $1.. -l 2000 | grep migrations\/0
-  find . | grep \/migrations\/ | grep -v pyc$ | grep -oE "\/.+\/[0-9]+" | sort | uniq -d
-  git diff --name-only $1.. | grep requirements.txt | xargs git diff $1..
+# Check release diff/packages/migrations
+crd() {
+    # limit=2000
+    git diff --name-status $1.. -l 2000 | grep migrations\/0
+    find . | grep \/migrations\/ | grep -v pyc$ | grep -oE "\/.+\/[0-9]+" | sort | uniq -d
+    git diff --name-only $1.. | grep requirements.txt | xargs git diff $1..
+}
+# Check release logs/merges
+crl() {
+    git log --pretty='%H %ar %s' --merges --grep='conflict' --grep='test' --regexp-ignore-case  $1..
 }
 # Check release and migration list
 crm() {
-  git diff --name-status $1.. | grep migrations\/0
-  find . | grep \/migrations\/ | grep -v pyc$ | grep -oE "\/.+\/[0-9]+" | sort | uniq -d
-  git diff --name-only $1.. | grep requirements.txt | xargs git diff $1..
-  cd docker
-  echo "checking for some migration node errors.."
-  mlist
-  cd ..
-} 
+    git diff --name-status $1.. | grep migrations\/0
+    find . | grep \/migrations\/ | grep -v pyc$ | grep -oE "\/.+\/[0-9]+" | sort | uniq -d
+    git diff --name-only $1.. | grep requirements.txt | xargs git diff $1..
+    cd docker
+    echo "checking for some migration node errors.."
+    mlist
+    cd ..
+}
 # Check latest tag
 clt() {
   git fetch --tags
   git tag | grep $1
-} 
+}
 
 # Exclude the untracked files in "test/folder", to reduce clutter.
 # Update the gitconfig's color attribute so that grep preserves the color.
@@ -751,7 +760,10 @@ sla() {
 }
 # docker clear
 dc() {
-    docker stop sessions-ui ets-mysql
+    docker stop \
+        sessions-ui \
+        ets-mysql \
+        ticketing_ets-celery_1
 }
 
 
@@ -989,9 +1001,9 @@ export BAT_THEME="TwoDark"
 # If you want the command to follow symbolic links,
 # and don't want it to exclude hidden files, use the following command:
 # export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+# --type f \
 export FZF_DEFAULT_COMMAND=" \
     fd \
-    --type f \
     --hidden \
     --follow \
     --no-ignore \
@@ -1011,18 +1023,18 @@ export FZF_DEFAULT_COMMAND=" \
 # command for listing path candidates.
 # - The first argument to the function ($1) is the base path to start traversal
 # - See the source code (completion.{bash,zsh}) for the details.
-_fzf_compgen_path() {
-  fd --hidden --follow --exclude ".git" . "$1"
-}
+# _fzf_compgen_path() {
+  # fd --hidden --follow --exclude ".git" . "$1"
+# }
 
 # Use fd to generate the list for directory completion
-_fzf_compgen_dir() {
-  fd --type d --hidden --follow --exclude ".git" . "$1"
-}
+# _fzf_compgen_dir() {
+  # fd --type d --hidden --follow --exclude ".git" . "$1"
+# }
 
 # Enable preview
 # fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'
-alias fzfx="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+alias fzf="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 alias fh='history | fzf'
@@ -1058,13 +1070,7 @@ fim() {
 }
 
 
-# if [[ $TERM == xterm ]]; then TERM=xterm-256color; fi
-# export COLORTERM="truecolor"
-
-# if [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; then
-#   export COLORTERM="truecolor"
-# fi
-
+# alias nvim='~/dev/binaries/nvim-osx64/bin/nvim'
 
 alias tmuxx='source ~/.config/tmux/tmuxrc.sh'
 
@@ -1080,10 +1086,10 @@ server() {
 
 
 linkify() {
-    cp $1 ~/dev/configs 
+    cp $1 ~/dev/configs
     mv $1 "$1_orig"
     filename="$(basename -- $1)"
-    ln -s ~/dev/configs/$filename $1 
+    ln -s ~/dev/configs/$filename $1
 }
 
 
@@ -1098,3 +1104,21 @@ linkify() {
 mcn() {
     git diff --name-only | uniq | xargs nvim
 }
+
+
+# nnn
+export NNN_PLUG='p:preview-tui;t:preview-tabbed;d:dragdrop;v:imgview'
+export NNN_BMS='r:"/Users/ranelpadon/Data/UP DGE/Resources"'
+export NNN_FIFO='/Users/ranelpadon/tmp/nnn.fifo'
+
+
+export COLORTERM="truecolor"
+export FZF_PREVIEW_COMMAND="COLORTERM=truecolor bat --style=numbers --color=always --line-range :500 {}"
+
+
+alias lg='lazygit'
+
+
+# Karabiner/BTT sends <C-Z> which zsh/Vim interprets as the EOL.
+# https://jdhao.github.io/2019/06/13/zsh_bind_keys/
+bindkey '^Z' end-of-line
