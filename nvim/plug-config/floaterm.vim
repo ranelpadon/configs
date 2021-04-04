@@ -1,10 +1,12 @@
 let g:floaterm_width = 0.8
 let g:floaterm_height = 0.8
-nnoremap  <silent>  <C-Space>  :FloatermToggle<CR>
-tnoremap  <silent>  <C-Space>  <C-\><C-n>:FloatermToggle<CR>
-"nnoremap  <silent>  <C-u>   :FloatermNext<CR>
-"tnoremap  <silent>  <C-u>  <C-\><C-n>:FloatermNext<CR>
-"nnoremap  <silent>  <C-y>  :FloatermNew<CR>
-"tnoremap  <silent>  <C-y>  <C-\><C-n>:FloatermNew<CR>
-"nnoremap  <silent>  <C-j>  :FloatermPrev<CR>
-"tnoremap  <silent>  <C-j>  <C-\><C-n>:FloatermPrev<CR>
+
+if !g:is_vim
+    nnoremap  <silent>  <C-Space>  :FloatermToggle<CR>
+    tnoremap  <silent>  <C-Space>  <C-\><C-n>:FloatermToggle<CR>
+else
+    " Vim has no support for <C-Space>, unlike Nvim/MacVim.
+    " https://github.com/neoclide/coc.nvim/issues/2176#issuecomment-658911940
+    nnoremap  <silent>  <F5>  :FloatermToggle<CR>
+    tnoremap  <silent>  <F5>  <C-\><C-n>:FloatermToggle<CR>
+endif
