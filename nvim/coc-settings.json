@@ -1,0 +1,44 @@
+{
+    "explorer.width": 35,
+    "explorer.mouseMode": "singleclick",
+    "explorer.file.autoReveal": true,
+    "explorer.file.showHiddenFiles": true,
+    "explorer.file.column.indent.indentLine": true,
+    "explorer.icon.enableVimDevicons": false,
+    "explorer.icon.enableNerdfont": false,
+    "explorer.previewAction.onHover": false,
+    "explorer.git.enable": true,
+    "explorer.file.git.showUntrackedFiles": true,
+    "explorer.git.showIgnored": false,
+    "explorer.keyMappings.global": {
+        "<cr>": ["expandable?",  ["expanded?", "collapse", "expand"], "open"],
+        "l": ["expandable?",  ["expanded?", "collapse", "expand"], "open"],
+        "i": ["expandable?",  ["expanded?", "collapse", "expand"], "open"],
+        "il": false,
+        "ic": false,
+        "ii": false,
+        "e": false
+    },
+    "explorer.file.root.template": "[icon] [root]",
+    "explorer.file.child.template": "[selection | clip | 1] [indent][icon | 1] [diagnosticError & 1][filename omitCenter 1][modified][readonly]",
+    "explorer.file.hiddenRules": {
+        "extensions": [
+            "o",
+            "a",
+            "obj",
+            "pyc"
+        ],
+        "filenames": [
+            ".DS_Store",
+            ".idea",
+            ".vscode",
+            ".idea"
+        ],
+        "patternMatches": [
+            "^sync"
+        ]
+    },
+    "python.linting.flake8Enabled": false,
+    "python.linting.enabled": false
+}
+
