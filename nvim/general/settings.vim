@@ -26,9 +26,9 @@ if !g:is_nvim
     set nocompatible                                                            " Vim instead of vi
     syntax on                                                                   " Syntax highlighing
     set autoindent                                                              " Smart indention
-    filetype on                                                                  " File type detection
-    filetype plugin on                                                           " Load ftplugin hooks for the file type
-    filetype indent on                                                           " Load indent hooks for the file type
+    filetype on                                                                 " File type detection
+    filetype plugin on                                                          " Load ftplugin hooks for the file type
+    filetype indent on                                                          " Load indent hooks for the file type
     set autoread                                                                " Re-read files if modified outside Vim
     set background=dark                                                         " Dark mode
     set backspace=indent,eol,start                                              " Smart backspace
@@ -48,7 +48,7 @@ set shortmess+=I                                                                
 set t_Co=256                                                                    " 8-bit/256 colors in terminal
 set termguicolors                                                               " 24-bit colors for in TUI, use `gui` instead of `cterm` attributes
 
-set fileencoding=utf-8                                                           " The encoding written to file
+set fileencoding=utf-8                                                          " The encoding written to file
 set showtabline=2                                                               " Always show tabs, even if there's one file
 set title                                                                       " Filename as window/tab name
 set hidden                                                                      " Required to keep multiple buffers open multiple buffers
@@ -96,5 +96,5 @@ set lazyredraw                                                                  
 set directory=$HOME/.config/nvim/swp//
 set nobackup
 set nowritebackup
-set undofile                                                                     " Save undo history across sessions
+set undofile                                                                    " Save undo history across sessions
 set undodir=$HOME/.config/nvim/undo
