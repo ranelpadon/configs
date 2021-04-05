@@ -1122,3 +1122,26 @@ alias lg='lazygit'
 # Karabiner/BTT sends <C-Z> which zsh/Vim interprets as the EOL.
 # https://jdhao.github.io/2019/06/13/zsh_bind_keys/
 bindkey '^Z' end-of-line
+
+
+# Fix commit email
+fce() {
+
+    git filter-branch --env-filter '
+        WRONG_EMAIL="ranel.padon@magneticasis.com"
+        NEW_NAME="Ranel Padon"
+        NEW_EMAIL="ranel.padon@gmail.com"
+
+        if [ "$GIT_COMMITTER_EMAIL" = "$WRONG_EMAIL" ]
+        then
+            export GIT_COMMITTER_NAME="$NEW_NAME"
+            export GIT_COMMITTER_EMAIL="$NEW_EMAIL"
+        fi
+        if [ "$GIT_AUTHOR_EMAIL" = "$WRONG_EMAIL" ]
+        then
+            export GIT_AUTHOR_NAME="$NEW_NAME"
+            export GIT_AUTHOR_EMAIL="$NEW_EMAIL"
+        fi
+    ' --tag-name-filter cat -- --branches --tags
+}
+
