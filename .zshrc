@@ -1128,7 +1128,7 @@ bindkey '^Z' end-of-line
 fce() {
 
     git filter-branch --env-filter '
-        WRONG_EMAIL="ranel.padon@magneticasis.com"
+        WRONG_EMAIL="ranel.padon@magneticasia.com"
         NEW_NAME="Ranel Padon"
         NEW_EMAIL="ranel.padon@gmail.com"
 
