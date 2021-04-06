@@ -2,7 +2,7 @@
     "explorer.width": 35,
     "explorer.mouseMode": "singleclick",
     "explorer.file.autoReveal": true,
-    "explorer.file.showHiddenFiles": true,
+    "explorer.file.showHiddenFiles": false,
     "explorer.file.column.indent.indentLine": true,
     "explorer.icon.enableVimDevicons": false,
     "explorer.icon.enableNerdfont": false,
@@ -30,7 +30,7 @@
         ],
         "filenames": [
             ".DS_Store",
-            ".idea",
+            ".netrwhist",
             ".vscode",
             ".idea"
         ],
