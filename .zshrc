@@ -1124,9 +1124,10 @@ alias lg='lazygit'
 bindkey '^Z' end-of-line
 
 
-# Fix commit email
+# Set this in the repo: git config user.email ranel.padon@gmail.com
+# then, fix commit email.
+# Use `git pull origin master --allow-unrelated-histories`.
 fce() {
-
     git filter-branch --env-filter '
         WRONG_EMAIL="ranel.padon@magneticasia.com"
         NEW_NAME="Ranel Padon"
@@ -1144,4 +1145,3 @@ fce() {
         fi
     ' --tag-name-filter cat -- --branches --tags
 }
-
