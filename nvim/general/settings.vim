@@ -37,7 +37,7 @@ if !g:is_nvim
     set hlsearch                                                                " Highlight search matches
     set incsearch                                                               " Highlight as you type your search.
     set laststatus=2                                                            " Always display the status line
-    set ruler              			                                            " Show the cursor position
+    set ruler                                                                   " Show the cursor position
     set showcmd                                                                 " Show the run commands
     set smarttab                                                                " Smart tabbing based on tab settings
     set ttyfast                                                                 " Fast scroll
