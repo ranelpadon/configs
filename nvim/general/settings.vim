@@ -22,6 +22,7 @@ if g:is_vim
     set term=xterm-256color                                                     " 8-bit/256 colors in Vim's embedded terminal, error in Nvim
 endif
 
+" These settings are auto-configured already in Neovim.
 if !g:is_nvim
     set nocompatible                                                            " Vim instead of vi
     syntax on                                                                   " Syntax highlighing

@@ -14,10 +14,11 @@ MacVim loads the `.vimrc` file also.
 
 
 ### STRUCTURE
+- **init.vim**: autoloads all settings/files below. Will not require changes most of the time.
 - **general/settings.vim**: native Vim, MacVim, and Neovim settings.
 - **keys/mappings.vim**: keymaps for native Vim, MacVim, and Neovim settings.
 - **themes/***: color schemes
-- **vim-plug/plugins.vim**: the loaded plugins. New plugins should be added here.
+- **vim-plug/plugins.vim**: the list of installed plugins. New plugins should be added here.
     - This assumes the [vim-plug](https://github.com/junegunn/vim-plug) plugin manager which is lightweight.
     - Most of my installed plugins are really ligthweight.
 - **plug-config/***: configs/keymaps for a new plugin should be added here as a new file.
