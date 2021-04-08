@@ -21,6 +21,8 @@ g:is_mvim
 ```
 which are used in loading specific/targeted settings only inside an `IF` block. Likewise, if you use Neovim only, the settings are fine and no need to delete the custom ones for Vim/MacVim.
 
+The unification of settings here is just secondary, the main important idea is how these folders/files are organized for better separation of concerns and to avoid the chaotic nature of having a single/lengthy `.vimrc` or `init.vim` file.
+
 ### STRUCTURE
 - `init.vim`: autoloads all settings/files below. Will not require changes most of the time.
 - `general/settings.vim`: native Vim, MacVim, and Neovim settings.
