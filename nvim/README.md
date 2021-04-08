@@ -10,8 +10,16 @@ let &packpath = &runtimepath
 source $HOME/.config/nvim/init.vim
 ```
 
-MacVim loads the `.vimrc` file also.
+MacVim loads the `.vimrc` file also. And I've created a `~/.vim` folder that just points to `~/.config/nvim` folder, that's why we have `runtimepath^=~/.vim` in `.vimrc` above.
+So, all files/settings in Vim, MacVim, and Neovim are shared for better maintainability.
 
+In the `general/settings.vim`, you could see these boolean variables:
+```
+g:is_nvim
+g:is_vim
+g:is_mvim
+```
+which are used in loading specific/targeted settings only inside an `IF` block. Likewise, if you use Neovim only, the settings are fine and no need to delete the custom ones for Vim/MacVim.
 
 ### STRUCTURE
 - `init.vim`: autoloads all settings/files below. Will not require changes most of the time.
