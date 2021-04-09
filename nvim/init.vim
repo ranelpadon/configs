@@ -1,7 +1,7 @@
-runtime general/settings.vim
-runtime vim-plug/plugins.vim
-runtime themes/onedark.vim
-runtime keys/mappings.vim
+runtime settings.vim
+runtime plugins.vim
+runtime mappings.vim
 
-" `!` is needed to load all files in this folder.
-runtime! plug-config/*.vim
+" `!` is needed to load all files in the folder.
+runtime! plugins-config/*.vim
+runtime! themes/*.vim
