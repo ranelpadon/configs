@@ -39,8 +39,8 @@ The unification of settings here is just secondary, the main important idea is h
 
 ### COMMON WORKFLOW
 - Adding new plugin `XXX`:
-    - add an entry for it in `vim-plug/plugins.vim`
-    - if needed, add a new `plug-config/XXX.vim` file for its custom config/keymaps 
+    - add an entry for it in `plugins.vim`
+    - if needed, add a new `plugins-config/XXX.vim` file for its custom config/keymaps 
 - Removing a plugin `XXX`:
-    - remove its entry in `vim-plug/plugins.vim`
-    - remove its custom config/keymaps (`plug-config/XXX.vim`) if there's any
+    - remove its entry in `plugins.vim`
+    - remove its custom config/keymaps (`plugins-config/XXX.vim`) if there's any
