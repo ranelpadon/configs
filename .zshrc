@@ -301,8 +301,8 @@ crm() {
     git diff --name-only $1.. | grep requirements.txt | xargs git diff $1..
     cd docker
     echo "checking for some migration node errors.."
-    mlist
-    cd ..
+    mpending
+    # cd ..
 }
 # Check latest tag
 clt() {
