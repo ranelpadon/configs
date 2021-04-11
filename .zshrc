@@ -25,6 +25,12 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Fix the annoying gap in the right prompt!
 ZLE_RPROMPT_INDENT=0
 
+
+preexec() {
+    # Add newline before command output for better vertical spacing.
+    echo ''
+}
+
 # Uncomment the following line to disable bi-weekly auto-update checks.
 DISABLE_AUTO_UPDATE="true"
 
@@ -763,7 +769,8 @@ dc() {
     docker stop \
         sessions-ui \
         ets-mysql \
-        ticketing_ets-celery_1
+        ticketing_ets-celery_1 \
+        832603c3c1a5_ets-mysq
 }
 
 
@@ -1002,12 +1009,17 @@ export BAT_THEME="TwoDark"
 # and don't want it to exclude hidden files, use the following command:
 # export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 # --type f \
+# This is used when running `fzf` in the CLI.
+# For faster/better results with ** operator in files/folders,
+# preprend with a representative folder first, like
+# `cd projects/**` instead of `cd **` only.
 export FZF_DEFAULT_COMMAND=" \
     fd \
     --hidden \
     --follow \
     --no-ignore \
     --exclude node_modules \
+    --exclude Library \
     --exclude logs \
     --exclude media \
     --exclude static \
