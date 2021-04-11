@@ -92,7 +92,7 @@ noremap <Leader>fw :FixWhitespace<CR>
 " https://stackoverflow.com/questions/657447/vim-clear-last-search-highlighting#657457
 " Could not use the <Esc><Esc> sequence due to issues with other keys like arrows:
 " https://stackoverflow.com/questions/11940801/mapping-esc-in-vimrc-causes-bizarre-arrow-behaviour?noredirect=1&lq=1
-nnoremap <silent> <Leader><Esc> :let @/ = ""<CR>
+nnoremap <silent> <Leader>j :let @/ = ""<CR>
 
 
 " Uncomment this to enable by default:
