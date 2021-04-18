@@ -1,3 +1,7 @@
+" Mappings: `ct` for theirs, `co` for ours, and `cb` for both.
+" HEAD is always `ours` which is the current change,
+" `theirs` is the incoming change,
+
 " Disable the default highlight group
 let g:conflict_marker_highlight_group = ''
 
