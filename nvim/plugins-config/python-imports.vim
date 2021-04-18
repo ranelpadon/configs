@@ -1,0 +1,1 @@
+nnoremap <Leader>in :ImportName<CR>
