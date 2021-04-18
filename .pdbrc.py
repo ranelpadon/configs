@@ -1,3 +1,6 @@
+# Debug line:
+# import pdb; pdb.set_trace()
+
 # print 'Executing .pdbrc.py...'
 # locals()
 # whatis num
