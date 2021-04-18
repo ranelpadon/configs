@@ -5,21 +5,28 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'junegunn/fzf.vim'
 
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'mattn/emmet-vim'
+    Plug 'ludovicchabant/vim-gutentags'
+    Plug 'mgedmin/python-imports.vim'
     Plug 'dense-analysis/ale'
     Plug 'voldikss/vim-floaterm'
 
+    Plug 'preservim/tagbar'
     Plug 'itchyny/lightline.vim'
     Plug 'mengelbrecht/lightline-bufferline'
     Plug 'yggdroot/indentline'
     Plug 'bronson/vim-trailing-whitespace'
     Plug 'tpope/vim-commentary'
+    Plug 'ap/vim-css-color'
+    Plug 'mattn/emmet-vim'
 
+    Plug 'psliwka/vim-smoothie'
     Plug 'justinmk/vim-sneak'
     Plug 'haya14busa/vim-asterisk'
     Plug 'RRethy/vim-tranquille'
 
     Plug 'jiangmiao/auto-pairs'
+    Plug 'sheerun/vim-polyglot'
+
     Plug 'wellle/targets.vim'
     Plug 'michaeljsmith/vim-indent-object'
 
