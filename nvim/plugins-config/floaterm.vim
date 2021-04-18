@@ -10,3 +10,9 @@ else
     nnoremap  <silent>  <F5>  :FloatermToggle<CR>
     tnoremap  <silent>  <F5>  <C-\><C-n>:FloatermToggle<CR>
 endif
+
+" Default: '─│─│┌┐┘└'
+let g:floaterm_borderchars = '· · ····'
+let g:floaterm_title = ''
+
+highlight FloatermBorder guibg=#282c34 guifg=#61afef
