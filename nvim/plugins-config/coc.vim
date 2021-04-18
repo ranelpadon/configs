@@ -16,6 +16,9 @@ else
     set signcolumn=yes
 endif
 
+highlight CocErrorHighlight ctermfg=Red  guifg=#e06c75
+highlight CocErrorSign  ctermfg=Red guifg=#e06c75
+
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
