@@ -1,0 +1,1 @@
+let g:smoothie_update_interval = 10
