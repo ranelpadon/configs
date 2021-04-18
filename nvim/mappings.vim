@@ -11,12 +11,14 @@ nnoremap <Enter> O<Esc>j
 nnoremap <S-Enter> o<Esc>k
 
 
-" Go to SOL and EOL when in Insert mode.
-" C-A and C-Z are mapped in Karabiner/BTT
+" Go to SOL and EOL when in Insert/Normal mode.
+" C-A and C-Z are mapped in Karabiner/BTT using the Left/Right Cmd physical keys.
 " with Cmd-Left and Cmd-Right keys.
 " https://coderwall.com/p/fd_bea/vim-jump-to-end-of-line-while-in-insert-mode
 inoremap <C-A> <C-o>^
 inoremap <C-Z> <C-o>$
+nnoremap <C-A> ^
+nnoremap <C-Z> $
 
 
 " Find and replace of the current word in cursor,
@@ -167,3 +169,7 @@ noremap <Leader>fw :FixWhitespace<CR>
 
 " Auto-yank mouse selected text
 noremap <LeftRelease> "+y<LeftRelease>
+
+
+" Python dotted path (project/relative path).
+nnoremap <Leader>dp :let @*=substitute(expand('%:h'), '\/', '.', 'g')<CR>
