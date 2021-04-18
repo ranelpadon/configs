@@ -3,9 +3,10 @@ map <Leader>g :GFiles<CR>
 map <Leader>b :Buffers<CR>
 map <Leader>m :Maps<CR>
 
-map <Leader>fh :History<CR>
-map <Leader>fc :Files ~/dev/configs<CR>
-map <Leader>fv :Files ~/Dropbox/Vortex<CR>
+map <Leader>ph :History<CR>
+map <Leader>pc :Files ~/dev/configs<CR>
+map <Leader>pv :Files ~/Dropbox/Vortex<CR>
+map <Leader>pt :Files ~/dev/ticketflap/ticketing<CR>
 
 map <Leader>rg :Rg<CR>
 
