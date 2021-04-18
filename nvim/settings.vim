@@ -66,7 +66,12 @@ set iskeyword+=-                      	                                        "
 set formatoptions-=cro                                                          " Stop newline continuation of comments
 set whichwrap+=<,>,[,],h,l                                                      " Continue cursor to the start of new line when it reaches the edge
 set nowrap                                                                      " Display long lines as just one line
-set nofoldenable                                                                " Disable folding
+
+" Fold by default to reduce clutter.
+set foldmethod=indent
+set foldlevelstart=1
+set foldnestmax=4
+
 set listchars=tab:▸\ ,eol:¬                                                     " Visualize tabs and newlines
 set conceallevel=0                                                              " To see `` in markdown files
 
