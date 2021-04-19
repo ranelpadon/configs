@@ -136,10 +136,30 @@ my_gca() {
 } 
 alias gca=my_gca
 
+# `git diff ets`: compare the current checked out branch to ets, optionally with specific file.
+# git diff ets release/ets/test/v2.4 apps/backoffice/generic/forms/property_forms.py
 # git diff ets..release/ets/test/v2.4 apps/backoffice/generic/forms/property_forms.py
 gde() {
-    git diff ets..$1 $2
+    git diff ets $1
 }
+# `git diff branches`: compare the two branches, optionally with specific file.
+# git diff ets release/ets/test/v2.4 apps/backoffice/generic/forms/property_forms.py
+gdb() {
+    git diff $1 $2 $3
+}
+
+# `git difftool ets`: compare the current checked out branch to ets, optionally with specific file.
+# git diff ets release/ets/test/v2.4 apps/backoffice/generic/forms/property_forms.py
+# git diff ets..release/ets/test/v2.4 apps/backoffice/generic/forms/property_forms.py
+gdte() {
+    git difftool ets $1
+}
+# `git difftool branches`: compare the two branches, optionally with specific file.
+# git difftool ets release/ets/test/v2.4 apps/backoffice/generic/forms/property_forms.py
+gdtb() {
+    git difftool $1 $2 $3
+}
+
 # `function` keyword is needed in ZSH?
 # `u` for `undirty`
 gce() {
@@ -228,8 +248,11 @@ gitblameline() {
 }
 alias gbl=gitblameline
 # get branch name
+# gbn LINE FILE
 gbn() {
-  git name-rev --name-only --exclude="tags/*" $1
+    commit_log=$(git blame -L$1,$1 -- $2)
+    commit_sha=${commit_log:0:8}
+    git name-rev --name-only --exclude="tags/*" $commit_sha
 }
 
 # git tag grep
@@ -276,7 +299,11 @@ mlist() {
 migrate() {
   ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py migrate $1
 }
-mpending() {
+fml() {
+  # fab migrate:--list | grep "NodeNotFoundError\|\[ \]"
+  fab migrate:--list
+}
+fmlg() {
   # fab migrate:--list | grep "NodeNotFoundError\|\[ \]"
   fab migrate:--list | grep -v "\[X\]"
 }
@@ -290,26 +317,39 @@ gcpm() {
 }
 
 # Check release diff/packages/migrations
-crd() {
+cr() {
     # limit=2000
     git diff --name-status $1.. -l 2000 | grep migrations\/0
     find . | grep \/migrations\/ | grep -v pyc$ | grep -oE "\/.+\/[0-9]+" | sort | uniq -d
     git diff --name-only $1.. | grep requirements.txt | xargs git diff $1..
+}
+crm() {
+    # limit=2000
+    git diff --name-status $1.. -l 2000 | grep migrations\/0
+    find . | grep \/migrations\/ | grep -v pyc$ | grep -oE "\/.+\/[0-9]+" | sort | uniq -d
+}
+crp() {
+    # limit=2000
+    git diff --name-only $1.. | grep requirements.txt | xargs git diff $1..
+}
+# Check migration conflicts.
+cmc() {
+    find . | grep \/migrations\/ | grep -v pyc$ | grep -oE "\/.+\/[0-9]+" | sort | uniq -d
 }
 # Check release logs/merges
 crl() {
     git log --pretty='%H %ar %s' --merges --grep='conflict' --grep='test' --regexp-ignore-case  $1..
 }
 # Check release and migration list
-crm() {
-    git diff --name-status $1.. | grep migrations\/0
-    find . | grep \/migrations\/ | grep -v pyc$ | grep -oE "\/.+\/[0-9]+" | sort | uniq -d
-    git diff --name-only $1.. | grep requirements.txt | xargs git diff $1..
-    cd docker
-    echo "checking for some migration node errors.."
-    mpending
-    # cd ..
-}
+# crm() {
+#     git diff --name-status $1.. | grep migrations\/0
+#     find . | grep \/migrations\/ | grep -v pyc$ | grep -oE "\/.+\/[0-9]+" | sort | uniq -d
+#     git diff --name-only $1.. | grep requirements.txt | xargs git diff $1..
+#     cd docker
+#     echo "checking for some migration node errors.."
+#     mpending
+#     # cd ..
+# }
 # Check latest tag
 clt() {
   git fetch --tags
@@ -770,7 +810,7 @@ dc() {
         sessions-ui \
         ets-mysql \
         ticketing_ets-celery_1 \
-        832603c3c1a5_ets-mysq
+        832603c3c1a5_ets-mysql
 }
 
 
