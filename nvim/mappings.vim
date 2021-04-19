@@ -141,6 +141,8 @@ noremap <Leader>s :w!<CR>
 noremap <Leader>w :bw<CR>
 " Focus the file.
 noremap <Leader>o :on<CR>
+" Open new file.
+noremap <Leader>n :enew<CR>
 " Cycle windowv
 noremap <Leader><Space> <C-w>w
 
