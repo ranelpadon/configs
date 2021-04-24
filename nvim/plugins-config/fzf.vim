@@ -13,7 +13,7 @@ map <Leader>rg :Rg<CR>
 " Fix issue in `bat`'s preview colorscheme by inserting `COLORTERM=truecolor` as envvar.
 " Fixed already in Neovim's nightly build. But needed in Vim.
 if g:is_vim
-    let $FZF_PREVIEW_COMMAND="COLORTERM=truecolor bat --style=numbers --color=always --line-range :500 {}"
+    let $FZF_PREVIEW_COMMAND="COLORTERM=truecolor bat --style=numbers --color=always --line-range :5000 {}"
 endif
 
 if g:is_mvim
