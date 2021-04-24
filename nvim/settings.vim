@@ -65,7 +65,6 @@ set linebreak                                                                   
 set iskeyword+=-                      	                                        " Treat dash-separated words as a word text object
 set formatoptions-=cro                                                          " Stop newline continuation of comments
 set whichwrap+=<,>,[,],h,l                                                      " Continue cursor to the start of new line when it reaches the edge
-set nowrap                                                                      " Display long lines as just one line
 
 " Fold by default to reduce clutter.
 set foldmethod=indent
