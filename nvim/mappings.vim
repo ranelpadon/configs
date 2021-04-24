@@ -11,6 +11,14 @@ nnoremap <Enter> O<Esc>j
 nnoremap <S-Enter> o<Esc>k
 
 
+" Move to older cursor position. Opposite of <C-I>.
+" Pressing <C-M> will map to <C-B> via BTT app
+" since <C-M> could not be used directly because it's equivalent to ENTER key.
+nnoremap <C-B> <C-O>
+" Move to newer cursor position. Opposite of <C-O>.
+nnoremap <C-H> <C-I>
+
+
 " Go to SOL and EOL when in Insert/Normal mode.
 " C-A and C-Z are mapped in Karabiner/BTT using the Left/Right Cmd physical keys.
 " with Cmd-Left and Cmd-Right keys.
