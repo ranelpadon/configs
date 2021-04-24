@@ -1,9 +1,9 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -278,7 +278,7 @@ gft() {
 changelog() {
   git commit -am "Update CHANGELOG."
 }
-conflict() {
+conflicts() {
   # $# variable will tell you the number of input arguments the script was passed.
   if [ $# -eq 0 ]
   then
@@ -287,7 +287,7 @@ conflict() {
     git commit -am "GL-$1: Fix merge conflicts."
   fi
 }
-mconflict() {
+mconflicts() {
   git commit -am "Fix migration conflicts."
 }
 mlist() {
@@ -1125,7 +1125,7 @@ fim() {
 # alias nvim='~/dev/binaries/nvim-osx64/bin/nvim'
 
 alias tmuxx='source ~/.config/tmux/tmuxrc.sh'
-
+alias tmuxx_resume='tmux attach -t Workspace'
 alias gad='gcloud app deploy'
 
 
@@ -1152,8 +1152,8 @@ linkify() {
 # }
 
 
-# Open all files with merge conflicts with nvim
-mcn() {
+# Open all files with open conflicts with nvim
+ocn() {
     git diff --name-only | uniq | xargs nvim
 }
 
@@ -1165,7 +1165,7 @@ export NNN_FIFO='/Users/ranelpadon/tmp/nnn.fifo'
 
 
 export COLORTERM="truecolor"
-export FZF_PREVIEW_COMMAND="COLORTERM=truecolor bat --style=numbers --color=always --line-range :500 {}"
+export FZF_PREVIEW_COMMAND="COLORTERM=truecolor bat --style=numbers --color=always --line-range :5000 {}"
 
 
 alias lg='lazygit'
@@ -1197,3 +1197,18 @@ fce() {
         fi
     ' --tag-name-filter cat -- --branches --tags
 }
+
+
+# enable-is-test
+eit() {
+  export IS_TEST=1
+}
+
+# disable-is-test
+dit() {
+  unset IS_TEST
+}
+
+
+# --body-numbering 'all-lines' (number the blank lines also)
+alias nl='nl -b a $1'
