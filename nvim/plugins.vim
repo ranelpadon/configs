@@ -23,6 +23,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'justinmk/vim-sneak'
     Plug 'haya14busa/vim-asterisk'
     Plug 'RRethy/vim-tranquille'
+    if !g:is_nvim
+        Plug 'obcat/vim-hitspop'
+    endif
 
     Plug 'jiangmiao/auto-pairs'
     Plug 'sheerun/vim-polyglot'
