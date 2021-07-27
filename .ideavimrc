@@ -1,4 +1,9 @@
-source ~/.vimrc
+" source ~/.vimrc
+
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath = &runtimepath
+
+source $HOME/.config/nvim/init.vim
 
 
 set surround              " visual select and then S
