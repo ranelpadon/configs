@@ -3,7 +3,8 @@ map <Leader>g :GFiles<CR>
 map <Leader>b :Buffers<CR>
 map <Leader>m :Maps<CR>
 
-map <Leader>ph :History<CR>
+" map <Leader>ph :History<CR>
+map <Leader>pd :Files ~/dev<CR>
 map <Leader>pc :Files ~/dev/configs<CR>
 map <Leader>pv :Files ~/Dropbox/Vortex<CR>
 map <Leader>pt :Files ~/dev/ticketflap/ticketing<CR>
@@ -23,7 +24,7 @@ endif
 
 " Helper function only.
 function! RgHelper(query, fullscreen, command_fmt)
-    let command_fmt = a:command_fmt . ' --no-heading --line-number --color=always --smart-case -- %s || true' 
+    let command_fmt = a:command_fmt . ' --no-heading --line-number --color=always --smart-case -- %s || true'
     let initial_command = printf(command_fmt, shellescape(a:query))
     let reload_command = printf(command_fmt, '{q}')
     let spec = {'options': ['--preview-window', 'right:50%', '--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
@@ -46,13 +47,21 @@ endfunction
 command! -nargs=* -bang RgPyT call RgPyTFzf(<q-args>, <bang>0)
 noremap <Leader>rt :RgPyT<CR>
 
+" Search Python/Django Requirements/Text Files
+function! RgPyTxtFzf(query, fullscreen)
+    let command_fmt = 'rg --type txt'
+    call RgHelper(a:query, a:fullscreen, command_fmt)
+endfunction
+command! -nargs=* -bang RgPyTxt call RgPyTxtFzf(<q-args>, <bang>0)
+noremap <Leader>rtxt :RgPyTxt<CR>
+
 " Search Python/Django Migration Files
 function! RgPyMFzf(query, fullscreen)
     let command_fmt = 'rg --type py --glob "**/migrations/**"'
     call RgHelper(a:query, a:fullscreen, command_fmt)
 endfunction
 command! -nargs=* -bang RgPyM call RgPyMFzf(<q-args>, <bang>0)
-noremap <Leader>rm :RgPyM<CR>
+noremap <Leader>rmp :RgPyM<CR>
 
 " Search JS Files
 function! RgJSFzf(query, fullscreen)
@@ -76,7 +85,7 @@ function! RgAllFzf(query, fullscreen)
     call RgHelper(a:query, a:fullscreen, command_fmt)
 endfunction
 command! -nargs=* -bang RgAll call RgAllFzf(<q-args>, <bang>0)
-noremap <Leader>ra :RgAll<CR>
+noremap <Leader>rac :RgAll<CR>
 
 " Search All Files with Git Conflicts
 function! RgAllConflictsFzf(query, fullscreen)
