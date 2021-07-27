@@ -10,7 +10,11 @@ augroup END
 
 let g:gutentags_exclude_project_root = [
     \ '/Users/ranelpadon',
-    \ '/Users/ranelpadon/dev/configs'
+    \ '/Users/ranelpadon/dev/configs',
+    \ '/Users/ranelpadon/dev/design-patterns',
+    \ '/Users/ranelpadon/dev/elevenskies',
+    \ '/Users/ranelpadon/dev/melco',
+    \ '/Users/ranelpadon/dev/mgm'
     \ ]
 
 let g:gutentags_exclude_filetypes = [
@@ -21,7 +25,10 @@ let g:gutentags_exclude_filetypes = [
     \ 'conf',
     \ 'sh',
     \ 'json',
-    \ 'log'
+    \ 'log',
+    \ 'yml',
+    \ 'sh',
+    \ 'env'
     \ ]
 
 let g:gutentags_ctags_exclude = [
