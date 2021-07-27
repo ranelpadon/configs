@@ -104,3 +104,5 @@ set nobackup
 set nowritebackup
 set undofile                                                                    " Save undo history across sessions
 set undodir=$HOME/.config/nvim/undo
+
+let g:python_host_prog = expand('~/.pyenv/versions/ticketing/bin/python2')
