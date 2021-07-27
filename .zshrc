@@ -103,38 +103,46 @@ prompt_agnoster_precmd() {
 }
 
 gitdiff() {
-  git diff $1
+    git diff $1
 }
 alias gd=gitdiff
 
 gitcheckout() {
-  git checkout $1
+    git checkout $1
 }
 alias gc=gitcheckout
 
 gitmerge() {
-  git merge $1
+    git merge $1
 }
 alias gm=gitmerge
 
 gme() {
-  git merge ets
+    git merge ets
 }
 gmprod() {
-  git merge release/ets/prod/v1.8.44
+    git merge release/ets/prod/v1.8.44
 }
 
 my_grh() {
-  git reset --hard
+    git reset --hard
 } 
 alias grh=my_grh
+
+unalias gca
 # needs alias because OMZ has `gca` alias also!
+# https://github.com/ohmyzsh/ohmyzsh/wiki/Cheatsheet
 # so we need to unbind/override it
 # git commit all
-my_gca() {
-  git commit -am $1
+gca() {
+    git commit -am $1
 } 
-alias gca=my_gca
+
+# Override the default zsh's Git alias
+unalias gcm
+gcm() {
+    git commit -m $1
+}
 
 # `git diff ets`: compare the current checked out branch to ets, optionally with specific file.
 # git diff ets release/ets/test/v2.4 apps/backoffice/generic/forms/property_forms.py
@@ -163,88 +171,91 @@ gdtb() {
 # `function` keyword is needed in ZSH?
 # `u` for `undirty`
 gce() {
-  git checkout ets
+    git checkout ets
+}
+gct() {
+    git checkout release/ets/test/v2.4
 }
 gcprod() {
-  git checkout release/ets/prod/v1.8.47
+    git checkout release/ets/prod/v1.8.47
 }
 gcuat() {
-  git checkout release/ets/uat/melco/v1.8.44
+    git checkout release/ets/uat/melco/v1.8.44
 }
 gctt() {
-  git checkout whitelabel/ttcl
+    git checkout whitelabel/ttcl
 }
 gcmpr() {
-  git checkout release/ets/test/melco/v1.8.46
+    git checkout release/ets/test/melco/v1.8.46
 }
 gcuat() {
-  git checkout release/ets/uat/melco/v1.8.44
+    git checkout release/ets/uat/melco/v1.8.44
 }
 gcemf() {
-  git checkout release/v1.8.32-emfhk-test
+    git checkout release/v1.8.32-emfhk-test
 }
 
 gple() {
-  git pull origin ets
+    git pull origin ets
 }
 gplprod() {
-  git pull origin release/ets/prod/v1.8.44
+    git pull origin release/ets/prod/v1.8.44
 }
 gpluat() {
-  git pull origin release/ets/uat/melco/v1.8.44
+    git pull origin release/ets/uat/melco/v1.8.44
 }
 gpltt() {
-  git pull origin whitelabel/ttcl
+    git pull origin whitelabel/ttcl
 }
 gplmpr() {
-  git pull origin release/ets/test/melco/v1.8.46
+    git pull origin release/ets/test/melco/v1.8.46
 }
 gpluat() {
-  git pull origin release/ets/uat/melco/v1.8.44
+    git pull origin release/ets/uat/melco/v1.8.44
 }
 gplemf() {
-  git pull origin release/v1.8.32-emfhk-test
+    git pull origin release/v1.8.32-emfhk-test
 }
 
 gpse() {
-  git push origin ets
+    git push origin ets
 }
 gpsprod() {
-  git push origin release/ets/prod/v1.8.44
+    git push origin release/ets/prod/v1.8.44
 }
 gpsuat() {
-  git push origin release/ets/uat/melco/v1.8.44
+    git push origin release/ets/uat/melco/v1.8.44
 }
 gpstt() {
-  git push origin whitelabel/ttcl
+    git push origin whitelabel/ttcl
 }
 gpsmpr() {
-  git push origin release/ets/test/melco/v1.8.46
+    git push origin release/ets/test/melco/v1.8.46
 }
 gpsuat() {
-  git push origin release/ets/uat/melco/v1.8.44
+    git push origin release/ets/uat/melco/v1.8.44
 }
 gpsemf() {
-  git push origin release/v1.8.32-emfhk-test
+    git push origin release/v1.8.32-emfhk-test
 }
 
 gitcheckoutbranchnew() {
-  git checkout -b $1 $2
+    git checkout -b $1 $2
 }
 alias gcb=gitcheckoutbranchnew
 
 gitadd() {
-  git add $1
+    git add $1
 }
 alias ga=gitadd
 
 gitblame() {
-  git blame $1
+    git blame $1
 }
 alias gb=gitblame
 
 gitblameline() {
-  git blame -L $1 $2
+    git blame -L $1 $2
 }
 alias gbl=gitblameline
 # get branch name
@@ -258,46 +269,81 @@ gbn() {
 # git tag grep
 gtg() {
     git fetch --tags
-    git tag | grep $1 | sort --version-sort | tail
+
+    # $# variable will tell you the number of input arguments the script was passed.
+    if [ $# -eq 0 ]
+    then
+        # Search PROD tag by default.
+        git tag | grep 'ets-prod' | sort --version-sort | tail
+    else
+        git tag | grep $1 | sort --version-sort | tail
+    fi
 }
 
 gpl() {
-  CURRENT_BRANCH=`git symbolic-ref --short HEAD`
-  # git pull origin $1
-  git pull origin $CURRENT_BRANCH
+    CURRENT_BRANCH=`git symbolic-ref --short HEAD`
+    # git pull origin $1
+    git pull origin $CURRENT_BRANCH
 }
 gps() {
-  CURRENT_BRANCH=`git symbolic-ref --short HEAD`
-  # git push origin $1
-  git push origin $CURRENT_BRANCH
+    CURRENT_BRANCH=`git symbolic-ref --short HEAD`
+    # git push origin $1
+    git push origin $CURRENT_BRANCH
 }
 gft() {
-  git fetch origin $1
+    git fetch origin $1
 }
 
 changelog() {
-  git commit -am "Update CHANGELOG."
+    git commit -am "Update CHANGELOG."
 }
 conflicts() {
-  # $# variable will tell you the number of input arguments the script was passed.
-  if [ $# -eq 0 ]
-  then
-    git commit -am "Fix merge conflicts."
-  else
-    git commit -am "GL-$1: Fix merge conflicts."
-  fi
+    # $# variable will tell you the number of input arguments the script was passed.
+    if [ $# -eq 0 ]
+    then
+        git commit -am "Fix merge conflicts."
+    else
+        git commit -am "GL-$1: Fix merge conflicts."
+    fi
 }
 mconflicts() {
   git commit -am "Fix migration conflicts."
 }
-mlist() {
-  # fab migrate:--list | grep "NodeNotFoundError\|\[ \]"
-  # All results except those migrated ones.
-  # fab migrate:--list | grep -v "\[X\]"
-  ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py migrate --list | grep -v "\[X\]"
+makemigrations() {
+    pyenv activate ticketing
+    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py makemigrations $1
 }
 migrate() {
-  ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py migrate $1
+    pyenv activate ticketing
+    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py migrate $1
+}
+quick_migrate() {
+    pyenv activate ticketing
+    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py quick_migrate $1
+}
+quick_makemigrations() {
+    pyenv activate ticketing
+    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py quick_makemigrations $1
+}
+sync_migrations() {
+    pyenv activate ticketing
+    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py sync_migrations
+}
+migrate_sync() {
+    pyenv activate ticketing
+    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py shell < ~/dev/ticketflap/ticketing/test/migrations_syncer.py
+}
+migrate_list() {
+    pyenv activate ticketing
+    # fab migrate:--list | grep "NodeNotFoundError\|\[ \]"
+    # All results except those migrated ones.
+    # fab migrate:--list | grep -v "\[X\]"
+    # ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py migrate --list | grep -v "\[X\]"
+    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py migrate --list | grep --fixed-strings "[ ]"
+}
+compilemessages() {
+    pyenv activate ticketing
+    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py compilemessages --locale=zh_Hans --locale=zh_Hant
 }
 fml() {
   # fab migrate:--list | grep "NodeNotFoundError\|\[ \]"
@@ -333,7 +379,7 @@ crp() {
     git diff --name-only $1.. | grep requirements.txt | xargs git diff $1..
 }
 # Check migration conflicts.
-cmc() {
+crc() {
     find . | grep \/migrations\/ | grep -v pyc$ | grep -oE "\/.+\/[0-9]+" | sort | uniq -d
 }
 # Check release logs/merges
@@ -360,15 +406,17 @@ clt() {
 # Update the gitconfig's color attribute so that grep preserves the color.
 # https://unix.stackexchange.com/questions/44266/how-to-colorize-output-of-git
 # --invert-match or -v: exclude the PATTERN.
-alias gs=' \
-    git status \
-    | grep --invert-match "test/" \
-    | grep -v "media/backoffice/private/csv_uploads/" \
-    | grep -v "qos/gate/conf/scapi/" \
-    | grep -v "alloserv/assignment.log"
-'
+# alias gs=' \
+#     git status \
+#     | grep --invert-match "test/" \
+#     | grep -v "media/backoffice/private/csv_uploads/" \
+#     | grep -v "qos/gate/conf/scapi/" \
+#     | grep -v "alloserv/assignment.log"
+# '
 # Include the untracked files in test folder.
-alias gsu='git status'
+alias gs='git status'
+alias gst='git stash'
+alias gsp='git stash pop'
 alias ds='drush status'
 
 # XAMPP/MAMP Stack.
@@ -585,8 +633,11 @@ dfh2() {
 sshd() {
     fab start:sshd && fab stop:backoffice
 }
-start() {
-    fab start:db && fab start:alloserv && fab start:worker && fab start:memcached
+# fab start essentials
+fse() {
+#     fab start:db && fab start:alloserv && fab start:worker && fab start:memcached
+    fab start:db && fab start:memcached
+    # fab start:db && fab start:worker && fab start:memcached
 }
 
 fr() {
@@ -623,9 +674,9 @@ frw() {
 frpb() {
     fab runserver_plus:backoffice
 }
-rpb() {
-    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py runserver_plus
-}
+# rpb() {
+#     ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py runserver_plus
+# }
 rb() {
     ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py runserver
 }
@@ -635,10 +686,15 @@ frpf() {
 rf() {
     ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/frontend/manage.py runserver 0.0.0.0:8002
 }
+# diff frontend
+diffsettings() {
+    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/$1/manage.py diffsettings
+}
 frpp() {
     fab runserver_plus:processing
 }
-rp() {
+# processing/box
+rpb() {
     ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/processing/manage.py runserver 0.0.0.0:8001
 }
 frpr() {
@@ -667,6 +723,12 @@ fmbs() {
 fmbsp() {
     fab manage:backoffice,shell_plus
 }
+mbsp() {
+    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py shell_plus
+}
+shell() {
+    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py shell_plus
+}
 
 # fab pip install
 # fpi backoffice "factory-boy\=\=2.8.1"  <-- needs the quotes!!!
@@ -674,6 +736,17 @@ fmbsp() {
 fpi() {
     # echo "install $2"
     fab pip:$1,"install $2"
+}
+# fab pip install all
+# fpia "factory-boy\=\=2.8.1"  <-- needs the quotes!!!
+fpia() {
+    fpi backoffice $1
+    fpi worker $1
+    fpi processing $1
+    fpi frontend $1
+    fpi scapi $1
+    fpi taapi $1
+    fpi acapi $1
 }
 
 act() {
@@ -700,7 +773,31 @@ ftb() {
     fi
 }
 tb() {
-    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py test $1 --settings=settings.local_settings._local_sqlite.backoffice --verbosity=0
+    ARG_1_TRIMMED=${1:5}  # Get the $1 substring, starting at index 5.
+    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py test $ARG_1_TRIMMED \
+        --settings=settings.local_settings._local_sqlite.backoffice --verbosity=0
+}
+# run custom command
+cb() {
+    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py $1
+}
+ftw() {
+    # dotted_path=$(pathx $1)
+    # fab test:backoffice,$dotted_path
+    # fab test:backoffice,$1,auto_clean_pyc=0,$2
+
+    # $# variable will tell you the number of input arguments the script was passed.
+    if [ $# -eq 1 ]
+    then
+      fab test:worker,$1,auto_clean_pyc=0
+    else
+      fab test:worker,$1,auto_clean_pyc=0,$2
+    fi
+}
+tw() {
+    ARG_1_TRIMMED=${1:5}  # Get the $1 substring, starting at index 5.
+    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/worker/manage.py test $ARG_1_TRIMMED \
+        --settings=settings.local_settings._local_sqlite.worker --verbosity=0
 }
 ftf() {
     # dotted_path=$(pathx $1)
@@ -716,7 +813,9 @@ ftf() {
     fi
 }
 tf() {
-    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/frontend/manage.py test $1 --settings=settings.local_settings._local_sqlite.frontend --verbosity=0
+    ARG_1_TRIMMED=${1:5}  # Get the $1 substring, starting at index 5.
+    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/frontend/manage.py test $ARG_1_TRIMMED \
+        --settings=settings.local_settings._local_sqlite.frontend --verbosity=0
 }
 ftp() {
     # dotted_path=$(pathx $1)
@@ -732,7 +831,9 @@ ftp() {
     fi
 }
 tp() {
-    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/processing/manage.py test $1 --settings=settings.local_settings._local_sqlite.processing --verbosity=0
+    ARG_1_TRIMMED=${1:5}  # Get the $1 substring, starting at index 5.
+    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/processing/manage.py test $ARG_1_TRIMMED \
+        --settings=settings.local_settings._local_sqlite.processing --verbosity=0
 }
 ftr() {
     # dotted_path=$(pathx $1)
@@ -761,18 +862,23 @@ fts() {
     fi
 }
 ts() {
-    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/sessions_api/manage.py test $1 --settings=settings.local_settings._local_sqlite.sessions_api --verbosity=0
+    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/sessions_api/manage.py test $ARG_1_TRIMMED \
+        --settings=settings.local_settings._local_sqlite.sessions_api --verbosity=0
 }
 
 frdb() {
+    # fix the `Head usage unknown option -1` error
+    # https://stackoverflow.com/questions/21498991/head-usage-unknown-option-1-n-error-possibly-ruby-related
+    # mv /Applications/XAMPP/xamppfiles/bin/HEAD /Applications/XAMPP/xamppfiles/bin/HTTP_HEAD
+    export PATH="/Applications/XAMPP/xamppfiles/bin:$PATH"
     # should be in docker/ folder!!!!
     # no need for this now since Homebrew's /usr/local/bin/mysql is ok now!
     # Set this first in root `fabfile.py`
     # local('gunzip < {db_target_file} | /Applications/XAMPP/xamppfiles/bin/mysql {db_connect} {db_target}'.format(
     # fab stop  # since Cmd+C will still leave the `db` container running in the background.
     # this doesnt work due to CLI error.
-    # export PATH="/Applications/XAMPP/xamppfiles/bin:$PATH"
     # clear the docker compose's autoruns, to free up the MySQL port.
+    # export PATH="/Applications/XAMPP/xamppfiles/bin:$PATH"
     dc
     fab create_database:drop=True
     cd ..
@@ -786,6 +892,7 @@ frdbm() {
     # fab stop  # since Cmd+C will still leave the `db` container running in the background.
     # export PATH="/Applications/XAMPP/xamppfiles/bin:$PATH"
     # clear the docker compose's autoruns, to free up the MySQL port.
+    export PATH="/Applications/XAMPP/xamppfiles/bin:$PATH"
     dc
     fab create_database:drop=True
     cd ..
@@ -833,7 +940,7 @@ wl() {
     worker_log
 }
 # check-worker-logs
-cwl() {
+clw() {
     # Verbose
     docker exec --tty --interactive --workdir /var/log/supervisor ticketflap-worker bash
     # docker exec --tty --interactive --workdir /var/log/supervisor $(docker ps --filter "name=ticketflap-worker" --quiet) bash
@@ -853,6 +960,15 @@ cwl() {
 
     # No error when executing.
     # fab log:frontend,error
+}
+clb() {
+    docker exec --tty --interactive --workdir /var/log/supervisor ticketflap-backoffice bash
+}
+clf() {
+    docker exec --tty --interactive --workdir /var/log/supervisor ticketflap-frontend bash
+}
+clp() {
+    docker exec --tty --interactive --workdir /var/log/supervisor ticketflap-processing bash
 }
 # docker-worker-logs
 dwl() {
@@ -929,6 +1045,11 @@ rhj() {
 rhjc() {
     # HTML + JS + CSS files.
     rg -i -thtml -tjs -tcss -g '!*.min.js' $1 $2 --colors match:bg:249,245,154 --colors match:fg:66,98,150 --colors match:style:nobold
+}
+
+rtxt() {
+    # Requirements.txt files.
+    rg -i -ttxt $1 $2 --colors match:bg:249,245,154 --colors match:fg:66,98,150 --colors match:style:nobold
 }
 
 clear_logs() {
@@ -1122,8 +1243,6 @@ fim() {
 }
 
 
-# alias nvim='~/dev/binaries/nvim-osx64/bin/nvim'
-
 alias tmuxx='source ~/.config/tmux/tmuxrc.sh'
 alias tmuxx_resume='tmux attach -t Workspace'
 alias gad='gcloud app deploy'
@@ -1212,3 +1331,17 @@ dit() {
 
 # --body-numbering 'all-lines' (number the blank lines also)
 alias nl='nl -b a $1'
+
+
+# Command: yvt URL START_TIME END_TIME
+# Sample: yvt 'https://www.youtube.com/watch?v=BmjAsjGbdXk' 98 148.8
+yt_video_trimmer() {
+    pyenv activate alloserv
+    python ~/dev/scripts/yt-video-trimmer.py $1 $2 $3
+}
+alias yvt=yt_video_trimmer
+
+
+export PYTHONWARNINGS=ignore
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+
