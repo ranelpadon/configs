@@ -308,7 +308,7 @@
     "when": "inFilesPicker && inQuickOpen"
   },
   {
-    "key": "ctrl+u",
+    "key": "ctrl+.",
     "command": "editor.action.moveLinesUpAction",
     "when": "editorTextFocus && !editorReadonly"
   },
@@ -318,12 +318,12 @@
     "when": "editorTextFocus && !editorReadonly"
   },
   {
-    "key": "ctrl+e",
+    "key": "ctrl+,",
     "command": "editor.action.moveLinesDownAction",
     "when": "editorTextFocus"
   },
   {
-    "key": "ctrl+u",
+    "key": "ctrl+.",
     "command": "editor.action.moveLinesUpAction",
     "when": "editorTextFocus"
   }
