@@ -344,12 +344,9 @@
     "vim.sneak": true,
     "git.enableStatusBarSync": false,
     "vim.replaceWithRegister": true,
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter.notebook.ipynb",
-            "filenamePattern": "*.ipynb"
-        }
-    ],
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
     "colorInfo.languages": [
         {
             "selector": "python",
@@ -376,5 +373,11 @@
             "colors": "css"
         }
     ],
+    "tabnine.experimentalAutoImports": true,
+    "editor.accessibilitySupport": "off",
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
     "window.zoomLevel": -1,
 }
