@@ -1,8 +1,8 @@
 augroup ProjectDrawer
     autocmd!
-    autocmd VimEnter * :CocCommand explorer --focus --preset --toggle --sources file+
+    autocmd VimEnter * :CocCommand explorer --sources file+
 augroup END
-nmap <space>e :CocCommand explorer --focus --preset --toggle --sources file+<CR>
+nmap <space>e :CocCommand explorer --sources file+<CR>
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
