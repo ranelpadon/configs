@@ -9,6 +9,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'mgedmin/python-imports.vim'
     Plug 'dense-analysis/ale'
     Plug 'voldikss/vim-floaterm'
+    Plug 'yegappan/mru'
 
     Plug 'preservim/tagbar'
     Plug 'itchyny/lightline.vim'
@@ -21,6 +22,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     Plug 'psliwka/vim-smoothie'
     Plug 'justinmk/vim-sneak'
+    Plug 'mg979/vim-visual-multi'
     Plug 'haya14busa/vim-asterisk'
     Plug 'RRethy/vim-tranquille'
     if !g:is_nvim
