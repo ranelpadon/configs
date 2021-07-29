@@ -1,3 +1,6 @@
+nnoremap Y y$
+
+
 " Find and replace
 nnoremap <silent> <Leader>ss :let @/='\<'.expand('<cword>').'\>'<CR>cgn
 xnoremap <silent> s* "sy:let @/=@s<CR>cgn
@@ -210,7 +213,7 @@ match ExtraWhitespace /\s\+$/
 noremap <Leader>fw :FixWhitespace<CR>
 
 
-" Auto-yank mouse selected text
+" Auto-yank mouse-selected text
 noremap <LeftRelease> "+y<LeftRelease>
 
 
