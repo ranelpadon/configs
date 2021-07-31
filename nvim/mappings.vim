@@ -236,21 +236,33 @@ nnoremap X "_X
 vnoremap X "_X"
 
 " Use Leader key to revert to default mode.
-nnoremap <Leader>d d
-vnoremap <Leader>d d
-nnoremap <Leader>D D
-vnoremap <Leader>D D
-nnoremap <Leader>c c
-vnoremap <Leader>c c
-nnoremap <Leader>C C
-vnoremap <Leader>C C
-nnoremap <Leader>x x
-vnoremap <Leader>x x
-nnoremap <Leader>X X
-vnoremap <Leader>X X
+" nnoremap <Leader>d d
+" vnoremap <Leader>d d
+" nnoremap <Leader>D D
+" vnoremap <Leader>D D
+" nnoremap <Leader>c c
+" vnoremap <Leader>c c
+" nnoremap <Leader>C C
+" vnoremap <Leader>C C
+" nnoremap <Leader>x x
+" vnoremap <Leader>x x
+" nnoremap <Leader>X X
+" vnoremap <Leader>X X
 
 
 nnoremap zf zO                                                                  " Open fold recursively
 nnoremap zF za                                                                  " Toggle fold
 nnoremap za zR                                                                  " Open all folds
-nnoremap zA zM                                                                  " Clos all folds
+nnoremap zA zM                                                                  " Close all folds
+
+
+" Center screen to result(s) while searching.
+function! CenterSearch()
+    let cmdtype = getcmdtype()
+    if cmdtype == '/' || cmdtype == '?'
+        return "\<enter>zz"
+    endif
+    return "\<enter>"
+endfunction
+
+cnoremap <silent> <expr> <enter> CenterSearch()
