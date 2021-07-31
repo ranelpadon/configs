@@ -1334,7 +1334,7 @@ alias nl='nl -b a $1'
 
 
 # Command: yvt URL START_TIME END_TIME
-# Sample: yvt 'https://www.youtube.com/watch?v=BmjAsjGbdXk' 98 148.8
+# Sample: yvt "https://www.youtube.com/watch?v=sI-a64EVPPU" 2:45 4:48.7
 yt_video_trimmer() {
     pyenv activate alloserv
     python ~/dev/scripts/yt-video-trimmer.py $1 $2 $3
