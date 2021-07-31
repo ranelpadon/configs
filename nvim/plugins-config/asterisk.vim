@@ -5,4 +5,4 @@ map g* <Plug>(asterisk-z*)
 map g# <Plug>(asterisk-z#)
 map * <Plug>(asterisk-gz*)
 map # <Plug>(asterisk-gz#)
-map / g/
+" map / g/
