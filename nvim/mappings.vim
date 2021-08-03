@@ -244,10 +244,10 @@ vnoremap X "_X"
 " vnoremap <Leader>c c
 " nnoremap <Leader>C C
 " vnoremap <Leader>C C
-" nnoremap <Leader>x x
-" vnoremap <Leader>x x
-" nnoremap <Leader>X X
-" vnoremap <Leader>X X
+nnoremap <Leader>x d
+vnoremap <Leader>x d
+nnoremap <Leader>X D
+vnoremap <Leader>X D
 
 
 nnoremap zf zO                                                                  " Open fold recursively
