@@ -341,6 +341,16 @@ migrate_list() {
     # ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py migrate --list | grep -v "\[X\]"
     ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py migrate --list | grep --fixed-strings "[ ]"
 }
+# Clear Download Signature records.
+# cds() {
+    # pyenv activate ticketing
+    # echo 'from common.misc.models import DownloadSignature; DownloadSignature.objects.all().delete()' \
+    # | ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py shell
+# }
+cds() {
+    mysql -h data.dev.ticketflap.net -P 3306 -u root -ppassword \
+    -e 'use TICKETFLAP; TRUNCATE table download_signatures;'
+}
 compilemessages() {
     pyenv activate ticketing
     ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py compilemessages --locale=zh_Hans --locale=zh_Hant
@@ -1182,8 +1192,9 @@ export FZF_DEFAULT_COMMAND=" \
     --exclude node_modules \
     --exclude Library \
     --exclude logs \
-    --exclude media \
-    --exclude static \
+    --exclude /media \
+    --exclude /static \
+    --exclude /sites \
     --exclude cache \
     --exclude .git \
     --exclude '.git' \
