@@ -44,5 +44,4 @@ let g:gutentags_ctags_exclude = [
     \ 'qos',
     \ 'sites',
     \ 'static',
-    \ 'test'
     \ ]
