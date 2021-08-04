@@ -1255,7 +1255,9 @@ fim() {
 
 
 alias tmuxx='source ~/.config/tmux/tmuxrc.sh'
+alias tmuxx_k8s='source ~/.config/tmux/tmuxrc_k8s.sh'
 alias tmuxx_resume='tmux attach -t Workspace'
+alias tmuxx_resume='tmux attach -t k8s'
 alias gad='gcloud app deploy'
 
 
