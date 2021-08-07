@@ -1,3 +1,4 @@
+" For concistency with D (d$) and C (c$).
 nnoremap Y y$
 
 
@@ -109,6 +110,9 @@ nnoremap n h
 vnoremap n h
 nnoremap i l
 vnoremap i l
+" Override the `vim-indent-object` binding for `ii`
+" to have right-ward direction than text object selection.
+vnoremap ii ll
 
 " Scroll up/down in chunks in Insert mode.
 inoremap <C-u> <C-O>9k
@@ -222,10 +226,10 @@ nnoremap <Leader>cr :let @*=substitute(expand('%:h'), '\/', '.', 'g')<CR>
 
 
 " Shortcut to use blackhole register by default
-nnoremap d "_d
-vnoremap d "_d
-nnoremap D "_D
-vnoremap D "_D
+" nnoremap d "_d
+" vnoremap d "_d
+" nnoremap D "_D
+" vnoremap D "_D
 nnoremap c "_c
 vnoremap c "_c
 nnoremap C "_C
@@ -236,18 +240,18 @@ nnoremap X "_X
 vnoremap X "_X"
 
 " Use Leader key to revert to default mode.
-" nnoremap <Leader>d d
-" vnoremap <Leader>d d
-" nnoremap <Leader>D D
-" vnoremap <Leader>D D
+nnoremap <Leader>d d
+vnoremap <Leader>d d
+nnoremap <Leader>D D
+vnoremap <Leader>D D
 " nnoremap <Leader>c c
 " vnoremap <Leader>c c
 " nnoremap <Leader>C C
 " vnoremap <Leader>C C
-nnoremap <Leader>x d
-vnoremap <Leader>x d
-nnoremap <Leader>X D
-vnoremap <Leader>X D
+" nnoremap <Leader>x "_d
+" vnoremap <Leader>x "_d
+" nnoremap <Leader>X "_D
+" vnoremap <Leader>X "_D
 
 
 nnoremap zf zO                                                                  " Open fold recursively
