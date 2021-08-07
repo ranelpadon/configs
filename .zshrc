@@ -120,13 +120,19 @@ alias gm=gitmerge
 gme() {
     git merge ets
 }
+
+# `git checkout previous` branch
+alias gcp='git checkout -'
+# `git merge previous` branch
+alias gmp='git merge -'
+
 gmprod() {
     git merge release/ets/prod/v1.8.44
 }
 
 my_grh() {
     git reset --hard
-} 
+}
 alias grh=my_grh
 
 unalias gca
@@ -136,7 +142,7 @@ unalias gca
 # git commit all
 gca() {
     git commit -am $1
-} 
+}
 
 # Override the default zsh's Git alias
 unalias gcm
@@ -168,7 +174,6 @@ gdtb() {
     git difftool $1 $2 $3
 }
 
-# `function` keyword is needed in ZSH?
 # `u` for `undirty`
 gce() {
     git checkout ets
@@ -530,21 +535,21 @@ hisx() {
   # fc -lt "$TS_DATE $TS_TIME" | grep $(date +$TS_DATE)
   # l (LIST), f (format in US time), -15 (last 15 commands)
   # See: http://zsh.sourceforge.net/Doc/Release/Shell-Builtin-Commands.html#Shell-Builtin-Commands
-  fc -lf -15  
+  fc -lf -15
 }
 
 
 compass_compile_sass() {
   current_dir="$(pwd)"
   target_dir="$HOME/.virtualenvs/crowdfunding/crowdfunding/apps/portal/static/portal/scss"
-    
+
   if [ $current_dir != $target_dir ]; then
     echo "Going to the target SASS directory...";
     # Semicolons are NOT needed when the next command is in next line.
     # Newlines are command separator by default.
     cd $HOME/.virtualenvs/crowdfunding/crowdfunding/apps/portal/static/portal/scss
-  fi  
-  
+  fi
+
   compass compile main.scss
 }
 alias ccs=compass_compile_sass
@@ -572,14 +577,14 @@ urp() {
 #   if [ $1 = 'ec' ]; then
 #     urp
 #     ./manage.py runserver local.eventcms.com:8000
-#   elif [ $1 = 'fa' ]; then 
-#     ./manage_local.py runserver local.festivalapp.com:8001  
-#   elif [ $1 = 'fa_base' ]; then 
-#     ./manage_local.py runserver local.festivalappbase.com:8002 
-#   elif [ $1 = 'warped' ]; then 
-#     ./manage_local.py runserver warped.local:8000  # defaults to port 8000 
-#   elif [ $1 = 'ppp' ]; then 
-#     ./manage_local.py runserver local.propertyplus.ph:8000  # defaults to port 8000 
+#   elif [ $1 = 'fa' ]; then
+#     ./manage_local.py runserver local.festivalapp.com:8001
+#   elif [ $1 = 'fa_base' ]; then
+#     ./manage_local.py runserver local.festivalappbase.com:8002
+#   elif [ $1 = 'warped' ]; then
+#     ./manage_local.py runserver warped.local:8000  # defaults to port 8000
+#   elif [ $1 = 'ppp' ]; then
+#     ./manage_local.py runserver local.propertyplus.ph:8000  # defaults to port 8000
 #   fi
 # }
 # alias run=runserver
@@ -742,7 +747,7 @@ shell() {
 
 # fab pip install
 # fpi backoffice "factory-boy\=\=2.8.1"  <-- needs the quotes!!!
-# fab pip:backoffice,'install factory-boy\=\=2.8.1' 
+# fab pip:backoffice,'install factory-boy\=\=2.8.1'
 fpi() {
     # echo "install $2"
     fab pip:$1,"install $2"
@@ -1014,7 +1019,7 @@ rac() {
 
 
 rp() {
-    # Python files only. 
+    # Python files only.
     # -i for case-insensitive search.
     # -s for sensitive-case search.
     rg -i -tpy $1 $2 --colors match:bg:249,245,154 --colors match:fg:66,98,150 --colors match:style:nobold
@@ -1104,9 +1109,9 @@ export COVERAGE_SKIP=1
 #
 # Add vhost for new site so that the site folder dont need to be put in `htdocs` and will stay as is.
 # Add the new vhost in host file (/etc/hosts).
-# 
+#
 # Update the admin user password using `wp-config.php`, execute once by loading any page.
-# $user_id = 1; 
+# $user_id = 1;
 # $user_pass = 'admin';
 # $user_data = wp_update_user(array('ID' => $user_id, 'user_pass' => $user_pass));
 #
@@ -1357,4 +1362,3 @@ alias yvt=yt_video_trimmer
 
 export PYTHONWARNINGS=ignore
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-
