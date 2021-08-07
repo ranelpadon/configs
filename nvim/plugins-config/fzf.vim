@@ -79,6 +79,14 @@ endfunction
 command! -nargs=* -bang RgHTML call RgHTMLFzf(<q-args>, <bang>0)
 noremap <Leader>rh :RgHTML<CR>
 
+" Search YAML Files
+function! RgYAMLFzf(query, fullscreen)
+    let command_fmt = 'rg --type-add "yaml:*.yaml" --type-add "yml:*.yml" --type yaml --type yml'
+    call RgHelper(a:query, a:fullscreen, command_fmt)
+endfunction
+command! -nargs=* -bang RgYAML call RgYAMLFzf(<q-args>, <bang>0)
+noremap <Leader>ry :RgYAML<CR>
+
 " Search All Files (includes Git-ignored files)
 function! RgAllFzf(query, fullscreen)
     let command_fmt = 'rg --no-ignore --type-add "compiled:*.compiled" --type-not compiled'
