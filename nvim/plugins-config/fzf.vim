@@ -4,7 +4,7 @@ map <Leader>b :Buffers<CR>
 map <Leader>m :Maps<CR>
 
 " map <Leader>ph :History<CR>
-map <Leader>d :Files ~/dev<CR>
+map <Leader>l :Files ~/dev<CR>
 map <Leader>c :Files ~/dev/configs<CR>
 map <Leader>v :Files ~/Dropbox/Vortex<CR>
 map <Leader>t :Files ~/dev/ticketflap/ticketing<CR>
