@@ -6,7 +6,8 @@ let g:ale_linters = {
     \ }
 
 let g:ale_fixers = {
-    \ 'python': ['isort'],
+    \ '*': ['trim_whitespace'],
+    \ 'python': ['isort', 'trim_whitespace'],
     \ }
 
 " `:ALEFix`
