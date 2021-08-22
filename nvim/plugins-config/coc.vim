@@ -1,8 +1,13 @@
+" After launch, focus on editor, not on explorer.
+function FocusEditor()
+    :CocCommand explorer --sources file+ --no-focus
+endfunction
+
 augroup ProjectDrawer
     autocmd!
-    autocmd VimEnter * :CocCommand explorer --sources file+
+    autocmd VimEnter * call FocusEditor()
 augroup END
-nmap <space>e :CocCommand explorer --sources file+<CR>
+nmap <Leader>e :CocCommand explorer --sources file+<CR>
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -66,4 +71,4 @@ function! s:show_documentation()
 endfunction
 
 " Highlight the symbol and its references when holding the cursor
-" autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd CursorHold * silent call CocActionAsync('highlight')
