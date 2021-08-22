@@ -385,9 +385,11 @@ cr() {
     git diff --name-only $1.. | grep requirements.txt | xargs git diff $1..
 }
 crm() {
+    cd ~/dev/ticketflap/ticketing
     # limit=2000
     git diff --name-status $1.. -l 2000 | grep migrations\/0
     find . | grep \/migrations\/ | grep -v pyc$ | grep -oE "\/.+\/[0-9]+" | sort | uniq -d
+    cd -
 }
 crp() {
     # limit=2000
@@ -741,6 +743,9 @@ fmbsp() {
 mbsp() {
     ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py shell_plus
 }
+mpsp() {
+    ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/processing/manage.py shell_plus
+}
 shell() {
     ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py shell_plus
 }
@@ -881,6 +886,9 @@ ts() {
         --settings=settings.local_settings._local_sqlite.sessions_api --verbosity=0
 }
 
+frd() {
+    fab release_diff:$1
+}
 frdb() {
     # fix the `Head usage unknown option -1` error
     # https://stackoverflow.com/questions/21498991/head-usage-unknown-option-1-n-error-possibly-ruby-related
@@ -1223,7 +1231,7 @@ export FZF_DEFAULT_COMMAND=" \
 
 # Enable preview
 # fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'
-alias fzf="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+alias fzf="fzf --preview 'bat --style=numbers --color=always --wrap auto --terminal-width 80 --line-range :500 {}'"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 alias fh='history | fzf'
@@ -1260,9 +1268,13 @@ fim() {
 
 
 alias tmuxx='source ~/.config/tmux/tmuxrc.sh'
-alias tmuxx_k8s='source ~/.config/tmux/tmuxrc_k8s.sh'
+alias tmuxx_kube='source ~/.config/tmux/tmuxrc_k8s.sh'
+# kube ets-prod-v1.8.47-RC123
+kube() {
+    tmux set-environment -g TAG $1 && tmuxx_k8s
+}
 alias tmuxx_resume='tmux attach -t Workspace'
-alias tmuxx_resume='tmux attach -t k8s'
+alias tmuxx_kube_resume='tmux attach -t k8s'
 alias gad='gcloud app deploy'
 
 
@@ -1273,7 +1285,7 @@ server() {
     php -S localhost:8000
 }
 
-
+# linkify "/Users/ranelpadon/Library/Application Support/lazygit/config.yml"
 linkify() {
     cp $1 ~/dev/configs
     mv $1 "$1_orig"
@@ -1302,7 +1314,7 @@ export NNN_FIFO='/Users/ranelpadon/tmp/nnn.fifo'
 
 
 export COLORTERM="truecolor"
-export FZF_PREVIEW_COMMAND="COLORTERM=truecolor bat --style=numbers --color=always --line-range :5000 {}"
+export FZF_PREVIEW_COMMAND="COLORTERM=truecolor bat --style=numbers --color=always --wrap auto --terminal-width 80 --line-range :5000 {}"
 
 
 alias lg='lazygit'
@@ -1362,3 +1374,98 @@ alias yvt=yt_video_trimmer
 
 export PYTHONWARNINGS=ignore
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+
+
+cdatl() {
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/asiaticketing/-/pipelines"
+    cd ~/dev/asiaticketing
+    gc develop
+    gpl
+    nvim
+}
+cddemo() {
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/demo/-/pipelines"
+    cd ~/dev/demo
+    gc main
+    gpl
+    nvim
+}
+cdgts() {
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/11-skies/-/pipelines"
+    cd ~/dev/11-skies
+    gc main
+    gpl
+    nvim
+}
+cdhelm() {
+    open "https://git.hk.asiaticketing.com/technology/helm-charts/ticketing-ets-chart/-/pipelines"
+    cd ~/dev/ticketing-ets-chart
+    gc master
+    gpl
+    nvim
+}
+cdhkru() {
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/hkru/-/pipelines"
+    cd ~/dev/hkru
+    gc main
+    gpl
+    nvim
+}
+cdmelco() {
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/melco/-/pipelines"
+    cd ~/dev/melco
+    gc release/production
+    gpl
+    nvim
+}
+cdmgm() {
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/mgm/-/pipelines"
+    cd ~/dev/mgm
+    gc main
+    gpl
+    nvim
+}
+cdsun() {
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/sun-entertainment/-/pipelines"
+    cd ~/dev/sun-entertainment
+    gc main
+    gpl
+    nvim
+}
+cdxr() {
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/clockenflap-xr/-/pipelines"
+    cd ~/dev/clockenflap-xr
+    gc main
+    gpl
+    nvim
+}
+cdzip() {
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/zipcity/-/pipelines"
+    cd ~/dev/zipcity
+    gc main
+    gpl
+    nvim
+}
+cdzk() {
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/zicket/-/pipelines"
+    cd ~/dev/zicket
+    gc main
+    gpl
+    nvim
+}
+
+
+# Release Notes
+# rn ets-prod-v1.8.47-RC142
+rn() {
+    python /Users/ranelpadon/dev/scripts/gl-api.py $1
+}
+
+
+# Replace vi/vim as default when triggerred in some contexts.
+# https://github.com/kdheepak/lazygit.nvim/issues/22#issuecomment-903164348
+export GIT_EDITOR=nvim
+export VISUAL="$GIT_EDITOR"
+export EDITOR="$GIT_EDITOR"
+
+# eval "$(starship init zsh)"
