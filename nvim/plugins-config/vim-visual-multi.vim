@@ -16,3 +16,11 @@ let g:VM_maps['I'] = 'O'
 let g:VM_custom_remaps = {'m': 'n', 'M': 'N'}
 let g:VM_maps['Undo'] = 'k'
 let g:VM_maps['Redo'] = '<C-r>'
+
+" Go back to Normal mode immediately after doing VM Insert.
+fun! VM_Start()
+    imap <buffer> <Esc> <Esc><Esc>
+endfun
+fun! VM_Exit()
+    iunmap <buffer> <Esc>
+endfun
