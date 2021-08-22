@@ -12,9 +12,9 @@ vnoremap < <gv
 vnoremap > >gv
 
 
-" Adjust current window width.
-nnoremap <Leader>, :vertical resize +15 <CR>
-nnoremap <Leader>. :vertical resize -15 <CR>
+" Adjust current window width. Focus should be in file explorer.
+nnoremap <Leader>, :vertical resize -15 <CR>
+nnoremap <Leader>. :vertical resize +15 <CR>
 
 
 " ENTER key
@@ -185,8 +185,8 @@ noremap <C-l> :bprev<CR>
 noremap <C-y> :bnext<CR>
 " Save file
 noremap <Leader>s :w!<CR>
-" Close/delete netrw/buffer
-noremap <Leader>w :bw<CR>
+" Close buffer, go to previous one, and preserve window layout.
+noremap <Leader>w :Bwipeout<CR>
 " Focus the file.
 noremap <Leader>o :on<CR>
 " Open new file.
@@ -218,7 +218,7 @@ noremap <Leader>fw :FixWhitespace<CR>
 
 
 " Auto-yank mouse-selected text
-noremap <LeftRelease> "+y<LeftRelease>
+vnoremap <LeftRelease> "+y<LeftRelease>
 
 
 " Python dotted path (project/relative path).
@@ -226,6 +226,10 @@ nnoremap <Leader>cr :let @*=substitute(expand('%:h'), '\/', '.', 'g')<CR>
 
 
 " Shortcut to use blackhole register by default
+nnoremap <Leader>d "_d
+vnoremap <Leader>d "_d
+nnoremap <Leader>D "_D
+vnoremap <Leader>D "_D
 " nnoremap d "_d
 " vnoremap d "_d
 " nnoremap D "_D
@@ -240,10 +244,10 @@ nnoremap X "_X
 vnoremap X "_X"
 
 " Use Leader key to revert to default mode.
-nnoremap <Leader>d d
-vnoremap <Leader>d d
-nnoremap <Leader>D D
-vnoremap <Leader>D D
+" nnoremap <Leader>d d
+" vnoremap <Leader>d d
+" nnoremap <Leader>D D
+" vnoremap <Leader>D D
 " nnoremap <Leader>c c
 " vnoremap <Leader>c c
 " nnoremap <Leader>C C
