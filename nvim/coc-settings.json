@@ -41,6 +41,10 @@
         ]
     },
     "python.linting.flake8Enabled": false,
-    "python.linting.enabled": false
+    "python.linting.enabled": false,
+    "python.autoComplete.extraPaths": [
+        "/Users/ranelpadon/dev/ticketflap/ticketing/apps",
+        "/Users/ranelpadon/dev/ticketflap/ticketing/conf"
+    ]
 }
 
