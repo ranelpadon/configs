@@ -68,7 +68,8 @@ set whichwrap+=<,>,[,],h,l                                                      
 
 " Fold by default to reduce clutter.
 set foldmethod=indent
-set foldlevelstart=1
+" set foldclose=all
+set foldlevelstart=99
 set foldnestmax=4
 
 set listchars=tab:▸\ ,eol:¬                                                     " Visualize tabs and newlines
