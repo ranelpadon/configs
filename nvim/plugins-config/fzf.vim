@@ -1,5 +1,15 @@
+let g:fzf_layout = {'window': {'width': 1, 'height': 0.96}}
+
+" Couldn't use the prescribed 'ctrl-/' in Mac,
+" so use 'ctrl-_' instead (which is triggered by 'ctrl--' also).
+" https://apple.stackexchange.com/questions/24261/how-do-i-send-c-that-is-control-slash-to-the-terminal#24282
+let g:fzf_preview_window = ['right:50%', 'ctrl-_']
+
+
 map <Leader>p :Files<CR>
 map <Leader>g :GFiles<CR>
+" git status
+map <Leader>gs :GFiles?<CR>
 map <Leader>b :Buffers<CR>
 map <Leader>m :Maps<CR>
 
@@ -14,7 +24,7 @@ map <Leader>rg :Rg<CR>
 " Fix issue in `bat`'s preview colorscheme by inserting `COLORTERM=truecolor` as envvar.
 " Fixed already in Neovim's nightly build. But needed in Vim.
 if g:is_vim
-    let $FZF_PREVIEW_COMMAND="COLORTERM=truecolor bat --style=numbers --color=always --line-range :5000 {}"
+    let $FZF_PREVIEW_COMMAND="COLORTERM=truecolor bat --style=numbers --color=always --wrap auto --terminal-width 80 --line-range :5000 {}"
 endif
 
 if g:is_mvim
@@ -78,6 +88,14 @@ function! RgHTMLFzf(query, fullscreen)
 endfunction
 command! -nargs=* -bang RgHTML call RgHTMLFzf(<q-args>, <bang>0)
 noremap <Leader>rh :RgHTML<CR>
+"
+" Search CSS Files
+function! RgCSSFzf(query, fullscreen)
+    let command_fmt = 'rg --type css'
+    call RgHelper(a:query, a:fullscreen, command_fmt)
+endfunction
+command! -nargs=* -bang RgCSS call RgCSSFzf(<q-args>, <bang>0)
+noremap <Leader>rc :RgCSS<CR>
 
 " Search YAML Files
 function! RgYAMLFzf(query, fullscreen)
@@ -93,7 +111,7 @@ function! RgAllFzf(query, fullscreen)
     call RgHelper(a:query, a:fullscreen, command_fmt)
 endfunction
 command! -nargs=* -bang RgAll call RgAllFzf(<q-args>, <bang>0)
-noremap <Leader>rac :RgAll<CR>
+noremap <Leader>ra :RgAll<CR>
 
 " Search All Files with Git Conflicts
 function! RgAllConflictsFzf(query, fullscreen)
@@ -101,4 +119,4 @@ function! RgAllConflictsFzf(query, fullscreen)
     call RgHelper('>>>>>>>', a:fullscreen, command_fmt)
 endfunction
 command! -nargs=* -bang RgAllConflicts call RgAllConflictsFzf(<q-args>, <bang>0)
-noremap <Leader>rc :RgAllConflicts<CR>
+noremap <Leader>rac :RgAllConflicts<CR>
