@@ -1,0 +1,19 @@
+# links to ~/Library/Application Support/lazygit/config.yml
+
+gui:
+  expandFocusedSidePanel: true
+  sidePanelWidth: 0.25
+  theme:
+    activeBorderColor:
+      - blue
+    inactiveBorderColor:
+      - white
+    optionsTextColor:
+      - magenta
+    selectedLineBgColor:
+      - underline
+
+git:
+  paging:
+    colorArg: always
+    pager: delta --paging=never --24-bit-color=never
