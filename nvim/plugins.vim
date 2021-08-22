@@ -11,6 +11,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'voldikss/vim-floaterm'
     Plug 'yegappan/mru'
 
+    Plug 'moll/vim-bbye'
     Plug 'preservim/tagbar'
     Plug 'itchyny/lightline.vim'
     Plug 'mengelbrecht/lightline-bufferline'
