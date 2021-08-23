@@ -8,6 +8,11 @@ augroup MyGutentagsStatusLineRefresher
     autocmd User GutentagsUpdated call lightline#update()
 augroup END
 
+" Index current buffer.
+nnoremap <Leader>gu :GutentagsUpdate<CR>
+" Index entire project.
+nnoremap <Leader>gup :GutentagsUpdate!<CR>
+
 let g:gutentags_exclude_project_root = [
     \ '/Users/ranelpadon',
     \ '/Users/ranelpadon/dev/configs',
