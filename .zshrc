@@ -703,7 +703,7 @@ frpf() {
 rf() {
     ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/frontend/manage.py runserver 0.0.0.0:8002
 }
-# diff frontend
+# format: diffsettings backoffice
 diffsettings() {
     ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/$1/manage.py diffsettings
 }
@@ -1231,7 +1231,9 @@ export FZF_DEFAULT_COMMAND=" \
 
 # Enable preview
 # fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'
-alias fzf="fzf --preview 'bat --style=numbers --color=always --wrap auto --terminal-width 80 --line-range :500 {}'"
+# --wrap auto --terminal-width 80: has issue with fzf.vim,
+# messing up the highlighted lines in the preview window.
+alias fzf="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 alias fh='history | fzf'
@@ -1268,15 +1270,24 @@ fim() {
 
 
 alias tmuxx='source ~/.config/tmux/tmuxrc.sh'
-alias tmuxx_kube='source ~/.config/tmux/tmuxrc_k8s.sh'
-# kube ets-prod-v1.8.47-RC123
-kube() {
-    tmux set-environment -g TAG $1 && tmuxx_k8s
-}
 alias tmuxx_resume='tmux attach -t Workspace'
-alias tmuxx_kube_resume='tmux attach -t k8s'
-alias gad='gcloud app deploy'
 
+alias tmuxx_kube_stag='source ~/.config/tmux/tmuxrc_k8s_stag.sh'
+# kube_stag ets-prod-v1.8.47-RC123
+kube_stag() {
+    tmux set-environment -g TAG $1 && tmuxx_kube_stag
+}
+alias tmuxx_kube_stag_resume='tmux attach -t k8s_stag'
+
+alias tmuxx_kube_prod='source ~/.config/tmux/tmuxrc_k8s_prod.sh'
+# kube_prod ets-prod-v1.8.47-RC123
+kube_prod() {
+    tmux set-environment -g TAG $1 && tmuxx_kube_prod
+}
+alias tmuxx_kube_prod_resume='tmux attach -t k8s_prod'
+
+
+alias gad='gcloud app deploy'
 
 
 # Start an HTTP server from a directory, optionally specifying the port
@@ -1314,7 +1325,7 @@ export NNN_FIFO='/Users/ranelpadon/tmp/nnn.fifo'
 
 
 export COLORTERM="truecolor"
-export FZF_PREVIEW_COMMAND="COLORTERM=truecolor bat --style=numbers --color=always --wrap auto --terminal-width 80 --line-range :5000 {}"
+export FZF_PREVIEW_COMMAND="COLORTERM=truecolor bat --style=numbers --color=always --line-range :5000 {}"
 
 
 alias lg='lazygit'
@@ -1407,6 +1418,13 @@ cdhelm() {
 cdhkru() {
     open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/hkru/-/pipelines"
     cd ~/dev/hkru
+    gc main
+    gpl
+    nvim
+}
+cdkgg() {
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/kgg-kg/-/pipelines"
+    cd ~/dev/kgg-kg
     gc main
     gpl
     nvim
