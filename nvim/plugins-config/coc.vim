@@ -50,7 +50,20 @@ endif
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gd <Plug>(coc-definition)
+" Search definitions: coc -> tags -> searchdecl
+function! s:GoToDefinition()
+    if CocAction('jumpDefinition')
+        return v:true
+    endif
+
+    let ret = execute('silent! normal \<C-]>')
+    if ret =~ 'Error' || ret =~ '错误'
+        call searchdecl(expand('<cword>'))
+    endif
+endfunction
+nmap <silent> gd :call <SID>GoToDefinition()<CR>
+
 " `gr` conflicts with `ReplaceWithRegister`.
 " Be careful with other mapping like `gv` since it conflicts with Indent Object's `ii` for some reason.
 nmap <silent> gz <Plug>(coc-references)
@@ -72,3 +85,11 @@ endfunction
 
 " Highlight the symbol and its references when holding the cursor
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+    \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Symbol renaming.
+nmap <Leader>rn <Plug>(coc-rename)
