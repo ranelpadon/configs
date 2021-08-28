@@ -10,6 +10,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'dense-analysis/ale'
     Plug 'voldikss/vim-floaterm'
     Plug 'yegappan/mru'
+    " Plug 'kana/vim-arpeggio'
 
     Plug 'moll/vim-bbye'
     Plug 'preservim/tagbar'
@@ -22,7 +23,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'mattn/emmet-vim'
 
     Plug 'psliwka/vim-smoothie'
-    Plug 'justinmk/vim-sneak'
+    " Plug 'justinmk/vim-sneak'
+    Plug 'phaazon/hop.nvim'
     Plug 'mg979/vim-visual-multi'
     Plug 'haya14busa/vim-asterisk'
     Plug 'RRethy/vim-tranquille'
