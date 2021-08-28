@@ -67,8 +67,8 @@ inoremap <C-Y> <C-o>w
 
 " Forward/backward delete in chunks in Insert mode.
 " Maps to <C-m> and <C-h> via BTT.
-inoremap <F11> <Esc>dwi
-inoremap <F12> <Esc>dbi
+inoremap <F11> <C-o>de
+inoremap <F12> <C-o>db
 
 
 " Find and replace of the current word in cursor,
