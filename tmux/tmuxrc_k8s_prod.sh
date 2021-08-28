@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Run as in (new Alacritty window or in Kitty):
-# kube_prod ets-prod-v1.8.47-RC123
+# kube_prod 123 (for RC123)
 # since $TAG is needed envvar.
 
 # Tabs
@@ -17,7 +17,7 @@ tmux send-keys -t 'k8s_prod:DEMOSTAG' '
     cd ~/dev/demo &&
     gc main &&
     gpl &&
-    fd --regex "gitlab-ci.yml|gitlab-ci.production.*" --hidden --print0 | xargs -0 sed -i "" -e "s/ets-prod-v1.8.47-RC[0-9]\{1,\}$/$TAG/" &&
+    fd --regex "gitlab-ci.yml|gitlab-ci.production.*" --hidden --print0 | xargs -0 sed -i "" -e "s/ets-prod-v1.8.47-RC[^\s]\{1,\}$/ets-prod-v1.8.47-RC$TAG/" &&
     gd
 ' Enter
 tmux send-keys -t 'k8s_prod:GTSPROD' '
@@ -33,7 +33,7 @@ tmux send-keys -t 'k8s_prod:KGGPROD' '
     cd ~/dev/kgg-kg &&
     gc main &&
     gpl &&
-    fd --regex "gitlab-ci.yml|gitlab-ci.production.*" --hidden --print0 | xargs -0 sed -i "" -e "s/ets-prod-v1.8.47-RC[0-9]\{1,\}$/$TAG/" &&
+    fd --regex "gitlab-ci.yml|gitlab-ci.production.*" --hidden --print0 | xargs -0 sed -i "" -e "s/ets-prod-v1.8.47-RC[^\s]\{1,\}$/ets-prod-v1.8.47-RC$TAG/" &&
     gd
 ' Enter
 tmux send-keys -t 'k8s_prod:MGMPROD' '
@@ -41,7 +41,7 @@ tmux send-keys -t 'k8s_prod:MGMPROD' '
     cd ~/dev/mgm &&
     gc main &&
     gpl &&
-    fd --regex "gitlab-ci.yml|gitlab-ci.production-shared.*" --hidden --print0 | xargs -0 sed -i "" -e "s/ets-prod-v1.8.47-RC[0-9]\{1,\}$/$TAG/" &&
+    fd --regex "gitlab-ci.yml|gitlab-ci.production-shared.*" --hidden --print0 | xargs -0 sed -i "" -e "s/ets-prod-v1.8.47-RC[^\s]\{1,\}$/ets-prod-v1.8.47-RC$TAG/" &&
     gd
 ' Enter
 tmux send-keys -t 'k8s_prod:ZIPPROD' '
