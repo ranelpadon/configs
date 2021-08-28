@@ -23,8 +23,9 @@ export ZSH=/Users/ranelpadon/.oh-my-zsh
 # p10k configure
 ZSH_THEME="powerlevel10k/powerlevel10k"
 # Fix the annoying gap in the right prompt!
-ZLE_RPROMPT_INDENT=0
-
+# Doesn't work though (and causes double prompts!):
+# https://superuser.com/questions/655607/removing-the-useless-space-at-the-end-of-the-right-prompt-of-zsh-rprompt
+# ZLE_RPROMPT_INDENT=0
 
 preexec() {
     # Add newline before command output for better vertical spacing.
@@ -200,6 +201,16 @@ gcemf() {
     git checkout release/v1.8.32-emfhk-test
 }
 
+# rprod 123 (for RC123)
+rprod() {
+    gce
+    gpl
+    gcprod
+    gpl
+    gm ets
+    fab create_release_tag:release/ets/prod/v1.8.47,ets-prod-v1.8.47-RC$1,full,melco
+}
+
 gple() {
     git pull origin ets
 }
@@ -313,6 +324,10 @@ conflicts() {
 }
 mconflicts() {
   git commit -am "Fix migration conflicts."
+}
+
+pat() {
+    pyenv activate ticketing
 }
 makemigrations() {
     pyenv activate ticketing
@@ -1476,7 +1491,7 @@ cdzk() {
 # Release Notes
 # rn ets-prod-v1.8.47-RC142
 rn() {
-    python /Users/ranelpadon/dev/scripts/gl-api.py $1
+    python /Users/ranelpadon/dev/scripts/gl-api.py $1 $2
 }
 
 
