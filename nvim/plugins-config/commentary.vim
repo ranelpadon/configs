@@ -1,3 +1,3 @@
 " Toggle comments.
-vnoremap <Leader>/ :norm gcc<CR>
-nnoremap <Leader>/ :norm gcc<CR>
+vmap <Leader>/ gc
+nmap <Leader>/ gcc
