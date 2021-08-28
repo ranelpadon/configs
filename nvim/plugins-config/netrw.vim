@@ -6,13 +6,6 @@ let g:netrw_winsize = 25
 
 noremap <Leader>ne :Lex<CR>
 
-" Copy Absolute Path  (/something/src/foo.txt)
-nnoremap <leader>fpa :let @*=expand("%:p")<CR>
-" Copy Relative Path  (src/foo.txt)
-nnoremap <leader>fpr :let @*=expand("%")<CR>
-" Copy Filename (foo.txt)
-nnoremap <leader>fpn :let @*=expand("%:t")<CR>
-
 " Toggle shortcuts/commands help.
 autocmd FileType netrw nnoremap ? :help netrw-quickmap<CR>
 
