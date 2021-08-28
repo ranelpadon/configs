@@ -52,7 +52,7 @@
                                 "type": "basic"
                             },
 
-                            
+
                             {
                                 "from": {
                                     "key_code": "left_shift"
@@ -701,7 +701,7 @@
                                 ],
                                 "description": "Space-j: S-Enter",
                                 "from": {
-                                    "key_code": "h"
+                                    "key_code": "y"
                                 },
                                 "to": [
                                     {
@@ -742,7 +742,7 @@
                                 ],
                                 "description": "Space-u: Escape",
                                 "from": {
-                                    "key_code": "y"
+                                    "key_code": "h"
                                 },
                                 "to": [
                                     {
