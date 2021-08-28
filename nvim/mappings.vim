@@ -21,11 +21,11 @@ nnoremap <Leader>. :vertical resize +15 <CR>
 " https://vim.fandom.com/wiki/Insert_newline_without_entering_insert_mode
 " Open a line before the current line (usual case)
 nnoremap <Enter> O<Esc>j
-" Open a line after the current line.
+" Open a line after the current line. Allow cursor to move as well.
 " <S-Enter> will not work due to
 " https://stackoverflow.com/questions/598113/can-terminals-detect-shift-enter-or-control-enter
 " So, remap <S-Enter> via BTT app.
-nnoremap <F2> o<Esc>k
+nnoremap <F2> o<Esc>
 
 
 " Warning: conflicts with inoremap for F11/F12.
@@ -58,9 +58,11 @@ vnoremap <F8> :m '<-2<CR>gv=gv
 
 
 " Forward/backward movements in chunks in Insert mode.
-" Maps to <C-w> and <C-b> via BTT.
+" Maps to <C-w>/<C-k> and <C-b> via BTT.
 inoremap <F9> <C-o>W
 inoremap <F10> <C-o>B
+inoremap <C-L> <C-o>b
+inoremap <C-Y> <C-o>w
 
 
 " Forward/backward delete in chunks in Insert mode.
@@ -78,6 +80,10 @@ nnoremap <Leader>fr :%s/\<<C-r><C-w>\>//g<Left><Left>
 nnoremap m n
 nnoremap M N
 
+" Switch comma and semicolon
+nnoremap , ;
+nnoremap ; ,
+
 
 " Set mark/jot.
 " Usage: ja then 'a.
@@ -88,8 +94,10 @@ nnoremap j m
 " Newlines: map the o command first before remapping it!
 nnoremap h o
 nnoremap H O
-nnoremap o i
-nnoremap O I
+nnoremap a i
+nnoremap A I
+nnoremap o a
+nnoremap O A
 
 " Arrows in general
 " onoremap mode is needed so that
@@ -100,7 +108,7 @@ nnoremap E 9j
 vnoremap E 9j
 onoremap e j
 vnoremap e j
-noremap k u
+nnoremap k u
 nnoremap u k
 nnoremap U 9k
 vnoremap U 9k
@@ -150,7 +158,7 @@ nnoremap <Leader>sv :source ~/dev/configs/nvim/init.vim<CR>:echo "Reloaded Neovi
 " https://stackoverflow.com/questions/657447/vim-clear-last-search-highlighting#657457
 " Could not use the <Esc><Esc> sequence due to issues with other keys like arrows:
 " https://stackoverflow.com/questions/11940801/mapping-esc-in-vimrc-causes-bizarre-arrow-behaviour?noredirect=1&lq=1
-nnoremap <silent> <Leader>j :let @/ = ""<CR>
+nnoremap <silent> <Leader>k :let @/ = ""<CR>
 
 
 " Uncomment this to enable by default:
@@ -221,10 +229,6 @@ noremap <Leader>fw :FixWhitespace<CR>
 vnoremap <LeftRelease> "+y<LeftRelease>
 
 
-" Python dotted path (project/relative path).
-nnoremap <Leader>cr :let @*=substitute(expand('%:h'), '\/', '.', 'g')<CR>
-
-
 " Shortcut to use blackhole register by default
 nnoremap <Leader>d "_d
 vnoremap <Leader>d "_d
@@ -274,3 +278,16 @@ function! CenterSearch()
 endfunction
 
 cnoremap <silent> <expr> <enter> CenterSearch()
+
+
+" Copy Absolute Path  (/something/src/foo.txt)
+nnoremap <leader>fn :let @*=expand("%:p")<CR>
+" Copy Relative Path  (src/foo.txt)
+nnoremap <leader>fe :let @*=expand("%")<CR>
+" Python dotted path (project/relative path). Similar to `copy reference` in PyCharm.
+" Auto-truncate the `apps/conf` folders in `ets` codebase.
+nnoremap <Leader>fi :let @*=substitute(expand('%:r'), '\/', '.', 'g')[5:] . '.' . expand('<cword>')<CR>
+" Copy Filename (foo.txt)
+nnoremap <leader>fo :let @*=expand("%:t")<CR>
+" Copy Filename without extension (foo)
+nnoremap <leader>f' :let @*=expand("%:t:r")<CR>
