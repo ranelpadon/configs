@@ -1,5 +1,4 @@
 " https://github.com/mg979/vim-visual-multi/wiki/Mappings
-
 let g:VM_maps = {}
 
 " Replace <C-n>
@@ -7,8 +6,13 @@ let g:VM_maps['Find Under'] = '<C-d>'
 " Replace visual <C-n>
 let g:VM_maps['Find Subword Under'] = '<C-d>'
 
-let g:VM_maps['i'] = 'o'
-let g:VM_maps['I'] = 'O'
+" https://github.com/mg979/vim-visual-multi/issues/187#issuecomment-908988989
+let g:VM_maps['i'] = 'a'
+let g:VM_maps['I'] = 'A'
+let g:VM_maps['a'] = 'o'
+let g:VM_maps['A'] = 'O'
+let g:VM_maps['o'] = 'i'
+let g:VM_maps['O'] = 'I'
 " let g:VM_maps["Find Next"] = 'm'
 " let g:VM_maps["Find Prev"] = 'M'
 " let g:VM_maps["Toggle Multiline"] = ''
