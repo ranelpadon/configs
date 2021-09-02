@@ -808,7 +808,8 @@ ftb() {
     fi
 }
 tb() {
-    ARG_1_TRIMMED=${1:5}  # Get the $1 substring, starting at index 5.
+    # ARG_1_TRIMMED=${1:5}  # Get the $1 substring, starting at index 5.
+    ARG_1_TRIMMED=$1
     ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/backoffice/manage.py test $ARG_1_TRIMMED \
         --settings=settings.local_settings._local_sqlite.backoffice --verbosity=0
 }
@@ -830,7 +831,8 @@ ftw() {
     fi
 }
 tw() {
-    ARG_1_TRIMMED=${1:5}  # Get the $1 substring, starting at index 5.
+    # ARG_1_TRIMMED=${1:5}  # Get the $1 substring, starting at index 5.
+    ARG_1_TRIMMED=$1
     ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/worker/manage.py test $ARG_1_TRIMMED \
         --settings=settings.local_settings._local_sqlite.worker --verbosity=0
 }
@@ -848,7 +850,8 @@ ftf() {
     fi
 }
 tf() {
-    ARG_1_TRIMMED=${1:5}  # Get the $1 substring, starting at index 5.
+    # ARG_1_TRIMMED=${1:5}  # Get the $1 substring, starting at index 5.
+    ARG_1_TRIMMED=$1
     ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/frontend/manage.py test $ARG_1_TRIMMED \
         --settings=settings.local_settings._local_sqlite.frontend --verbosity=0
 }
@@ -866,7 +869,8 @@ ftp() {
     fi
 }
 tp() {
-    ARG_1_TRIMMED=${1:5}  # Get the $1 substring, starting at index 5.
+    # ARG_1_TRIMMED=${1:5}  # Get the $1 substring, starting at index 5.
+    ARG_1_TRIMMED=$1
     ~/.pyenv/versions/2.7.17/envs/ticketing/bin/python ~/dev/ticketflap/ticketing/apps/processing/manage.py test $ARG_1_TRIMMED \
         --settings=settings.local_settings._local_sqlite.processing --verbosity=0
 }
@@ -1489,9 +1493,11 @@ cdzk() {
 
 
 # Release Notes
-# rn ets-prod-v1.8.47-RC142
+# rn 142 (for RC142)
+# rn 142 1 (with migrations)
 rn() {
-    python /Users/ranelpadon/dev/scripts/gl-api.py $1 $2
+    pat
+    python /Users/ranelpadon/dev/scripts/gl-api.py ets-prod-v1.8.47-RC$1 $2
 }
 
 
