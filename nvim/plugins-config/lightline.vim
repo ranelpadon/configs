@@ -15,6 +15,8 @@ let g:lightline = {
     \ }
     \ }
 
+let g:lightline#bufferline#shorten_path = 1
+let g:lightline#bufferline#filename_modifier = ':p:.'
 
 " Remove the pipe character as separator.
 let g:lightline.tabline_separator = { 'left': '', 'right': '' }
