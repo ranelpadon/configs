@@ -22,11 +22,11 @@ tmux send-keys -t 'k8s_prod:DEMOSTAG' '
 ' Enter
 tmux send-keys -t 'k8s_prod:GTSPROD' '
     open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/11-skies/-/pipelines" &&
-    cd "~/dev/11-skies" &&
+    cd ~/dev/11-skies &&
     gc main &&
     gpl &&
-    git tag $TAG &&
-    git push origin $TAG
+    git tag ets-prod-v1.8.47-RC$TAG &&
+    git push origin ets-prod-v1.8.47-RC$TAG
 ' Enter
 tmux send-keys -t 'k8s_prod:KGGPROD' '
     open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/kgg-kg/-/pipelines" &&
@@ -49,8 +49,8 @@ open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/zipcity/-/pipeline
     cd ~/dev/zipcity &&
     gc main &&
     gpl &&
-    git tag $TAG &&
-    git push origin $TAG
+    git tag ets-prod-v1.8.47-RC$TAG &&
+    git push origin ets-prod-v1.8.47-RC$TAG
 ' Enter
 
 # Activate main window
