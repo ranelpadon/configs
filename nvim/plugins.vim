@@ -3,6 +3,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     set rtp+=/usr/local/opt/fzf
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}
     Plug 'junegunn/fzf.vim'
+    " Plug 'mfussenegger/nvim-fzy'
+    " Plug 'bfrg/vim-fzy'
 
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'ludovicchabant/vim-gutentags'
@@ -23,8 +25,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'mattn/emmet-vim'
 
     Plug 'psliwka/vim-smoothie'
+
     " Plug 'justinmk/vim-sneak'
     Plug 'phaazon/hop.nvim'
+    " Plug 'ggandor/lightspeed.nvim'
     Plug 'mg979/vim-visual-multi'
     Plug 'haya14busa/vim-asterisk'
     Plug 'RRethy/vim-tranquille'
