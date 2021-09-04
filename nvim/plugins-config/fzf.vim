@@ -5,9 +5,11 @@ let g:fzf_layout = {'window': {'width': 1, 'height': 1}}
 " https://apple.stackexchange.com/questions/24261/how-do-i-send-c-that-is-control-slash-to-the-terminal#24282
 let g:fzf_preview_window = ['up:50%', 'ctrl-_']
 
-" F1+... is mapped as Cmd+p via BTT.
+" Cmd+f via BTT.
 map <F1>f /
+" Cmd+p via BTT.
 map <F1>p :Files<CR>
+" Cmd+b via BTT.
 map <F1>b :Buffers<CR>
 map <Leader>g :GFiles<CR>
 " git status

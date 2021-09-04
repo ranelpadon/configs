@@ -41,10 +41,51 @@ nnoremap <F2> o<Esc>
 " C-A and C-Z are mapped in Karabiner/BTT using the Left/Right Cmd physical keys.
 " with Cmd-Left and Cmd-Right keys.
 " https://coderwall.com/p/fd_bea/vim-jump-to-end-of-line-while-in-insert-mode
-inoremap <C-A> <C-o>^
-inoremap <C-Z> <C-o>$
-nnoremap <C-A> ^
-nnoremap <C-Z> $
+inoremap <C-a> <C-o>^
+inoremap <C-z> <C-o>$
+nnoremap <C-a> ^
+nnoremap <C-z> $
+" Execute Normal command.
+inoremap kk <C-o>
+" Duplicate selection (same as NyP and VyP).
+" Mac Cmd key is not working with non-MacVim version
+" https://unix.stackexchange.com/questions/29665/in-vim-how-to-map-command-right-and-command-left-to-beginning-of-line-and-e
+" Cmd+d via BTT.
+nnoremap <F1>d :copy .<CR>
+vnoremap <F1>d :copy '><CR>
+" Duplicate line.
+" Cmd+r via BTT.
+inoremap <F1>d <C-O>yy<C-O>p
+" Copy.
+" Cmd+c via BTT.
+nnoremap <F1>c yy
+inoremap <F1>c <C-O>yy
+" Cut.
+" Cmd+x via BTT.
+nnoremap <F1>x dd
+inoremap <F1>x <C-O>dd
+" Undo.
+" Cmd+z via BTT.
+nnoremap <F1>u u
+inoremap <F1>u <C-O>u
+" Redo
+" Cmd+g via BTT.
+nnoremap <F1>r <C-R>
+inoremap <F1>r <C-O><C-R>
+
+
+" Forward/backward movements in chunks in Insert mode.
+" Maps to <C-w>/<C-k> and <C-b> via BTT.
+" inoremap <F9> <C-o>W
+" inoremap <F10> <C-o>B
+inoremap <C-l> <C-o>W
+inoremap <C-y> <C-o>B
+
+
+" Forward/backward delete in chunks in Insert mode.
+" Maps to <C-m> and <C-h> via BTT.
+inoremap <F11> <C-o>de
+inoremap <F12> <C-o>db
 
 
 " Move block up/down
@@ -55,20 +96,6 @@ inoremap <F7> <Esc>:m .+1<CR>==gi
 inoremap <F8> <Esc>:m .-2<CR>==gi
 vnoremap <F7> :m '>+1<CR>gv=gv
 vnoremap <F8> :m '<-2<CR>gv=gv
-
-
-" Forward/backward movements in chunks in Insert mode.
-" Maps to <C-w>/<C-k> and <C-b> via BTT.
-inoremap <F9> <C-o>W
-inoremap <F10> <C-o>B
-inoremap <C-L> <C-o>b
-inoremap <C-Y> <C-o>w
-
-
-" Forward/backward delete in chunks in Insert mode.
-" Maps to <C-m> and <C-h> via BTT.
-inoremap <F11> <C-o>de
-inoremap <F12> <C-o>db
 
 
 " Find and replace of the current word in cursor,
@@ -128,12 +155,16 @@ inoremap <C-e> <C-O>9j
 
 " End of Word
 nnoremap l e
+onoremap l e
 vnoremap l e
 nnoremap gl ge
+onoremap gl ge
 vnoremap gl ge
 nnoremap L E
+onoremap L E
 vnoremap L E
 nnoremap gL gE
+onoremap gL gE
 vnoremap gL gE
 
 " Backward motion, inclusive the current cursor
@@ -150,8 +181,9 @@ nnoremap ZZ :wqa<CR>                                                            
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!         " Save changes to a read-only/sudo-only file using :w!!
 
 
-" Reload Nvim source
-nnoremap <Leader>sv :source ~/dev/configs/nvim/init.vim<CR>:echo "Reloaded Neovim init.vim"<CR>
+" Reload Nvim source.
+" Cmd+t via BTT.
+nnoremap <F1>t :source ~/dev/configs/nvim/init.vim<CR>:echo "Reloaded Neovim init.vim"<CR>
 
 
 " Clear highlighting after search:
@@ -161,23 +193,12 @@ nnoremap <Leader>sv :source ~/dev/configs/nvim/init.vim<CR>:echo "Reloaded Neovi
 nnoremap <silent> <Leader>k :let @/ = ""<CR>
 
 
-" Uncomment this to enable by default:
-" set list
-" Or use your leader key + l to toggle on/off
-map <leader>tt :set list!<CR>                                                   " Toggle tabs and EOL
-
-
 " Visual Mode - Dot
 vnoremap . :normal.<CR>                                                         " Make . work with visually selected lines
 
-" Select All: Alt keys in iTerm2 need to be unmapped from Esc
-nnoremap <Leader>sa ggVG                                                        " Select all text
-
-" Duplicate selection (same as NyP and VyP)
-" Mac Cmd key is not working with non-MacVim version
-" https://unix.stackexchange.com/questions/29665/in-vim-how-to-map-command-right-and-command-left-to-beginning-of-line-and-e
-nnoremap <Leader>rr :copy .<CR>
-vnoremap <Leader>rr :copy '><CR>
+" Select All: Alt keys in iTerm2 need to be unmapped from Esc.
+" Cmd+a via BTT.
+nnoremap <F1>a ggVG                                                             " Select all text
 
 
 " Macro for compiling release notes.
@@ -188,18 +209,21 @@ nnoremap <F5> :g/^https/ norm @n <CR>
 
 " Buffers
 " Also `S-Tab` via BTT app.
-noremap <C-l> :bprev<CR>
+" noremap <C-l> :bprev<CR>
+nnoremap N :bprev<CR>
 " Also `Tab` via BTT app.
-noremap <C-y> :bnext<CR>
-" Save file
-noremap <Leader>s :w!<CR>
+" noremap <C-y> :bnext<CR>
+nnoremap I :bnext<CR>
+" Save file.
+" Cmd+s via BTT.
+noremap <F1>s :w!<CR>
 " Close buffer, go to previous one, and preserve window layout.
 noremap <Leader>w :Bwipeout<CR>
 " Focus the file.
 noremap <Leader>o :on<CR>
 " Open new file.
 noremap <Leader>n :enew<CR>
-" Cycle windowv
+" Cycle window.
 noremap <Leader><Space> <C-w>w
 
 
@@ -291,3 +315,6 @@ nnoremap <Leader>fi :let @*=substitute(expand('%:r'), '\/', '.', 'g')[5:] . '.' 
 nnoremap <leader>fo :let @*=expand("%:t")<CR>
 " Copy Filename without extension (foo)
 nnoremap <leader>f' :let @*=expand("%:t:r")<CR>
+
+
+abbreviate clog console.log(
