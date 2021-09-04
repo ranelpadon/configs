@@ -27,6 +27,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'psliwka/vim-smoothie'
 
     " Plug 'justinmk/vim-sneak'
+    Plug 'easymotion/vim-easymotion'
     Plug 'phaazon/hop.nvim'
     " Plug 'ggandor/lightspeed.nvim'
     Plug 'mg979/vim-visual-multi'
