@@ -1508,3 +1508,6 @@ export VISUAL="$GIT_EDITOR"
 export EDITOR="$GIT_EDITOR"
 
 # eval "$(starship init zsh)"
+
+
+. ~/z/z.sh
