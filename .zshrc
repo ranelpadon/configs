@@ -56,7 +56,7 @@ HIST_STAMPS="mm/dd/yyyy"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # TODO: plugins=(git virtualenv virtualenvwrapper python django)
-plugins=(git python django)
+plugins=(git zsh-completions zsh-syntax-highlighting zsh-autosuggestions python django)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -180,7 +180,10 @@ gce() {
     git checkout ets
 }
 gct() {
-    git checkout release/ets/test/v2.4
+    git checkout release/ets/test/v2.18
+}
+gcttl() {
+    git checkout release/ets/test/shopping-cart
 }
 gcprod() {
     git checkout release/ets/prod/v1.8.47
@@ -209,6 +212,12 @@ rprod() {
     gpl
     gm ets
     fab create_release_tag:release/ets/prod/v1.8.47,ets-prod-v1.8.47-RC$1,full,melco
+}
+# rttltest 1 (for RC1)
+rttltest() {
+    gc release/ets/test/shopping-cart
+    gpl
+    fab create_release_tag:release/ets/test/shopping-cart,ets-test-shopping-cart-RC$1,full,melco
 }
 
 gple() {
@@ -328,6 +337,7 @@ mconflicts() {
 
 pat() {
     pyenv activate ticketing
+    eit
 }
 makemigrations() {
     pyenv activate ticketing
@@ -395,20 +405,27 @@ gcpm() {
 # Check release diff/packages/migrations
 cr() {
     # limit=2000
-    git diff --name-status $1.. -l 2000 | grep migrations\/0
+    git diff --name-status ets-prod-v1.8.47-RC$1.. -l 2000 | grep migrations\/0
     find . | grep \/migrations\/ | grep -v pyc$ | grep -oE "\/.+\/[0-9]+" | sort | uniq -d
-    git diff --name-only $1.. | grep requirements.txt | xargs git diff $1..
+    git diff --name-only ets-prod-v1.8.47-RC$1.. | grep requirements.txt | xargs git diff ets-prod-v1.8.47-RC$1..
 }
 crm() {
     cd ~/dev/ticketflap/ticketing
     # limit=2000
-    git diff --name-status $1.. -l 2000 | grep migrations\/0
+    git diff --name-status ets-prod-v1.8.47-RC$1.. -l 2000 | grep migrations\/0
+    find . | grep \/migrations\/ | grep -v pyc$ | grep -oE "\/.+\/[0-9]+" | sort | uniq -d
+    cd -
+}
+crmttl() {
+    cd ~/dev/ticketflap/ticketing
+    # limit=2000
+    git diff --name-status ets-test-shopping-cart-RC$1.. -l 2000 | grep migrations\/0
     find . | grep \/migrations\/ | grep -v pyc$ | grep -oE "\/.+\/[0-9]+" | sort | uniq -d
     cd -
 }
 crp() {
     # limit=2000
-    git diff --name-only $1.. | grep requirements.txt | xargs git diff $1..
+    git diff --name-only ets-prod-v1.8.47-RC$1.. | grep requirements.txt | xargs git diff ets-prod-v1.8.47-RC$1..
 }
 # Check migration conflicts.
 crc() {
@@ -416,7 +433,7 @@ crc() {
 }
 # Check release logs/merges
 crl() {
-    git log --pretty='%H %ar %s' --merges --grep='conflict' --grep='test' --regexp-ignore-case  $1..
+    git log --pretty='%H %ar %s' --merges --grep='conflict' --grep='test' --regexp-ignore-case ets-prod-v1.8.47-RC$1..
 }
 # Check release and migration list
 # crm() {
@@ -1161,7 +1178,7 @@ xmysql() {
 #     export PATH="/Applications/XAMPP/xamppfiles/bin:$PATH"
 }
 
-z() {
+ez() {
     exec zsh
 }
 
@@ -1228,7 +1245,13 @@ export FZF_DEFAULT_COMMAND=" \
     --exclude /static \
     --exclude /sites \
     --exclude cache \
+    --exclude undo/ \
+    --exclude backups/ \
+    --exclude automatic_backups/ \
+    --exclude autoload/ \
+    --exclude .idea/ \
     --exclude .git \
+    --exclude .DS_Store \
     --exclude '.git' \
     --exclude '*.pyc' \
     --exclude '*.compiled' \
@@ -1396,6 +1419,7 @@ alias nl='nl -b a $1'
 # Command: yvt URL START_TIME END_TIME
 # Sample: yvt "https://www.youtube.com/watch?v=sI-a64EVPPU" 2:45 4:48.7
 yt_video_trimmer() {
+    cd ~/Desktop
     pyenv activate alloserv
     python ~/dev/scripts/yt-video-trimmer.py $1 $2 $3
 }
@@ -1412,6 +1436,11 @@ cdatl() {
     gc develop
     gpl
     nvim
+}
+cdchart() {
+    cd  ~/dev/ticketing-ets-chart
+    gc master
+    gpl
 }
 cddemo() {
     open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/demo/-/pipelines"
@@ -1431,6 +1460,13 @@ cdhelm() {
     open "https://git.hk.asiaticketing.com/technology/helm-charts/ticketing-ets-chart/-/pipelines"
     cd ~/dev/ticketing-ets-chart
     gc master
+    gpl
+    nvim
+}
+cdhkilf() {
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/hkilf/-/pipelines"
+    cd ~/dev/hkilf
+    gc main
     gpl
     nvim
 }
@@ -1466,6 +1502,13 @@ cdsun() {
     open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/sun-entertainment/-/pipelines"
     cd ~/dev/sun-entertainment
     gc main
+    gpl
+    nvim
+}
+cdttl() {
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/totalticketing/-/pipelines"
+    cd ~/dev/totalticketing
+    gc develop
     gpl
     nvim
 }
