@@ -15,14 +15,6 @@ tmux new-window -t k8s_stag -n 'ZIPSTAG'
 tmux new-window -t k8s_stag -n 'ZKTSTAG'
 
 # Auto-runs
-# tmux send-keys -t 'k8s_stag :DEMOSTAG' '
-    # open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/demo/-/pipelines" &&
-    # cd ~/dev/demo &&
-    # gc main &&
-    # gpl &&
-    # fd ".gitlab*" --hidden --print0 | xargs -0 sed -i "" -e "s/ets-prod-v1.8.47-RC[0-9]\{1,\}$/$TAG/" &&
-    # gd
-# ' Enter
 tmux send-keys -t 'k8s_stag:GTSSTAG' '
     open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/11-skies/-/pipelines" &&
     cd ~/dev/11-skies &&
@@ -60,7 +52,7 @@ tmux send-keys -t 'k8s_stag:SUNSTAG' '
     cd ~/dev/sun-entertainment &&
     gc main &&
     gpl &&
-    fd "gitlab*" --hidden --print0 | xargs -0 sed -i "" -e "s/ets-prod-v1.8.47-RC[^\s]\{1,\}$/ets-prod-v1.8.47-RC$TAG/" &&
+    fd --regex "gitlab-ci.yml|gitlab-ci.staging.*"  --hidden --print0 | xargs -0 sed -i "" -e "s/ets-prod-v1.8.47-RC[^\s]\{1,\}$/ets-prod-v1.8.47-RC$TAG/" &&
     gd
 ' Enter
 tmux send-keys -t 'k8s_stag:ZIPSTAG' '
