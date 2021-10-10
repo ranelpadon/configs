@@ -1154,7 +1154,7 @@ rgc() {
         --type txt \
         --type po \
         --type md \
-        '>>>>>>'
+        '>>>>>>>'
 }
 
 
