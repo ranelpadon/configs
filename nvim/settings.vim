@@ -58,7 +58,7 @@ set mouse=a                                                                     
 set scrolloff=999                                                               " Cursor is always centered vertically
 " Toggling [relative]number: set [r]nu!
 set number                                                                      " Line numbers
-set relativenumber                                                              " Show the relative line number
+" set relativenumber                                                            " Show the relative line number
 set cursorline                                                                  " Highlight current line
 set colorcolumn=80                                                              " Line wrap/column marker
 set linebreak                                                                   " Break at word boundary
