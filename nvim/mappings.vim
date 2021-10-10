@@ -1,5 +1,7 @@
 " For concistency with D (d$) and C (c$).
 nnoremap Y y$
+" Exclude the new line.
+nnoremap yy 0y$
 
 
 " Find and replace
