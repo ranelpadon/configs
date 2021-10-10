@@ -35,6 +35,7 @@ if g:is_mvim
     let $BAT_THEME="TwoDark"
 endif
 
+
 " Helper function only.
 function! RgHelper(query, fullscreen, command_fmt)
     let command_fmt = a:command_fmt . ' --no-heading --line-number --color=always --smart-case -- %s || true'
@@ -44,82 +45,56 @@ function! RgHelper(query, fullscreen, command_fmt)
     call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 
-" Search Python Files
-function! RgPyFzf(query, fullscreen)
-    let command_fmt = 'rg --type py'
-    call RgHelper(a:query, a:fullscreen, command_fmt)
-endfunction
-command! -nargs=* -bang RgPy call RgPyFzf(<q-args>, <bang>0)
+
+" Search Python Files. Exclude the `tests` and `migrations` files.
+let rg_py = 'rg --type py --glob "!**/tests/**" --glob "!**/migrations/**"'
+command! -nargs=* -bang RgPy call RgHelper(<q-args>, <bang>0, rg_py)
 noremap <Leader>rp :RgPy<CR>
 
 " Search Python/Django Unit Test Files
-function! RgPyTFzf(query, fullscreen)
-    let command_fmt = 'rg --type py --glob "**/tests/**"'
-    call RgHelper(a:query, a:fullscreen, command_fmt)
-endfunction
-command! -nargs=* -bang RgPyT call RgPyTFzf(<q-args>, <bang>0)
-noremap <Leader>rt :RgPyT<CR>
-
-" Search Python/Django Requirements/Text Files
-function! RgPyTxtFzf(query, fullscreen)
-    let command_fmt = 'rg --type txt'
-    call RgHelper(a:query, a:fullscreen, command_fmt)
-endfunction
-command! -nargs=* -bang RgPyTxt call RgPyTxtFzf(<q-args>, <bang>0)
-noremap <Leader>rtxt :RgPyTxt<CR>
+let rg_py_tests = 'rg --type py --glob "**/tests/**"'
+command! -nargs=* -bang RgPyT call RgHelper(<q-args>, <bang>0, rg_py_tests)
+noremap <Leader>rpt :RgPyT<CR>
 
 " Search Python/Django Migration Files
-function! RgPyMFzf(query, fullscreen)
-    let command_fmt = 'rg --type py --glob "**/migrations/**"'
-    call RgHelper(a:query, a:fullscreen, command_fmt)
-endfunction
-command! -nargs=* -bang RgPyM call RgPyMFzf(<q-args>, <bang>0)
-noremap <Leader>rmp :RgPyM<CR>
+let rg_py_migrations = 'rg --type py --glob "**/migrations/**"'
+command! -nargs=* -bang RgPyM call RgHelper(<q-args>, <bang>0, rg_py_migrations)
+noremap <Leader>rpm :RgPyM<CR>
 
-" Search JS Files
-function! RgJSFzf(query, fullscreen)
-    let command_fmt = 'rg --type js'
-    call RgHelper(a:query, a:fullscreen, command_fmt)
-endfunction
-command! -nargs=* -bang RgJS call RgJSFzf(<q-args>, <bang>0)
-noremap <Leader>rj :RgJS<CR>
 
 " Search HTML Files
-function! RgHTMLFzf(query, fullscreen)
-    let command_fmt = 'rg --type html'
-    call RgHelper(a:query, a:fullscreen, command_fmt)
-endfunction
-command! -nargs=* -bang RgHTML call RgHTMLFzf(<q-args>, <bang>0)
+let rg_html = 'rg --type html'
+command! -nargs=* -bang RgHTML call RgHelper(<q-args>, <bang>0, rg_html)
 noremap <Leader>rh :RgHTML<CR>
-"
+
+" Search JS Files
+let rg_js = 'rg --type js'
+command! -nargs=* -bang RgJS call RgHelper(<q-args>, <bang>0, rg_js)
+noremap <Leader>rj :RgJS<CR>
+
 " Search CSS Files
-function! RgCSSFzf(query, fullscreen)
-    let command_fmt = 'rg --type css'
-    call RgHelper(a:query, a:fullscreen, command_fmt)
-endfunction
-command! -nargs=* -bang RgCSS call RgCSSFzf(<q-args>, <bang>0)
+let rg_css = 'rg --type css'
+command! -nargs=* -bang RgCSS call RgHelper(<q-args>, <bang>0, rg_css)
 noremap <Leader>rc :RgCSS<CR>
 
+
+" Search Python/Django Requirements/Text Files
+let rg_txt = 'rg --type txt'
+command! -nargs=* -bang RgTxt call RgHelper(<q-args>, <bang>0, rg_txt)
+noremap <Leader>rt :RgTxt<CR>
+
 " Search YAML Files
-function! RgYAMLFzf(query, fullscreen)
-    let command_fmt = 'rg --type-add "yaml:*.yaml" --type-add "yml:*.yml" --type yaml --type yml'
-    call RgHelper(a:query, a:fullscreen, command_fmt)
-endfunction
-command! -nargs=* -bang RgYAML call RgYAMLFzf(<q-args>, <bang>0)
+let rg_yaml = 'rg --type yaml'
+command! -nargs=* -bang RgYAML call RgHelper(<q-args>, <bang>0, rg_yaml)
 noremap <Leader>ry :RgYAML<CR>
 
-" Search All Files (includes Git-ignored files)
-function! RgAllFzf(query, fullscreen)
-    let command_fmt = 'rg --no-ignore --type-add "compiled:*.compiled" --type-not compiled'
-    call RgHelper(a:query, a:fullscreen, command_fmt)
-endfunction
-command! -nargs=* -bang RgAll call RgAllFzf(<q-args>, <bang>0)
+
+" Search All Files (include Git-ignored files)
+let rg_all = 'rg --no-ignore --type-add "compiled:*.compiled" --type-not compiled --type-not log'
+command! -nargs=* -bang RgAll call RgHelper(<q-args>, <bang>0, rg_all)
 noremap <Leader>ra :RgAll<CR>
 
-" Search All Files with Git Conflicts
-function! RgAllConflictsFzf(query, fullscreen)
-    let command_fmt = 'rg --type-add "po:*.po" --type po --type py --type html --type js --type css --type txt'
-    call RgHelper('>>>>>>>', a:fullscreen, command_fmt)
-endfunction
-command! -nargs=* -bang RgAllConflicts call RgAllConflictsFzf(<q-args>, <bang>0)
-noremap <Leader>rac :RgAllConflicts<CR>
+" Search All Files with Git Conflicts. Include important files only.
+let rg_git_conflicts = 'rg --type py --type html --type js --type css --type txt --type yaml --type po --type md'
+command! -nargs=* -bang RgGitConflicts call RgHelper('>>>>>>>', <bang>0, rg_git_conflicts)
+noremap <Leader>rgc :RgGitConflicts<CR>
