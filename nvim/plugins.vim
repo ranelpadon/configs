@@ -25,9 +25,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'mattn/emmet-vim'
 
     Plug 'psliwka/vim-smoothie'
+    " Plug 'karb94/neoscroll.nvim'
 
     " Plug 'justinmk/vim-sneak'
-    Plug 'easymotion/vim-easymotion'
+    " Plug 'easymotion/vim-easymotion'
     Plug 'phaazon/hop.nvim'
     " Plug 'ggandor/lightspeed.nvim'
     Plug 'mg979/vim-visual-multi'
