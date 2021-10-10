@@ -316,7 +316,7 @@ gps() {
     git push origin $CURRENT_BRANCH
 }
 gft() {
-    git fetch origin $1
+    git fetch --tags
 }
 
 changelog() {
@@ -1035,81 +1035,131 @@ dwl() {
 }
 
 
-##########
+###############################################################################
 
 # RipGrep MAN page:
 # https://www.mankier.com/1/rg
 
-# Search in migration files.
-rmp() {
-  rg $1 --glob '**/migrations/**'
+
+# Core helper function.
+# Add -s for --case-sensitive search when calling the top level functions.
+# rp "LoginView" -s
+# For --colors, see https://www.mankier.com/1/rg#--colors.
+_rg() {
+    rg \
+        --ignore-case \
+        --colors match:bg:249,245,154 \
+        --colors match:fg:66,98,150 \
+        --colors match:style:nobold $@
 }
 
-# Search in test files.
-rt() {
-  rg $1 --glob '**/tests/**'
-}
-
-
-ra() {
-    # Include the Git-ignored files w/c are excluded by default!
-    rg -i --no-ignore --type-add 'compiled:*.compiled' --type-not compiled $1 $2 --colors match:bg:249,245,154 --colors match:fg:66,98,150 --colors match:style:nobold
-}
-rac() {
-    # rga ">>>>>>"
-    rg --type-add 'po:*.po' --type-add 'yml:*.yml' --type po --type py --type html --type js --type css --type txt --type yml ">>>>>>" -s \
-        --colors match:bg:249,245,154 --colors match:fg:66,98,150 --colors match:style:nobold
-}
-
-
+# rg-python
+# Search in Python files only.
 rp() {
-    # Python files only.
-    # -i for case-insensitive search.
-    # -s for sensitive-case search.
-    rg -i -tpy $1 $2 --colors match:bg:249,245,154 --colors match:fg:66,98,150 --colors match:style:nobold
+    _rg --type py --glob '!**/tests/**' --glob '!**/migrations/**' $@
 }
 
-rh() {
-    # HTML files only.
-    rg -i -thtml $1 $2 --colors match:bg:249,245,154 --colors match:fg:66,98,150 --colors match:style:nobold
+# rg-python-tests
+# Search in unit test files.
+rpt() {
+    rp --glob '**/tests/**' $@
 }
 
-rj() {
-    # JS files only. Exclude minified files.
-    rg -i -tjs -g '!*.min.js' $1 $2 --colors match:bg:249,245,154 --colors match:fg:66,98,150 --colors match:style:nobold
+# rg-python-migrations
+# Search in migration files.
+rpm() {
+    rp --glob '**/migrations/**' $@
 }
 
-rc() {
-    # CSS files only.
-    rg -i -tcss $1 $2 --colors match:bg:249,245,154 --colors match:fg:66,98,150 --colors match:style:nobold
-}
-
-
+# rg-python-html
+# Search in Python + HTML files.
 rph() {
-    # Python + HTML files.
-    rg -i -tpy -thtml $1 $2 --colors match:bg:249,245,154 --colors match:fg:66,98,150 --colors match:style:nobold
+    rp --type html $@
 }
 
+# rg-python-html-js
+# Search in Python + HTML + JS files.
 rphj() {
-    # Python + HTML + JS files.
-    rg -i -tpy -thtml -tjs -g '!*.min.js' $1 $2 --colors match:bg:249,245,154 --colors match:fg:66,98,150 --colors match:style:nobold
+    rph --type js --glop '!*.min.js' $@
 }
 
 
+# rg-html
+# Search in HTML files only.
+rh() {
+    _rg --type html $@
+}
+
+# rg-html-js
+# Search in HTML + JS files.
 rhj() {
-    # HTML + JS files.
-    rg -i -thtml -tjs -g '!*.min.js' $1 $2 --colors match:bg:249,245,154 --colors match:fg:66,98,150 --colors match:style:nobold
+    rh --type js --glob '!*.min.js' $@
 }
 
+# rg-html-js-css
+# Search in HTML + JS + CSS files.
 rhjc() {
-    # HTML + JS + CSS files.
-    rg -i -thtml -tjs -tcss -g '!*.min.js' $1 $2 --colors match:bg:249,245,154 --colors match:fg:66,98,150 --colors match:style:nobold
+    rhj --type css --glob '!*.min.js' $@
 }
 
-rtxt() {
-    # Requirements.txt files.
-    rg -i -ttxt $1 $2 --colors match:bg:249,245,154 --colors match:fg:66,98,150 --colors match:style:nobold
+# rg-js
+# Search in JS files only. Exclude minified files.
+rj() {
+    _rg --type js --glob '!*.min.js' $@
 }
+
+# rg-css
+# Search in CSS files only.
+rc() {
+    _rg --type css $@
+}
+
+# rg-txt
+# Search in text files (mainly Python's requirements.txt).
+rt() {
+    _rg --type txt $@
+}
+
+# rg-yaml
+# Search in YAML files (mainly CI/k8s files).
+ry() {
+    _rg --type yaml $@
+}
+
+
+# rg-all
+# Include the Git-ignored files w/c are excluded by default!
+# Exclude files we don't care about.
+# Define file type if it's not included in the `rg --type-list`.
+ra() {
+    _rg \
+        --no-ignore \
+        --type-add 'compiled:*.compiled' \
+        --type-not compiled \
+        --type-not log \
+        $@
+}
+
+# rg-git-conflicts
+# Search for Git conflict marker in important files.
+# No need to search all file types.
+# rgc instead of `rc` since it's already mapped to CSS files.
+rgc() {
+    _rg \
+        --type py \
+        --type html \
+        --type js \
+        --type css \
+        --type yaml \
+        --type txt \
+        --type po \
+        --type md \
+        '>>>>>>'
+}
+
+
+###############################################################################
+
 
 clear_logs() {
     cat /dev/null > /Users/ranelpadon/dev/ticketflap/ticketing/logs/admission.log
@@ -1484,7 +1534,7 @@ cdkgg() {
     gpl
     nvim
 }
-cdmelco() {
+cdmc() {
     open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/melco/-/pipelines"
     cd ~/dev/melco
     gc release/production
@@ -1529,6 +1579,13 @@ cdzip() {
 cdzk() {
     open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/zicket/-/pipelines"
     cd ~/dev/zicket
+    gc main
+    gpl
+    nvim
+}
+cdzuni() {
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/zuni/-/pipelines"
+    cd ~/dev/zuni
     gc main
     gpl
     nvim
