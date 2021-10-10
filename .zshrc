@@ -1480,115 +1480,59 @@ export PYTHONWARNINGS=ignore
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 
-cdatl() {
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/asiaticketing/-/pipelines"
-    cd ~/dev/asiaticketing
-    gc develop
+# Helper function.
+_cd_whitelabel() {
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/$1/-/pipelines"
+    cd ~/dev/$1
+    gc $2
     gpl
     nvim
 }
-cdchart() {
-    cd  ~/dev/ticketing-ets-chart
-    gc master
-    gpl
+
+cdatl() {
+    _cd_whitelabel asiaticketing develop
 }
 cddemo() {
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/demo/-/pipelines"
-    cd ~/dev/demo
-    gc main
-    gpl
-    nvim
+    _cd_whitelabel demo main
 }
 cdgts() {
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/11-skies/-/pipelines"
-    cd ~/dev/11-skies
-    gc main
-    gpl
-    nvim
+    _cd_whitelabel 11-skies main
 }
 cdhelm() {
-    open "https://git.hk.asiaticketing.com/technology/helm-charts/ticketing-ets-chart/-/pipelines"
-    cd ~/dev/ticketing-ets-chart
-    gc master
-    gpl
-    nvim
+    _cd_whitelabel ticketing-ets-chart master
 }
 cdhkilf() {
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/hkilf/-/pipelines"
-    cd ~/dev/hkilf
-    gc main
-    gpl
-    nvim
+    _cd_whitelabel hkilf main
 }
 cdhkru() {
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/hkru/-/pipelines"
-    cd ~/dev/hkru
-    gc main
-    gpl
-    nvim
+    _cd_whitelabel hkru main
 }
 cdkgg() {
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/kgg-kg/-/pipelines"
-    cd ~/dev/kgg-kg
-    gc main
-    gpl
-    nvim
+    _cd_whitelabel kgg-kg main
 }
 cdmc() {
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/melco/-/pipelines"
-    cd ~/dev/melco
-    gc release/production
-    gpl
-    nvim
+    _cd_whitelabel melco release/production
 }
 cdmgm() {
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/mgm/-/pipelines"
-    cd ~/dev/mgm
-    gc main
-    gpl
-    nvim
+    _cd_whitelabel mgm main
 }
 cdsun() {
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/sun-entertainment/-/pipelines"
-    cd ~/dev/sun-entertainment
-    gc main
-    gpl
-    nvim
+    _cd_whitelabel sun-entertainment main
 }
 cdttl() {
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/totalticketing/-/pipelines"
-    cd ~/dev/totalticketing
-    gc develop
-    gpl
-    nvim
+    _cd_whitelabel totalticketing develop
 }
 cdxr() {
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/clockenflap-xr/-/pipelines"
-    cd ~/dev/clockenflap-xr
-    gc main
-    gpl
-    nvim
+    _cd_whitelabel clockenflap-xr main
 }
 cdzip() {
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/zipcity/-/pipelines"
-    cd ~/dev/zipcity
-    gc main
-    gpl
-    nvim
+    cd_whitelabel zipcity main
 }
 cdzk() {
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/zicket/-/pipelines"
-    cd ~/dev/zicket
-    gc main
-    gpl
-    nvim
+    cd_whitelabel zicket main
 }
 cdzuni() {
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/zuni/-/pipelines"
-    cd ~/dev/zuni
-    gc main
-    gpl
-    nvim
+    cd_whitelabel zuni main
 }
 
 
