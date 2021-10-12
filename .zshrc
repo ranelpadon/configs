@@ -1482,7 +1482,15 @@ export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
 # Helper function.
 _cd_whitelabel() {
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/$1/-/pipelines"
+    # Check if need to use custom URL.
+    # Quotes are needed for evaluating the $ vars.
+    if [ "$1" = "ticketing-ets-chart" ]
+    then
+        open "https://git.hk.asiaticketing.com/technology/helm-charts/ticketing-ets-chart/-/pipelines"
+    else
+        open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/$1/-/pipelines"
+    fi
+
     cd ~/dev/$1
     gc $2
     gpl
@@ -1526,13 +1534,13 @@ cdxr() {
     _cd_whitelabel clockenflap-xr main
 }
 cdzip() {
-    cd_whitelabel zipcity main
+    _cd_whitelabel zipcity main
 }
 cdzk() {
-    cd_whitelabel zicket main
+    _cd_whitelabel zicket main
 }
 cdzuni() {
-    cd_whitelabel zuni main
+    _cd_whitelabel zuni main
 }
 
 
