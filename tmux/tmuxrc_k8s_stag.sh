@@ -1,76 +1,61 @@
 #!/bin/sh
 
-# Run as in (new Alacritty window or in Kitty):
+# Dependencies:
+# 1. https://github.com/sharkdp/fd
+# 2. https://github.com/chmln/sd
+# Run as (new Alacritty window or in Kitty):
 # kube_stag 123 (for RC123)
 # since $TAG is needed envvar.
 
+
 # Tabs
-# tmux new-session -s k8s_stag -n 'DEMOSTAG' -d
-tmux new-session -s k8s_stag -n 'GTSSTAG' -d
-tmux new-window -t k8s_stag -n 'HKRUSTAG'
-tmux new-window -t k8s_stag -n 'MCSTAG'
-tmux new-window -t k8s_stag -n 'MGMSTAG'
-tmux new-window -t k8s_stag -n 'SUNSTAG'
-tmux new-window -t k8s_stag -n 'ZIPSTAG'
-tmux new-window -t k8s_stag -n 'ZKTSTAG'
+tmux new-session -s k8s_stag -d
+
+_new_window() {
+    tmux new-window  -t k8s_stag -n $1 -e WHITELABEL=$2
+}
+
+_new_window GTSSTAG 11-skies
+_new_window HKRUSTAG hkru
+_new_window MCSTAG melco
+_new_window MGMSTAG mgm
+_new_window SUNSTAG sun-entertainment
+_new_window ZIPSTAG zipcity
+_new_window ZKTSTAG zicket
+
+
+# Helper function.
+_update_env() {
+    COMMAND='
+        open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/$WHITELABEL/-/pipelines" &&
+        cd ~/dev/$WHITELABEL &&
+    '
+    # Melco has special branch.
+    if [ "$1" = "MCSTAG" ]
+    then
+        COMMAND+='gc release/production &&'
+    else
+        COMMAND+='gc main &&'
+    fi
+
+    COMMAND+='
+        gpl &&
+        fd --regex "gitlab-ci(.staging)?.yml" --hidden --print0 \
+            | xargs -0 sd "ets-prod-v1.8.47-RC[^\s]+" "ets-prod-v1.8.47-RC$TAG" &&
+        gd
+    '
+    tmux send-keys -t k8s_stag:$1 $COMMAND Enter
+}
 
 # Auto-runs
-tmux send-keys -t 'k8s_stag:GTSSTAG' '
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/11-skies/-/pipelines" &&
-    cd ~/dev/11-skies &&
-    gc main &&
-    gpl &&
-    fd --regex "gitlab-ci.yml|gitlab-ci.staging.yml" --hidden --print0 | xargs -0 sed -i "" -e "s/ets-prod-v1.8.47-RC[^\s]\{1,\}$/ets-prod-v1.8.47-RC$TAG/" &&
-    gd
-' Enter
-tmux send-keys -t 'k8s_stag:HKRUSTAG' '
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/hkru/-/pipelines" &&
-    cd ~/dev/hkru &&
-    gc main &&
-    gpl &&
-    fd "gitlab*" --hidden --print0 | xargs -0 sed -i "" -e "s/ets-prod-v1.8.47-RC[^\s]\{1,\}$/ets-prod-v1.8.47-RC$TAG/" &&
-    gd
-' Enter
-tmux send-keys -t 'k8s_stag:MCSTAG' '
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/melco/-/pipelines" &&
-    cd ~/dev/melco &&
-    gc release/production &&
-    gpl &&
-    fd "gitlab*" --hidden --print0 | xargs -0 sed -i "" -e "s/ets-prod-v1.8.47-RC[^\s]\{1,\}$/ets-prod-v1.8.47-RC$TAG/" &&
-    gd
-' Enter
-tmux send-keys -t 'k8s_stag:MGMSTAG' '
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/mgm/-/pipelines" &&
-    cd ~/dev/mgm &&
-    gc main &&
-    gpl &&
-    fd --regex "gitlab-ci.yml|gitlab-ci.staging.*"  --hidden --print0 | xargs -0 sed -i "" -e "s/ets-prod-v1.8.47-RC[^\s]\{1,\}$/ets-prod-v1.8.47-RC$TAG/" &&
-    gd
-' Enter
-tmux send-keys -t 'k8s_stag:SUNSTAG' '
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/sun-entertainment/-/pipelines" &&
-    cd ~/dev/sun-entertainment &&
-    gc main &&
-    gpl &&
-    fd --regex "gitlab-ci.yml|gitlab-ci.staging.*"  --hidden --print0 | xargs -0 sed -i "" -e "s/ets-prod-v1.8.47-RC[^\s]\{1,\}$/ets-prod-v1.8.47-RC$TAG/" &&
-    gd
-' Enter
-tmux send-keys -t 'k8s_stag:ZIPSTAG' '
-open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/zipcity/-/pipelines" &&
-    cd ~/dev/zipcity &&
-    gc main &&
-    gpl &&
-    fd "gitlab*" --hidden --print0 | xargs -0 sed -i "" -e "s/ets-prod-v1.8.47-RC[^\s]\{1,\}$/ets-prod-v1.8.47-RC$TAG/" &&
-    gd
-' Enter
-tmux send-keys -t 'k8s_stag:ZKTSTAG' '
-    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/zicket/-/pipelines" &&
-    cd ~/dev/zicket &&
-    gc main &&
-    gpl &&
-    fd "gitlab*" --hidden --print0 | xargs -0 sed -i "" -e "s/ets-prod-v1.8.47-RC[^\s]\{1,\}$/ets-prod-v1.8.47-RC$TAG/" &&
-    gd
-' Enter
+_update_env GTSSTAG
+_update_env HKRUSTAG
+_update_env MCSTAG
+_update_env MGMSTAG
+_update_env SUNSTAG
+_update_env ZIPSTAG
+_update_env ZKTSTAG
+
 
 # Activate main window
 tmux select-window -t 'k8s_stag:GTSSTAG'
