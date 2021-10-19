@@ -34,8 +34,8 @@ nnoremap <F2> o<Esc>
 " Move to older cursor position. Opposite of <C-I>.
 " Pressing <C-M> will map to <C-B> via BTT app
 " since <C-M> could not be used directly because it's equivalent to ENTER key.
-" nnoremap <C-B> <C-O>
-" Move to newer cursor position. Opposite of <C-O>.
+" nnoremap <C-B> <C-o>
+" Move to newer cursor position. Opposite of <C-o>.
 " nnoremap <C-H> <C-I>
 
 
@@ -57,23 +57,23 @@ nnoremap <F1>d :copy .<CR>
 vnoremap <F1>d :copy '><CR>
 " Duplicate line.
 " Cmd+r via BTT.
-inoremap <F1>d <C-O>yy<C-O>p
+inoremap <F1>d <C-o>yy<C-o>p
 " Copy.
 " Cmd+c via BTT.
 nnoremap <F1>c yy
-inoremap <F1>c <C-O>yy
+inoremap <F1>c <C-o>yy
 " Cut.
 " Cmd+x via BTT.
 nnoremap <F1>x dd
-inoremap <F1>x <C-O>dd
+inoremap <F1>x <C-o>dd
 " Undo.
 " Cmd+z via BTT.
 nnoremap <F1>u u
-inoremap <F1>u <C-O>u
+inoremap <F1>u <C-o>u
 " Redo
 " Cmd+g via BTT.
 nnoremap <F1>r <C-R>
-inoremap <F1>r <C-O><C-R>
+inoremap <F1>r <C-o><C-R>
 
 
 " Forward/backward movements in chunks in Insert mode.
@@ -152,8 +152,8 @@ vnoremap i l
 vnoremap ii ll
 
 " Scroll up/down in chunks in Insert mode.
-inoremap <C-u> <C-O>9k
-inoremap <C-e> <C-O>9j
+inoremap <C-u> <C-o>9k
+inoremap <C-e> <C-o>9j
 
 " End of Word
 nnoremap l e
