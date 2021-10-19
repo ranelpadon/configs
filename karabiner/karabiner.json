@@ -1975,6 +1975,7 @@
                                 "type": "basic"
                             },
                             {
+                                "description": "Held `g` as 'App Expose', or use the system shortcut for 'Application windows' config.",
                                 "from": {
                                     "key_code": "g"
                                 },
@@ -1990,7 +1991,7 @@
                                 "to_if_held_down": [
                                     {
                                         "halt": true,
-                                        "key_code": "p",
+                                        "key_code": "mission_control",
                                         "modifiers": [
                                             "left_control"
                                         ]
