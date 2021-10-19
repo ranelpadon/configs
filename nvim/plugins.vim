@@ -3,10 +3,19 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     set rtp+=/usr/local/opt/fzf
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}
     Plug 'junegunn/fzf.vim'
+    " Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
+    " Plug 'lotabout/skim.vim'
+    " Plug 'camspiers/snap'
+    " Plug 'sineto/fzy.nvim'
     " Plug 'mfussenegger/nvim-fzy'
     " Plug 'bfrg/vim-fzy'
 
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    if has('nvim')
+      Plug 'gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
+    else
+      Plug 'gelguy/wilder.nvim'
+    endif
     Plug 'ludovicchabant/vim-gutentags'
     Plug 'mgedmin/python-imports.vim'
     Plug 'dense-analysis/ale'
