@@ -1144,7 +1144,7 @@ ra() {
 # Search for Git conflict marker in important files.
 # No need to search all file types.
 # rgc instead of `rc` since it's already mapped to CSS files.
-rgc() {
+rcc() {
     _rg \
         --type py \
         --type html \
