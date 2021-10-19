@@ -1,3 +1,5 @@
 " Toggle comments.
-vmap <Leader>/ gc
-nmap <Leader>/ gcc
+" Cmd+/ via BTT.
+vmap <F1>/ gc
+nmap <F1>/ gcc
+imap <F1>/ <C-o>gcc
