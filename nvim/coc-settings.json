@@ -45,7 +45,8 @@
     "python.linting.enabled": false,
     "python.autoComplete.extraPaths": [
         "/Users/ranelpadon/dev/ticketflap/ticketing/apps",
-        "/Users/ranelpadon/dev/ticketflap/ticketing/conf"
+        "/Users/ranelpadon/dev/ticketflap/ticketing/conf",
+        "/Users/ranelpadon/.pyenv/versions/2.7.17/envs/ticketing/lib/python2.7/site-packages"
     ]
 }
 
