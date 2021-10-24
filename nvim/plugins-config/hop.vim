@@ -8,3 +8,4 @@ hi HopUnmatched guifg=#4B5263
 
 map s <cmd>HopChar1<CR>
 omap s v<cmd>HopChar1<CR>
+map S v<cmd>HopChar1<CR>
