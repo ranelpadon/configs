@@ -18,7 +18,6 @@
                     {
                         "description": "Arrow navigation, opening apps, etc.",
                         "manipulators": [
-
                             {
                                 "from": {
                                     "key_code": "j",
@@ -87,7 +86,6 @@
                                 ],
                                 "type": "basic"
                             },
-
                             {
                                 "from": {
                                     "key_code": "u",
@@ -190,8 +188,6 @@
                                 ],
                                 "type": "basic"
                             },
-
-
                             {
                                 "from": {
                                     "key_code": "f3"
@@ -223,8 +219,6 @@
                                 ],
                                 "type": "basic"
                             },
-
-
                             {
                                 "from": {
                                     "key_code": "left_shift"
@@ -2368,6 +2362,19 @@
                     "ignore": false,
                     "manipulate_caps_lock_led": false,
                     "simple_modifications": []
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": false,
+                        "is_pointing_device": true,
+                        "product_id": 9488,
+                        "vendor_id": 2362
+                    },
+                    "ignore": false,
+                    "manipulate_caps_lock_led": false,
+                    "simple_modifications": []
                 }
             ],
             "fn_function_keys": [
@@ -2500,26 +2507,26 @@
                 },
                 {
                     "from": {
-                        "key_code": "right_command"
-                    },
-                    "to": {
-                        "key_code": "right_option"
-                    }
-                },
-                {
-                    "from": {
-                        "key_code": "right_option"
-                    },
-                    "to": {
-                        "key_code": "right_command"
-                    }
-                },
-                {
-                    "from": {
                         "key_code": "left_shift"
                     },
                     "to": {
                         "key_code": "left_control"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "right_command"
+                    },
+                    "to": {
+                        "key_code": "right_option"
+                    }
+                },
+                {
+                    "from": {
+                        "key_code": "right_option"
+                    },
+                    "to": {
+                        "key_code": "right_command"
                     }
                 }
             ],
