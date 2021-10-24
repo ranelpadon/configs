@@ -7,6 +7,9 @@ let g:lightline = {
     \   'left': [['buffers']],
     \   'right': [[]]
     \ },
+    \ 'component_function': {
+    \   'filename': 'LightlineFilename'
+    \ },
     \ 'component_expand': {
     \   'buffers': 'lightline#bufferline#buffers'
     \ },
@@ -15,13 +18,19 @@ let g:lightline = {
     \ }
     \ }
 
-let g:lightline#bufferline#shorten_path = 1
-let g:lightline#bufferline#filename_modifier = ':p:.'
+function! LightlineFilename()
+    return expand('%:p:.') !=# '' ? expand('%:p:.') : '[No Name]'
+endfunction
+
+
+let g:lightline#bufferline#shorten_path = 0
+let g:lightline#bufferline#smart_path = 1
+let g:lightline#bufferline#show_number = 2
+let g:lightline#bufferline#number_separator = '|'
 
 " Remove the pipe character as separator.
 let g:lightline.tabline_separator = { 'left': '', 'right': '' }
 let g:lightline.tabline_subseparator = { 'left': '', 'right': '' }
-
 
 " Improve the tabline colors
 let one_dark_black = '#282c34'
@@ -35,9 +44,20 @@ let s:p.tabline.left = [[one_dark_gray, one_dark_black, transparent_term_color, 
 let s:p.tabline.tabsel = [[one_dark_white, one_dark_black, transparent_term_color, transparent_term_color]]
 let s:p.tabline.middle = [[one_dark_black, one_dark_black, transparent_term_color, transparent_term_color]]
 
-
 " Clickable buffer tabs when in Neovim
 if g:is_nvim
     let g:lightline#bufferline#clickable = 1
     let g:lightline.component_raw = {'buffers': 1}
 endif
+
+# Fast buffer switching when multiple ones are opened.
+nmap 1 <Plug>lightline#bufferline#go(1)
+nmap 2 <Plug>lightline#bufferline#go(2)
+nmap 3 <Plug>lightline#bufferline#go(3)
+nmap 4 <Plug>lightline#bufferline#go(4)
+nmap 5 <Plug>lightline#bufferline#go(5)
+nmap 6 <Plug>lightline#bufferline#go(6)
+nmap 7 <Plug>lightline#bufferline#go(7)
+nmap 8 <Plug>lightline#bufferline#go(8)
+nmap 9 <Plug>lightline#bufferline#go(9)
+nmap 0 <Plug>lightline#bufferline#go(10)
