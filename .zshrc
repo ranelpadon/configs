@@ -959,10 +959,32 @@ frdbm() {
     cd docker
     fab migrate
 }
+
 fcp() {
     # Clear the .pyc files.
     fab local_remove_all_pyc
 }
+
+fpyc() {
+    # Clear the .pyc files.
+    fd \
+        --no-ignore \
+        --type file \
+        --extension pyc \
+        --exclude database \
+        --exclude docker \
+        --exclude docs \
+        --exclude k8s \
+        --exclude locale \
+        --exclude logs \
+        --exclude media \
+        --exclude node_modules \
+        --exclude static \
+        --exclude sites \
+        --exclude templates \
+        --exec-batch rm {} ;
+}
+
 # start_local_alloserv
 sla() {
     # Needs `fab stop:alloserv fab start:db fab start:memcached fab start:worker`
@@ -1337,7 +1359,11 @@ alias fh='history | fzf'
 # https://chrisltd.com/blog/2015/03/caps-lock-to-backspace-mac/
 # hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x70000002A}]}'
 
-pyenv global 2.7.17
+# pyenv global 2.7.17
+# For this warning: pyenv: python3: command not found
+# 3.8.4 contains the py-neovim.
+pyenv global 2.7.17 3.8.4
+
 export PATH="/usr/local/opt/node@12/bin:$PATH"
 # export PYTHONPATH="${PYTHONPATH}:${HOME}/.pyenv/versions/2.7.17/envs/ticketing/bin/python:${HOME}/.pyenv/versions/3.6.10/bin/python:${HOME}/dev/ticketflap/ticketing/apps:${HOME}/dev/ticketflap/ticketing/conf"
 
@@ -1378,6 +1404,14 @@ kube_prod() {
 }
 alias tmuxx_kube_prod_resume='tmux attach -t k8s_prod'
 
+# kube_commit STAG 123
+# kube_commit PROD 123
+kube_commit() {
+    # Send the same Git commit message to all active windows.
+    SESSION_NAME=$(tmux display-message -p '#S')
+    MESSAGE='gca "Update $1 to RC$2." && gps'
+    tmux list-windows -t $SESSION_NAME|cut -d: -f1|xargs -I{} tmux send-keys -t $SESSION_NAME:{} $MESSAGE Enter
+}
 
 alias gad='gcloud app deploy'
 
@@ -1405,7 +1439,7 @@ linkify() {
 
 
 # Open all files with open conflicts with nvim
-ocn() {
+vconflicts() {
     git diff --name-only | uniq | xargs nvim
 }
 
@@ -1467,13 +1501,24 @@ alias nl='nl -b a $1'
 
 
 # Command: yvt URL START_TIME END_TIME
-# Sample: yvt "https://www.youtube.com/watch?v=sI-a64EVPPU" 2:45 4:48.7
+# Sample: yvt https://www.youtube.com/watch?v=sI-a64EVPPU 2:45 4:48.7
 yt_video_trimmer() {
+    # Set the working dir.
     cd ~/Desktop
     pyenv activate alloserv
     python ~/dev/scripts/yt-video-trimmer.py $1 $2 $3
 }
 alias yvt=yt_video_trimmer
+
+# Command: vt FILE_PATH START_TIME END_TIME
+# Sample: vt /Users/ranelpadon/Desktop/sample.mp4 2:45 4:48.7
+video_trimmer() {
+    # Set the working dir.
+    cd ~/Desktop
+    pyenv activate alloserv
+    python ~/dev/scripts/video-trimmer.py $1 $2 $3
+}
+alias vt=video_trimmer
 
 
 export PYTHONWARNINGS=ignore
@@ -1519,7 +1564,7 @@ cdkgg() {
     _cd_whitelabel kgg-kg main
 }
 cdmc() {
-    _cd_whitelabel melco release/production
+    _cd_whitelabel melco main
 }
 cdmgm() {
     _cd_whitelabel mgm main
@@ -1527,8 +1572,13 @@ cdmgm() {
 cdsun() {
     _cd_whitelabel sun-entertainment main
 }
-cdttl() {
+cdttltest() {
+    # TTLTEST
     _cd_whitelabel totalticketing develop
+}
+cdttlstag() {
+    # TTLSTAG
+    _cd_whitelabel totalticketing main
 }
 cdxr() {
     _cd_whitelabel clockenflap-xr main
