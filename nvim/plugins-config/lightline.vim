@@ -50,7 +50,7 @@ if g:is_nvim
     let g:lightline.component_raw = {'buffers': 1}
 endif
 
-# Fast buffer switching when multiple ones are opened.
+" Fast buffer switching when multiple ones are opened.
 nmap 1 <Plug>lightline#bufferline#go(1)
 nmap 2 <Plug>lightline#bufferline#go(2)
 nmap 3 <Plug>lightline#bufferline#go(3)
