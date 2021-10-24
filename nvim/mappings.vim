@@ -31,13 +31,13 @@ nnoremap <F2> o<Esc>
 
 
 " Warning: conflicts with inoremap for F11/F12.
-" Move to older cursor position. Opposite of <C-I>.
 " Pressing <C-M> will map to <C-B> via BTT app
 " since <C-M> could not be used directly because it's equivalent to ENTER key.
-" nnoremap <C-B> <C-o>
+" Maps to <C-m> and <C-h> via BTT. <C-i> is same as <Tab>.
+" Move to older cursor position. Opposite of <C-i>.
+nnoremap <F11> <C-o>
 " Move to newer cursor position. Opposite of <C-o>.
-" nnoremap <C-H> <C-I>
-
+nnoremap <F12> <C-i>
 
 " Go to SOL and EOL when in Insert/Normal mode.
 " C-A and C-Z are mapped in Karabiner/BTT using the Left/Right Cmd physical keys.
@@ -80,8 +80,8 @@ inoremap <F1>r <C-o><C-R>
 " Maps to <C-w>/<C-k> and <C-b> via BTT.
 " inoremap <F9> <C-o>W
 " inoremap <F10> <C-o>B
-inoremap <C-l> <C-o>W
-inoremap <C-y> <C-o>B
+inoremap <C-l> <C-o>w
+inoremap <C-y> <C-o>b
 
 
 " Forward/backward delete in chunks in Insert mode.
@@ -192,7 +192,7 @@ nnoremap <F1>t :source ~/dev/configs/nvim/init.vim<CR>:echo "Reloaded Neovim ini
 " https://stackoverflow.com/questions/657447/vim-clear-last-search-highlighting#657457
 " Could not use the <Esc><Esc> sequence due to issues with other keys like arrows:
 " https://stackoverflow.com/questions/11940801/mapping-esc-in-vimrc-causes-bizarre-arrow-behaviour?noredirect=1&lq=1
-nnoremap <silent> <Leader>k :let @/ = ""<CR>
+nnoremap <silent> kk :let @/ = ""<CR>
 
 
 " Visual Mode - Dot
@@ -319,4 +319,5 @@ nnoremap <leader>fo :let @*=expand("%:t")<CR>
 nnoremap <leader>f' :let @*=expand("%:t:r")<CR>
 
 
+" Expands in Insert mode.
 abbreviate clog console.log(
