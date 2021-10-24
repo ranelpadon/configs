@@ -157,7 +157,7 @@ font:
     #style: Bold Italic
 
   # Point size
-  size: 13.0
+  size: 11.0
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -214,6 +214,10 @@ colors:
     cyan:    '#56b6c2'
     white:   '#ffffff'
 
+  vi_mode_cursor:
+   text: CellBackground
+   cursor: CellForeground
+
 
 # Colors (Tomorrow Night)
 # colors:
@@ -248,7 +252,7 @@ colors:
   #
   # Allowed values are CellForeground and CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
-  #vi_mode_cursor:
+  # vi_mode_cursor:
   #  text: CellBackground
   #  cursor: CellForeground
 
@@ -401,8 +405,8 @@ cursor:
     #   - ▇ Block
     #   - _ Underline
     #   - | Beam
-    shape: Underline
-    # shape: Beam
+    # shape: Underline
+    shape: Beam
 
     # Cursor blinking state
     #
@@ -725,7 +729,7 @@ alt_send_esc: false
 #
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
-#key_bindings:
+key_bindings:
   #- { key: Paste,                                       action: Paste          }
   #- { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
@@ -738,14 +742,22 @@ alt_send_esc: false
   # Vi Mode
   #- { key: Space,  mods: Shift|Control, mode: Vi|~Search, action: ScrollToBottom          }
   #- { key: Space,  mods: Shift|Control, mode: ~Search,    action: ToggleViMode            }
+  # <C-v> is taken up by Tmux vi mode.
+  - { key: V,  mods: Shift|Control, mode: ~Search,    action: ToggleViMode            }
   #- { key: Escape,                      mode: Vi|~Search, action: ClearSelection          }
   #- { key: I,                           mode: Vi|~Search, action: ScrollToBottom          }
   #- { key: I,                           mode: Vi|~Search, action: ToggleViMode            }
   #- { key: C,      mods: Control,       mode: Vi|~Search, action: ToggleViMode            }
-  #- { key: Y,      mods: Control,       mode: Vi|~Search, action: ScrollLineUp            }
-  #- { key: E,      mods: Control,       mode: Vi|~Search, action: ScrollLineDown          }
+  # - { key: Y,      mods: Control,       mode: Vi|~Search, action: ScrollLineUp            }
+  # - { key: E,      mods: Control,       mode: Vi|~Search, action: ScrollLineDown          }
+  - { key: U,      mods: Shift,       mode: Vi|~Search, action: ScrollLineUp            }
+  - { key: E,      mods: Shift,       mode: Vi|~Search, action: ScrollLineDown          }
   #- { key: G,                           mode: Vi|~Search, action: ScrollToTop             }
   #- { key: G,      mods: Shift,         mode: Vi|~Search, action: ScrollToBottom          }
+  - { key: B,      mods: Control,       mode: Vi|~Search, action: ScrollPageUp            }
+  - { key: F,      mods: Control,       mode: Vi|~Search, action: ScrollPageDown          }
+  - { key: U,      mods: Control,       mode: Vi|~Search, action: ScrollHalfPageUp        }
+  - { key: D,      mods: Control,       mode: Vi|~Search, action: ScrollHalfPageDown      }
   #- { key: B,      mods: Control,       mode: Vi|~Search, action: ScrollPageUp            }
   #- { key: F,      mods: Control,       mode: Vi|~Search, action: ScrollPageDown          }
   #- { key: U,      mods: Control,       mode: Vi|~Search, action: ScrollHalfPageUp        }
@@ -762,6 +774,10 @@ alt_send_esc: false
   #- { key: J,                           mode: Vi|~Search, action: Down                    }
   #- { key: H,                           mode: Vi|~Search, action: Left                    }
   #- { key: L,                           mode: Vi|~Search, action: Right                   }
+  - { key: U,                           mode: Vi|~Search, action: Up                      }
+  - { key: E,                           mode: Vi|~Search, action: Down                    }
+  - { key: N,                           mode: Vi|~Search, action: Left                    }
+  - { key: I,                           mode: Vi|~Search, action: Right                   }
   #- { key: Up,                          mode: Vi|~Search, action: Up                      }
   #- { key: Down,                        mode: Vi|~Search, action: Down                    }
   #- { key: Left,                        mode: Vi|~Search, action: Left                    }
@@ -780,6 +796,7 @@ alt_send_esc: false
   #- { key: E,      mods: Shift,         mode: Vi|~Search, action: WordRightEnd            }
   #- { key: Key5,   mods: Shift,         mode: Vi|~Search, action: Bracket                 }
   #- { key: Slash,                       mode: Vi|~Search, action: SearchForward           }
+  # - { key: Slash,   mods: Command,       mode: Vi|~Search, action: SearchForward           }
   #- { key: Slash,  mods: Shift,         mode: Vi|~Search, action: SearchBackward          }
   #- { key: N,                           mode: Vi|~Search, action: SearchNext              }
   #- { key: N,      mods: Shift,         mode: Vi|~Search, action: SearchPrevious          }
