@@ -6,7 +6,7 @@ let g:is_vim = !g:is_nvim && !g:is_mvim
 
 if g:is_nvim
     " `highlight.on_yank` is only in Nvim.
-    au TextYankPost * silent! lua vim.highlight.on_yank {higroup='IncSearch', timeout=1000}
+    au TextYankPost * silent! lua vim.highlight.on_yank {higroup='IncSearch', timeout=300}
 
     " Substitution preview
     set inccommand=nosplit
