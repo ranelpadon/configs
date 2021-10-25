@@ -965,7 +965,7 @@ fcp() {
     fab local_remove_all_pyc
 }
 
-fpyc() {
+clear_pyc() {
     # Clear the .pyc files.
     fd \
         --no-ignore \
@@ -1417,7 +1417,7 @@ alias gad='gcloud app deploy'
 
 
 # Start an HTTP server from a directory, optionally specifying the port
-server() {
+local_server() {
     open "http://localhost:8000/" &
     php -S localhost:8000
 }
