@@ -55,7 +55,7 @@ set title                                                                       
 set hidden                                                                      " Required to keep multiple buffers open multiple buffers
 
 set mouse=a                                                                     " Enable mouse in all modes
-set scrolloff=999                                                               " Cursor is always centered vertically
+" set scrolloff=999                                                               " Cursor is always centered vertically
 " Toggling [relative]number: set [r]nu!
 set number                                                                      " Line numbers
 " set relativenumber                                                            " Show the relative line number
