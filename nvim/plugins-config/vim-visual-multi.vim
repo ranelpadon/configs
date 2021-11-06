@@ -22,9 +22,13 @@ let g:VM_maps['Undo'] = 'k'
 let g:VM_maps['Redo'] = '<C-r>'
 
 " Go back to Normal mode immediately after doing VM Insert.
-fun! VM_Start()
+function! VM_Start()
+    " Center stuff.
+    set scrolloff=999
     imap <buffer> <Esc> <Esc><Esc>
 endfun
-fun! VM_Exit()
+function! VM_Exit()
     iunmap <buffer> <Esc>
+    " Back to default centering.
+    set scrolloff=0
 endfun
