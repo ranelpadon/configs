@@ -22,12 +22,12 @@ nnoremap <Leader>. :vertical resize +15 <CR>
 " ENTER key
 " https://vim.fandom.com/wiki/Insert_newline_without_entering_insert_mode
 " Open a line before the current line (usual case)
-nnoremap <Enter> O<Esc>j
+nnoremap <Enter> O<Esc>jzz
 " Open a line after the current line. Allow cursor to move as well.
 " <S-Enter> will not work due to
 " https://stackoverflow.com/questions/598113/can-terminals-detect-shift-enter-or-control-enter
 " So, remap <S-Enter> via BTT app.
-nnoremap <F2> o<Esc>
+nnoremap <F2> o<Esc>zz
 
 
 " Warning: conflicts with inoremap for F11/F12.
@@ -78,10 +78,10 @@ inoremap <F1>r <C-o><C-R>
 
 " Forward/backward movements in chunks in Insert mode.
 " Maps to <C-w>/<C-k> and <C-b> via BTT.
-" inoremap <F9> <C-o>W
-" inoremap <F10> <C-o>B
-inoremap <C-l> <C-o>w
-inoremap <C-y> <C-o>b
+inoremap <F9> <C-o>B
+inoremap <F10> <C-o>W
+inoremap <C-l> <C-o>b
+inoremap <C-y> <C-o>w
 
 
 " Forward/backward delete in chunks in Insert mode.
@@ -92,12 +92,12 @@ inoremap <F12> <C-o>db
 
 " Move block up/down
 " Maps to <C-,> and <C-.> via BTT.
-nnoremap <F7> :m .+1<CR>==
-nnoremap <F8> :m .-2<CR>==
-inoremap <F7> <Esc>:m .+1<CR>==gi
-inoremap <F8> <Esc>:m .-2<CR>==gi
-vnoremap <F7> :m '>+1<CR>gv=gv
-vnoremap <F8> :m '<-2<CR>gv=gv
+nnoremap <F7> :move .+1<CR>==zz
+nnoremap <F8> :move .-2<CR>==zz
+inoremap <F7> <Esc>:move .+1<CR>==gi<C-o>zz
+inoremap <F8> <Esc>:move .-2<CR>==gi<C-o>zz
+vnoremap <F7> :move '>+1<CR>gv=gvzz
+vnoremap <F8> :move '<-2<CR>gv=gvzz
 
 
 " Find and replace of the current word in cursor,
@@ -128,21 +128,32 @@ nnoremap A I
 nnoremap o a
 nnoremap O A
 
+" Center some operations.
+nnoremap p pzz
+nnoremap P Pzz
+nnoremap G Gzz
+nnoremap <Down> <Down>zz
+nnoremap <Up> <Up>zz
+inoremap <Esc> <Esc>zz
+" Up/Down should not use `zz` when navigating completion popup menu.
+inoremap <expr> <Down> pumvisible() ? "\<Down>" : "\<Down>\<C-o>zz"
+inoremap <expr> <Up> pumvisible() ? "\<Up>" : "\<Up>\<C-o>zz"
+
 " Arrows in general
 " onoremap mode is needed so that
 " `c3n` is interpreted as `c3j`.
 " https://medium.com/usevim/operator-pending-mode-a4247d8596b7
-nnoremap e j
-nnoremap E 9j
-vnoremap E 9j
-onoremap e j
-vnoremap e j
 nnoremap k u
-nnoremap u k
-nnoremap U 9k
+nnoremap u kzz
+nnoremap U 9kzz
 vnoremap U 9k
 onoremap u k
 vnoremap u k
+nnoremap e jzz
+nnoremap E 9jzz
+vnoremap E 9j
+onoremap e j
+vnoremap e j
 nnoremap n h
 vnoremap n h
 nnoremap i l
@@ -152,8 +163,8 @@ vnoremap i l
 vnoremap ii ll
 
 " Scroll up/down in chunks in Insert mode.
-inoremap <C-u> <C-o>9k
-inoremap <C-e> <C-o>9j
+inoremap <C-u> <Esc>9kzzi
+inoremap <C-e> <Esc>9jzzi
 
 " End of Word
 nnoremap l e
@@ -176,7 +187,7 @@ onoremap T vT
 
 
 " Dont save and quit all.
-nnoremap zz :qa!<CR>                                                            " Exit when in Normal mode
+nnoremap qq :qa!<CR>                                                            " Exit when in Normal mode
 " Save all, ZZ by default will save the current buffer only and if there are changes only, then will quit.
 " This shortcut makes it possible to force save all then exit.
 nnoremap ZZ :wqa<CR>                                                            " Exit when in Normal mode
@@ -184,16 +195,15 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!         
 
 
 " Reload Nvim source.
-" Cmd+t via BTT.
-nnoremap <F1>t :source ~/dev/configs/nvim/init.vim<CR>:echo "Reloaded Neovim init.vim"<CR>
+nnoremap <Leader>s :source ~/dev/configs/nvim/init.vim<CR>:echo "Reloaded Neovim init.vim"<CR>
 
 
 " Clear highlighting after search:
 " https://stackoverflow.com/questions/657447/vim-clear-last-search-highlighting#657457
 " Could not use the <Esc><Esc> sequence due to issues with other keys like arrows:
 " https://stackoverflow.com/questions/11940801/mapping-esc-in-vimrc-causes-bizarre-arrow-behaviour?noredirect=1&lq=1
-nnoremap <silent> kk :let @/ = ""<CR>
-
+nnoremap <silent><Esc> :noh<CR>
+" nnoremap <silent> kk :let @/ = ""<CR>
 
 " Visual Mode - Dot
 vnoremap . :normal.<CR>                                                         " Make . work with visually selected lines
@@ -253,6 +263,9 @@ noremap <Leader>fw :FixWhitespace<CR>
 
 " Auto-yank mouse-selected text
 vnoremap <LeftRelease> "+y<LeftRelease>
+" Center mouse on click.
+nnoremap <LeftMouse> <LeftMouse>zz
+inoremap <LeftMouse> <LeftMouse><C-o>zz
 
 
 " Shortcut to use blackhole register by default
