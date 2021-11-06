@@ -19,6 +19,10 @@ map <Leader>m :Maps<CR>
 map <Leader>l :Files ~/dev<CR>
 map <Leader>rg :Rg<CR>
 
+" Cmd+t via BTT.
+map <F1>t :BTags<CR>
+
+
 " Fix issue in `bat`'s preview colorscheme by inserting `COLORTERM=truecolor` as envvar.
 " Fixed already in Neovim's nightly build. But needed in Vim.
 if g:is_vim
@@ -45,6 +49,9 @@ endfunction
 let rg_py = 'rg --type py --glob "!**/tests/**" --glob "!**/migrations/**"'
 command! -nargs=* -bang RgPy call RgHelper(<q-args>, <bang>0, rg_py)
 noremap <Leader>p :RgPy<CR>
+
+" Search Python files, using the word under the cursor.
+nnoremap <silent> <Leader>pp :call RgHelper(expand('<cword>'), 0, rg_py)<CR>
 
 " Search Python/Django Unit Test Files
 let rg_py_tests = 'rg --type py --glob "**/tests/**"'
