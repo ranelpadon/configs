@@ -29,7 +29,6 @@ _new_window ZUNIPROD zuni
 
 # Helper function.
 _update_env() {
-    echo $WHITELABEL
     COMMAND='
         open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/$WHITELABEL/-/pipelines"
         cd ~/dev/$WHITELABEL
