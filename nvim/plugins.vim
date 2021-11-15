@@ -16,11 +16,14 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     else
       Plug 'gelguy/wilder.nvim'
     endif
+    Plug 'wincent/ferret'
     Plug 'ludovicchabant/vim-gutentags'
     Plug 'mgedmin/python-imports.vim'
     Plug 'dense-analysis/ale'
     Plug 'voldikss/vim-floaterm'
-    Plug 'yegappan/mru'
+    " Plug 'yegappan/mru'
+    Plug 'pbogut/fzf-mru.vim'
+    " Plug 'tweekmonster/fzf-filemru'
     " Plug 'kana/vim-arpeggio'
 
     Plug 'moll/vim-bbye'
