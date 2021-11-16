@@ -1,6 +1,6 @@
 karabiner/automatic_backups
 nvim/autoload/
-nvim/swp
+nvim/swp/
 nvim/undo
 nvim/.netrwhist
 nvim/autoload/plug.vim
