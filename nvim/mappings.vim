@@ -334,3 +334,7 @@ nnoremap <leader>f' :let @*=expand("%:t:r")<CR>
 
 " Expands in Insert mode.
 abbreviate clog console.log(
+abbreviate ic from icecream import ic
+abbreviate pudb import pudb; pu.db
+abbreviate pdbpp import pdb; pdb.set_trace()
+abbreviate ipdb import ipdb; ipdb.set_trace(context=10)
