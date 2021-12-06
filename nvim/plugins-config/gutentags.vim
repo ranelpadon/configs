@@ -15,6 +15,7 @@ nnoremap <Leader>gup :GutentagsUpdate!<CR>
 
 let g:gutentags_exclude_project_root = [
     \ '/Users/ranelpadon',
+    \ '/Users/ranelpadon/.pyenv',
     \ '/Users/ranelpadon/dev/configs',
     \ '/Users/ranelpadon/dev/design-patterns',
     \ '/Users/ranelpadon/dev/elevenskies',
