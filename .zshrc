@@ -1,7 +1,4 @@
 CONFIGS=$HOME/dev/configs
-ETS=$HOME/dev/ticketflap/ticketing
-PY27=~/.pyenv/versions/2.7.17/envs/ticketing/bin/python
-
 source $CONFIGS/zshrc/zsh.init
 
 # Load all the Partials.
