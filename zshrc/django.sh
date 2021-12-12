@@ -33,17 +33,14 @@ _gunicorn() {
 }
 
 
-unalias gb
 gb() {
     _gunicorn backoffice 8000
 }
 
-unalias gp
 gp() {
     _gunicorn processing 8001
 }
 
-unalias gf
 gf() {
     _gunicorn frontend 8002
 }
