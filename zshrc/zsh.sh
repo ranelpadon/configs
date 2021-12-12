@@ -43,15 +43,9 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # TODO: plugins=(git virtualenv virtualenvwrapper python django)
-plugins=(git zsh-completions zsh-syntax-highlighting zsh-autosuggestions python django)
+plugins=(zsh-completions zsh-syntax-highlighting zsh-autosuggestions python django)
 
 source $ZSH/oh-my-zsh.sh
-
-prompt_agnoster_precmd() {
-    RV=$?
-    vcs_info
-    PROMPT='$(date +%H:%M:%S)%{%f%b%k%}$(prompt_agnoster_main) '
-}
 
 # This conflicts with `fzf`'s Ctrl-R for command history.
 # zle-line-init() {
@@ -71,4 +65,3 @@ ez() {
 # Replace with zoxide.
 # https://github.com/ajeetdsouza/zoxide
 . ~/z/z.sh
-
