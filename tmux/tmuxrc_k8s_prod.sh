@@ -39,13 +39,13 @@ _update_env() {
     if [ "$1" = "MGMPROD" ]
     then
         COMMAND+='
-            fd --regex "gitlab-ci(.production-shared)?.yml" --hidden --print0 \
-                | xargs -0 sd "ets-prod-v1.8.47-RC[^\s]+" "ets-prod-v1.8.47-RC$TAG"
+            fd --regex "gitlab-ci(.production-shared)?.yml" --hidden \
+                | xargs sd "ets-prod-v1.8.47-RC[^\s]+" "ets-prod-v1.8.47-RC$TAG"
         '
     else
         COMMAND+='
-            fd --regex "gitlab-ci(.prod.*)?.yml" --hidden --print0 \
-                | xargs -0 sd "ets-prod-v1.8.47-RC[^\s]+" "ets-prod-v1.8.47-RC$TAG"
+            fd --regex "gitlab-ci(.prod.*)?.yml" --hidden \
+                | xargs sd "ets-prod-v1.8.47-RC[^\s]+" "ets-prod-v1.8.47-RC$TAG"
         '
     fi
 
@@ -61,11 +61,11 @@ _update_env HKILFPROD
 _update_env HKRUPROD
 _update_env KGGPROD
 _update_env MGMPROD
-_update_env SUNPROD
+_update_env SUNPROD  # BYPROD
 _update_env ZIPPROD
 _update_env ZUNIPROD
 
 
 # Activate main window
-tmux select-window -t 'k8s_prod:DEMOSTAG'
+tmux select-window -t 'k8s_prod:GTSPROD'
 tmux -u attach-session -t k8s_prod
