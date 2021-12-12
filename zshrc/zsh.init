@@ -1,0 +1,74 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+
+# https://stackoverflow.com/questions/51006002/how-do-i-get-intellij-terminal-to-work-properly-with-oh-my-zsh
+# https://intellij-support.jetbrains.com/hc/en-us/community/posts/360003553899-Change-colors-for-Oh-my-zsh-in-PHPStorm-terminal
+# system-wide environment settings for zsh(1)
+if [ -x /usr/libexec/path_helper ]; then
+	eval `/usr/libexec/path_helper -s`
+fi
+
+# Path to your oh-my-zsh installation.
+export ZSH=/Users/ranelpadon/.oh-my-zsh
+
+# https://github.com/romkatv/powerlevel10k
+# Unli-run
+# p10k configure
+ZSH_THEME="powerlevel10k/powerlevel10k"
+# Fix the annoying gap in the right prompt!
+# Doesn't work though (and causes double prompts!):
+# https://superuser.com/questions/655607/removing-the-useless-space-at-the-end-of-the-right-prompt-of-zsh-rprompt
+# ZLE_RPROMPT_INDENT=0
+
+preexec() {
+    # Add newline before command output for better vertical spacing.
+    echo ''
+}
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+export UPDATE_ZSH_DAYS=60
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+COMPLETION_WAITING_DOTS="true"
+
+# Plugins can be found in `~/.oh-my-zsh/plugins/*`.
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+# TODO: plugins=(git virtualenv virtualenvwrapper python django)
+plugins=(git zsh-completions zsh-syntax-highlighting zsh-autosuggestions python django)
+
+source $ZSH/oh-my-zsh.sh
+
+prompt_agnoster_precmd() {
+    RV=$?
+    vcs_info
+    PROMPT='$(date +%H:%M:%S)%{%f%b%k%}$(prompt_agnoster_main) '
+}
+
+# This conflicts with `fzf`'s Ctrl-R for command history.
+# zle-line-init() {
+#     zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+#     echo -ne "\e[3 q"
+# }
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+ez() {
+    exec zsh
+}
+
+
+# Replace with zoxide.
+# https://github.com/ajeetdsouza/zoxide
+. ~/z/z.sh
+
