@@ -1,5 +1,5 @@
 CONFIGS=$HOME/dev/configs
-source $CONFIGS/zshrc/zsh.init
+source $CONFIGS/zshrc/zsh.sh
 
 # Load all the Partials.
 # source $HOME/dev/configs/zshrc/*.sh
@@ -15,7 +15,7 @@ source $CONFIGS/zshrc/zsh.init
 # fd --glob '*.sh' $HOME/dev/configs/zshrc --exec source {}
 
 # `--extension sh ''` will also do.
-FILES_STR=$(fd --glob '*.sh' $CONFIGS/zshrc)
+FILES_STR=$(fd --glob '*.sh' --exclude 'zsh.sh' $CONFIGS/zshrc)
 
 # `translate` will replace newlines with space.
 # Outer () will convert the output of $() to array.
