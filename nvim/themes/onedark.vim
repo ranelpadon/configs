@@ -1,3 +1,6 @@
+" When using monsonjeremy/onedark.nvim.
+" lua require('onedark').setup()
+
 colorscheme onedark
 
 let g:onedark_hide_endofbuffer=1
