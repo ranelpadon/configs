@@ -20,7 +20,6 @@ commit_email_update() {
     ' --tag-name-filter cat -- --branches --tags
 }
 
-unalias ga
 ga() {
     git add $1
 }
@@ -33,42 +32,36 @@ gbn() {
     git name-rev --name-only --exclude="tags/*" $commit_sha
 }
 
-unalias gc
 gc() {
     git checkout $@
 }
 
-unalias gcb
 gcb() {
     git checkout -b $1 $2
 }
 
 # `git checkout previous` branch
-alias gcp='git checkout -'
-
-gcpm() {
-  # Should have no space before and after `=` assignement operator!!!
-  CURRENT_BRANCH=`git symbolic-ref --short HEAD`
-  git checkout $1 && git pull origin $1
-  git checkout $CURRENT_BRANCH
-  git merge $1
+gcp() {
+    git checkout -
 }
 
-unalias gca
-# needs alias because OMZ has `gca` alias also!
-# https://github.com/ohmyzsh/ohmyzsh/wiki/Cheatsheet
-# so we need to unbind/override it
-# git commit all
+# `git checkout pull merge`
+gcpm() {
+    # Should have no space before and after `=` assignement operator!!!
+    CURRENT_BRANCH=`git symbolic-ref --short HEAD`
+    git checkout $1 && git pull origin $1
+    git checkout $CURRENT_BRANCH
+    git merge $1
+}
+
 gca() {
     git commit -am $1
 }
 
-unalias gcm
 gcm() {
     git commit -m $1
 }
 
-unalias gd
 gd() {
     git diff $@
 }
@@ -77,13 +70,14 @@ gft() {
     git fetch --tags
 }
 
-unalias gm
 gm() {
     git merge $@
 }
 
 # `git merge previous` branch
-alias gmp='git merge -'
+gmp() {
+    git merge -
+}
 
 gpl() {
     CURRENT_BRANCH=`git symbolic-ref --short HEAD`
@@ -95,17 +89,22 @@ gps() {
     git push origin $CURRENT_BRANCH
 }
 
-unalias grh
 grh() {
     git reset --hard
 }
 
 
-alias gs='git status'
+gs() {
+    git status
+}
 
-alias gsp='git stash pop'
+gsp() {
+    git stash pop
+}
 
-alias gst='git stash'
+gst() {
+    git stash
+}
 
 
 changelog() {
@@ -124,7 +123,6 @@ conflicts() {
 mconflicts() {
     gca "Fix migration conflicts."
 }
-
 
 # Open all files with open conflicts with nvim
 vconflicts() {
