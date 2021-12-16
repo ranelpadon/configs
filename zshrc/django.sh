@@ -70,12 +70,15 @@ test() {
     TRIMMED_PATH=$2
     CONTEXT=$3
 
+    # Use [[]] instead of []:
+    # https://stackoverflow.com/questions/3427872/whats-the-difference-between-and-in-bash/#answer-3427931
+
     # Default is `buildbox`.
-    if [ -z "$CONTEXT" ]; then
+    if [[ -z $CONTEXT ]]; then
         CONTEXT=buildbox
     fi
 
-    if [ "$CONTEXT" = "buildbox" ] && [ "$SITE" = "worker" ]; then
+    if [[ $CONTEXT = 'buildbox' && $SITE = 'worker' ]]; then
         _SITE='worker_override'
     fi
 
