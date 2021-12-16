@@ -88,10 +88,13 @@ flower() {
 # For XAMPP, need to disable the root check for better UX:
 # sudo chmod 777 /Applications/XAMPP/xamppfiles/share/xampp/xampplib
 # then patch the contents of `checkRoot()`.
+# Make sure to have access in db:
+# sudo chmod 4777 /Applications/XAMPP/xamppfiles/var/mysql/TICKETFLAP
+
 XAMPP=/Applications/XAMPP/xamppfiles/xampp
 
 _start_or_stop() {
-    if [ "$1" = "start" ]; then
+    if [[ $1 = 'start' ]]; then
         eval $2
     else
         eval $3
@@ -194,12 +197,12 @@ server_local_start() {
 
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/ranelpadon/google-cloud-sdk/path.zsh.inc' ]; then
+if [[ -f '/Users/ranelpadon/google-cloud-sdk/path.zsh.inc' ]]; then
     . '/Users/ranelpadon/google-cloud-sdk/path.zsh.inc';
 fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/ranelpadon/google-cloud-sdk/completion.zsh.inc' ]; then
+if [[ -f '/Users/ranelpadon/google-cloud-sdk/completion.zsh.inc' ]]; then
     . '/Users/ranelpadon/google-cloud-sdk/completion.zsh.inc';
 fi
 
