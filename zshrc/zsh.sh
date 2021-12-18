@@ -13,21 +13,14 @@ if [ -x /usr/libexec/path_helper ]; then
 fi
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/ranelpadon/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # https://github.com/romkatv/powerlevel10k
-# Unli-run
-# p10k configure
-ZSH_THEME="powerlevel10k/powerlevel10k"
-# Fix the annoying gap in the right prompt!
-# Doesn't work though (and causes double prompts!):
-# https://superuser.com/questions/655607/removing-the-useless-space-at-the-end-of-the-right-prompt-of-zsh-rprompt
-# ZLE_RPROMPT_INDENT=0
+# Main `p10k` configuration.
+# Run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-preexec() {
-    # Add newline before command output for better vertical spacing.
-    echo ''
-}
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 DISABLE_AUTO_UPDATE="true"
@@ -40,12 +33,25 @@ COMPLETION_WAITING_DOTS="true"
 
 # Plugins can be found in `~/.oh-my-zsh/plugins/*`.
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# TODO: plugins=(git virtualenv virtualenvwrapper python django)
-plugins=(zsh-completions zsh-syntax-highlighting zsh-autosuggestions python django)
+plugins=(zsh-completions zsh-syntax-highlighting zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
+
+
+# Fix the annoying gap in the right prompt!
+# Doesn't work though (and causes double prompts!):
+# https://superuser.com/questions/655607/removing-the-useless-space-at-the-end-of-the-right-prompt-of-zsh-rprompt
+# ZLE_RPROMPT_INDENT=0
+
+preexec() {
+    # Add newline before command output for better vertical spacing.
+    echo ''
+}
+
+ez() {
+    exec zsh
+}
 
 # This conflicts with `fzf`'s Ctrl-R for command history.
 # zle-line-init() {
@@ -53,15 +59,5 @@ source $ZSH/oh-my-zsh.sh
 #     echo -ne "\e[3 q"
 # }
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-
-ez() {
-    exec zsh
-}
-
-
-# Replace with zoxide.
 # https://github.com/ajeetdsouza/zoxide
-. ~/z/z.sh
+eval "$(zoxide init zsh)"
