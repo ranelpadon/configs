@@ -151,7 +151,8 @@ export FZF_DEFAULT_COMMAND='
         --exclude "*.scss" \
 '
 
-export FZF_PREVIEW_COMMAND="COLORTERM=truecolor bat --style=numbers --color=always --line-range :5000 {}"
+export FZF_PREVIEW_COMMAND='COLORTERM=truecolor bat --style=numbers --color=always --line-range :5000 {}'
+export FZF_DEFAULT_OPTS='--multi --bind ctrl-a:toggle-all'
 
 rfb() {
     # --nth=3 to search the right side of each line which is the code contents.
