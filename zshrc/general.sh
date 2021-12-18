@@ -45,5 +45,9 @@ configs_link() {
 }
 
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
+# `find-and-replace`
+# Usage: far foo bar --commit
+far() {
+    fd . | sad $@
+}
+
