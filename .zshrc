@@ -1,8 +1,7 @@
 CONFIGS=$HOME/dev/configs
-source $CONFIGS/zshrc/zsh.sh
 
-# Load all the Partials.
-# source $HOME/dev/configs/zshrc/*.sh
+# Load the critical scripts.
+source $CONFIGS/zshrc/init.sh
 
 # find/fd --exec arg requires a system/external command.
 # source/exec is a built-in/internal command. It's a shell function.
@@ -15,12 +14,15 @@ source $CONFIGS/zshrc/zsh.sh
 # fd --glob '*.sh' $HOME/dev/configs/zshrc --exec source {}
 
 # `--extension sh ''` will also do.
+# Equivalent command: `find zshrc -name '*.sh' -not -name 'zsh.sh'`
 FILES_STR=$(fd --glob '*.sh' --exclude 'zsh.sh' $CONFIGS/zshrc)
 
-# `translate` will replace newlines with space.
+# `translate`/`transliterate` will replace newlines with space.
+# `echo 'haha' | tr 'a' 'e'` outputs `hehe`.
 # Outer () will convert the output of $() to array.
 FILES=($(echo $FILES_STR | tr '\n' ' '))
 
+# Load the partials.
 # This will also work.
 # FILES=$HOME/dev/configs/zshrc/
 # for FILE in $FILES/*; do
