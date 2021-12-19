@@ -14,18 +14,19 @@ source $CONFIGS/zshrc/init.sh
 # fd --glob '*.sh' $HOME/dev/configs/zshrc --exec source {}
 
 # `--extension sh ''` will also do.
-# Equivalent command: `find zshrc -name '*.sh' -not -name 'zsh.sh'`
-FILES_STR=$(fd --glob '*.sh' --exclude 'zsh.sh' $CONFIGS/zshrc)
+# FILES_STR=$(find zshrc -name '*.sh' -not -name 'zsh.sh')
+FILES_STR=$(fd --glob '*.sh' --exclude 'init.sh' $CONFIGS/zshrc)
 
-# `translate`/`transliterate` will replace newlines with space.
+# `translate`/`transliterate` is a find-and-replace utility.
 # `echo 'haha' | tr 'a' 'e'` outputs `hehe`.
 # Outer () will convert the output of $() to array.
 FILES=($(echo $FILES_STR | tr '\n' ' '))
 
 # Load the partials.
-# This will also work.
+# This will also work if we don't need to exlude a file.
 # FILES=$HOME/dev/configs/zshrc/
 # for FILE in $FILES/*; do
-for FILE in $FILES[@]; do
+# for FILE in $FILES[@]; do
+for FILE in $FILES; do
     source $FILE
 done
