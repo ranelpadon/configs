@@ -35,12 +35,25 @@ if g:is_mvim
 endif
 
 
+command! -bang -nargs=* Rg
+\   call fzf#vim#grep(
+\       'rg --line-number --color=always --smart-case -- '.shellescape(<q-args>), 1,
+\       fzf#vim#with_preview({'options': '--exact --delimiter : --nth 3..'}), <bang>0
+\   )
+
 " Helper function only.
 function! RgHelper(query, fullscreen, command_fmt)
+    " let command_fmt = a:command_fmt . ' --line-number --color=always --smart-case -- '
     let command_fmt = a:command_fmt . ' --line-number --color=always --smart-case -- %s || true'
     let initial_command = printf(command_fmt, shellescape(a:query))
     let reload_command = printf(command_fmt, '{q}')
-    let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+    " let spec = {'options': ['--phony', '--query', a:query]}
+    let query_exact_match = "'" . a:query
+    " {'options': '--delimiter : --nth 4..'}
+    let spec = {'options': '--exact --delimiter : --nth 3..'}
+    " let spec = {'options': ['--query', query_exact_match, '--delimiter', ':', '--nth', '3..']}
+    " let spec = {'options': ['--query', a:query]}
+    " let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
     call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 
@@ -48,10 +61,10 @@ endfunction
 " Search Python Files. Exclude the `tests` and `migrations` files.
 let rg_py = 'rg --type py --glob "!**/tests/**" --glob "!**/migrations/**"'
 command! -nargs=* -bang RgPy call RgHelper(<q-args>, <bang>0, rg_py)
-noremap <Leader>p :RgPy<CR>
+noremap <Leader>pp :RgPy<CR>
 
 " Search Python files, using the word under the cursor.
-nnoremap <silent> <Leader>pp :call RgHelper(expand('<cword>'), 0, rg_py)<CR>
+nnoremap <silent> <Leader>pr :call RgHelper(expand('<cword>'), 0, rg_py)<CR>
 
 " Search Python/Django Unit Test Files
 let rg_py_tests = 'rg --type py --glob "**/tests/**"'
