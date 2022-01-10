@@ -42,6 +42,11 @@ cache_clear() {
     echo "flush_all" | nc localhost 11211
 }
 
+cache_ui() {
+    cd $HOME/dev/simple-memcache-ui
+    pyenv activate nvim
+    python src/main.py localhost 11211
+}
 
 # Non-daemon mode.
 memcache() {
@@ -72,10 +77,11 @@ worker() {
 flower() {
     brew_services start rabbitmq
     pat
-    # python apps/worker/manage.py autorestart flower
-    python apps/worker/manage.py celery flower \
-        --app=common.patcher.celery_app \
-        --loglevel=INFO
+    python apps/worker/manage.py autorestart flower
+    # python apps/worker/manage.py autorestart_flower flower
+    # python apps/worker/manage.py celery flower \
+    #     --app=common.patcher.celery_app \
+    #     --loglevel=INFO
     # apps/worker/manage.py celery flower \
     #     --app=common.patcher \
     #     --loglevel=INFO \
@@ -190,7 +196,7 @@ alloserv() {
 
 
 # Start an HTTP server from a directory, optionally specifying the port
-server_local_start() {
+local_server() {
     open "http://localhost:8000/" &
     php -S localhost:8000
 }
