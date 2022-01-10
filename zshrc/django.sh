@@ -129,7 +129,9 @@ tws() {
 
 
 # Clear Download Signature records.
-download_signature_clear() {
-    mysql -h localhost -P 3306 -uroot -ppassword \
+download_signatures_clear() {
+    # echo "from common.misc.models import DownloadSignature; DownloadSignature.objects.all().delete()" | manage shell
+    /Applications/XAMPP/xamppfiles/bin/mysql \
+        -h localhost -P 3306 -uroot -ppassword \
         -e 'use TICKETFLAP; TRUNCATE table download_signatures;'
 }
