@@ -74,7 +74,8 @@ rttltest() {
 
 
 worker_logs() {
-    tail -f $ETS/logs/worker.log
+    # tail -f $ETS/logs/worker.log
+    batwatch $ETS/logs/worker.log
 }
 
 
