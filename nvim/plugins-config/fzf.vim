@@ -5,22 +5,37 @@ let g:fzf_layout = {'window': {'width': 1, 'height': 1}}
 " https://apple.stackexchange.com/questions/24261/how-do-i-send-c-that-is-control-slash-to-the-terminal#24282
 let g:fzf_preview_window = ['right:60%', 'ctrl-_']
 
+
+function ShiftFocusThenExecute(command)
+    " Shift focus to the right/main window,
+    " especially when focus is in sidebar.
+    :wincmd l
+
+    "Run commands like `:Files`.
+    execute a:command
+endfunction
+
+
 " Cmd+f via BTT.
 map <F1>f /
-" Cmd+p via BTT.
-map <F1>p :Files<CR>
-" Cmd+b via BTT.
-map <F1>b :Buffers<CR>
-map <Leader>g :GFiles<CR>
-" git status
-map <Leader>gs :GFiles?<CR>
-map <Leader>m :Maps<CR>
 
-map <Leader>l :Files ~/dev<CR>
-map <Leader>rg :Rg<CR>
+" Cmd+p via BTT.
+" Works also. Use `<Bar>` instead of `|`:
+" map <F1>p :wincmd l <Bar> :Files<CR>
+map <F1>p :call ShiftFocusThenExecute('Files')<CR>
+
+" Cmd+b via BTT.
+map <F1>b :call ShiftFocusThenExecute('Buffers')<CR>
+map <Leader>g :call ShiftFocusThenExecute('GFiles')<CR>
+
+" git status
+map <Leader>gs :call ShiftFocusThenExecute('GFiles?')<CR>
+map <Leader>m :call ShiftFocusThenExecute('Maps')<CR>
+map <Leader>l :call ShiftFocusThenExecute('Files ~/dev')<CR>
+map <Leader>rg :call ShiftFocusThenExecute('Rg')<CR>
 
 " Cmd+t via BTT.
-map <F1>t :BTags<CR>
+map <F1>t ShiftFocusThenExecute('BTags')<CR>
 
 
 " Fix issue in `bat`'s preview colorscheme by inserting `COLORTERM=truecolor` as envvar.
@@ -43,6 +58,8 @@ command! -bang -nargs=* Rg
 
 " Helper function only.
 function! RgHelper(query, fullscreen, command_fmt)
+    :wincmd l
+
     " let command_fmt = a:command_fmt . ' --line-number --color=always --smart-case -- '
     let command_fmt = a:command_fmt . ' --line-number --color=always --smart-case -- %s || true'
     let initial_command = printf(command_fmt, shellescape(a:query))
