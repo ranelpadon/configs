@@ -74,6 +74,13 @@ worker() {
     #     --autoreload
 }
 
+worker_clear() {
+    pyc_clear
+    rm celerybeat-schedule
+    brew_services restart rabbitmq
+    brew_services restart memcached
+}
+
 flower() {
     brew_services start rabbitmq
     pat
