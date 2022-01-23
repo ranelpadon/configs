@@ -1,5 +1,3 @@
-#!/bin/sh
-
 # Dependencies:
 # 1. https://github.com/sharkdp/fd
 # 2. https://github.com/chmln/sd
