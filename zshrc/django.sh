@@ -110,6 +110,10 @@ tw() {
     test worker $1
 }
 
+tre() {
+    test redemption $1
+}
+
 
 tbs() {
     test backoffice $1 _local_sqlite
