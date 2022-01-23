@@ -1,5 +1,3 @@
-#!/bin/sh
-
 # Dependencies:
 # 1. https://github.com/sharkdp/fd
 # 2. https://github.com/chmln/sd
@@ -17,12 +15,13 @@ _new_window() {
 }
 
 _new_window DEMOSTAG demo
+# _new_window DEMOPROD demo
+_new_window BYPROD sun-entertainment  # SUNPROD
 _new_window GTSPROD 11-skies
 _new_window HKILFPROD hkilf
 _new_window HKRUPROD hkru
 _new_window KGGPROD kgg-kg
 _new_window MGMPROD mgm
-_new_window SUNPROD sun-entertainment  # BYPROD
 _new_window ZIPPROD zipcity
 _new_window ZUNIPROD zuni
 
@@ -56,12 +55,13 @@ _update_env() {
 
 # Auto-runs
 _update_env DEMOSTAG
+# _update_env DEMOPROD
+_update_env BYPROD  # SUNPROD
 _update_env GTSPROD
 _update_env HKILFPROD
 _update_env HKRUPROD
 _update_env KGGPROD
 _update_env MGMPROD
-_update_env SUNPROD  # BYPROD
 _update_env ZIPPROD
 _update_env ZUNIPROD
 
