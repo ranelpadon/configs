@@ -135,3 +135,27 @@ ftp() {
         fab test:processing,$1,auto_clean_pyc=0,$2
     fi
 }
+
+
+dcu() {
+    docker-compose up $@
+}
+
+dcm() {
+    docker-compose run backoffice_manage $@
+}
+
+# For unit tests also.
+# dcr backoffice_test backoffice.box_office.tests
+dcr() {
+    docker-compose run $@
+}
+
+# dcc backoffice
+dcc() {
+    docker-compose run $1_manage collectstatic --clear --link --noinput
+}
+
+dcs() {
+    docker-compose stop && docker-compose rm -f
+}
