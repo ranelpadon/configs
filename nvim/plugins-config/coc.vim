@@ -9,6 +9,10 @@ augroup ProjectDrawer
 augroup END
 nmap <Leader>e :CocCommand explorer --sources file+<CR>
 
+
+" Focus the file.
+noremap <Leader>o :on<CR> <bar> :CocCommand explorer --sources file+<CR>
+
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
