@@ -90,7 +90,7 @@ gps() {
 }
 
 grh() {
-    git reset --hard
+    git reset --hard $@
 }
 
 
