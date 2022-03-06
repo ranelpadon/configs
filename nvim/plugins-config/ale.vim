@@ -7,10 +7,11 @@ let g:ale_linters = {
 
 let g:ale_fixers = {
     \ '*': ['trim_whitespace'],
-    \ 'python': ['isort', 'trim_whitespace'],
+    \ 'python': ['autoflake', 'isort', 'trim_whitespace'],
     \ }
 
-" `:ALEFix`
 nnoremap <Leader>af :ALEFix<CR>
 
 let g:ale_fix_on_save = 1
+let g:ale_python_autoflake_options = '--in-place --remove-all-unused-imports --exclude */conf/settings/*'
+let g:ale_python_isort_options = '--skip-glob */conf/settings/*'
