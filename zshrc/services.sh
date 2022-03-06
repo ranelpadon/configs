@@ -53,10 +53,29 @@ memcache() {
     memcached -vv
 }
 
+# RabbitMQ bins.
+export PATH="/usr/local/sbin:$PATH"
+
 # Non-daemon mode.
 rabbitmq() {
     # RabbitMQ UI: http://localhost:15672/
     CONF_ENV_FILE="/usr/local/etc/rabbitmq/rabbitmq-env.conf" /usr/local/opt/rabbitmq/sbin/rabbitmq-server
+}
+
+# Purge Queue Messages.
+rabbitmq_purge() {
+    declare -a QUEUES=(
+        'default'
+        'mail'
+        'opera'
+        'priority.high'
+        'priority.low'
+        'reporter'
+        'scheduled'
+    )
+    for QUEUE in "${QUEUES[@]}" ; do
+        /usr/local/sbin/rabbitmqctl purge_queue $QUEUE -p /
+    done
 }
 
 worker() {
@@ -77,8 +96,11 @@ worker() {
 worker_clear() {
     pyc_clear
     rm celerybeat-schedule
+
     brew_services restart rabbitmq
     brew_services restart memcached
+
+    apps/worker/manage.py celery purge --app=common.patcher.celery_app -f
 }
 
 flower() {
