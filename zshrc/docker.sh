@@ -1,13 +1,3 @@
-# docker clear
-dc() {
-    docker stop \
-        sessions-ui \
-        ets-mysql \
-        ticketing_ets-celery_1 \
-        832603c3c1a5_ets-mysql
-}
-
-
 # ubuntu:20.04 is the base system used in TF!
 dfh() {
     docker run --rm ubuntu:20.04 df -h
@@ -137,6 +127,10 @@ ftp() {
 }
 
 
+dc() {
+    docker-compose $@
+}
+
 dcu() {
     docker-compose up $@
 }
@@ -157,5 +151,6 @@ dcc() {
 }
 
 dcs() {
-    docker-compose stop && docker-compose rm -f
+    # docker-compose stop && docker-compose rm -f
+    docker-compose down
 }
