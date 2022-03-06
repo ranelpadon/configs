@@ -51,3 +51,13 @@ far() {
     fd . | sad $@
 }
 
+
+# Building takes a long time, and could have errors.
+# Just download the pre-built binaries:
+# https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-download
+alias nvim="$HOME/dev/bins/nvim-osx64/bin/nvim"
+
+
+Sad() {
+    fd . | sad $1 $2
+}
