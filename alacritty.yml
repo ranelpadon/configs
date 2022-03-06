@@ -388,13 +388,17 @@ colors:
 # The value `0.0` is completely transparent and `1.0` is opaque.
 #background_opacity: 1.0
 
-#selection:
+selection:
   # This string contains all characters that are used as separators for
   # "semantic words" in Alacritty.
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
 
+  # Copy on Mouse Selection. Set to `true`.
   # When set to `true`, selected text will be copied to the primary clipboard.
-  #save_to_clipboard: false
+  # Use `Shift + MouseDrag` when in Tmux.
+  # `Shift` means `alacritty` will not forwart the events to `Tmux`/pseudoterminal:
+  # https://github.com/alacritty/alacritty/issues/146#issuecomment-274155530
+  save_to_clipboard: true
 
 cursor:
   # Cursor style
