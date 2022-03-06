@@ -96,7 +96,7 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
     \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Symbol renaming.
-nmap <Leader>rn <Plug>(coc-rename)
+" nmap <Leader>rn <Plug>(coc-rename)
 
 " Restart when COC crashed for some reason.
 nmap <Leader>cr :CocRestart<CR>
