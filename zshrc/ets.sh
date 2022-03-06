@@ -176,6 +176,10 @@ cdkgg() {
     _cd_whitelabel kgg-kg main
 }
 
+cdmt() {
+    _cd_whitelabel matchtic main
+}
+
 cdmc() {
     _cd_whitelabel melco main
 }
