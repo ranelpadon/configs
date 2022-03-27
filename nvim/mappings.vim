@@ -72,8 +72,12 @@ nnoremap <F1>u u
 inoremap <F1>u <C-o>u
 " Redo
 " Cmd+g via BTT.
-nnoremap <F1>r <C-R>
-inoremap <F1>r <C-o><C-R>
+nnoremap <F1>r <C-r>
+inoremap <F1>r <C-o><C-r>
+" Edit file in a new 'tab'
+" Cmd+t via BTT.
+" <C-r>+ in command mode will copy the system clipboard registy (+).
+nnoremap <F1>t :edit <C-r>+<CR>
 
 
 " Forward/backward movements in chunks in Insert mode.
@@ -100,14 +104,18 @@ vnoremap <F7> :move '>+1<CR>gv=gvzz
 vnoremap <F8> :move '<-2<CR>gv=gvzz
 
 
+noremap N [m
+noremap I ]m
+
+
 " Find and replace of the current word in cursor,
 " with Live Preview when in Nvim.
 nnoremap <Leader>fr :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 
 " Next match in search, Open lines, Insert mode.
-nnoremap m n
-nnoremap M N
+nnoremap m nzz
+nnoremap M Nzz
 
 " Switch comma and semicolon
 nnoremap , ;
@@ -221,18 +229,16 @@ nnoremap <F5> :g/^https/ norm @n <CR>
 
 " Buffers
 " Also `S-Tab` via BTT app.
-" noremap <C-l> :bprev<CR>
-nnoremap N :bprev<CR>
+nnoremap <C-l> :bprev<CR>
+" noremap N [m
 " Also `Tab` via BTT app.
-" noremap <C-y> :bnext<CR>
-nnoremap I :bnext<CR>
+nnoremap <C-y> :bnext<CR>
+" noremap I ]m
 " Save file.
 " Cmd+s via BTT.
 noremap <F1>s :w!<CR>
 " Close buffer, go to previous one, and preserve window layout.
 noremap <Leader>w :Bwipeout<CR>
-" Focus the file.
-noremap <Leader>o :on<CR>
 " Open new file.
 noremap <Leader>n :enew<CR>
 " Cycle window.
@@ -301,8 +307,8 @@ vnoremap X "_X"
 " vnoremap <Leader>X "_D
 
 
-nnoremap zf zO                                                                  " Open fold recursively
-nnoremap zF za                                                                  " Toggle fold
+nnoremap zf za                                                                  " Toggle fold
+nnoremap zF zO                                                                  " Open fold recursively
 nnoremap za zR                                                                  " Open all folds
 nnoremap zA zM                                                                  " Close all folds
 
@@ -333,8 +339,11 @@ nnoremap <leader>f' :let @*=expand("%:t:r")<CR>
 
 
 " Expands in Insert mode.
-abbreviate clog console.log(
-abbreviate ic from icecream import ic
-abbreviate pudb import pudb; pu.db
-abbreviate pdbpp import pdb; pdb.set_trace()
-abbreviate ipdb import ipdb; ipdb.set_trace(context=10)
+iabbrev clog console.log(
+iabbrev ic from icecream import ic
+iabbrev pudb import pudb; pu.db
+iabbrev pdbpp import pdb; pdb.set_trace()
+iabbrev ipdb import ipdb; ipdb.set_trace(context=10)
+iabbrev iskip # isort:skip_file
+iabbrev dj111 # FIXME-DJ1.11:
+iabbrev super super(Foo, self).bar(*args, **kwargs)
