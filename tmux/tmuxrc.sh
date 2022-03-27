@@ -21,5 +21,5 @@ tmux send-keys -t "Workspace:ETS-3" "cd ~/dev/ticketflap/ticketing && pat" Enter
 tmux send-keys -t "Workspace:Dev" "cd ~/dev" Enter
 
 # Activate main window
-tmux select-window -t "Workspace:configs"
+tmux select-window -t "Workspace:Configs"
 tmux -u attach-session -t Workspace
