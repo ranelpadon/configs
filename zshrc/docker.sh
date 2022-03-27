@@ -150,7 +150,7 @@ dcc() {
     docker-compose run $1_manage collectstatic --clear --link --noinput
 }
 
-dcs() {
+dcd() {
     # docker-compose stop && docker-compose rm -f
     docker-compose down
 }
