@@ -66,7 +66,7 @@ function! s:GoToDefinition()
         call searchdecl(expand('<cword>'))
     endif
 endfunction
-nmap <silent> gd :call <SID>GoToDefinition()<CR>
+nmap <silent> gd :call <SID>GoToDefinition()<CR>zz
 
 " `gr` conflicts with `ReplaceWithRegister`.
 " Be careful with other mapping like `gv` since it conflicts with Indent Object's `ii` for some reason.
