@@ -61,3 +61,21 @@ alias nvim="$HOME/dev/bins/nvim-osx64/bin/nvim"
 Sad() {
     fd . | sad $1 $2
 }
+
+
+# Sample: `pipe_command_output_to_file tb common.voucher`
+pipe_command_output_to_file() {
+    # Create a new file in Desktop.
+    FILE=~/Desktop/pipe.txt
+    touch $FILE
+    chmod 777 $FILE
+
+    echo 'Created ~/Desktop/pipe.txt ...'
+
+    # > file redirects stdout to file
+    # 1> file redirects stdout to file
+    # 2> file redirects stderr to file
+    # &> file redirects stdout and stderr to file
+    # & (in 2>&1) specifies that 1 is not a file name but a file descriptor.
+    $@ > $FILE 2>&1
+}
