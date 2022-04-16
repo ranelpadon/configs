@@ -89,6 +89,7 @@ logs_clear() {
     fd --glob "*.eml" --no-ignore $LOGS_DIR --exec-batch rm
 }
 
+
 _pyc() {
     # Check/clear the .pyc files.
     FD='
@@ -118,8 +119,12 @@ _pyc() {
     eval $FD
 }
 
-alias pyc_check='_pyc check'
-alias pyc_clear='_pyc clear'
+check_pyc() {
+    _pyc check
+}
+clear_pyc() {
+    _pyc clear
+}
 
 
 # Fix imports
@@ -134,12 +139,18 @@ fim() {
 
 # Helper function.
 _cd_whitelabel() {
-    # Check if need to use custom URL.
-    # Quotes are needed for evaluating the $ vars.
-    if [ "$1" = "ticketing-ets-chart" ]; then
-        open "https://git.hk.asiaticketing.com/technology/helm-charts/ticketing-ets-chart/-/pipelines"
+    # $# variable will tell you the number of input arguments the script was passed.
+    if [ $# -eq 2 ]; then
+        # Don't open the whitelabel URL.
     else
-        open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/$1/-/pipelines"
+        # With `open_url` command arg.
+        # Check if need to use custom URL.
+        # Quotes are needed for evaluating the $ vars.
+        if [ "$1" = "ticketing-ets-chart" ]; then
+            open "https://git.hk.asiaticketing.com/technology/helm-charts/ticketing-ets-chart/-/pipelines"
+        else
+            open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/$1/-/pipelines"
+        fi
     fi
 
     cd ~/dev/$1
@@ -148,68 +159,137 @@ _cd_whitelabel() {
     nvim
 }
 
-cdatl() {
+_cdatl() {
     _cd_whitelabel asiaticketing main
 }
+cdatl() {
+    _cd_whitelabel asiaticketing main open_url
+}
 
-cddemo() {
+_cdbymop() {
+    _cd_whitelabel bookyay-mop main
+}
+cdbymop() {
+    _cd_whitelabel bookyay-mop main open_url
+}
+
+_cdbyntd() {
+    _cd_whitelabel bookyay-ntd main
+}
+cdbyntd() {
+    _cd_whitelabel bookyay-ntd main open_url
+}
+
+_cddemo() {
     _cd_whitelabel demo main
 }
+cddemo() {
+    _cd_whitelabel demo main open_url
+}
 
-cdgts() {
+_cdf7() {
+    _cd_whitelabel f7 main
+}
+cdf7() {
+    _cd_whitelabel f7 main open_url
+}
+
+_cdgts() {
     _cd_whitelabel 11-skies main
 }
+cdgts() {
+    _cd_whitelabel 11-skies main open_url
+}
 
-cdhelm() {
+_cdhelm() {
     _cd_whitelabel ticketing-ets-chart master
 }
+cdhelm() {
+    _cd_whitelabel ticketing-ets-chart master open_url
+}
 
-cdhkilf() {
+_cdhkilf() {
     _cd_whitelabel hkilf main
 }
+cdhkilf() {
+    _cd_whitelabel hkilf main open_url
+}
 
-cdhkru() {
+_cdhkru() {
     _cd_whitelabel hkru main
 }
+cdhkru() {
+    _cd_whitelabel hkru main open_url
+}
 
-cdkgg() {
+_cdkgg() {
     _cd_whitelabel kgg-kg main
 }
+cdkgg() {
+    _cd_whitelabel kgg-kg main open_url
+}
 
-cdmt() {
+_cdmt() {
     _cd_whitelabel matchtic main
 }
+cdmt() {
+    _cd_whitelabel matchtic main open_url
+}
 
-cdmc() {
+_cdmc() {
     _cd_whitelabel melco main
 }
+cdmc() {
+    _cd_whitelabel melco main open_url
+}
 
-cdmgm() {
+_cdmgm() {
     _cd_whitelabel mgm main
 }
+cdmgm() {
+    _cd_whitelabel mgm main open_url
+}
 
-cdsun() {
+_cdsun() {
     _cd_whitelabel sun-entertainment main
 }
+cdsun() {
+    _cd_whitelabel sun-entertainment main open_url
+}
 
-cdttl() {
+_cdttl() {
     _cd_whitelabel totalticketing main
 }
+cdttl() {
+    _cd_whitelabel totalticketing main open_url
+}
 
-cdxr() {
+_cdxr() {
     _cd_whitelabel clockenflap-xr main
 }
+cdxr() {
+    _cd_whitelabel clockenflap-xr main open_url
+}
 
-cdzip() {
+_cdzip() {
     _cd_whitelabel zipcity main
 }
-
-cdzk() {
-    _cd_whitelabel zicket main
+cdzip() {
+    _cd_whitelabel zipcity main open_url
 }
 
-cdzuni() {
+_cdzk() {
+    _cd_whitelabel zicket main
+}
+cdzk() {
+    _cd_whitelabel zicket main open_url
+}
+
+_cdzuni() {
     _cd_whitelabel zuni main
+}
+cdzuni() {
+    _cd_whitelabel zuni main open_url
 }
 
 
@@ -264,11 +344,21 @@ gtg() {
     fi
 }
 
-# Release Notes
-# rn 142 (for RC142)
-# rn 142 1 (with migrations)
-rn() {
+# GitLab Release Notes
+# _rn 142 (for RC142)
+_glrn() {
     pat
-    python /Users/ranelpadon/dev/scripts/gl-api.py ets-prod-v1.8.47-RC$1 $2
+    python /Users/ranelpadon/dev/scripts/gitlab/release-notes.py ets-prod-v1.8.47-RC$1
+}
+# rn 142 (with migrations)
+glrn() {
+    pat
+    python /Users/ranelpadon/dev/scripts/gitlab/release-notes.py ets-prod-v1.8.47-RC$1 with_migrations
 }
 
+
+# GitLab CI stats
+glci() {
+    # pat
+    python /Users/ranelpadon/dev/scripts/gitlab/ci-stats.py $1
+}
