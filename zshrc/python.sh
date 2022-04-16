@@ -53,7 +53,7 @@ yt_video_trimmer() {
     # Set the working dir.
     cd ~/Desktop
     pyenv activate alloserv
-    python ~/dev/scripts/yt-video-trimmer.py $1 $2 $3
+    python ~/dev/scripts/video/yt-trimmer.py $1 $2 $3
 }
 alias yvt=yt_video_trimmer
 
@@ -63,7 +63,7 @@ video_trimmer() {
     # Set the working dir.
     cd ~/Desktop
     pyenv activate alloserv
-    python ~/dev/scripts/video-trimmer.py $1 $2 $3
+    python ~/dev/scripts/video/trimmer.py $1 $2 $3
 }
 alias vt=video_trimmer
 
