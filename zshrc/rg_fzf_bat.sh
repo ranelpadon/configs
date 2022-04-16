@@ -19,6 +19,13 @@ rp() {
     _rg --type py --glob '!**/tests/**' --glob '!**/migrations/**' $@
 }
 
+# rg-python-all
+# Search in Python files only, including those ignored files.
+# Useful for scouring the `site-packages` or Django source code.
+rpa() {
+    rp --no-ignore $@
+}
+
 # rg-python-tests
 # Search in unit test files.
 rpt() {
