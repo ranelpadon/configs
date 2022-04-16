@@ -16,6 +16,21 @@ dit() {
 manage() {
     $PY27 apps/backoffice/manage.py $@
 }
+manage_p() {
+    $PY27 apps/processing/manage.py $@
+}
+manage_rd() {
+    $PY27 apps/redemption/manage.py $@
+}
+manage_taapi() {
+    $PY27 apps/taapi/manage.py $@
+}
+manage_scapi() {
+    $PY27 apps/scapi/manage.py $@
+}
+manage_acapi() {
+    $PY27 apps/acapi/manage.py $@
+}
 
 migrate_list() {
     # fab migrate:--list | grep "NodeNotFoundError\|\[ \]"
@@ -78,8 +93,8 @@ test() {
         CONTEXT=buildbox
     fi
 
-    if [[ $CONTEXT = 'buildbox' && $SITE = 'worker' ]]; then
-        _SITE='worker_override'
+    if [[ $CONTEXT = 'buildbox' ]]; then
+        _SITE="_$SITE"
     fi
 
     SETTING=settings.local_settings.$CONTEXT.$_SITE
@@ -88,11 +103,16 @@ test() {
 
     $PY27 \
         ~/dev/ticketflap/ticketing/apps/$SITE/manage.py \
-        test $TRIMMED_PATH \
+        test \
         --settings=$SETTING \
-        --verbosity=0
+        --verbosity=1 \
+        $TRIMMED_PATH
 }
 
+
+ta() {
+    test acapi $1
+}
 
 tb() {
     test backoffice $1
@@ -110,8 +130,20 @@ tw() {
     test worker $1
 }
 
-tre() {
+trd() {
     test redemption $1
+}
+
+ts() {
+    test sessions_api $1
+}
+
+tsc() {
+    test scapi $1
+}
+
+tt() {
+    test taapi $1
 }
 
 
@@ -131,6 +163,18 @@ tws() {
     test worker $1 _local_sqlite
 }
 
+trds() {
+    test worker $1 _local_sqlite
+}
+
+tss() {
+    test sessions_api $1 _local_sqlite
+}
+
+tts() {
+    test taapi $1 _local_sqlite
+}
+
 
 # Clear Download Signature records.
 download_signatures_clear() {
@@ -138,4 +182,57 @@ download_signatures_clear() {
     /Applications/XAMPP/xamppfiles/bin/mysql \
         -h localhost -P 3306 -uroot -ppassword \
         -e 'use TICKETFLAP; TRUNCATE table download_signatures;'
+}
+
+drf2() {
+    gce
+    clear_pyc
+    pip install djangorestframework===2.4.8 --no-input
+    # pip install django-authority==0.11
+    pip install drf_compound_fields==0.2.2 --no-input
+}
+
+drf3() {
+    gc feature/gl-394_upgrade_drf_related_packages
+    clear_pyc
+    pip install djangorestframework===3.5.4 --no-input
+    # pip install django-authority==0.13.2
+    pip uninstall drf_compound_fields==0.2.2 --no-input
+}
+
+
+flake() {
+    pip install isort==4.3.21  # 4.x for Py2
+    pip install flake8==3.8.3  # Latest
+    pip install flake8-isort==3.0.1
+}
+
+
+dj111() {
+    gc upgrade/django-1.11
+    pip install Django==1.11.29 --no-input
+    pip uninstall django-longerusernameandemail==0.5.7 --no-input
+    pip install django-modeltranslation==0.14.4 --no-input
+
+    # pip install django-sekizai==1.1.0
+    # pip install django-classy-tags==0.9.0
+}
+
+undj111() {
+    pip install Django==1.8.19 --no-input
+    pip install django-longerusernameandemail==0.5.7 --no-input
+    pip install django-modeltranslation==0.12.2 --no-input
+
+    # pip install django-sekizai==0.10.0
+    # pip install django-classy-tags==0.8.0
+}
+
+
+downgrade() {
+    drf2 && undj111
+}
+
+
+upgrade() {
+    drf3 && dj111
 }
