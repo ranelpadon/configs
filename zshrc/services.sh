@@ -94,7 +94,7 @@ worker() {
 }
 
 worker_clear() {
-    pyc_clear
+    clear_pyc
     rm celerybeat-schedule
 
     brew_services restart rabbitmq
