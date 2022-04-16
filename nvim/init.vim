@@ -1,3 +1,6 @@
+" Start vim without plugins:
+" vim -u NONE file.txt
+
 runtime settings.vim
 runtime plugins.vim
 runtime mappings.vim
