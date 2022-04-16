@@ -14,12 +14,18 @@ _new_window() {
 }
 
 # _new_window DEMOSTAG demo
+
+_new_window BYMOPSTAG bookyay-mop
+_new_window BYNTDSTAG bookyay-ntd
+_new_window DEMOSTAG demo
+_new_window F7STAG f7
 _new_window GTSSTAG 11-skies  # GTSSTAG and GTSSTAG-K11
 _new_window HKILFSTAG hkilf
 _new_window HKRUSTAG hkru
 _new_window KGGSTAG kgg-kg
 _new_window MCSTAG melco
 _new_window MGMSTAG mgm
+_new_window MTSTAG matchtic
 _new_window SUNSTAG sun-entertainment
 _new_window TTLSTAG totalticketing
 _new_window ZIPSTAG zipcity
@@ -42,13 +48,17 @@ _update_env() {
 }
 
 # Auto-runs
-# _update_env DEMOSTAG
+_update_env BYMOPSTAG
+_update_env BYNTDSTAG
+_update_env DEMOSTAG
+_update_env F7STAG
 _update_env GTSSTAG
 _update_env HKILFSTAG
 _update_env HKRUSTAG
 _update_env KGGSTAG
 _update_env MCSTAG
 _update_env MGMSTAG
+_update_env MTSTAG
 _update_env SUNSTAG
 _update_env TTLSTAG
 _update_env ZIPSTAG

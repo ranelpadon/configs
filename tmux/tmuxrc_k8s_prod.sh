@@ -14,22 +14,28 @@ _new_window() {
     tmux new-window  -t k8s_prod -n $1 -e WHITELABEL=$2
 }
 
-_new_window DEMOSTAG demo
-# _new_window DEMOPROD demo
+_new_window BYMOPPROD bookyay-mop
 _new_window BYPROD sun-entertainment  # SUNPROD
+_new_window DEMOPROD demo
+_new_window F7PROD f7
 _new_window GTSPROD 11-skies
 _new_window HKILFPROD hkilf
 _new_window HKRUPROD hkru
 _new_window KGGPROD kgg-kg
 _new_window MGMPROD mgm
+_new_window MTPROD matchtic
+_new_window TTLPROD totalticketing
 _new_window ZIPPROD zipcity
 _new_window ZUNIPROD zuni
 
 
 # Helper function.
 _update_env() {
+
+    # DevOps now triggers the PROD deployments.
+    # open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/$WHITELABEL/-/pipelines"
+
     COMMAND='
-        open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/$WHITELABEL/-/pipelines"
         cd ~/dev/$WHITELABEL
         gc main
         gpl
@@ -54,14 +60,17 @@ _update_env() {
 }
 
 # Auto-runs
-_update_env DEMOSTAG
-# _update_env DEMOPROD
+_update_env BYMOPPROD
 _update_env BYPROD  # SUNPROD
+_update_env DEMOPROD
+_update_env F7PROD
 _update_env GTSPROD
 _update_env HKILFPROD
 _update_env HKRUPROD
 _update_env KGGPROD
 _update_env MGMPROD
+_update_env MTPROD
+_update_env TTLPROD
 _update_env ZIPPROD
 _update_env ZUNIPROD
 
