@@ -10,17 +10,17 @@ alias tmuxx_resume='_tmuxx_resume Workspace'
 alias tmuxx_resume_stag='_tmuxx_resume k8s_stag'
 alias tmuxx_resume_prod='_tmuxx_resume k8s_prod'
 
-# kube_update STAG 123
-# kube_update PROD 123
-kube_update() {
+# update_ets_version STAG 123
+# update_ets_version PROD 123
+update_ets_version() {
     tmux set-environment -g TAG $2
     ENV=$(echo $1 | tr '[:upper:]' '[:lower:]')
     eval tmuxx_kube_$ENV
 }
 
-# kube_commit STAG 123
-# kube_commit PROD 123
-kube_commit() {
+# commit_ets_version STAG 123
+# commit_ets_version PROD 123
+commit_ets_version() {
     # Send the same Git commit message to all active windows.
     SESSION_NAME=$(tmux display-message -p '#S')
     # Double quotes are needed to correctly evaluate the inner vars.
