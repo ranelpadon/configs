@@ -229,10 +229,12 @@ undj111() {
 
 
 downgrade() {
-    drf2 && undj111
+    drf2
+    undj111
 }
 
 
 upgrade() {
-    drf3 && dj111
+    drf3
+    dj111
 }
