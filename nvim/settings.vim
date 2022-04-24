@@ -45,7 +45,10 @@ if !g:is_nvim
     set wildmenu                                                                " Command completion menu
 endif
 
+" `:h shortmess` is a text, so use concatenation.
 set shortmess+=I                                                                " Disable startup message
+" Has issue with auto-cursor centering like `nzz`.
+set shortmess-=S                                                                " Show search count (S: means do not show search count, so we negate it)
 set t_Co=256                                                                    " 8-bit/256 colors in terminal
 set termguicolors                                                               " 24-bit colors for in TUI, use `gui` instead of `cterm` attributes
 
@@ -55,7 +58,7 @@ set title                                                                       
 set hidden                                                                      " Required to keep multiple buffers open multiple buffers
 
 set mouse=a                                                                     " Enable mouse in all modes
-" set scrolloff=999                                                               " Cursor is always centered vertically
+" set scrolloff=999                                                             " Cursor is always centered vertically
 " Toggling [relative]number: set [r]nu!
 set number                                                                      " Line numbers
 " set relativenumber                                                            " Show the relative line number
@@ -69,7 +72,7 @@ set whichwrap+=<,>,[,],h,l                                                      
 " Fold by default to reduce clutter.
 set foldmethod=indent
 " set foldclose=all
-" set foldlevelstart=99
+set foldlevelstart=99
 set foldnestmax=4
 
 set listchars=tab:▸\ ,eol:¬                                                     " Visualize tabs and newlines
@@ -79,6 +82,7 @@ set tabstop=4                                                                   
 set expandtab                                                                   " Tab to spaces conversion in Insert mode
 set softtabstop=4                                                               " Tab key/backspace stops
 set shiftwidth=4                                                                " > indentation size
+set shiftround                                                                  " indent to nearest indentatin
 set smartindent                                                                 " Newline indention
 
 set ignorecase                                                                  " Make searches case-insensitive
@@ -100,10 +104,17 @@ set visualbell                                                                  
 set lazyredraw                                                                  " Avoid redrawing screen in macro since it's expensive
 
 " SHADA (SHAred DAta) file of Nvim is in ~/.local/share/nvim/shada/main.shada
-set directory=$HOME/.config/nvim/swp//
+" set directory=$HOME/.config/nvim/swp//
+set noswapfile
 set nobackup
 set nowritebackup
 set undofile                                                                    " Save undo history across sessions
 set undodir=$HOME/.config/nvim/undo
 
 let g:python_host_prog = expand('~/.pyenv/versions/ticketing/bin/python2')
+
+" To check the buffer's filetype:
+" set filetype?
+"
+" To define the filetype commentstring, add new <FILETYPE>.vim:
+" nvim/after/ftplugin/<FILETYPE>.vim
