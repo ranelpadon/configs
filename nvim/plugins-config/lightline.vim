@@ -1,20 +1,23 @@
 let g:lightline = {
 \   'colorscheme': 'one',
 \   'active': {
-\     'left': [[ 'mode', 'paste' ], ['readonly', 'filename', 'modified']]
+\       'left': [['mode', 'paste' ], ['gitbranch', 'readonly', 'filename', 'modified']],
+\       'right': [['lineinfo'], ['percent'], ['searchcount']],
 \   },
 \   'tabline': {
-\     'left': [['buffers']],
-\     'right': [[]]
+\       'left': [['buffers']],
+\       'right': [[]]
 \   },
 \   'component_function': {
-\     'filename': 'LightlineFilename'
+\       'filename': 'LightlineFilename',
+\       'gitbranch': 'gitbranch#name',
+\       'searchcount': 'SearchCount'
 \   },
 \   'component_expand': {
-\     'buffers': 'lightline#bufferline#buffers'
+\       'buffers': 'lightline#bufferline#buffers'
 \   },
 \   'component_type': {
-\     'buffers': 'tabsel'
+\       'buffers': 'tabsel'
 \   }
 \ }
 
@@ -22,6 +25,15 @@ function! LightlineFilename()
     return expand('%:p:.') !=# '' ? expand('%:p:.') : '[No Name]'
 endfunction
 
+
+function! SearchCount() abort
+    let result = searchcount()
+    if empty(result.total)
+        return ''
+    endif
+    " return result.total
+    return printf('%d/%d', result.current, result.total)
+endfunction
 
 " let g:lightline#bufferline#shorten_path = 1
 let g:lightline#bufferline#smart_path = 0
@@ -50,6 +62,10 @@ let s:p.tabline.middle = [[one_dark_black, one_dark_black, transparent_term_colo
 if g:is_nvim
     let g:lightline#bufferline#clickable = 1
     let g:lightline.component_raw = {'buffers': 1}
+
+    " Prevent opening buffer in sidebar.
+    autocmd User LightlineBufferlinePreClick :wincmd l
+    " let g:lightline#bufferline#click_handler_pre_command = 'wincmd l'
 endif
 
 " Fast buffer switching when multiple ones are opened.
