@@ -2000,10 +2000,7 @@
                                 "to_if_held_down": [
                                     {
                                         "halt": true,
-                                        "key_code": "mission_control",
-                                        "modifiers": [
-                                            "left_control"
-                                        ]
+                                        "key_code": "mission_control"
                                     }
                                 ],
                                 "type": "basic"
