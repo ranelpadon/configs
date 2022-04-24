@@ -1,4 +1,18 @@
+" https://github.com/sheerun/vim-polyglot#language-packs
+" let g:polyglot_disabled = [
+" \    'css',
+" \    'docker',
+" \    'html5',
+" \    'javascript',
+" \    'json',
+" \    'php',
+" \    'python',
+" \    'python-indent',
+" \]
+
 call plug#begin('~/.config/nvim/autoload/plugged')
+    " Plug 'nathom/filetype.nvim'
+
     " If installed using Homebrew
     set rtp+=/usr/local/opt/fzf
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}
@@ -12,19 +26,17 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     if has('nvim')
-      Plug 'gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
+        Plug 'gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
     else
-      Plug 'gelguy/wilder.nvim'
+        Plug 'gelguy/wilder.nvim'
     endif
     Plug 'wincent/ferret'
     Plug 'ludovicchabant/vim-gutentags'
     Plug 'mgedmin/python-imports.vim'
     Plug 'dense-analysis/ale'
     Plug 'voldikss/vim-floaterm'
-    " Plug 'yegappan/mru'
     Plug 'pbogut/fzf-mru.vim'
-    " Plug 'tweekmonster/fzf-filemru'
-    " Plug 'kana/vim-arpeggio'
+    Plug 'wsdjeg/vim-fetch'
 
     Plug 'moll/vim-bbye'
     Plug 'preservim/tagbar'
@@ -50,8 +62,24 @@ call plug#begin('~/.config/nvim/autoload/plugged')
         Plug 'obcat/vim-hitspop'
     endif
 
+    " Seems not working!
+    " https://github.com/henrik/vim-indexed-search#alternatives
+    " Plug 'osyo-manga/vim-anzu'
+    " Plug 'henrik/vim-indexed-search'
+    " Plug 'google/vim-searchindex'
+
     Plug 'jiangmiao/auto-pairs'
     Plug 'sheerun/vim-polyglot'
+
+    " Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                 " We recommend updating the parsers on update
+    " Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+    " Plug 'RRethy/nvim-treesitter-textsubjects'
+    " BAD: Plug 'navarasu/onedark.nvim'
+    " GOOD: Plug 'monsonjeremy/onedark.nvim'
+    " TO-TRY: Plug 'ful1e5/onedark.nvim'
+
+    Plug 'ray-x/guihua.lua'  "lua GUI lib
+    Plug 'ray-x/sad.nvim'
 
     Plug 'wellle/targets.vim'
     Plug 'michaeljsmith/vim-indent-object'
@@ -63,10 +91,13 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     if g:is_nvim
         Plug 'kdheepak/lazygit.nvim'
+        Plug 'f-person/git-blame.nvim'
     endif
     Plug 'airblade/vim-gitgutter'
+    " Plug 'Xuyuanp/scrollbar.nvim'
+    Plug 'dstein64/nvim-scrollview'
+    Plug 'itchyny/vim-gitbranch'
     Plug 'rhysd/conflict-marker.vim'
-    Plug 'APZelos/blamer.nvim'
 
     Plug 'joshdick/onedark.vim'
     Plug 'tweekmonster/startuptime.vim'
