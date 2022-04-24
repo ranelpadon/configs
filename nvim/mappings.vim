@@ -49,15 +49,50 @@ nnoremap <C-a> ^
 nnoremap <C-z> $
 " Execute Normal command.
 inoremap kk <C-o>
-" Duplicate selection (same as NyP and VyP).
+
+" Duplicate line(s)/selection (same as NyP and VyP).
 " Mac Cmd key is not working with non-MacVim version
 " https://unix.stackexchange.com/questions/29665/in-vim-how-to-map-command-right-and-command-left-to-beginning-of-line-and-e
-" Cmd+d via BTT.
-nnoremap <F1>d :copy .<CR>
-vnoremap <F1>d :copy '><CR>
-" Duplicate line.
 " Cmd+r via BTT.
+nnoremap <F1>d :copy .<CR>
+xnoremap <F1>d :copy '><CR>
 inoremap <F1>d <C-o>yy<C-o>p
+
+function AutoCommentDuplicatedLine()
+    " Comment line.
+    normal gcc
+
+    " Duplicate the commented line.
+    copy .
+
+    " Uncomment the new line.
+    normal gcc
+endfunction
+
+" `range` will make this function execute only once
+" for the entire selection range.
+" https://vi.stackexchange.com/questions/37295/duplicate-selected-lines-programmatically/#answer-37296
+function AutoCommentDuplicatedLines() range
+    " Duplicate the selected lines.
+    '<,'>copy '>
+
+    " Comment the previously selected lines.
+    '<,'>Commentary
+endfunction
+
+nnoremap R :call AutoCommentDuplicatedLine()<CR>
+
+" Use `Bar` to separate commands and to avoid the <CR>!
+" xnoremap R :copy '><Bar>'<,'>Commentary<CR>
+
+" <C-U> will delete the existing command ('<,'>) before calling the function,
+" hence, could be used when you don't want to use the `range` function modifier.
+" <C-U> is similar to the shell/CLI shortcut for deleting characters towards the start of line.
+" xnoremap R :<C-U>call AutoCommentDuplicatedLines()<CR>
+
+xnoremap R :call AutoCommentDuplicatedLines()<CR>
+
+
 " Copy.
 " Cmd+c via BTT.
 nnoremap <F1>c yy
@@ -104,8 +139,8 @@ vnoremap <F7> :move '>+1<CR>gv=gvzz
 vnoremap <F8> :move '<-2<CR>gv=gvzz
 
 
-noremap N [m
-noremap I ]m
+" noremap J [m
+" noremap K ]m
 
 
 " Find and replace of the current word in cursor,
@@ -325,6 +360,27 @@ endfunction
 cnoremap <silent> <expr> <enter> CenterSearch()
 
 
+" Open GitLab file.
+function! GitLabFile()
+    let s:base_uri = 'https://git.hk.asiaticketing.com/ticketflap/ticketing-v2/-/tree/ets/'
+    echo s:base_uri
+    let s:relative_file_path = expand("%")
+    let s:uri = s:base_uri . s:relative_file_path
+    exec "!open \"" . s:uri . "\""
+endfunction
+map <Leader>glf :call GitLabFile()<CR><CR>
+
+" Open GitLab file in blame mode.
+function! GitLabBlame()
+    let s:base_uri = 'https://git.hk.asiaticketing.com/ticketflap/ticketing-v2/-/blame/ets/'
+    echo s:base_uri
+    let s:relative_file_path = expand("%")
+    let s:uri = s:base_uri . s:relative_file_path
+    exec "!open \"" . s:uri . "\""
+endfunction
+map <Leader>glb :call GitLabBlame()<CR><CR>
+
+
 " Copy Absolute Path  (/something/src/foo.txt)
 nnoremap <leader>fn :let @*=expand("%:p")<CR>
 " Copy Relative Path  (src/foo.txt)
@@ -341,9 +397,15 @@ nnoremap <leader>f' :let @*=expand("%:t:r")<CR>
 " Expands in Insert mode.
 iabbrev clog console.log(
 iabbrev ic from icecream import ic
+iabbrev ict ic(type())
+iabbrev icg ic(self.get_response_errors(response))
 iabbrev pudb import pudb; pu.db
 iabbrev pdbpp import pdb; pdb.set_trace()
 iabbrev ipdb import ipdb; ipdb.set_trace(context=10)
 iabbrev iskip # isort:skip_file
 iabbrev dj111 # FIXME-DJ1.11:
 iabbrev super super(Foo, self).bar(*args, **kwargs)
+
+
+" autocmd FileType python nnoremap <buffer> [[ ?^class\\|^\s*def<CR>
+" autocmd FileType python nnoremap <buffer> ]] /^class\\|^\s*def<CR>
