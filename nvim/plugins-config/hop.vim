@@ -6,6 +6,7 @@ hi HopNextKey1 guifg=#E06C75
 hi HopNextKey2 guifg=#E06C75
 hi HopUnmatched guifg=#4B5263
 
-map s <cmd>HopChar1<CR>
-omap s v<cmd>HopChar1<CR>
-map S v<cmd>HopChar1<CR>
+map s <Cmd>HopChar1<CR>
+" Use `v` so that it's an inclusive operation!
+omap s v<Cmd>HopChar1<CR>
+map S V<Cmd>HopChar1<CR>
