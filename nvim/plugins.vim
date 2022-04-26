@@ -94,6 +94,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
         Plug 'f-person/git-blame.nvim'
     endif
     Plug 'airblade/vim-gitgutter'
+    Plug 'rhysd/git-messenger.vim'
     " Plug 'Xuyuanp/scrollbar.nvim'
     Plug 'dstein64/nvim-scrollview'
     Plug 'itchyny/vim-gitbranch'
