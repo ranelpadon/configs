@@ -1,6 +1,13 @@
 nnoremap <Leader>gb :GitBlameToggle<CR>
-nnoremap <Leader>gbc :GitBlameCopySHA<CR>
-nnoremap <Leader>gbo :GitBlameOpenCommitURL<CR>
+nnoremap <Leader>gbs :GitBlameCopySHA<CR>
+nnoremap <Leader>gbu :GitBlameOpenCommitURL<CR>
+
+" function Func()
+"      :GitBlameToggle
+"      :GitBlameCopySHA
+"      :GitBlameToggle
+" endfunction
+" nnoremap <Leader>gbs :call Func()<CR>
 
 " Don't run on startup.
 let g:gitblame_enabled = 0
