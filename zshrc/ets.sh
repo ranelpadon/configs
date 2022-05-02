@@ -6,8 +6,11 @@ gcprod() {
     git checkout release/ets/prod/v1.8.47
 }
 
-gct() {
-    git checkout release/ets/test/v2.21
+gct3() {
+    git checkout release/ets/test/v3.0
+}
+gct2() {
+    git checkout release/ets/test/v2.22
 }
 
 gctsc() {
