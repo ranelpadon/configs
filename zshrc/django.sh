@@ -201,7 +201,7 @@ drf3() {
 }
 
 
-flake() {
+install_flake() {
     pip install isort==4.3.21  # 4.x for Py2
     pip install flake8==3.8.3  # Latest
     pip install flake8-isort==3.0.1
@@ -237,4 +237,18 @@ downgrade() {
 upgrade() {
     drf3
     dj111
+}
+
+
+py37() {
+    pip install billiard>=3.6.3.0,<4.0 --no-input
+    pip install kombu>=4.6.8,<5.0.0 --no-input
+    pip install celery==4.4.7 --no-input
+    pip install django-celery-email==2.0.2 --no-input
+}
+unpy37() {
+    pip install billiard>=3.5.0.2,<3.6.0 --no-input
+    pip install kombu>=4.2.0,<4.4 --no-input
+    pip install celery==4.2.2 --no-input
+    pip install django-celery-email==2.0.1 --no-input
 }
