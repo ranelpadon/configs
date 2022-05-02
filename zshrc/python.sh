@@ -75,3 +75,31 @@ unrar() {
 pathx() {
     $PY27 "$HOME/Data/UP DGE/Resources/Codes/pathx.py" $1
 }
+
+
+_pyfix() {
+    # Exclude D (Deleted) in `--diff-filter`.
+    CHANGED_PYTHON_FILES=$(git diff --name-only --diff-filter=ACMR | rg '.py')
+    BLUE='\e[1;34m'
+    NC='\e[0m'  # No Color
+
+    echo "${BLUE}isort check: $NC"
+    echo $CHANGED_PYTHON_FILES | xargs isort --check-only
+
+    echo
+    echo "${BLUE}autoflake check: $NC"
+    echo $CHANGED_PYTHON_FILES | xargs autoflake --remove-all-unused-imports --exclude 'conf/settings/*' --check
+}
+pyfix() {
+    # Exclude D (Deleted) in `--diff-filter`.
+    CHANGED_PYTHON_FILES=$(git diff --name-only --diff-filter=ACMR | rg '.py')
+    BLUE='\e[1;34m'
+    NC='\e[0m'  # No Color
+
+    echo "${BLUE}isort fix: $NC"
+    echo $CHANGED_PYTHON_FILES | xargs isort
+
+    echo
+    echo "${BLUE}autoflake fix: $NC"
+    echo $CHANGED_PYTHON_FILES | xargs autoflake --in-place --remove-all-unused-imports --exclude 'conf/settings/*'
+}
