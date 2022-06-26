@@ -95,7 +95,8 @@ ftb() {
     # fab test:backoffice,$1,auto_clean_pyc=0,$2
 
     # $# variable will tell you the number of input arguments the script was passed.
-    if [[ $# -eq 1 ]]; then
+    if [[ $# -eq 1 ]]
+    then
         fab test:backoffice,$1,auto_clean_pyc=0
     else
         fab test:backoffice,$1,auto_clean_pyc=0,$2
@@ -103,7 +104,8 @@ ftb() {
 }
 
 ftw() {
-    if [[ $# -eq 1 ]]; then
+    if [[ $# -eq 1 ]]
+    then
         fab test:worker,$1,auto_clean_pyc=0
     else
         fab test:worker,$1,auto_clean_pyc=0,$2
@@ -111,7 +113,8 @@ ftw() {
 }
 
 ftf() {
-    if [[ $# -eq 1 ]]; then
+    if [[ $# -eq 1 ]]
+    then
         fab test:frontend,$1,auto_clean_pyc=0
     else
         fab test:frontend,$1,auto_clean_pyc=0,$2
@@ -119,7 +122,8 @@ ftf() {
 }
 
 ftp() {
-    if [[ $# -eq 1 ]]; then
+    if [[ $# -eq 1 ]]
+    then
         fab test:processing,$1,auto_clean_pyc=0
     else
         fab test:processing,$1,auto_clean_pyc=0,$2
