@@ -69,6 +69,7 @@ function AutoCommentDuplicatedLine()
     normal gcc
 endfunction
 
+
 " `range` will make this function execute only once
 " for the entire selection range.
 " https://vi.stackexchange.com/questions/37295/duplicate-selected-lines-programmatically/#answer-37296
@@ -80,7 +81,7 @@ function AutoCommentDuplicatedLines() range
     '<,'>Commentary
 endfunction
 
-nnoremap R :call AutoCommentDuplicatedLine()<CR>
+" nnoremap R :call AutoCommentDuplicatedLine()<CR>
 
 " Use `Bar` to separate commands and to avoid the <CR>!
 " xnoremap R :copy '><Bar>'<,'>Commentary<CR>
@@ -90,7 +91,64 @@ nnoremap R :call AutoCommentDuplicatedLine()<CR>
 " <C-U> is similar to the shell/CLI shortcut for deleting characters towards the start of line.
 " xnoremap R :<C-U>call AutoCommentDuplicatedLines()<CR>
 
-xnoremap R :call AutoCommentDuplicatedLines()<CR>
+" xnoremap R :call AutoCommentDuplicatedLines()<CR>
+
+
+function CommentTwoAdjacentLines(direction)
+    " `direction` arg will be referenced as `a:direction`.
+    " echom a:direction
+
+    if a:direction == 'DOWN'
+        normal 2gcc
+    else
+        " Move the cursor up, comment, then move the cursor back to original position.
+        normal u
+        normal 2gcc
+        normal e
+    endif
+endfunction
+
+" Commenting 2 adjacent lines.
+" `gce` (gc1e) and `gcu` (gc1u) have some delays,
+" implement a function instead for faster sequence.
+nnoremap gce :call CommentTwoAdjacentLines('DOWN')<CR>
+nnoremap gcu :call CommentTwoAdjacentLines('UP')<CR>
+
+
+function! DuplicateLines(type)
+    " `type` is required arg for `operatorfunc`.
+    " See https://vi.stackexchange.com/questions/7711/use-motion-in-normal-mapping-calling-a-function?#answer-7712
+
+    " Get the lines/motion.
+    let START = line("'[")
+    let END = line("']")
+
+    " Duplicate lines.
+    " Equivalent: `:123,345copy 345`
+    " See `:help execute`.
+    exec START .. ',' .. END .. 'copy ' .. END
+endfunction
+
+function! DuplicateAndCommentLines(type)
+    " Get the lines/motion.
+    let START = line("'[")
+    let END = line("']")
+
+    " Provide a dummy arg since it's required.
+    call DuplicateLines('')
+
+    " Comment original lines.
+    " Equivalent: `:123,345Commentarty`
+    exec START .. ',' .. END .. 'Commentary'
+endfunction
+
+" Remap `r` so that we could use it for more important commands below.
+nnoremap <Leader>r r
+
+" See `:help operatorfunc`.
+" Duplicate lines by providing the motion/number of lines: `r4j`.
+nnoremap r :set operatorfunc=DuplicateLines<CR>g@
+nnoremap R :set operatorfunc=DuplicateAndCommentLines<CR>g@
 
 
 " Copy.
@@ -395,17 +453,27 @@ nnoremap <leader>f' :let @*=expand("%:t:r")<CR>
 
 
 " Expands in Insert mode.
-iabbrev clog console.log(
+" https://stackoverflow.com/questions/3320182/cursor-position-in-vim-abbreviation#answer-3320321
+" `<Left>` is the left arrow, `Eatchar` is built-in function (`:helpgrep Eatchar`).
+" <C-R>=Eatchar('\s')<CR>` will eat the extraneous spaces.
+" `=Eatchar` will evaluate the expression and put it in `=` register.
+" `<C-R>=` will insert the contents of `=` register.
+" https://dev.to/iggredible/the-only-vim-insert-mode-cheatsheet-you-ever-needed-nk9
+iabbrev clog console.log()<Left><C-R>=Eatchar('\s')<CR>
+
+iabbrev ict ic(type())<Left><Left><C-R>=Eatchar('\s')<CR>
+iabbrev icd ic(dir())<Left><Left><C-R>=Eatchar('\s')<CR>
+iabbrev icv ic(vars())<Left><Left><C-R>=Eatchar('\s')<CR>
+
 iabbrev ic from icecream import ic
-iabbrev ict ic(type())
 iabbrev icg ic(self.get_response_errors(response))
 iabbrev pudb import pudb; pu.db
 iabbrev pdbpp import pdb; pdb.set_trace()
 iabbrev ipdb import ipdb; ipdb.set_trace(context=10)
+iabbrev IPy import IPython; IPython.embed()
 iabbrev iskip # isort:skip_file
 iabbrev dj111 # FIXME-DJ1.11:
-iabbrev super super(Foo, self).bar(*args, **kwargs)
-
+iabbrev super super(Foo, self).bar(*args, **kwargs)<Home><Right><Right><Right><Right><Right><Right><C-R>=Eatchar('\s')<CR>
 
 " autocmd FileType python nnoremap <buffer> [[ ?^class\\|^\s*def<CR>
 " autocmd FileType python nnoremap <buffer> ]] /^class\\|^\s*def<CR>
