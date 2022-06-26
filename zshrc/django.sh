@@ -16,8 +16,14 @@ dit() {
 manage() {
     $PY27 apps/backoffice/manage.py $@
 }
+manage_f() {
+    $PY27 apps/frontend/manage.py $@
+}
 manage_p() {
     $PY27 apps/processing/manage.py $@
+}
+manage_w() {
+    $PY27 apps/worker/manage.py $@
 }
 manage_rd() {
     $PY27 apps/redemption/manage.py $@
@@ -186,6 +192,8 @@ download_signatures_clear() {
 
 drf2() {
     gce
+    # old `ets` version.
+    git reset --hard f61163d650077ab94615132869c6eae693d96179
     clear_pyc
     pip install djangorestframework===2.4.8 --no-input
     # pip install django-authority==0.11
