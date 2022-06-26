@@ -61,7 +61,7 @@ set mouse=a                                                                     
 " set scrolloff=999                                                             " Cursor is always centered vertically
 " Toggling [relative]number: set [r]nu!
 set number                                                                      " Line numbers
-" set relativenumber                                                            " Show the relative line number
+set relativenumber                                                              " Show the relative line number
 set cursorline                                                                  " Highlight current line
 set colorcolumn=80                                                              " Line wrap/column marker
 set linebreak                                                                   " Break at word boundary
@@ -118,3 +118,10 @@ let g:python_host_prog = expand('~/.pyenv/versions/ticketing/bin/python2')
 "
 " To define the filetype commentstring, add new <FILETYPE>.vim:
 " nvim/after/ftplugin/<FILETYPE>.vim
+
+" Stop auto-commenting for new lines.
+set formatoptions-=cro
+
+" Better DX with YAML files.
+autocmd FileType yml set cursorcolumn
+autocmd FileType yaml set cursorcolumn
