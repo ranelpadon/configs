@@ -3,10 +3,11 @@ gce() {
 }
 
 gcprod() {
-    git checkout release/ets/prod/v1.8.47
+    git checkout release/ets/prod/v2.0
+    # git checkout release/ets/prod/v1.8.47
 }
 
-gct3() {
+gct() {
     git checkout release/ets/test/v3.0
 }
 gct2() {
@@ -54,9 +55,20 @@ gme() {
 }
 
 gmprod() {
-    git merge release/ets/prod/v1.8.44
+    git merge release/ets/prod/v2.0
+    # git merge release/ets/prod/v1.8.44
 }
 
+
+# rtest 123 (for v.3.0.123)
+rtest() {
+    # gc upgrade/django-1.11
+    # gpl
+    gct
+    gpl
+    # gm upgrade/django-1.11
+    fab create_release_tag:release/ets/test/v3.0,$1,full,melco
+}
 
 # rprod 123 (for RC123)
 rprod() {
@@ -65,7 +77,8 @@ rprod() {
     gcprod
     gpl
     gm ets
-    fab create_release_tag:release/ets/prod/v1.8.47,ets-prod-v1.8.47-RC$1,full,melco
+    fab create_release_tag:release/ets/prod/v2.0,$1,full,melco
+    # fab create_release_tag:release/ets/prod/v1.8.47,ets-prod-v1.8.47-RC$1,full,melco
 }
 
 # rttltest 1 (for RC1)
@@ -112,7 +125,8 @@ _pyc() {
             --exclude templates \
     '
 
-    if [ "$1" = "clear" ]; then
+    if [ "$1" = "clear" ]
+    then
         FD+='--exec rm'
         echo 'Clearing .pyc files...'
     else
@@ -143,13 +157,15 @@ fim() {
 # Helper function.
 _cd_whitelabel() {
     # $# variable will tell you the number of input arguments the script was passed.
-    if [ $# -eq 2 ]; then
+    if [ $# -eq 2 ]
+    then
         # Don't open the whitelabel URL.
     else
         # With `open_url` command arg.
         # Check if need to use custom URL.
         # Quotes are needed for evaluating the $ vars.
-        if [ "$1" = "ticketing-ets-chart" ]; then
+        if [ "$1" = "ticketing-ets-chart" ]
+        then
             open "https://git.hk.asiaticketing.com/technology/helm-charts/ticketing-ets-chart/-/pipelines"
         else
             open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/$1/-/pipelines"
@@ -160,6 +176,20 @@ _cd_whitelabel() {
     gc $2
     gpl
     nvim
+}
+
+_cd29rsg() {
+    _cd_whitelabel 29rooms-sg main
+}
+cd29rsg() {
+    _cd_whitelabel 29rooms-sg main open_url
+}
+
+_cdaaj() {
+    _cd_whitelabel allaboutjazz main
+}
+cdaaj() {
+    _cd_whitelabel allaboutjazz main open_url
 }
 
 _cdatl() {
@@ -246,6 +276,13 @@ cdmc() {
     _cd_whitelabel melco main open_url
 }
 
+_cdmcc() {
+    _cd_whitelabel melco-cyprus main
+}
+cdmcc() {
+    _cd_whitelabel melco-cyprus main open_url
+}
+
 _cdmgm() {
     _cd_whitelabel mgm main
 }
@@ -258,6 +295,20 @@ _cdsun() {
 }
 cdsun() {
     _cd_whitelabel sun-entertainment main open_url
+}
+
+_cdta() {
+    _cd_whitelabel tatlerasia main
+}
+cdta() {
+    _cd_whitelabel tatlerasia main open_url
+}
+
+_cdtkl() {
+    _cd_whitelabel tickelo main
+}
+cdtkl() {
+    _cd_whitelabel tickelo main open_url
 }
 
 _cdttl() {
@@ -299,7 +350,8 @@ cdzuni() {
 # Check release diff/packages/migrations
 crm() {
     cd $ETS
-    git diff --name-status ets-prod-v1.8.47-RC$1.. -l 2000 | rg migrations | sd 'A\s+' '* '
+    git diff --name-status $1.. -l 2000 | rg migrations | sd 'A\s+' '* '
+    # git diff --name-status ets-prod-v2.0.$1.. -l 2000 | rg migrations | sd 'A\s+' '* '
     echo
     echo "====================================================================="
     fd --full-path "migrations" . | grep -oE "\/.+\/[0-9]+" | sort | uniq -d
@@ -309,7 +361,8 @@ crm() {
 }
 
 crp() {
-    git diff --name-only ets-prod-v1.8.47-RC$1.. | grep requirements.txt | xargs git diff ets-prod-v1.8.47-RC$1..
+    git diff --name-only $1.. | grep requirements.txt | xargs git diff $1..
+    # git diff --name-only ets-prod-v2.0.$1.. | grep requirements.txt | xargs git diff ets-prod-v2.0.$1..
 }
 
 cr() {
@@ -331,7 +384,7 @@ crmtsc() {
 
 # Check release logs/merges
 crl() {
-    git log --pretty='%H %ar %s' --merges --grep='conflict' --grep='test' --regexp-ignore-case ets-prod-v1.8.47-RC$1..
+    git log --pretty='%H %ar %s' --merges --grep='conflict' --grep='test' --regexp-ignore-case ets-prod-v2.0.$1..
 }
 
 # git tag grep
@@ -339,7 +392,8 @@ gtg() {
     git fetch --tags
 
     # $# variable will tell you the number of input arguments the script was passed.
-    if [ $# -eq 0 ]; then
+    if [ $# -eq 0 ]
+    then
         # Search PROD tag by default.
         git tag | grep 'ets-prod' | sort --version-sort | tail
     else
@@ -348,17 +402,28 @@ gtg() {
 }
 
 # GitLab Release Notes
-# _rn 142 (for RC142)
+# _glrn ets-prod-v2.0.11
+# _glrn ets-prod-v2.0.11 123 456
 _glrn() {
     pat
-    python /Users/ranelpadon/dev/scripts/gitlab/release-notes.py ets-prod-v1.8.47-RC$1
+    python /Users/ranelpadon/dev/scripts/gitlab/release-notes.py $1 no_migrations ${@:2}
 }
-# rn 142 (with migrations)
+# glrn ets-prod-v2.0.11 (with migrations)
+# glrn ets-prod-v2.0.11 123 456 (with migrations)
 glrn() {
     pat
-    python /Users/ranelpadon/dev/scripts/gitlab/release-notes.py ets-prod-v1.8.47-RC$1 with_migrations
-}
 
+    # $@ = ets-prod-v2.0.11 123 456
+    # $@:0 = glrn ets-prod-v2.0.11 123 456
+    # $0 = glrn
+    # $1 = ets-prod-v2.0.11
+    # $2 = 123
+    # $3 = 456
+
+    # Slice from index=2.
+    # ${@:2}
+    python /Users/ranelpadon/dev/scripts/gitlab/release-notes.py $1 with_migrations ${@:2}
+}
 
 # GitLab CI stats
 glci() {
