@@ -113,7 +113,8 @@ changelog() {
 
 conflicts() {
     # $# variable will tell you the number of input arguments the script was passed.
-    if [ $# -eq 0 ]; then
+    if [ $# -eq 0 ]
+    then
         gca "Fix merge conflicts."
     else
         gca "GL-$1: Fix merge conflicts."
