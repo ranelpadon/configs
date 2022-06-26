@@ -14,16 +14,23 @@ _new_window() {
     tmux new-window  -t k8s_prod -n $1 -e WHITELABEL=$2
 }
 
+
+# _new_window 29RSGPROD 29rooms-sg
+# _new_window AAJPROD allaboutjazz
 _new_window BYMOPPROD bookyay-mop
+_new_window BYNTDPROD bookyay-ntd
 _new_window BYPROD sun-entertainment  # SUNPROD
 _new_window DEMOPROD demo
-_new_window F7PROD f7
+_new_window F7PROD f7  # for Canada midnight
 _new_window GTSPROD 11-skies
 _new_window HKILFPROD hkilf
 _new_window HKRUPROD hkru
 _new_window KGGPROD kgg-kg
+_new_window MCCPROD melco-cyprus
 _new_window MGMPROD mgm
 _new_window MTPROD matchtic
+_new_window TAPROD tatlerasia
+# _new_window TKLPROD tickelo
 _new_window TTLPROD totalticketing
 _new_window ZIPPROD zipcity
 _new_window ZUNIPROD zuni
@@ -31,7 +38,6 @@ _new_window ZUNIPROD zuni
 
 # Helper function.
 _update_env() {
-
     # DevOps now triggers the PROD deployments.
     # open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/$WHITELABEL/-/pipelines"
 
@@ -45,12 +51,12 @@ _update_env() {
     then
         COMMAND+='
             fd --regex "gitlab-ci(.production-shared)?.yml" --hidden \
-                | xargs sd "ets-prod-v1.8.47-RC[^\s]+" "ets-prod-v1.8.47-RC$TAG"
+                | xargs sd "ets-prod-v1.8.47-RC[^\s]+" "ets-prod-v2.0.$TAG"
         '
     else
         COMMAND+='
             fd --regex "gitlab-ci(.prod.*)?.yml" --hidden \
-                | xargs sd "ets-prod-v1.8.47-RC[^\s]+" "ets-prod-v1.8.47-RC$TAG"
+                | xargs sd "ets-prod-v1.8.47-RC[^\s]+" "ets-prod-v2.0.$TAG"
         '
     fi
 
@@ -60,7 +66,10 @@ _update_env() {
 }
 
 # Auto-runs
+# _update_env 29RSGPROD
+# _update_env AAJPROD
 _update_env BYMOPPROD
+_update_env BYNTDPROD
 _update_env BYPROD  # SUNPROD
 _update_env DEMOPROD
 _update_env F7PROD
@@ -68,8 +77,11 @@ _update_env GTSPROD
 _update_env HKILFPROD
 _update_env HKRUPROD
 _update_env KGGPROD
+_update_env MCCPROD
 _update_env MGMPROD
 _update_env MTPROD
+_update_env TAPROD
+# _update_env TKLPROD
 _update_env TTLPROD
 _update_env ZIPPROD
 _update_env ZUNIPROD
