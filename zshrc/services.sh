@@ -100,7 +100,7 @@ worker_clear() {
     brew_services restart rabbitmq
     brew_services restart memcached
 
-    apps/worker/manage.py celery purge --app=common.patcher.celery_app -f
+    python apps/worker/manage.py celery purge --app=common.patcher.celery -f
 }
 
 flower() {
