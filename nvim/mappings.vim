@@ -33,11 +33,13 @@ nnoremap <F2> o<Esc>zz
 " Warning: conflicts with inoremap for F11/F12.
 " Pressing <C-M> will map to <C-B> via BTT app
 " since <C-M> could not be used directly because it's equivalent to ENTER key.
-" Maps to <C-m> and <C-h> via BTT. <C-i> is same as <Tab>.
+" Maps to <C-m>, <C-h>, and <C-;> via BTT. <C-i> is same as <Tab>.
 " Move to older cursor position. Opposite of <C-i>.
 nnoremap <F11> <C-o>
 " Move to newer cursor position. Opposite of <C-o>.
 nnoremap <F12> <C-i>
+" Mapped to <C-;> which is physically above the <C-o> in Colemak layout.
+nnoremap <F13> <C-i>
 
 " Go to SOL and EOL when in Insert/Normal mode.
 " C-A and C-Z are mapped in Karabiner/BTT using the Left/Right Cmd physical keys.
@@ -125,7 +127,7 @@ function! DuplicateLines(type)
 
     " Duplicate lines.
     " Equivalent: `:123,345copy 345`
-    " See `:help execute`.
+    " See `:help execute` for the syntax, especially for `..`.
     exec START .. ',' .. END .. 'copy ' .. END
 endfunction
 
@@ -138,7 +140,7 @@ function! DuplicateAndCommentLines(type)
     call DuplicateLines('')
 
     " Comment original lines.
-    " Equivalent: `:123,345Commentarty`
+    " Equivalent: `:123,345Commentary`
     exec START .. ',' .. END .. 'Commentary'
 endfunction
 
@@ -331,7 +333,8 @@ nnoremap <C-y> :bnext<CR>
 " Cmd+s via BTT.
 noremap <F1>s :w!<CR>
 " Close buffer, go to previous one, and preserve window layout.
-noremap <Leader>w :Bwipeout<CR>
+" Use `!` so that unsaved/new buffer could be closed as well.
+noremap <Leader>w :Bwipeout!<CR>
 " Open new file.
 noremap <Leader>n :enew<CR>
 " Cycle window.
@@ -368,6 +371,7 @@ inoremap <LeftMouse> <LeftMouse><C-o>zz
 
 
 " Shortcut to use blackhole register by default
+" Swap two letters: `vdp`.
 nnoremap <Leader>d "_d
 vnoremap <Leader>d "_d
 nnoremap <Leader>D "_D
@@ -383,7 +387,7 @@ vnoremap C "_C
 nnoremap x "_x
 vnoremap x "_x
 nnoremap X "_X
-vnoremap X "_X"
+vnoremap X "_X
 
 " Use Leader key to revert to default mode.
 " nnoremap <Leader>d d
@@ -394,10 +398,10 @@ vnoremap X "_X"
 " vnoremap <Leader>c c
 " nnoremap <Leader>C C
 " vnoremap <Leader>C C
-" nnoremap <Leader>x "_d
-" vnoremap <Leader>x "_d
-" nnoremap <Leader>X "_D
-" vnoremap <Leader>X "_D
+" nnoremap <Leader>x "_x
+" vnoremap <Leader>x "_x
+" nnoremap <Leader>X "_X
+" vnoremap <Leader>X "_X
 
 
 nnoremap zf za                                                                  " Toggle fold
