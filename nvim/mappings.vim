@@ -113,8 +113,8 @@ endfunction
 " Commenting 2 adjacent lines.
 " `gce` (gc1e) and `gcu` (gc1u) have some delays,
 " implement a function instead for faster sequence.
-nnoremap gce :call CommentTwoAdjacentLines('DOWN')<CR>
-nnoremap gcu :call CommentTwoAdjacentLines('UP')<CR>
+" nnoremap gce :call CommentTwoAdjacentLines('DOWN')<CR>
+" nnoremap gcu :call CommentTwoAdjacentLines('UP')<CR>
 
 
 function! DuplicateLines(type)
@@ -148,9 +148,14 @@ endfunction
 nnoremap <Leader>r r
 
 " See `:help operatorfunc`.
-" Duplicate lines by providing the motion/number of lines: `r4j`.
-nnoremap r :set operatorfunc=DuplicateLines<CR>g@
-nnoremap R :set operatorfunc=DuplicateAndCommentLines<CR>g@
+" Duplicate lines by providing the motion/number of lines, say, `r4j`.
+" Use `nmap` instead of `nnoremap` so that we could override the definition of `r`/`R`
+" and could have `rr` and `RR`.
+nmap r :set operatorfunc=DuplicateLines<CR>g@
+nmap R :set operatorfunc=DuplicateAndCommentLines<CR>g@
+" If no motion provided, operate on the current line only (`_`).
+nmap rr r_
+nmap RR R_
 
 
 " Copy.
