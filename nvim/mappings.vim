@@ -486,3 +486,7 @@ iabbrev super super(Foo, self).bar(*args, **kwargs)<Home><Right><Right><Right><R
 
 " autocmd FileType python nnoremap <buffer> [[ ?^class\\|^\s*def<CR>
 " autocmd FileType python nnoremap <buffer> ]] /^class\\|^\s*def<CR>
+
+" Include in jumps list (<C-o>) the j/k motions if they're more than 1 step.
+nnoremap <silent> e :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'j'<CR>
+nnoremap <silent> u :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'k'<CR>
