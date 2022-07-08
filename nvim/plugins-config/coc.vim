@@ -100,3 +100,9 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 
 " Restart when COC crashed for some reason.
 nmap <Leader>cr :CocRestart<CR>
+
+" Refactoring, couldn't detect `rope` Python package even it's installed.
+" Triggered also by visual selection then `:CocAction`.
+" https://github.com/neoclide/coc-python/issues/44
+" xmap ,a  <Plug>(coc-codeaction-selected)
+" nmap ,a  <Plug>(coc-codeaction-selected)
