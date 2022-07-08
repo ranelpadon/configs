@@ -110,11 +110,12 @@ function CommentTwoAdjacentLines(direction)
     endif
 endfunction
 
-" Commenting 2 adjacent lines.
+" Commenting 2 adjacent lines since the `commentary` plugin
+" seems to work only in adjacent downward motion.
 " `gce` (gc1e) and `gcu` (gc1u) have some delays,
 " implement a function instead for faster sequence.
-" nnoremap gce :call CommentTwoAdjacentLines('DOWN')<CR>
-" nnoremap gcu :call CommentTwoAdjacentLines('UP')<CR>
+nnoremap gce :call CommentTwoAdjacentLines('DOWN')<CR>
+nnoremap gcu :call CommentTwoAdjacentLines('UP')<CR>
 
 
 function! DuplicateLines(type)
@@ -204,8 +205,10 @@ vnoremap <F7> :move '>+1<CR>gv=gvzz
 vnoremap <F8> :move '<-2<CR>gv=gvzz
 
 
-" noremap J [m
-" noremap K ]m
+" Need to be recursive mapping.
+" Use `[[`/`]]` for classes navigation.
+nmap J [mzz
+nmap K ]mzz
 
 
 " Find and replace of the current word in cursor,
@@ -271,8 +274,8 @@ vnoremap i l
 vnoremap ii ll
 
 " Scroll up/down in chunks in Insert mode.
-inoremap <C-u> <Esc>9kzzi
-inoremap <C-e> <Esc>9jzzi
+" inoremap <C-u> <Esc>9kzzi
+" inoremap <C-e> <Esc>9jzzi
 
 " End of Word
 nnoremap l e
@@ -329,10 +332,12 @@ nnoremap <F5> :g/^https/ norm @n <CR>
 
 " Buffers
 " Also `S-Tab` via BTT app.
-nnoremap <C-l> :bprev<CR>
+" nnoremap <C-l> :bprev<CR>
+nnoremap <C-u> :bprev<CR>
 " noremap N [m
 " Also `Tab` via BTT app.
-nnoremap <C-y> :bnext<CR>
+" nnoremap <C-y> :bnext<CR>
+nnoremap <C-e> :bnext<CR>
 " noremap I ]m
 " Save file.
 " Cmd+s via BTT.
@@ -425,6 +430,8 @@ function! CenterSearch()
 endfunction
 
 cnoremap <silent> <expr> <enter> CenterSearch()
+" Repeat the last search.
+nnoremap // //<CR>
 
 
 " Open GitLab file.
