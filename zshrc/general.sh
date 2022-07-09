@@ -25,9 +25,9 @@ alias ll='exa --long --icons --all --group-directories-first'
 alias lg='lazygit'
 
 
-# Karabiner/BTT sends <C-Z> which zsh/Vim interprets as the EOL.
+# Karabiner/BTT sends <C-P> which zsh/Vim interprets as the EOL.
 # https://jdhao.github.io/2019/06/13/zsh_bind_keys/
-bindkey '^Z' end-of-line
+bindkey '^P' end-of-line
 
 
 # Uncomment the following line if you want to change the command execution time
