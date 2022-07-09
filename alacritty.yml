@@ -857,6 +857,20 @@ key_bindings:
   #- { key: F,              mods: Command, mode: ~Search,     action: SearchForward    }
   #- { key: B,              mods: Command, mode: ~Search,     action: SearchBackward   }
 
+  # Promising solution but still has issue:
+  # enabling <C-I> still didn't separate it from Tab key.
+  #
+  # https://www.youtube.com/watch?v=lHBD6pdJ-Ng
+  # https://www.reddit.com/r/neovim/comments/vfqseq/enable_special_keyboard_combinations_in_alacritty/
+  #
+  # So that `Tab` and `Ctrl-I` are treated differently.
+  # - { key: I, mods: Control, chars: "\x1b[105;5u" }
+  #
+  # So that `Ctrl-,`, `Ctrl-.`, and `Ctrl-;` will work.
+  # - { key: Period, mods: Control, chars: "\x1b[46;5u" }
+  # - { key: Comma, mods: Control, chars: "\x1b[44;5u" }
+  # - { key: Semicolon, mods: Control, chars: "\x1b[59;5u" }
+
 #debug:
   # Display the time it takes to redraw each frame.
   #render_timer: false
