@@ -48,6 +48,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'ap/vim-css-color'
     Plug 'mattn/emmet-vim'
 
+    " Fix issue with `scrolloff=999` when operating on the end of file:
+    " normal mode is ok, but once you edit, the cursor moves back to bottom.
+    Plug 'vim-scripts/scrollfix'
+
     Plug 'psliwka/vim-smoothie'
     " Plug 'karb94/neoscroll.nvim'
 
