@@ -1,4 +1,5 @@
 nnoremap <Leader>gg :GitGutterToggle<CR>
-nnoremap <Leader>ggm :GitGutterNextHunk<CR>
-nnoremap <Leader>ggM :GitGutterPrevHunk<CR>
-nnoremap <Leader>ggp :GitGutterPreviewHunk<CR>
+nnoremap gm :GitGutterNextHunk<CR>
+nnoremap gM :GitGutterPrevHunk<CR>
+nnoremap gp :GitGutterPreviewHunk<CR>
+nnoremap gu :GitGutterUndoHunk<CR>
