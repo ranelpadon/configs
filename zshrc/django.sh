@@ -54,15 +54,15 @@ _gunicorn() {
 }
 
 
-gb() {
+ub() {
     _gunicorn backoffice 8000
 }
 
-gp() {
+up() {
     _gunicorn processing 8001
 }
 
-gf() {
+uf() {
     _gunicorn frontend 8002
 }
 
