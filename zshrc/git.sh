@@ -129,3 +129,9 @@ mconflicts() {
 vconflicts() {
     git diff --name-only | uniq | xargs nvim
 }
+
+
+gb() {
+    # Also set as `git blog` in ~/.gitconfig
+    git log --color --pretty=format:'%C(green)%h%Creset: %C(yellow)%ar %C(blue)%s %C(red)(%an)' --abbrev-commit
+}
