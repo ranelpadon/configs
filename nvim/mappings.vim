@@ -42,13 +42,13 @@ nnoremap <F12> <C-i>
 nnoremap <F13> <C-i>
 
 " Go to SOL and EOL when in Insert/Normal mode.
-" C-A and C-Z are mapped in Karabiner/BTT using the Left/Right Cmd physical keys.
+" C-A and C-P are mapped in Karabiner/BTT using the Left/Right Cmd physical keys.
 " with Cmd-Left and Cmd-Right keys.
 " https://coderwall.com/p/fd_bea/vim-jump-to-end-of-line-while-in-insert-mode
 inoremap <C-a> <C-o>^
-inoremap <C-z> <C-o>$
+inoremap <C-p> <C-o>$
 nnoremap <C-a> ^
-nnoremap <C-z> $
+nnoremap <C-p> $
 " Execute Normal command.
 inoremap kk <C-o>
 
@@ -209,6 +209,8 @@ vnoremap <F8> :move '<-2<CR>gv=gvzz
 " Use `[[`/`]]` for classes navigation.
 nmap J [mzz
 nmap K ]mzz
+nmap <C-j> [[zz
+nmap <C-k> ]]zz
 
 
 " Find and replace of the current word in cursor,
@@ -430,8 +432,10 @@ function! CenterSearch()
 endfunction
 
 cnoremap <silent> <expr> <enter> CenterSearch()
+
 " Repeat the last search.
-nnoremap // //<CR>
+" Good but has some delays when doing normal search only!
+" nnoremap // //<CR>
 
 
 " Open GitLab file.
