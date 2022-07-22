@@ -83,7 +83,6 @@ set expandtab                                                                   
 set softtabstop=4                                                               " Tab key/backspace stops
 set shiftwidth=4                                                                " > indentation size
 set shiftround                                                                  " indent to nearest indentatin
-set smartindent                                                                 " Newline indention
 
 set ignorecase                                                                  " Make searches case-insensitive
 set smartcase                                                                   " Use /\C to force match capitalizations
@@ -125,3 +124,25 @@ set formatoptions-=cro
 " Better DX with YAML files.
 autocmd FileType yml set cursorcolumn
 autocmd FileType yaml set cursorcolumn
+
+
+" `smartindent` is superseded by `autoindent` and generally useless.
+" It also causes issue when inserting the comment character:
+" the comment character is being put in the start of line
+" instead of indenting it.
+" https://stackoverflow.com/questions/2063175/comments-go-to-start-of-line-in-the-insert-mode-in-vim
+" https://stackoverflow.com/questions/18415492/autoindent-is-subset-of-smartindent-in-vim/18415867#18415867
+" au! FileType python setl nosmartindent
+" autocmd BufRead *.py inoremap # X<c-h>#
+" https://linuxhint.com/use-auto-indent-in-vim/
+" https://www.reddit.com/r/vim/comments/erjyhl/smartindent_vs_cindent/
+" `autoindent`: this method uses indent from the previous line for the file type you are editing.
+" `smartindent`: works similarly to autoindent but recognizes the syntax for some languages such as C language.
+" `cindent`: slightly different from autoindent and smartindent as it is more clever and is configurable to various indexing styles.
+set smartindent                                                                 " Newline indention
+" `:help  c-indenting`
+set cindent                                                                     " Potentially useful as well.
+
+" Don't render markdown files.
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
