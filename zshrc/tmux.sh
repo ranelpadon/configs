@@ -46,6 +46,7 @@ commit_ets_version() {
 }
 
 
+# Broadcast/send `ez` command to all Tmux windows.
 refresh_windows() {
     SESSION_NAME=$(tmux display-message -p '#S')
     tmux list-windows -t $SESSION_NAME|cut -d: -f1|xargs -I{} tmux send-keys -t $SESSION_NAME:{} ez Enter
