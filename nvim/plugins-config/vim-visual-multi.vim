@@ -21,6 +21,7 @@ let g:VM_custom_remaps = {'m': 'n', 'M': 'N'}
 let g:VM_maps['Undo'] = 'k'
 let g:VM_maps['Redo'] = '<C-r>'
 
+
 " Go back to Normal mode immediately after doing VM Insert.
 function! VM_Start()
     " Center stuff.

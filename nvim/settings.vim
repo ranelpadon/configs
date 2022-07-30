@@ -139,9 +139,9 @@ autocmd FileType yaml set cursorcolumn
 " `autoindent`: this method uses indent from the previous line for the file type you are editing.
 " `smartindent`: works similarly to autoindent but recognizes the syntax for some languages such as C language.
 " `cindent`: slightly different from autoindent and smartindent as it is more clever and is configurable to various indexing styles.
-set smartindent                                                                 " Newline indention
+" set smartindent                                                               " Newline indention
 " `:help  c-indenting`
-set cindent                                                                     " Potentially useful as well.
+" set cindent                                                                   " Potentially useful as well.
 
 " Don't render markdown files.
 let g:vim_markdown_conceal = 0
