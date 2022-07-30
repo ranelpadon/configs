@@ -114,8 +114,10 @@ endfunction
 " seems to work only in adjacent downward motion.
 " `gce` (gc1e) and `gcu` (gc1u) have some delays,
 " implement a function instead for faster sequence.
-nnoremap gce :call CommentTwoAdjacentLines('DOWN')<CR>
-nnoremap gcu :call CommentTwoAdjacentLines('UP')<CR>
+" nnoremap gce :call CommentTwoAdjacentLines('DOWN')<CR>
+" nnoremap se :call CommentTwoAdjacentLines('DOWN')<CR>
+" nnoremap gcu :call CommentTwoAdjacentLines('UP')<CR>
+" nnoremap su :call CommentTwoAdjacentLines('UP')<CR>
 
 
 function! DuplicateLines(type)
@@ -132,6 +134,31 @@ function! DuplicateLines(type)
     exec START .. ',' .. END .. 'copy ' .. END
 endfunction
 
+
+function! _CommentLines(start_line, end_line)
+    " Equivalent: `:123,345Commentary`
+    exec a:start_line .. ',' .. a:end_line .. 'Commentary'
+endfunction
+
+
+function! CommentLines(type)
+    " Get the lines/motion.
+    let START = line("'[")
+    let END = line("']")
+
+    call _CommentLines(START, END)
+endfunction
+
+
+" See `:help operatorfunc`.
+" Comment lines by providing the motion/number of lines, say, `r4j`.
+" Use `nmap` instead of `nnoremap` so that we could override the definition of `s`
+" and could have `ss`.
+nmap s :set operatorfunc=CommentLines<CR>g@
+" If no motion provided, operate on the current line only (`_`).
+nmap ss s_
+
+
 function! DuplicateAndCommentLines(type)
     " Get the lines/motion.
     let START = line("'[")
@@ -141,9 +168,9 @@ function! DuplicateAndCommentLines(type)
     call DuplicateLines('')
 
     " Comment original lines.
-    " Equivalent: `:123,345Commentary`
-    exec START .. ',' .. END .. 'Commentary'
+    call _CommentLines(START, END)
 endfunction
+
 
 " Remap `r` so that we could use it for more important commands below.
 nnoremap <Leader>r r
@@ -154,6 +181,7 @@ nnoremap <Leader>r r
 " and could have `rr` and `RR`.
 nmap r :set operatorfunc=DuplicateLines<CR>g@
 nmap R :set operatorfunc=DuplicateAndCommentLines<CR>g@
+
 " If no motion provided, operate on the current line only (`_`).
 nmap rr r_
 nmap RR R_
@@ -223,8 +251,9 @@ nnoremap m nzz
 nnoremap M Nzz
 
 " Switch comma and semicolon
-nnoremap , ;
-nnoremap ; ,
+" ; as forward motion by default.
+" , as backward motion by default, remap to `.
+nnoremap ` ,
 
 
 " Set mark/jot.
@@ -247,6 +276,8 @@ nnoremap P Pzz
 nnoremap G Gzz
 nnoremap <Down> <Down>zz
 nnoremap <Up> <Up>zz
+nnoremap <C-o> <C-o>zz
+nnoremap <C-d> <C-d>zz
 inoremap <Esc> <Esc>zz
 " Up/Down should not use `zz` when navigating completion popup menu.
 inoremap <expr> <Down> pumvisible() ? "\<Down>" : "\<Down>\<C-o>zz"
@@ -487,6 +518,7 @@ iabbrev icv ic(vars())<Left><Left><C-R>=Eatchar('\s')<CR>
 
 iabbrev ic from icecream import ic
 iabbrev icg ic(self.get_response_errors(response))
+iabbrev lw logger.warning('{}'.format())<Left><Left><C-R>=Eatchar('\s')<CR>
 iabbrev pudb import pudb; pu.db
 iabbrev pdbpp import pdb; pdb.set_trace()
 iabbrev ipdb import ipdb; ipdb.set_trace(context=10)
@@ -499,5 +531,5 @@ iabbrev super super(Foo, self).bar(*args, **kwargs)<Home><Right><Right><Right><R
 " autocmd FileType python nnoremap <buffer> ]] /^class\\|^\s*def<CR>
 
 " Include in jumps list (<C-o>) the j/k motions if they're more than 1 step.
-nnoremap <silent> e :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'j'<CR>
-nnoremap <silent> u :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'k'<CR>
+nnoremap <silent> e :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'jzz'<CR>
+nnoremap <silent> u :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'kzz'<CR>
