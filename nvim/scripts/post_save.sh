@@ -4,6 +4,6 @@
 
 # `--in-place` is needed since it will just print the diff by default,
 # instead of applying the changes.
-autoflake $1 --remove-all-unused-imports --in-place --exclude 'conf/settings/*'
+# autoflake $1 --remove-all-unused-imports --in-place --exclude 'conf/settings/*'
 
-isort $1
+# isort $1
