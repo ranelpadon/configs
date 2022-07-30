@@ -318,6 +318,13 @@ cdttl() {
     _cd_whitelabel totalticketing main open_url
 }
 
+_cdtwa() {
+    _cd_whitelabel thewanch main
+}
+cdtwa() {
+    _cd_whitelabel thewanch main open_url
+}
+
 _cdxr() {
     _cd_whitelabel clockenflap-xr main
 }
