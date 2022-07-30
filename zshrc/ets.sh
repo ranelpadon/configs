@@ -145,12 +145,24 @@ clear_pyc() {
 
 
 # Fix imports
-fim() {
+fix_imports_ets() {
     git diff --name-only ets \
     | grep '.py' \
     | grep -v 'migrations/' \
     | grep -v 'conf/' \
     | xargs isort
+}
+
+fix_python_files() {
+    modified_files=$(git diff --name-only | grep '.py' | grep -v 'migrations/' | grep -v 'conf/')
+
+    # Convert newlines to spaces.
+    FILES=($(echo $modified_files | tr '\n' ' '))
+
+    for FILE in $FILES; do
+        isort $FILE
+        autoflake $FILE --remove-all-unused-imports --in-place --exclude 'conf/settings/*'
+    done
 }
 
 
