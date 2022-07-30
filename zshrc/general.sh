@@ -22,10 +22,15 @@ export PATH="/usr/local/opt/node@12/bin:$PATH"
 # --body-numbering 'all-lines' (number the blank lines also)
 alias nl='nl -b a $1'
 alias ll='exa --long --icons --all --group-directories-first'
-alias lg='~/dev/bins/lazygit/lazygit'
-alias lazygit='~/dev/bins/lazygit/lazygit'
-# alias lg='lazygit'
+# alias lg='~/dev/bins/lazygit/lazygit'
+# alias lazygit='~/dev/bins/lazygit/lazygit'
 
+function _lazygit() {
+    fix_python_files
+    /usr/local/bin/lazygit
+}
+alias lg='_lazygit'
+alias lazygit='_lazygit'
 
 # Karabiner/BTT sends <C-P> which zsh/Vim interprets as the EOL.
 # https://jdhao.github.io/2019/06/13/zsh_bind_keys/
