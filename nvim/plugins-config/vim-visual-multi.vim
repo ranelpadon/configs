@@ -32,3 +32,23 @@ function! VM_Exit()
     " Back to default centering.
     set scrolloff=0
 endfun
+
+
+function! CurrentWordSelect()
+   execute "normal \<Plug>(VM-Find-Under)"
+endfunction
+
+
+" Normal way: v + HopChar1 + <C-d>
+" Better way: gm + HopChar1
+function! SubWordSelect(command)
+    normal v
+
+    " Run commands like `:HopChar1`.
+    execute a:command
+   execute "normal \<Plug>(VM-Find-Subword-Under)"
+endfunction
+
+
+nnoremap gm :call CurrentWordSelect()<CR>
+nnoremap gM :call SubWordSelect('HopChar1')<CR>
