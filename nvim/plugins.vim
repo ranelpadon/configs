@@ -54,6 +54,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'vim-scripts/scrollfix'
 
     Plug 'psliwka/vim-smoothie'
+    " Main notify/debug plugin, load only when needed.
+    " Plug 'rcarriga/nvim-notify'
     " Plug 'karb94/neoscroll.nvim'
 
     " Plug 'justinmk/vim-sneak'
