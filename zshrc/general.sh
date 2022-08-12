@@ -9,6 +9,14 @@ export VISUAL="$GIT_EDITOR"
 export EDITOR="$GIT_EDITOR"
 export COLORTERM="truecolor"
 
+# Use `one-dark` theme in `fd`, `exa`, `ls`, etc.
+# Download the binary instead of compiling via Homebrew!
+# https://github.com/sharkdp/vivid/releases
+# https://github.com/sharkdp/vivid
+# https://github.com/sharkdp/vivid/blob/master/themes/one-dark.yml
+alias vivid="$HOME/dev/binaries/vivid-v0.8.0/vivid"
+export LS_COLORS="$(vivid generate one-dark)"
+
 # `nnn` terminal file manager.
 export NNN_PLUG='p:preview-tui;t:preview-tabbed;d:dragdrop;v:imgview'
 export NNN_BMS='r:"$HOME/Data/UP DGE/Resources"'
@@ -22,8 +30,8 @@ export PATH="/usr/local/opt/node@12/bin:$PATH"
 # --body-numbering 'all-lines' (number the blank lines also)
 alias nl='nl -b a $1'
 alias ll='exa --long --icons --all --group-directories-first'
-# alias lg='~/dev/bins/lazygit/lazygit'
-# alias lazygit='~/dev/bins/lazygit/lazygit'
+# alias lg='~/dev/binaries/lazygit/lazygit'
+# alias lazygit='~/dev/binaries/lazygit/lazygit'
 
 function _lazygit() {
     fix_python_files
@@ -62,7 +70,7 @@ far() {
 # Building takes a long time, and could have errors.
 # Just download the pre-built binaries:
 # https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-download
-alias nvim="$HOME/dev/bins/nvim-osx64/bin/nvim"
+alias nvim="$HOME/dev/binaries/nvim-osx64/bin/nvim"
 
 
 Sad() {
