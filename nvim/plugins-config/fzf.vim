@@ -51,9 +51,11 @@ if g:is_mvim
 endif
 
 
+let s:rg_colors = ' --colors line:fg:red --colors path:fg:blue'
+
 command! -bang -nargs=* Rg
 \   call fzf#vim#grep(
-\       'rg --line-number --color=always --smart-case -- '.shellescape(<q-args>), 1,
+\       'rg' . s:rg_colors . ' --line-number --color=always --smart-case -- '.shellescape(<q-args>), 1,
 \       fzf#vim#with_preview({'options': '--exact --delimiter : --nth 3..'}), <bang>0
 \   )
 
@@ -62,7 +64,7 @@ function! RgHelper(query, fullscreen, command_fmt)
     :wincmd l
 
     " let command_fmt = a:command_fmt . ' --line-number --color=always --smart-case -- '
-    let command_fmt = a:command_fmt . ' --line-number --color=always --smart-case -- %s || true'
+    let command_fmt = a:command_fmt . s:rg_colors . ' --line-number --color=always --smart-case -- %s || true'
     let initial_command = printf(command_fmt, shellescape(a:query))
     let reload_command = printf(command_fmt, '{q}')
     " let spec = {'options': ['--phony', '--query', a:query]}
@@ -80,7 +82,7 @@ function! FileRgHelper(query, fullscreen, command_fmt)
     :wincmd l
 
     " let command_fmt = a:command_fmt . ' --line-number --color=always --smart-case -- '
-    let command_fmt = a:command_fmt . ' --line-number --color=always --smart-case -- %s || true'
+    let command_fmt = a:command_fmt . s:rg_colors . ' --line-number --color=always --smart-case -- %s || true'
     let initial_command = printf(command_fmt, shellescape(a:query))
     let reload_command = printf(command_fmt, '{q}')
     " let spec = {'options': ['--phony', '--query', a:query]}
