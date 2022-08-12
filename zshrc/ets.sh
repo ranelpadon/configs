@@ -166,6 +166,17 @@ fix_python_files() {
 }
 
 
+# create_tag_and_deploy TEST ets-test-v3.0.101
+function create_tag_and_deploy() {
+    cd ~/dev/whitelabels/scripts
+    pyenv activate ticketing
+    python whitelabels.py create $1 --ets-version $2
+    python whitelabels.py update $1 --ets-version $2
+    python whitelabels.py commit $1
+    python whitelabels.py deploy $1
+}
+
+
 # Helper function.
 _cd_whitelabel() {
     # $# variable will tell you the number of input arguments the script was passed.
