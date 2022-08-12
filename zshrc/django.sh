@@ -13,6 +13,7 @@ dit() {
 
 
 # Commands will use the BackOffice site.
+# manage makemessages --locale ko -i logs -i media -i migrations -i node_modules -i sites -i static --no-obsolete --no-location --verbosity 2
 manage() {
     $PY27 apps/backoffice/manage.py $@
 }
