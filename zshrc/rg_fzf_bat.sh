@@ -5,13 +5,17 @@
 # Add -s for --case-sensitive search when calling the top level functions.
 # rp "LoginView" -s
 # For --colors, see https://www.mankier.com/1/rg#--colors.
+
 _rg() {
     rg \
         --ignore-case \
+        --colors path:fg:175,135,255 \
+        --colors line:fg:red \
         --colors match:bg:249,245,154 \
         --colors match:fg:66,98,150 \
         --colors match:style:nobold $@
 }
+
 
 # rg-python
 # Search in Python files only.
@@ -159,7 +163,40 @@ export FZF_DEFAULT_COMMAND='
 '
 
 export FZF_PREVIEW_COMMAND='COLORTERM=truecolor bat --style=numbers --color=always --line-range :5000 {}'
-export FZF_DEFAULT_OPTS='--multi --bind ctrl-a:toggle-all'
+
+# Set the FZF color scheme.
+# https://github.com/junegunn/fzf/wiki/Color-schemes
+# https://minsw.github.io/fzf-color-picker/
+# https://github.com/base16-project/base16-fzf/blob/main/bash/base16-onedark.config
+
+local color00='#282c34'
+local color01='#353b45'
+local color02='#3e4451'
+local color03='#545862'
+local color04='#565c64'
+local color05='#abb2bf'
+local color06='#b6bdca'
+local color07='#c8ccd4'
+local color08='#e06c75'
+local color09='#d19a66'
+local color0A='#e5c07b'
+local color0B='#98c379'
+local color0C='#56b6c2'
+local color0D='#61afef'
+local color0E='#c678dd'
+local color0F='#be5046'
+local dracula_green='#5fff87'
+local dracula_magenta='#ff87d7'
+local dracula_purple='#af87ff'
+local dracula_yellow='#ffaf5f'
+
+export FZF_DEFAULT_OPTS="
+    --multi
+    --bind ctrl-a:toggle-all
+    --color=fg:$color04,header:$color0B,info:$dracula_purple,pointer:$dracula_green
+    --color=bg+:$color01,bg:$color00,spinner:$dracula_green,hl:$color0B
+    --color=marker:$dracula_green,fg+:$color06,prompt:$dracula_green,hl+:$color0B,query:$dracula_magenta
+"
 
 rfb() {
     # --nth=3 to search the right side of each line which is the code contents.
