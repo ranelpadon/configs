@@ -120,6 +120,13 @@ endfunction
 " nnoremap su :call CommentTwoAdjacentLines('UP')<CR>
 
 
+function! _MoveCursorAndCenterVertically(end_line)
+    let LINE_BELOW_END = a:end_line + 1
+    exec 'normal!' .. LINE_BELOW_END .. 'gg'
+    normal! zz
+endfunction
+
+
 function! DuplicateLines(type)
     " `type` is required arg for `operatorfunc`.
     " See https://vi.stackexchange.com/questions/7711/use-motion-in-normal-mapping-calling-a-function?#answer-7712
@@ -132,6 +139,8 @@ function! DuplicateLines(type)
     " Equivalent: `:123,345copy 345`
     " See `:help execute` for the syntax, especially for `..`.
     exec START .. ',' .. END .. 'copy ' .. END
+
+    call _MoveCursorAndCenterVertically(END)
 endfunction
 
 
@@ -169,6 +178,8 @@ function! DuplicateAndCommentLines(type)
 
     " Comment original lines.
     call _CommentLines(START, END)
+
+    call _MoveCursorAndCenterVertically(END)
 endfunction
 
 
@@ -254,6 +265,10 @@ nnoremap M Nzz
 " ; as forward motion by default.
 " , as backward motion by default, remap to `.
 nnoremap ` ,
+" g, as forward changelist. Analogous to <C-;>
+" g; as backward changelist. Analogous to <C-o>
+nnoremap go g;
+nnoremap g; g,
 
 
 " Set mark/jot.
@@ -359,6 +374,7 @@ nnoremap <F1>a ggVG                                                             
 
 " Macro for compiling release notes.
 " need to use the re-mapped values of j/k as e/u.
+" or use norm! to use the Vim's default keybindings.
 let @n="I  - \<Esc>uI* \<Esc>2edd"
 nnoremap <F5> :g/^https/ norm @n <CR>
 
