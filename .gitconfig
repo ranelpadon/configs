@@ -1,0 +1,72 @@
+[core]
+	excludesfile = ~/.gitignore
+	excludesfiles = .gitignore
+	; pager = less -r
+	pager = delta
+
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+
+[user]
+	name = Ranel Padon
+    email = ranel.padon@gmail.com
+#
+# https://github.com/Homebrew/brew/issues/52
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+
+[color]
+	status = always
+	diff = always
+	interactive = always
+	branch = always
+	grep = always
+
+[pull]
+	rebase = false
+
+[diff]
+    tool = nvimdiff
+
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+
+[difftool]
+    prompt = false
+
+[pager]
+    ; diff = delta -w ${FZF_PREVIEW_COLUMNS:-$COLUMNS}
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+
+[delta]
+	plus-style = green
+	minus-style = red
+	plus-emph-style = bold black green
+	minus-emph-style = bold black red
+	line-numbers = true
+	line-numbers-plus-style = green
+	line-numbers-minus-style = red
+	plus-empty-line-marker-style = green
+	minus-empty-line-marker-style = red
+	hunk-header-style = omit
+    navigate = true
+	; lazygit doesnt support 24-bit colors:
+	; https://github.com/jesseduffield/lazygit/issues/907#issuecomment-711918476
+	zero-style = 244
+	line-numbers-zero-style = 244
+	; zero-style = "#4e545e"
+	; line-numbers-zero-style = "#3e4452"
+
+[interactive]
+    diffFilter = delta --color-only
+[alias]
+	blog = log --color --graph --pretty=format:'%C(green)%h%Creset: %C(yellow)%ar %C(blue)%s %C(red)(%an)' --abbrev-commit
+	; blog = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
