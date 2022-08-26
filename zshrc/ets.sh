@@ -229,6 +229,13 @@ cdbjt() {
     _cd_whitelabel buyjapantickets main open_url
 }
 
+_cdbkt() {
+    _cd_whitelabel buyjapantickets main
+}
+cdbkt() {
+    _cd_whitelabel buyjapantickets main open_url
+}
+
 _cdbymop() {
     _cd_whitelabel bookyay-mop main
 }
