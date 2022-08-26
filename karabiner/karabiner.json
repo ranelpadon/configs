@@ -2108,7 +2108,7 @@
                                 "to_if_held_down": [
                                     {
                                         "halt": true,
-                                        "shell_command": "open -a 'Alfred 4.app'"
+                                        "shell_command": "open -a 'Alfred 5.app'"
                                     }
                                 ],
                                 "type": "basic"
