@@ -222,6 +222,13 @@ cdatl() {
     _cd_whitelabel asiaticketing main open_url
 }
 
+_cdbjt() {
+    _cd_whitelabel buyjapantickets main
+}
+cdbjt() {
+    _cd_whitelabel buyjapantickets main open_url
+}
+
 _cdbymop() {
     _cd_whitelabel bookyay-mop main
 }
@@ -436,7 +443,7 @@ gtg() {
 # _glrn ets-prod-v2.0.11 123 456
 _glrn() {
     pat
-    python /Users/ranelpadon/dev/scripts/gitlab/release-notes.py $1 no_migrations ${@:2}
+    python ~/dev/scripts/gitlab/release-notes.py $1 no_migrations ${@:2}
 }
 # glrn ets-prod-v2.0.11 (with migrations)
 # glrn ets-prod-v2.0.11 123 456 (with migrations)
@@ -452,11 +459,11 @@ glrn() {
 
     # Slice from index=2.
     # ${@:2}
-    python /Users/ranelpadon/dev/scripts/gitlab/release-notes.py $1 with_migrations ${@:2}
+    python ~/dev/scripts/gitlab/release-notes.py $1 with_migrations ${@:2}
 }
 
 # GitLab CI stats
 glci() {
     # pat
-    python /Users/ranelpadon/dev/scripts/gitlab/ci-stats.py $1
+    python ~/dev/scripts/gitlab/ci-stats.py $1
 }
