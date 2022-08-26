@@ -23,7 +23,7 @@ export NNN_BMS='r:"$HOME/Data/UP DGE/Resources"'
 export NNN_FIFO='$HOME/tmp/nnn.fifo'
 
 # Doom Emacs
-export PATH="/Users/ranelpadon/.emacs.d/bin:$PATH"
+export PATH="~/.emacs.d/bin:$PATH"
 export PATH="/usr/local/opt/node@12/bin:$PATH"
 
 
@@ -51,7 +51,7 @@ bindkey '^P' end-of-line
 HIST_STAMPS="mm/dd/yyyy"
 
 
-# configs_link "/Users/ranelpadon/Library/Application Support/lazygit/config.yml"
+# configs_link "~/Library/Application Support/lazygit/config.yml"
 configs_link() {
     cp $1 $CONFIGS
     mv $1 "$1_orig"
