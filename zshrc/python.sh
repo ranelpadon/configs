@@ -58,7 +58,7 @@ yt_video_trimmer() {
 alias yvt=yt_video_trimmer
 
 # Command: vt FILE_PATH START_TIME END_TIME
-# Sample: vt /Users/ranelpadon/Desktop/sample.mp4 2:45 4:48.7
+# Sample: vt ~/Desktop/sample.mp4 2:45 4:48.7
 video_trimmer() {
     # Set the working dir.
     cd ~/Desktop
