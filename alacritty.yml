@@ -745,6 +745,12 @@ key_bindings:
   #- { key: Home,      mods: Shift,   mode: ~Alt,        action: ScrollToTop,   }
   #- { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom }
 
+  # Map Cmd-Left/Right to Home/End keys.
+  # https://github.com/alacritty/alacritty/issues/2718
+  # Use the default keybindings for Home/End keys
+  - { key: Left,      mods: Command,     chars: "\x1bOH"                       }
+  - { key: Right,     mods: Command,     chars: "\x1bOF"                       }
+
   # Vi Mode
   #- { key: Space,  mods: Shift|Control, mode: Vi|~Search, action: ScrollToBottom          }
   #- { key: Space,  mods: Shift|Control, mode: ~Search,    action: ToggleViMode            }

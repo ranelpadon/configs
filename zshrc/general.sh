@@ -41,7 +41,8 @@ alias lazygit='_lazygit'
 
 # Karabiner/BTT sends <C-P> which zsh/Vim interprets as the EOL.
 # https://jdhao.github.io/2019/06/13/zsh_bind_keys/
-bindkey '^P' end-of-line
+# Not needed anymore due to Home/End key rebinding in `alacritty.yml`.
+# bindkey '^P' end-of-line
 
 
 # Uncomment the following line if you want to change the command execution time

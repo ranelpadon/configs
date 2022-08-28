@@ -42,13 +42,15 @@ nnoremap <F12> <C-i>
 nnoremap <F13> <C-i>
 
 " Go to SOL and EOL when in Insert/Normal mode.
+" Use the Home/End keys mapped in `alacritty.yml` which is more robust
+" than the C-A/C-P in BTT.
 " C-A and C-P are mapped in Karabiner/BTT using the Left/Right Cmd physical keys.
 " with Cmd-Left and Cmd-Right keys.
 " https://coderwall.com/p/fd_bea/vim-jump-to-end-of-line-while-in-insert-mode
-inoremap <C-a> <C-o>^
-inoremap <C-p> <C-o>$
-nnoremap <C-a> ^
-nnoremap <C-p> $
+inoremap <Home> <C-o>^
+inoremap <End> <C-o>$
+nnoremap <Home> ^
+nnoremap <End> $
 " Execute Normal command.
 inoremap kk <C-o>
 
