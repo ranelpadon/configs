@@ -26,7 +26,6 @@ export NNN_FIFO='$HOME/tmp/nnn.fifo'
 export PATH="~/.emacs.d/bin:$PATH"
 export PATH="/usr/local/opt/node@12/bin:$PATH"
 
-
 # --body-numbering 'all-lines' (number the blank lines also)
 alias nl='nl -b a $1'
 alias ll='exa --long --icons --all --group-directories-first'
@@ -71,6 +70,9 @@ far() {
 # Just download the pre-built binaries:
 # https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-download
 alias nvim="$HOME/dev/binaries/nvim-osx64/bin/nvim"
+
+# Nvim - Mac M1
+export PATH="/opt/homebrew/opt/node@12/bin:$PATH"
 
 
 Sad() {
