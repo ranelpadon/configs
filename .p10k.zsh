@@ -151,7 +151,8 @@
   typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_CHAR=' '
   typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_BACKGROUND=
   typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_GAP_BACKGROUND=
-  if [[ $POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_CHAR != ' ' ]]; then
+  if [[ $POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_CHAR != ' ' ]]
+  then
     # The color of the filler. You'll probably want to match the color of POWERLEVEL9K_MULTILINE
     # ornaments defined above.
     typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_FOREGROUND=242
@@ -374,7 +375,8 @@
   function my_git_formatter() {
     emulate -L zsh
 
-    if [[ -n $P9K_CONTENT ]]; then
+    if [[ -n $P9K_CONTENT ]]
+    then
       # If P9K_CONTENT is not empty, use it. It's either "loading" or from vcs_info (not from
       # gitstatus plugin). VCS_STATUS_* parameters are not available in this case.
       typeset -g my_git_format=$P9K_CONTENT
@@ -390,10 +392,12 @@
 
     local res
     local where  # branch or tag
-    if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]; then
+    if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]
+    then
       res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}"
       where=${(V)VCS_STATUS_LOCAL_BRANCH}
-    elif [[ -n $VCS_STATUS_TAG ]]; then
+    elif [[ -n $VCS_STATUS_TAG ]]
+    then
       res+="${meta}#"
       where=${(V)VCS_STATUS_TAG}
     fi
@@ -410,7 +414,8 @@
     [[ -z $where ]] && res+="${meta}@${clean}${VCS_STATUS_COMMIT[1,8]}"
 
     # Show tracking branch name if it differs from local branch.
-    if [[ -n ${VCS_STATUS_REMOTE_BRANCH:#$VCS_STATUS_LOCAL_BRANCH} ]]; then
+    if [[ -n ${VCS_STATUS_REMOTE_BRANCH:#$VCS_STATUS_LOCAL_BRANCH} ]]
+    then
       res+="${meta}:${clean}${(V)VCS_STATUS_REMOTE_BRANCH//\%/%%}"  # escape %
     fi
 
