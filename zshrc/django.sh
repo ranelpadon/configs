@@ -96,11 +96,13 @@ test() {
     # https://stackoverflow.com/questions/3427872/whats-the-difference-between-and-in-bash/#answer-3427931
 
     # Default is `buildbox`.
-    if [[ -z $CONTEXT ]]; then
+    if [[ -z $CONTEXT ]]
+    then
         CONTEXT=buildbox
     fi
 
-    if [[ $CONTEXT = 'buildbox' ]]; then
+    if [[ $CONTEXT = 'buildbox' ]]
+    then
         _SITE="_$SITE"
     fi
 
