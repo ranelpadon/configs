@@ -129,7 +129,8 @@ flower() {
 XAMPP=/Applications/XAMPP/xamppfiles/xampp
 
 _start_or_stop() {
-    if [[ $1 = 'start' ]]; then
+    if [[ $1 = 'start' ]]
+    then
         eval $2
     else
         eval $3
@@ -232,12 +233,14 @@ local_server() {
 
 
 # The next line updates PATH for the Google Cloud SDK.
-if [[ -f '~/google-cloud-sdk/path.zsh.inc' ]]; then
+if [[ -f '~/google-cloud-sdk/path.zsh.inc' ]]
+then
     . '~/google-cloud-sdk/path.zsh.inc';
 fi
 
 # The next line enables shell command completion for gcloud.
-if [[ -f '~/google-cloud-sdk/completion.zsh.inc' ]]; then
+if [[ -f '~/google-cloud-sdk/completion.zsh.inc' ]]
+then
     . '~/google-cloud-sdk/completion.zsh.inc';
 fi
 
