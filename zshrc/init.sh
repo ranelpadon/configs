@@ -1,14 +1,16 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
+# then
+#     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
 
 # https://stackoverflow.com/questions/51006002/how-do-i-get-intellij-terminal-to-work-properly-with-oh-my-zsh
 # https://intellij-support.jetbrains.com/hc/en-us/community/posts/360003553899-Change-colors-for-Oh-my-zsh-in-PHPStorm-terminal
 # system-wide environment settings for zsh(1)
-if [ -x /usr/libexec/path_helper ]; then
+if [ -x /usr/libexec/path_helper ]
+then
 	eval `/usr/libexec/path_helper -s`
 fi
 
@@ -61,3 +63,14 @@ ez() {
 
 # https://github.com/ajeetdsouza/zoxide
 eval "$(zoxide init zsh)"
+
+
+# Define $M1 for reuse in other scripts.
+if [ $(uname -m) = 'arm64' ]
+then
+    M1='true'
+    echo "Mac is M1!"
+else
+    M1='false'
+    echo "Mac is non-M1!"
+fi
