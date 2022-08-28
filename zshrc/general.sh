@@ -34,7 +34,14 @@ alias ll='exa --long --icons --all --group-directories-first'
 
 function _lazygit() {
     fix_python_files
-    /usr/local/bin/lazygit
+
+    if [[ $M1 = 'true' ]]
+    then
+        /opt/homebrew/bin/lazygit
+    else
+        /usr/local/bin/lazygit
+    fi
+
 }
 alias lg='_lazygit'
 alias lazygit='_lazygit'
