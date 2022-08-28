@@ -15,12 +15,14 @@ export PYTHONIOENCODING=UTF-8
 # PyEnv
 # export PYENV_ROOT="$HOME/.pyenv"
 # export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
+if command -v pyenv 1>/dev/null 2>&1
+then
     eval "$(pyenv init -)"
     # eval "$(pyenv virtualenv-init -)"  # Optional.
 fi
 
-if which pyenv-virtualenv-init > /dev/null; then
+if which pyenv-virtualenv-init > /dev/null
+then
     eval "$(pyenv virtualenv-init -)";
 fi
 
@@ -38,7 +40,14 @@ pyenv global 2.7.17 3.8.4
 
 
 pat() {
-    pyenv activate ticketing
+    if [[ $M1 = 'true' ]]
+    then
+        echo 'Conda will be used to activate env.'
+        conda activate ticketing
+    else
+        echo 'PyEnv will be used to activate env.'
+        pyenv activate ticketing
+    fi
     eit
 }
 
@@ -102,4 +111,19 @@ pyfix() {
     echo
     echo "${BLUE}autoflake fix: $NC"
     echo $CHANGED_PYTHON_FILES | xargs autoflake --in-place --remove-all-unused-imports --exclude 'conf/settings/*'
+}
+
+
+create_conda_environment() {
+    # Create a conda environment using x86 architecture.
+    # $1 is environment name, all subsequent arguments will be passed to `conda create`.
+    # Example: create_conda_environment ticketing python=2.7
+
+    # Installs the x86_64/i386 Python installer.
+    CONDA_SUBDIR=osx-64 conda create --name $@
+    conda activate $1
+
+    # Set to use install packages for x86_64/i386 in ~/.condarc.
+    # https://docs.conda.io/projects/conda/en/stable/commands/config.html
+    conda config --env --set subdir osx-64
 }
