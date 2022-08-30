@@ -69,10 +69,9 @@ eval "$(zoxide init zsh)"
 if [ $(uname -m) = 'arm64' ]
 then
     M1='true'
-    echo "Mac is M1!"
+    export PATH="/opt/homebrew/bin:$PATH"
 else
     M1='false'
-    echo "Mac is non-M1!"
 fi
 
 
