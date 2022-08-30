@@ -1,5 +1,12 @@
 ETS=$HOME/dev/ticketflap/ticketing
-PY27=$HOME/.pyenv/versions/2.7.17/envs/ticketing/bin/python
+
+# Choose the right Py2 depending on the MacBook type.
+if [[ $M1 = 'true' ]]
+then
+    PY27=/opt/homebrew/Caskroom/miniforge/base/envs/ticketing/bin/python
+else
+    PY27=$HOME/.pyenv/versions/2.7.17/envs/ticketing/bin/python
+fi
 
 
 # Replace vi/vim as default when triggerred in some contexts.
