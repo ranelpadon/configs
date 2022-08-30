@@ -42,10 +42,10 @@ pyenv global 2.7.17 3.8.4
 pat() {
     if [[ $M1 = 'true' ]]
     then
-        echo 'Conda will be used to activate env.'
+        # echo 'Conda will be used to activate env.'
         conda activate ticketing
     else
-        echo 'PyEnv will be used to activate env.'
+        # echo 'PyEnv will be used to activate env.'
         pyenv activate ticketing
     fi
     eit
