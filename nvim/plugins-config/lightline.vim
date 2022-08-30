@@ -27,12 +27,12 @@ endfunction
 
 
 function! SearchCount() abort
-    " let result = searchcount()
-    " if empty(result.total)
-    "     return ''
-    " endif
-    " " return result.total
-    " return printf('%d/%d', result.current, result.total)
+    let result = searchcount()
+    if empty(result.total)
+        return ''
+    endif
+    " return result.total
+    return printf('%d/%d', result.current, result.total)
 endfunction
 
 " let g:lightline#bufferline#shorten_path = 1
