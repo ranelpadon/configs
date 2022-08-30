@@ -26,12 +26,15 @@ function! LightlineFilename()
 endfunction
 
 
-function! SearchCount() abort
+function! SearchCount()
+    " `result` is a dict.
     let result = searchcount()
-    if empty(result.total)
+    "
+    " https://learnvimscriptthehardway.stevelosh.com/chapters/37.html
+    if empty(get(result, 'total', 0))
         return ''
     endif
-    " return result.total
+
     return printf('%d/%d', result.current, result.total)
 endfunction
 
