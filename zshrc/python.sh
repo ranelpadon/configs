@@ -12,31 +12,35 @@ export LC_ALL=en_US.UTF-8
 # Make the Python console/interpreter UTF-8 compatible
 export PYTHONIOENCODING=UTF-8
 
-# PyEnv
-# export PYENV_ROOT="$HOME/.pyenv"
-# export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1
+
+if [[ $M1 != 'true' ]]
 then
-    eval "$(pyenv init -)"
-    # eval "$(pyenv virtualenv-init -)"  # Optional.
+    # PyEnv
+    # export PYENV_ROOT="$HOME/.pyenv"
+    # export PATH="$PYENV_ROOT/bin:$PATH"
+    if command -v pyenv 1>/dev/null 2>&1
+    then
+        eval "$(pyenv init -)"
+        # eval "$(pyenv virtualenv-init -)"  # Optional.
+    fi
+
+    if which pyenv-virtualenv-init > /dev/null
+    then
+        eval "$(pyenv virtualenv-init -)";
+    fi
+
+    # Crucial export.
+    # Debugging: PYENV_DEBUG=1 pyenv versions
+    export PATH=$(pyenv root)/shims:$PATH
+
+    # For this warning: pyenv: python3: command not found
+    # 3.8.4 contains the py-neovim.
+    pyenv global 2.7.17 3.8.4
 fi
 
-if which pyenv-virtualenv-init > /dev/null
-then
-    eval "$(pyenv virtualenv-init -)";
-fi
 
 # `quiet` mode means to disable the POWERLEVEL instant prompt.
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-
-# Crucial export.
-# Debugging: PYENV_DEBUG=1 pyenv versions
-export PATH=$(pyenv root)/shims:$PATH
-
-
-# For this warning: pyenv: python3: command not found
-# 3.8.4 contains the py-neovim.
-pyenv global 2.7.17 3.8.4
 
 
 pat() {
