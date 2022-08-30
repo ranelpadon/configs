@@ -158,7 +158,9 @@ start() {
 }
 
 stop() {
-    mysql stop
+    # Stopping need an ENTER key for some reason, so simulate it using `echo`:
+    # https://stackoverflow.com/questions/6264596/simulating-enter-keypress-in-bash-script
+    echo | mysql stop
     mysql_kill
     brew_services stop memcached
     brew_services stop rabbitmq
