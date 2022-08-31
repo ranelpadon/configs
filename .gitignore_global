@@ -1,0 +1,25 @@
+.DS_Store
+.idea
+.pdbrc.py
+.vscode
+
+setup.cfg
+tags
+
+alloserv/assignment.log
+apps/.config/
+apps/.ipython/
+apps/common/patcher/
+media/backoffice/private/csv_uploads/
+test/django_shell_script_*
+test/gl2159_script__anomalous_gross_prices__non_package_tickets.py
+test/load/locust/docs
+test/migrations_syncer.py
+test/promocodes
+test/sandbox.py
+test/script_runner.py
+test/seating
+
+# Not needed most of the time.
+Library/
+/Library/
