@@ -13,8 +13,12 @@ export LC_ALL=en_US.UTF-8
 export PYTHONIOENCODING=UTF-8
 
 
-if [[ $M1 != 'true' ]]
+if [[ $M1 = 'true' ]]
 then
+    export PATH=/opt/homebrew/Caskroom/miniforge/base/envs/ticketing/bin:$PATH
+    conda activate ticketing
+    eit
+else
     # PyEnv
     # export PYENV_ROOT="$HOME/.pyenv"
     # export PATH="$PYENV_ROOT/bin:$PATH"
