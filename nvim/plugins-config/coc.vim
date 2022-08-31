@@ -1,3 +1,9 @@
+" M1 - MacVim couldn't detect the `node` path for some reason.
+if !executable('node')
+    let g:coc_node_path = '/opt/homebrew/opt/node@12/bin/node'
+endif
+
+
 " After launch, focus on editor, not on explorer.
 function FocusEditor()
     :CocCommand explorer --sources file+ --no-focus
