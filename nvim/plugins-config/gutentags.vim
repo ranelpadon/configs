@@ -20,7 +20,8 @@ let g:gutentags_exclude_project_root = [
     \ '/Users/ranelpadon/dev/design-patterns',
     \ '/Users/ranelpadon/dev/elevenskies',
     \ '/Users/ranelpadon/dev/melco',
-    \ '/Users/ranelpadon/dev/mgm'
+    \ '/Users/ranelpadon/dev/mgm',
+    \ '/opt/homebrew'
     \ ]
 
 let g:gutentags_exclude_filetypes = [
