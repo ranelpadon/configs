@@ -16,7 +16,8 @@ export PYTHONIOENCODING=UTF-8
 if [[ $M1 = 'true' ]]
 then
     export PATH=/opt/homebrew/Caskroom/miniforge/base/envs/ticketing/bin:$PATH
-    conda activate ticketing
+    export PY_MGR=conda
+    $PY_MGR activate ticketing
     eit
 else
     # PyEnv
@@ -33,6 +34,8 @@ else
         eval "$(pyenv virtualenv-init -)";
     fi
 
+    export PY_MGR=pyenv
+
     # Crucial export.
     # Debugging: PYENV_DEBUG=1 pyenv versions
     export PATH=$(pyenv root)/shims:$PATH
@@ -48,19 +51,12 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 
 pat() {
-    if [[ $M1 = 'true' ]]
-    then
-        # echo 'Conda will be used to activate env.'
-        conda activate ticketing
-    else
-        # echo 'PyEnv will be used to activate env.'
-        pyenv activate ticketing
-    fi
+    $PY_MGR activate ticketing
     eit
 }
 
 pai() {
-    pyenv activate 3_10_0__ipython
+    $PY_MGR activate 3_10_0__ipython
 }
 
 
@@ -69,7 +65,7 @@ pai() {
 yt_video_trimmer() {
     # Set the working dir.
     cd ~/Desktop
-    pyenv activate alloserv
+    $PY_MGR activate alloserv
     python ~/dev/scripts/video/yt-trimmer.py $1 $2 $3
 }
 alias yvt=yt_video_trimmer
@@ -79,7 +75,7 @@ alias yvt=yt_video_trimmer
 video_trimmer() {
     # Set the working dir.
     cd ~/Desktop
-    pyenv activate alloserv
+    $PY_MGR activate alloserv
     python ~/dev/scripts/video/trimmer.py $1 $2 $3
 }
 alias vt=video_trimmer
