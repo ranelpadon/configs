@@ -213,3 +213,6 @@ rpfb() {
 # https://github.com/sharkdp/bat
 export BAT_THEME="TwoDark"
 
+
+# Activate auto-completiong and keybindings like Ctrl-R.
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
