@@ -179,7 +179,8 @@ port_kill() {
 
 # https://dba.stackexchange.com/questions/36102/how-to-properly-kill-mysql
 mysql_kill() {
-    mysqladmin -uroot -ppassword -h127.0.0.1 --protocol=tcp shutdown
+    mysqladmin=/Applications/XAMPP/xamppfiles/bin/mysqladmin
+    $mysqladmin -uroot -ppassword -h127.0.0.1 --protocol=tcp shutdown
 }
 
 
