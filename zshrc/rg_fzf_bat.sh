@@ -11,8 +11,7 @@ _rg() {
         --ignore-case \
         --colors path:fg:175,135,255 \
         --colors line:fg:red \
-        --colors match:bg:249,245,154 \
-        --colors match:fg:66,98,150 \
+        --colors match:fg:green \
         --colors match:style:nobold $@
 }
 
@@ -214,5 +213,5 @@ rpfb() {
 export BAT_THEME="TwoDark"
 
 
-# Activate auto-completiong and keybindings like Ctrl-R.
+# Activate auto-completion and keybindings like Ctrl-R.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
