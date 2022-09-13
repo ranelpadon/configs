@@ -1,7 +1,7 @@
 ETS=$HOME/dev/ticketflap/ticketing
 
 # Choose the right Py2 depending on the MacBook type.
-if [[ $M1 = 'true' ]]
+if [[ $M1 == 'true' ]]
 then
     PY27=/opt/homebrew/Caskroom/miniforge/base/envs/ticketing/bin/python
 else
@@ -42,7 +42,7 @@ alias ll='exa --long --icons --all --group-directories-first'
 function _lazygit() {
     fix_python_files
 
-    if [[ $M1 = 'true' ]]
+    if [[ $M1 == 'true' ]]
     then
         /opt/homebrew/bin/lazygit
     else
