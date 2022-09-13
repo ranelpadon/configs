@@ -6,11 +6,12 @@ let g:save_on_update = 1
 " Add a preview window.
 command! -bang -nargs=? FZFMru call fzf_mru#actions#mru(<q-args>,
     \{
-        \'window': {'width': 1, 'height': 1},
+        \'window': {'width': 0.75, 'height': 0.5},
         \'options': [
+            \'--prompt', 'λ ',
             \'--preview', 'bat --style=numbers --color=always {}',
-            \'--preview-window', 'up:60%',
-            \'--bind', 'ctrl-_:toggle-preview'
+            \'--preview-window', 'up:55%:hidden',
+            \'--bind', '?:toggle-preview'
         \]
     \}
 \)
