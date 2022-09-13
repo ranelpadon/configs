@@ -129,7 +129,7 @@ flower() {
 XAMPP=/Applications/XAMPP/xamppfiles/xampp
 
 _start_or_stop() {
-    if [[ $1 = 'start' ]]
+    if [[ $1 == 'start' ]]
     then
         eval $2
     else
