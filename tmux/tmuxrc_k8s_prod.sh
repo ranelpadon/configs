@@ -47,7 +47,7 @@ _update_env() {
         gpl
     '
 
-    if [ "$1" = "MGMPROD" ]
+    if [[ "$1" == "MGMPROD" ]]
     then
         COMMAND+='
             fd --regex "gitlab-ci(.production-shared)?.yml" --hidden \
