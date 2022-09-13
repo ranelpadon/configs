@@ -28,8 +28,7 @@ commit_ets_version() {
     # Send the same Git commit message to all active windows.
     SESSION_NAME=$(tmux display-message -p '#S')
 
-    # Double quotes are needed to correctly evaluate the inner vars.
-    if [[ "$1" = "TEST" ]]
+    if [[ $1 == "TEST" ]]
     then
         MESSAGE="
             gca 'Update $1 to ets-test-v3.0.$2.'
