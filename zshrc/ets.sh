@@ -76,8 +76,12 @@ rprod() {
     gpl
     gcprod
     gpl
+    # Merging requires $GIT_EDITOR to be set, and will use the binary file pointed to it.
+    # Aliased `nvim` will not work. Hence, need to do `brew install nvim` first.
     gm ets
-    fab create_release_tag:release/ets/prod/v2.0,$1,full,melco
+
+    $PY27 ~/dev/whitelabels/scripts/python/whitelabels.py create_tag PROD --ets-version $1
+    # fab create_release_tag:release/ets/prod/v2.0,$1,full,melco
     # fab create_release_tag:release/ets/prod/v1.8.47,ets-prod-v1.8.47-RC$1,full,melco
 }
 
@@ -125,7 +129,7 @@ _pyc() {
             --exclude templates \
     '
 
-    if [ "$1" = "clear" ]
+    if [[ $1 == "clear" ]]
     then
         FD+='--exec rm'
         echo 'Clearing .pyc files...'
@@ -180,14 +184,14 @@ function create_tag_and_deploy() {
 # Helper function.
 _cd_whitelabel() {
     # $# variable will tell you the number of input arguments the script was passed.
-    if [ $# -eq 2 ]
+    if [[ $# -eq 2 ]]
     then
         # Don't open the whitelabel URL.
     else
         # With `open_url` command arg.
         # Check if need to use custom URL.
-        # Quotes are needed for evaluating the $ vars.
-        if [ "$1" = "ticketing-ets-chart" ]
+        # Quotes are not needed for evaluating the $ vars when using `[[  ]]`.
+        if [[ $1 == "ticketing-ets-chart" ]]
         then
             open "https://git.hk.asiaticketing.com/technology/helm-charts/ticketing-ets-chart/-/pipelines"
         else
@@ -436,7 +440,7 @@ gtg() {
     git fetch --tags
 
     # $# variable will tell you the number of input arguments the script was passed.
-    if [ $# -eq 0 ]
+    if [[ $# -eq 0 ]]
     then
         # Search PROD tag by default.
         git tag | grep 'ets-prod' | sort --version-sort | tail
