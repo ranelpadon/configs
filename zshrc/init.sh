@@ -9,7 +9,7 @@
 # https://stackoverflow.com/questions/51006002/how-do-i-get-intellij-terminal-to-work-properly-with-oh-my-zsh
 # https://intellij-support.jetbrains.com/hc/en-us/community/posts/360003553899-Change-colors-for-Oh-my-zsh-in-PHPStorm-terminal
 # system-wide environment settings for zsh(1)
-if [ -x /usr/libexec/path_helper ]
+if [[ -x /usr/libexec/path_helper ]]
 then
 	eval `/usr/libexec/path_helper -s`
 fi
@@ -66,7 +66,7 @@ eval "$(zoxide init zsh)"
 
 
 # Define $M1 for reuse in other scripts.
-if [ $(uname -m) = 'arm64' ]
+if [[ $(uname -m) == 'arm64' ]]
 then
     M1='true'
     export PATH="/opt/homebrew/bin:$PATH"
@@ -78,10 +78,12 @@ fi
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/homebrew/Caskroom/miniforge/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
+if [[ $? -eq 0 ]]
+then
     eval "$__conda_setup"
 else
-    if [ -f "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]; then
+    if [[ -f "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]]
+    then
         . "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh"
     else
         export PATH="/opt/homebrew/Caskroom/miniforge/base/bin:$PATH"
