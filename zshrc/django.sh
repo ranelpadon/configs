@@ -101,7 +101,7 @@ test() {
         CONTEXT=buildbox
     fi
 
-    if [[ $CONTEXT = 'buildbox' ]]
+    if [[ $CONTEXT == 'buildbox' ]]
     then
         _SITE="_$SITE"
     fi
