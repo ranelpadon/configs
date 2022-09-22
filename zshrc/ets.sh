@@ -83,6 +83,11 @@ rprod() {
     $PY27 ~/dev/whitelabels/scripts/python/whitelabels.py create_tag PROD --ets-version $1
     # fab create_release_tag:release/ets/prod/v2.0,$1,full,melco
     # fab create_release_tag:release/ets/prod/v1.8.47,ets-prod-v1.8.47-RC$1,full,melco
+
+    # Merge new release tag back to `ets` and push.
+    gce
+    gmp
+    gps
 }
 
 # rttltest 1 (for RC1)
@@ -199,7 +204,7 @@ _cd_whitelabel() {
         fi
     fi
 
-    cd ~/dev/$1
+    cd ~/dev/whitelabels/$1
     gc $2
     gpl
     nvim
