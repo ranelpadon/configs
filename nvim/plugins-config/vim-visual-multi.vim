@@ -2,9 +2,9 @@
 let g:VM_maps = {}
 
 " Replace <C-n>
-let g:VM_maps['Find Under'] = '<C-d>'
+let g:VM_maps['Find Under'] = 'gm'
 " Replace visual <C-n>
-let g:VM_maps['Find Subword Under'] = '<C-d>'
+let g:VM_maps['Find Subword Under'] = 'gm'
 
 " https://github.com/mg979/vim-visual-multi/issues/187#issuecomment-908988989
 let g:VM_maps['i'] = 'a'
@@ -39,17 +39,31 @@ function! CurrentWordSelect()
    execute "normal \<Plug>(VM-Find-Under)"
 endfunction
 
+" nnoremap gm :call CurrentWordSelect()<CR>
+
 
 " Normal way: v + HopChar1 + <C-d>
 " Better way: gm + HopChar1
-function! SubWordSelect(command)
-    normal v
+" Best way: gm + <motion>
+" function! SubWordSelect(command)
+"     normal v
 
-    " Run commands like `:HopChar1`.
-    execute a:command
-   execute "normal \<Plug>(VM-Find-Subword-Under)"
+"     " Run commands like `:HopChar1`.
+"     execute a:command
+"
+" endfunction
+
+" nnoremap <Leader>gm :call SubWordSelect('HopChar1')<CR>
+
+
+function! SubWordSelect(type)
+    " Get the char-wise motion.
+    let START_CHAR = "`["
+    let END_CHAR = "`]"
+
+    " Run command like `vfa`.
+    execute "normal v" . END_CHAR
+    execute "normal \<Plug>(VM-Find-Subword-Under)"
 endfunction
 
-
-nnoremap gm :call CurrentWordSelect()<CR>
-nnoremap gM :call SubWordSelect('HopChar1')<CR>
+" nnoremap <Leader>gm :set operatorfunc=SubWordSelect<CR>g@
