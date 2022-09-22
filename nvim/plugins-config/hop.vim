@@ -1,5 +1,5 @@
 " lua require('hop').setup {keys = 'neioarstkgluyhmpfwqdcv', term_seq_bias = 0.5, inclusive_jump = true, hint_offset = 0}
-lua require('hop').setup {keys = 'neioarstkgluyhmpfwqdc', hint_offset = -1}
+lua require('hop').setup {keys = 'neioarstkgluyhmpfwqdc', hint_offset = 0}
 " lua require('hop').setup {keys = 'neioarstkgluyhmpfwqdc'}
 
 
@@ -36,16 +36,15 @@ endfunction
 " " map F <Plug>(VM-Find-Under)
 " map F :call RangeSelect('HopChar1')<CR>
 
-" Cmd+f via BTT.
-map <F1>f /
-
 " nmap f :call ExecuteThenCenterScreenVertically('HopChar1')<CR>
 " For verb-subject operations.
 " omap f :call VisuallyExecute('HopChar1')<CR>
 " For `vim-visual-multi` cursor.
 " xmap f <Cmd>HopChar1<CR>
 " omap f v<Cmd>HopChar1<CR>
-omap f v<Cmd>HopChar1<CR>
+" No need to use `v` for an inclusive operation, which will cause issue anyway
+" since the `hint_offset` behavior is now fixed.
+omap <Leader>f <Cmd>HopChar1<CR>
 
 " map F v<Cmd>HopChar1<CR>
 " nnoremap f :call ExecuteThenCenterScreenVertically('HopChar1')<CR>
