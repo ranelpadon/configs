@@ -13,7 +13,7 @@ export LC_ALL=en_US.UTF-8
 export PYTHONIOENCODING=UTF-8
 
 
-if [[ $M1 = 'true' ]]
+if [[ $M1 == 'true' ]]
 then
     export PATH=/opt/homebrew/Caskroom/miniforge/base/envs/ticketing/bin:$PATH
     export PY_MGR=conda
@@ -75,7 +75,7 @@ alias yvt=yt_video_trimmer
 video_trimmer() {
     # Set the working dir.
     cd ~/Desktop
-    $PY_MGR activate alloserv
+    # $PY_MGR activate alloserv
     python ~/dev/scripts/video/trimmer.py $1 $2 $3
 }
 alias vt=video_trimmer
@@ -131,3 +131,18 @@ create_conda_environment() {
     # https://docs.conda.io/projects/conda/en/stable/commands/config.html
     conda config --env --set subdir osx-64
 }
+
+
+# python whitelabels.py
+pw() {
+    cd ~/dev/whitelabels/scripts/python
+    $PY27 whitelabels.py $@
+}
+
+
+# mouse_mover.py
+mouse_mover() {
+    cd ~/dev/scripts
+    $PY27 mouse_mover.py
+}
+alias mm=mouse_mover
