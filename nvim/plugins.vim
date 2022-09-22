@@ -62,6 +62,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'easymotion/vim-easymotion'
     Plug 'phaazon/hop.nvim'
     " Plug 'ggandor/lightspeed.nvim'
+    Plug 'rhysd/clever-f.vim'
     Plug 'mg979/vim-visual-multi'
     Plug 'haya14busa/vim-asterisk'
     Plug 'RRethy/vim-tranquille'
@@ -89,6 +90,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'ray-x/sad.nvim'
 
     Plug 'wellle/targets.vim'
+    " Plug 'wellle/context.vim'
     Plug 'michaeljsmith/vim-indent-object'
 
     if !g:is_nvim
