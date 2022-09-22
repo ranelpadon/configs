@@ -1,6 +1,6 @@
-nnoremap <Leader>gb :GitBlameToggle<CR>
-nnoremap <Leader>gbs :GitBlameCopySHA<CR>
-nnoremap <Leader>gbu :GitBlameOpenCommitURL<CR>
+nnoremap gb :GitBlameToggle<CR>
+nnoremap gbu :GitBlameOpenCommitURL<CR>
+nnoremap gbs :GitBlameCopySHA<CR>
 
 " function Func()
 "      :GitBlameToggle
