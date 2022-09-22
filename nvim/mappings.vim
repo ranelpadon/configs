@@ -200,6 +200,9 @@ nmap rr r_
 nmap RR R_
 
 
+" Search/Find
+" Cmd+f via BTT.
+nnoremap <F1>f /
 " Copy.
 " Cmd+c via BTT.
 nnoremap <F1>c yy
