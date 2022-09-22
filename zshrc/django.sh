@@ -204,7 +204,7 @@ drf2() {
 }
 
 drf3() {
-    gc feature/gl-394_upgrade_drf_related_packages
+    gce
     clear_pyc
     pip install djangorestframework===3.5.4 --no-input
     # pip install django-authority==0.13.2
@@ -224,6 +224,8 @@ dj111() {
     pip install Django==1.11.29 --no-input
     pip uninstall django-longerusernameandemail==0.5.7 --no-input
     pip install django-modeltranslation==0.14.4 --no-input
+    pip install django-authority==0.14
+    pip install django-simple-history==2.12.0
 
     # pip install django-sekizai==1.1.0
     # pip install django-classy-tags==0.9.0
@@ -233,7 +235,8 @@ undj111() {
     pip install Django==1.8.19 --no-input
     pip install django-longerusernameandemail==0.5.7 --no-input
     pip install django-modeltranslation==0.12.2 --no-input
-
+    pip install django-authority==0.13.2
+    pip install django-simple-history==1.9.1
     # pip install django-sekizai==0.10.0
     # pip install django-classy-tags==0.8.0
 }
