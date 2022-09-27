@@ -16,37 +16,47 @@ _new_window() {
 
 _new_window 29RSGSTAG 29rooms-sg
 _new_window AAJSTAG allaboutjazz
+_new_window BJTSTAG buyjapantickets
+_new_window BKTSTAG buykoreatickets
 _new_window BYMOPSTAG bookyay-mop
 _new_window BYNTDSTAG bookyay-ntd
-_new_window DEMOSTAG demo
+# _new_window DEMOSTAG demo
 _new_window F7STAG f7
 _new_window GTSSTAG 11-skies  # GTSSTAG and GTSSTAG-K11
+_new_window HKIDASTAG hkida
 _new_window HKILFSTAG hkilf
 _new_window HKRUSTAG hkru
 _new_window KGGSTAG kgg-kg
-_new_window MCSTAG melco
 _new_window MCCSTAG melco-cyprus
+_new_window MCSTAG melco
 _new_window MGMSTAG mgm
 _new_window MTSTAG matchtic
 _new_window SUNSTAG sun-entertainment
+_new_window SWISTAG swire
 _new_window TASTAG tatlerasia
 _new_window TKLSTAG tickelo
 _new_window TTLSTAG totalticketing
+_new_window TWASTAG thewanch
 _new_window ZIPSTAG zipcity
-# _new_window ZKTSTAG zicket
 _new_window ZUNISTAG zuni
 
 
 # Helper function.
 _update_env() {
+    # COMMAND='
+    #     open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/$WHITELABEL/-/pipelines"
+    #     cd ~/dev/whitelabels/$WHITELABEL
+    #     gc main
+    #     gpl
+    #     fd --regex "gitlab-ci(.staging.*)?.yml" --hidden \
+    #         | xargs sd "ets-prod-v2.0.[^\s]+" "ets-prod-v2.0.$TAG"
+    #     gd
+    # '
     COMMAND='
-        open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/$WHITELABEL/-/pipelines"
-        cd ~/dev/$WHITELABEL
+        cd ~/dev/whitelabels/$WHITELABEL
         gc main
         gpl
-        fd --regex "gitlab-ci(.staging.*)?.yml" --hidden \
-            | xargs sd "ets-prod-v2.0.[^\s]+" "ets-prod-v2.0.$TAG"
-        gd
+        nvim k8s/k8s.staging/deploy/values.0.9.46.yaml
     '
     # | xargs sd "ets-prod-v1.8.47-RC[^\s]+" "ets-prod-v2.0.$TAG"
     tmux send-keys -t k8s_stag:$1 $COMMAND Enter
@@ -55,24 +65,29 @@ _update_env() {
 # Auto-runs
 _update_env 29RSGSTAG
 _update_env AAJSTAG
+_update_env BJTSTAG
+_update_env BKTSTAG
 _update_env BYMOPSTAG
 _update_env BYNTDSTAG
-_update_env DEMOSTAG
+# _update_env DEMOSTAG
 _update_env F7STAG
 _update_env GTSSTAG
+_update_env HKIDASTAG
 _update_env HKILFSTAG
 _update_env HKRUSTAG
+# _update_env K11STAG
 _update_env KGGSTAG
-_update_env MCSTAG
 _update_env MCCSTAG
+_update_env MCSTAG
 _update_env MGMSTAG
 _update_env MTSTAG
 _update_env SUNSTAG
+_update_env SWISTAG
 _update_env TASTAG
 _update_env TKLSTAG
 _update_env TTLSTAG
+_update_env TWASTAG
 _update_env ZIPSTAG
-# _update_env ZKTSTAG
 _update_env ZUNISTAG
 
 
