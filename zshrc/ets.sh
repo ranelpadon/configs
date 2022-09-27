@@ -287,6 +287,13 @@ cdhelm() {
     _cd_whitelabel ticketing-ets-chart master open_url
 }
 
+_cdhkida() {
+    _cd_whitelabel hkida main
+}
+cdhkida() {
+    _cd_whitelabel hkida main open_url
+}
+
 _cdhkilf() {
     _cd_whitelabel hkilf main
 }
@@ -341,6 +348,13 @@ _cdsun() {
 }
 cdsun() {
     _cd_whitelabel sun-entertainment main open_url
+}
+
+_cdswi() {
+    _cd_whitelabel swire main
+}
+cdswi() {
+    _cd_whitelabel swire main open_url
 }
 
 _cdta() {
