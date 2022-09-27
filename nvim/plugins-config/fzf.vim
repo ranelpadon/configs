@@ -269,6 +269,11 @@ let rg_zsh = 'rg --type sh'
 command! -nargs=* -bang RgZsh call RgReloader(<q-args>, <bang>0, rg_zsh)
 noremap <Leader>z :RgZsh<CR>
 
+" Search Vim Files
+let rg_vim = 'rg --type vim'
+command! -nargs=* -bang RgVim call RgReloader(<q-args>, <bang>0, rg_vim)
+noremap <Leader>v :RgVim<CR>
+
 
 " Search All Files (include Git-ignored files)
 let rg_all = 'rg --no-ignore --type-add "compiled:*.compiled" --type-not compiled --type-not log'
