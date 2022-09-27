@@ -41,6 +41,20 @@ nnoremap <F12> <C-i>
 " Mapped to <C-;> which is physically above the <C-o> in Colemak layout.
 nnoremap <F13> <C-i>
 
+" `C-o` and `C-i` (remapped to `C-o` and `C-;`) are jumplist like the `n` for search results (multi-buffer scope?).
+" `g;` and `g,` (remapped to `go` and `g;`) are changelist (same buffer scope?).
+" `gi` is similar to `g;` (remapped to `go`) but go to Insert mode immediately?
+" g, as forward changelist. Analogous to <C-;>
+" g; as backward changelist. Analogous to <C-o>
+nnoremap go g;
+nnoremap g; g,
+
+" Switch comma and semicolon
+" ; as forward motion by default.
+" , as backward motion by default, remap to `.
+nnoremap ` ,
+
+
 " Go to SOL and EOL when in Insert/Normal mode.
 " Use the Home/End keys mapped in `alacritty.yml` which is more robust
 " than the C-A/C-P in BTT.
@@ -266,15 +280,6 @@ nnoremap <Leader>fr :%s/\<<C-r><C-w>\>//g<Left><Left>
 nnoremap m nzz
 nnoremap M Nzz
 
-" Switch comma and semicolon
-" ; as forward motion by default.
-" , as backward motion by default, remap to `.
-nnoremap ` ,
-" g, as forward changelist. Analogous to <C-;>
-" g; as backward changelist. Analogous to <C-o>
-nnoremap go g;
-nnoremap g; g,
-
 
 " Set mark/jot.
 " Usage: ja then 'a.
@@ -366,7 +371,7 @@ nnoremap <Leader>s :source ~/dev/configs/nvim/init.vim<CR>:echo "Reloaded Neovim
 " https://stackoverflow.com/questions/657447/vim-clear-last-search-highlighting#657457
 " Could not use the <Esc><Esc> sequence due to issues with other keys like arrows:
 " https://stackoverflow.com/questions/11940801/mapping-esc-in-vimrc-causes-bizarre-arrow-behaviour?noredirect=1&lq=1
-nnoremap <silent><Esc> :noh<CR>
+nnoremap <Esc> :noh<CR>:call clever_f#reset()<CR>
 " nnoremap <silent> kk :let @/ = ""<CR>
 
 " Visual Mode - Dot
