@@ -78,6 +78,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     Plug 'jiangmiao/auto-pairs'
     Plug 'sheerun/vim-polyglot'
+    " Plug 'andymass/vim-matchup'
+    " Plug 'voithos/vim-python-matchit'
 
     " Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}                 " We recommend updating the parsers on update
     " Plug 'nvim-treesitter/nvim-treesitter-textobjects'
@@ -111,4 +113,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
     Plug 'joshdick/onedark.vim'
     Plug 'tweekmonster/startuptime.vim'
+
+    " Plug '~/dev/configs/nvim/autoload/plugged/python-copy-reference'
+    Plug 'ranelpadon/python-copy-reference.vim'
 call plug#end()
+
+
+" Vim bundled plugin.
+packadd! matchit
