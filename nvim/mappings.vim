@@ -52,7 +52,7 @@ nnoremap g; g,
 " Switch comma and semicolon
 " ; as forward motion by default.
 " , as backward motion by default, remap to `.
-nnoremap ` ,
+" nnoremap ` ,
 
 
 " Go to SOL and EOL when in Insert/Normal mode.
@@ -331,6 +331,10 @@ vnoremap i l
 " to have right-ward direction than text object selection.
 vnoremap ii ll
 
+" Display/Wrapped Lines:
+nnoremap gE gj
+nnoremap gU gk
+
 " Scroll up/down in chunks in Insert mode.
 " inoremap <C-u> <Esc>9kzzi
 " inoremap <C-e> <Esc>9jzzi
@@ -522,7 +526,8 @@ nnoremap <leader>fn :let @*=expand("%:p")<CR>
 nnoremap <leader>fe :let @*=expand("%")<CR>
 " Python dotted path (project/relative path). Similar to `copy reference` in PyCharm.
 " Auto-truncate the `apps/conf` folders in `ets` codebase.
-nnoremap <Leader>fi :let @*=substitute(expand('%:r'), '\/', '.', 'g')[5:] . '.' . expand('<cword>')<CR>
+" See: `python-copy-reference.vim` config.
+" nnoremap <Leader>fi :PythonCopyReferenceDotted<CR>
 " Copy Filename (foo.txt)
 nnoremap <leader>fo :let @*=expand("%:t")<CR>
 " Copy Filename without extension (foo)
