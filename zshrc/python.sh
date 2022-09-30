@@ -144,5 +144,6 @@ pw() {
 mouse_mover() {
     cd ~/dev/scripts
     $PY27 mouse_mover.py
+    cd -
 }
 alias mm=mouse_mover
