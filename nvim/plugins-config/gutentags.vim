@@ -9,9 +9,9 @@ augroup MyGutentagsStatusLineRefresher
 augroup END
 
 " Index current buffer.
-nnoremap <Leader>gu :GutentagsUpdate<CR>
+nnoremap <Leader>gtu :GutentagsUpdate<CR>
 " Index entire project.
-nnoremap <Leader>gup :GutentagsUpdate!<CR>
+nnoremap <Leader>gtup :GutentagsUpdate!<CR>
 
 let g:gutentags_exclude_project_root = [
     \ '/Users/ranelpadon',
