@@ -108,7 +108,7 @@ test() {
 
     SETTING=settings.local_settings.$CONTEXT.$_SITE
 
-    echo $SETTING
+    # echo $SETTING
 
     $PY27 \
         ~/dev/ticketflap/ticketing/apps/$SITE/manage.py \
