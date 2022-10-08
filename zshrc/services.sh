@@ -231,7 +231,14 @@ alloserv() {
 # Start an HTTP server from a directory, optionally specifying the port
 local_server() {
     open "http://localhost:8000/" &
-    php -S localhost:8000
+
+    # Py2
+    python -m SimpleHTTPServer 8000
+
+    # Py3
+    # python -m http.server 8080
+
+    # php -S localhost:8000
 }
 
 
