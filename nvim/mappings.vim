@@ -390,7 +390,15 @@ nnoremap <F1>a ggVG                                                             
 " need to use the re-mapped values of j/k as e/u.
 " or use norm! to use the Vim's default keybindings.
 let @n="I  - \<Esc>uI* \<Esc>2edd"
-nnoremap <F5> :g/^https/ norm @n <CR>
+" nnoremap <F5> :g/^https/ norm @n <CR>
+
+
+" Macro to convert raw Ngrams to Ngram-Type data source:
+" https://ranelpadon.github.io/ngram-type/ngrams/bigrams.js
+" `x` is needed to delete the closing pair of the single-quotes
+" due to auto-pair behavior.
+let @q="g~iwf DI    '\<c-o>x\<c-o>$',\<Esc>"
+" nnoremap <Leader>q :% normal! @q<CR>
 
 
 " Buffers
