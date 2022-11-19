@@ -236,7 +236,18 @@ inoremap <F1>r <C-o><C-r>
 " Edit file in a new 'tab'
 " Cmd+t via BTT.
 " <C-r>+ in command mode will copy the system clipboard registy (+).
-nnoremap <F1>t :edit <C-r>+<CR>
+
+" Input (copied in terminal output): `apps/backoffice/event/services/tests/test_duplicate_event.py:113`
+" Output: `:edit +113 apps/backoffice/event/services/tests/test_duplicate_event.py`
+function! OpenLineNumberedFile()
+    let copied_file_path = @+
+    let splitted_path = split(copied_file_path, ':')
+    let relative_path = splitted_path[0]
+    let line_number = splitted_path[1]
+    exec 'edit' '+'..line_number relative_path
+endfunction
+
+nnoremap <F1>t :call OpenLineNumberedFile()<CR>
 
 
 " Forward/backward movements in chunks in Insert mode.
@@ -326,9 +337,10 @@ vnoremap e j
 nnoremap n h
 vnoremap n h
 nnoremap i l
-vnoremap i l
+" Comment-out so that `vib` and `viq` will work.
+" vnoremap i l
 " Override the `vim-indent-object` binding for `ii`
-" to have right-ward direction than text object selection.
+" to have right-ward direction instead of text object selection.
 vnoremap ii ll
 
 " Display/Wrapped Lines:
@@ -355,8 +367,8 @@ vnoremap gL gE
 
 " Backward motion, inclusive the current cursor
 onoremap b vb
-onoremap F vF
-onoremap T vT
+" omap F vF
+" omap T vT
 
 
 " Dont save and quit all.
@@ -550,6 +562,7 @@ nnoremap <leader>f' :let @*=expand("%:t:r")<CR>
 " `<C-R>=` will insert the contents of `=` register.
 " https://dev.to/iggredible/the-only-vim-insert-mode-cheatsheet-you-ever-needed-nk9
 iabbrev clog console.log()<Left><C-R>=Eatchar('\s')<CR>
+iabbrev logd logger.debug()<Left><C-R>=Eatchar('\s')<CR>
 
 iabbrev ict ic(type())<Left><Left><C-R>=Eatchar('\s')<CR>
 iabbrev icd ic(dir())<Left><Left><C-R>=Eatchar('\s')<CR>
