@@ -31,7 +31,7 @@ export NNN_FIFO='$HOME/tmp/nnn.fifo'
 
 # Doom Emacs
 export PATH="~/.emacs.d/bin:$PATH"
-export PATH="/usr/local/opt/node@12/bin:$PATH"
+export PATH="$HOMEBREW/opt/node@12/bin:$PATH"
 
 # --body-numbering 'all-lines' (number the blank lines also)
 alias nl='nl -b a $1'
@@ -44,9 +44,9 @@ function _lazygit() {
 
     if [[ $M1 == 'true' ]]
     then
-        /opt/homebrew/bin/lazygit
+        $HOMEBREW/bin/lazygit
     else
-        /usr/local/bin/lazygit
+        $HOMEBREW/bin/lazygit
     fi
 
 }
@@ -87,7 +87,12 @@ far() {
 alias nvim="$HOME/dev/binaries/nvim-osx64/bin/nvim"
 
 # Nvim - Mac M1
-export PATH="/opt/homebrew/opt/node@12/bin:$PATH"
+# export PATH="$HOMEBREW/opt/node@12/bin:$PATH"
+
+# ETS node@13
+alias node13="$HOME/dev/binaries/node-v13.14.0/bin/node"
+alias npm13="$HOME/dev/binaries/node-v13.14.0/bin/npm"
+export PATH="$HOME/dev/binaries/node-v13.14.0/bin:$PATH"
 
 
 Sad() {
@@ -110,4 +115,10 @@ pipe_command_output_to_file() {
     # &> file redirects stdout and stderr to file
     # & (in 2>&1) specifies that 1 is not a file name but a file descriptor.
     $@ > $FILE 2>&1
+}
+
+
+# Go to previous directory.
+cdp() {
+    cd -
 }
