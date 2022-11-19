@@ -88,6 +88,10 @@ rprod() {
     gce
     gmp
     gps
+
+    # TODO: run `crm $1 - 1`
+    echo
+    echo 'Make sure to check for migrations!!!'
 }
 
 # rttltest 1 (for RC1)
@@ -308,6 +312,13 @@ cdhkru() {
     _cd_whitelabel hkru main open_url
 }
 
+_cdhkt() {
+    _cd_whitelabel hkticketing main
+}
+cdhkt() {
+    _cd_whitelabel hkticketing main open_url
+}
+
 _cdkgg() {
     _cd_whitelabel kgg-kg main
 }
@@ -362,6 +373,13 @@ _cdta() {
 }
 cdta() {
     _cd_whitelabel tatlerasia main open_url
+}
+
+_cdtcob() {
+    _cd_whitelabel tcobmedia main
+}
+cdtcob() {
+    _cd_whitelabel tcobmedia main open_url
 }
 
 _cdtkl() {
@@ -489,7 +507,8 @@ glrn() {
 
     # Slice from index=2.
     # ${@:2}
-    python ~/dev/scripts/gitlab/release-notes.py $1 with_migrations ${@:2}
+    # python ~/dev/scripts/gitlab/release-notes.py $1 with_migrations ${@:2}
+    python ~/dev/scripts/gitlab/release-notes.py $@
 }
 
 # GitLab CI stats
