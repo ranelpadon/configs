@@ -44,7 +44,7 @@ endfunction
 " omap f v<Cmd>HopChar1<CR>
 " No need to use `v` for an inclusive operation, which will cause issue anyway
 " since the `hint_offset` behavior is now fixed.
-omap <Leader>f <Cmd>HopChar1<CR>
+" omap <Leader>f <Cmd>HopChar1<CR>
 
 " map F v<Cmd>HopChar1<CR>
 " nnoremap f :call ExecuteThenCenterScreenVertically('HopChar1')<CR>
