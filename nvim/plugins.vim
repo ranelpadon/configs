@@ -36,7 +36,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'dense-analysis/ale'
     Plug 'voldikss/vim-floaterm'
     Plug 'pbogut/fzf-mru.vim'
-    Plug 'wsdjeg/vim-fetch'
+    " Plug 'wsdjeg/vim-fetch'
 
     Plug 'moll/vim-bbye'
     Plug 'preservim/tagbar'
