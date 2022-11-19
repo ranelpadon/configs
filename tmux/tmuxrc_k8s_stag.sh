@@ -26,6 +26,7 @@ _new_window GTSSTAG 11-skies  # GTSSTAG and GTSSTAG-K11
 _new_window HKIDASTAG hkida
 _new_window HKILFSTAG hkilf
 _new_window HKRUSTAG hkru
+_new_window HKTSTAG hkticketing
 _new_window KGGSTAG kgg-kg
 _new_window MCCSTAG melco-cyprus
 _new_window MCSTAG melco
@@ -34,6 +35,7 @@ _new_window MTSTAG matchtic
 _new_window SUNSTAG sun-entertainment
 _new_window SWISTAG swire
 _new_window TASTAG tatlerasia
+_new_window TCOBSTAG tcobmedia
 _new_window TKLSTAG tickelo
 _new_window TTLSTAG totalticketing
 _new_window TWASTAG thewanch
@@ -75,7 +77,7 @@ _update_env GTSSTAG
 _update_env HKIDASTAG
 _update_env HKILFSTAG
 _update_env HKRUSTAG
-# _update_env K11STAG
+_update_env HKTSTAG
 _update_env KGGSTAG
 _update_env MCCSTAG
 _update_env MCSTAG
@@ -84,6 +86,7 @@ _update_env MTSTAG
 _update_env SUNSTAG
 _update_env SWISTAG
 _update_env TASTAG
+_update_env TCOBSTAG
 _update_env TKLSTAG
 _update_env TTLSTAG
 _update_env TWASTAG
