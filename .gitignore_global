@@ -4,7 +4,8 @@
 .vscode
 
 setup.cfg
-tags
+# includes `tags.lock`, `tags.temp`
+tags*
 
 alloserv/assignment.log
 apps/.config/
