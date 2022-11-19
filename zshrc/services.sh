@@ -54,12 +54,12 @@ memcache() {
 }
 
 # RabbitMQ bins.
-export PATH="/usr/local/sbin:$PATH"
+export PATH="$HOMEBREW/sbin:$PATH"
 
 # Non-daemon mode.
 rabbitmq() {
     # RabbitMQ UI: http://localhost:15672/
-    CONF_ENV_FILE="/usr/local/etc/rabbitmq/rabbitmq-env.conf" /usr/local/opt/rabbitmq/sbin/rabbitmq-server
+    CONF_ENV_FILE="$HOMEBREW/etc/rabbitmq/rabbitmq-env.conf" $HOMEBREW/opt/rabbitmq/sbin/rabbitmq-server
 }
 
 # Purge Queue Messages.
@@ -74,7 +74,7 @@ rabbitmq_purge() {
         'scheduled'
     )
     for QUEUE in "${QUEUES[@]}" ; do
-        /usr/local/sbin/rabbitmqctl purge_queue $QUEUE -p /
+        $HOMEBREW/sbin/rabbitmqctl purge_queue $QUEUE -p /
     done
 }
 
