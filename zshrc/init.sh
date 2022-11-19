@@ -65,14 +65,16 @@ ez() {
 eval "$(zoxide init zsh)"
 
 
-# Define $M1 for reuse in other scripts.
+# Define $M1 and other vars for reuse in other scripts.
 if [[ $(uname -m) == 'arm64' ]]
 then
     M1='true'
-    export PATH="/opt/homebrew/bin:$PATH"
+    HOMEBREW='/opt/homebrew'
 else
     M1='false'
+    HOMEBREW='/usr/local'
 fi
+export PATH="$HOMEBREW/bin:$PATH"
 
 
 # >>> conda initialize >>>
