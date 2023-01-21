@@ -37,7 +37,42 @@ let s:fzf_options = {
         \ ]
 \ }
 
-command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, fzf#vim#with_preview(s:fzf_options), <bang>0)
+" command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, fzf#vim#with_preview(s:fzf_options), <bang>0)
+command! -nargs=? Files call fzf#vim#files(<q-args>, fzf#vim#with_preview(s:fzf_options), 0)
+
+
+function GoToTemplateFileOnCursor()
+    " Copy the enclosed texts, including the quotes, for example:
+    "   `'purchasing/cart_summary_vuejs_app.html'`
+    " `yiq` will not work since sometimes there are nested quotes, for example:
+    "   `src='{% static 'ets-vue-mini-confirm-order-page/js/app.js' %}'`
+    execute 'normal! yiW'
+
+    " Use the unnamed register, seems has issue with system register (e.g. @* or @+).
+    " `let query = getreg('"')` will do also.
+    let query = @"
+
+    " Remove the surrounding quotes.
+    let query = substitute(query, "'", '', 'g')
+    let query = substitute(query, '"', '', 'g')
+
+    " Set the initial query.
+    let fzf_options = {
+        \ 'options':
+            \ [
+                \ '--prompt', 'λ ',
+                \ '--exact',
+                \ '--query', query,
+                \ '--preview-window', 'up,55%:hidden',
+                \ '--bind', '?:toggle-preview',
+            \ ]
+    \ }
+
+    call fzf#vim#files('', fzf#vim#with_preview(fzf_options))
+endfunction
+
+nnoremap gf :call GoToTemplateFileOnCursor()<CR>
+
 
 " Cmd+p via BTT.
 " Works also. Use `<Bar>` instead of `|`:
@@ -163,7 +198,8 @@ function! RgReloader(query, fullscreen, rg_base_command)
             \ ]
     \ }
 
-    call fzf#vim#grep(s:rg_initial_command, 1, fzf#vim#with_preview(fzf_options), a:fullscreen)
+    " call fzf#vim#grep(s:rg_initial_command, 1, fzf#vim#with_preview(fzf_options), a:fullscreen)
+    call fzf#vim#grep(s:rg_initial_command, 1, fzf#vim#with_preview(fzf_options))
 endfunction
 
 
@@ -189,7 +225,8 @@ function! RgLoader(query, fullscreen, rg_base_command)
                 \ '--bind', '?:toggle-preview',
             \ ]
     \ }
-    call fzf#vim#grep(rg_load_command, 1, fzf#vim#with_preview(fzf_options), a:fullscreen)
+    " call fzf#vim#grep(rg_load_command, 1, fzf#vim#with_preview(fzf_options), a:fullscreen)
+    call fzf#vim#grep(rg_load_command, 1, fzf#vim#with_preview(fzf_options))
 endfunction
 
 
@@ -200,6 +237,9 @@ endfunction
 " let rg_py = 'rg --mmap --glob "apps/**/*.py" ---glob "!apps/**/__init__.py" --glob "!**/test/**" --glob "!**/tests/**" --glob "!**/migrations/**"'
 let rg_py = 'rg --type py --glob "!**/test/**" --glob "!**/tests/**" --glob "!**/migrations/**"'
 command! -nargs=* -bang RgPy call RgReloader(<q-args>, <bang>0, rg_py)
+" command! RgPy call RgReloader(<q-args>, <bang>0, rg_py)
+" noremap <Leader>p :RgPy<CR>
+" noremap <Leader>p :RgReloader(<q-args>, 0, rg_py)<CR>
 noremap <Leader>p :RgPy<CR>
 
 " Search Python/Django Unit Test Files
@@ -230,6 +270,13 @@ noremap <Leader>fp :FileRgPy<CR>
 " Search Python files using the word under the cursor.
 nnoremap <silent> <Leader>rp :call RgLoader(expand('<cword>'), 0, rg_py)<CR>
 nnoremap <silent> <Leader>rt :call RgLoader(expand('<cword>'), 0, rg_py_tests)<CR>
+
+
+" Search JS/JSON/Vue Files, includes the filename in matches.
+" let file_rg_json = 'rg --type js'
+let file_rg_js = 'rg --type js --type json --type-add "vue:*.vue" --type vue'
+command! -nargs=* FileRgJS call RgLoader(<q-args>, 0, file_rg_js)
+noremap <Leader>fj :FileRgJS<CR>
 
 
 " Search HTML Files
