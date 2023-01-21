@@ -80,7 +80,8 @@ rprod() {
     # Aliased `nvim` will not work. Hence, need to do `brew install nvim` first.
     gm ets
 
-    $PY27 ~/dev/whitelabels/scripts/python/whitelabels.py create_tag PROD --ets-version $1
+    $PY_MGR activate py311
+    python ~/dev/whitelabels/scripts/python/whitelabels.py create_tag PROD --ets-version $1
     # fab create_release_tag:release/ets/prod/v2.0,$1,full,melco
     # fab create_release_tag:release/ets/prod/v1.8.47,ets-prod-v1.8.47-RC$1,full,melco
 
@@ -92,6 +93,7 @@ rprod() {
     # TODO: run `crm $1 - 1`
     echo
     echo 'Make sure to check for migrations!!!'
+    $PY_MGR activate ticketing
 }
 
 # rttltest 1 (for RC1)
@@ -446,7 +448,19 @@ crm() {
 }
 
 crp() {
-    git diff --name-only $1.. | grep requirements.txt | xargs git diff $1..
+    # git diff --name-only $1.. | grep requirements.txt | xargs git diff $1..
+
+    # Disable the Delta pager to have a plain diff.
+    # Disable colors since it interferes with the `+` character.
+    # Filter the changed lines only.
+    # Remove duplicate lines.
+    git diff --name-only $1.. \
+        | grep requirements.txt \
+        | xargs git --no-pager diff $1.. --unified=0 --color=never \
+        | grep --extended-regexp "[-+][-a-zA-Z0-9]+[=><]+" \
+        | sort --unique --reverse \
+        | grep --invert-match "@@"
+
     # git diff --name-only ets-prod-v2.0.$1.. | grep requirements.txt | xargs git diff ets-prod-v2.0.$1..
 }
 
@@ -493,10 +507,11 @@ _glrn() {
     pat
     python ~/dev/scripts/gitlab/release-notes.py $1 no_migrations ${@:2}
 }
+
 # glrn ets-prod-v2.0.11 (with migrations)
 # glrn ets-prod-v2.0.11 123 456 (with migrations)
 glrn() {
-    pat
+    # pat
 
     # $@ = ets-prod-v2.0.11 123 456
     # $@:0 = glrn ets-prod-v2.0.11 123 456
@@ -508,7 +523,12 @@ glrn() {
     # Slice from index=2.
     # ${@:2}
     # python ~/dev/scripts/gitlab/release-notes.py $1 with_migrations ${@:2}
+
+    # Now requires Py3 due to `whitelabels.py`.
+    $PY_MGR activate py311
+
     python ~/dev/scripts/gitlab/release-notes.py $@
+    $PY_MGR activate ticketing
 }
 
 # GitLab CI stats
