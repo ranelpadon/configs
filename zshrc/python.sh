@@ -15,9 +15,9 @@ export PYTHONIOENCODING=UTF-8
 
 if [[ $M1 == 'true' ]]
 then
-    export PATH=/opt/homebrew/Caskroom/miniforge/base/envs/ticketing/bin:$PATH
     export PY_MGR=conda
     $PY_MGR activate ticketing
+    # $PY_MGR activate py311
     eit
 else
     # PyEnv
@@ -136,14 +136,80 @@ create_conda_environment() {
 # python whitelabels.py
 pw() {
     cd ~/dev/whitelabels/scripts/python
-    $PY27 whitelabels.py $@
+    python whitelabels.py $@
+}
+
+
+wut() {
+    pw update TEST $@
+}
+wrt() {
+    pw reset TEST $@
+}
+wct() {
+    pw commit TEST $@
+}
+wdt() {
+    pw deploy TEST $@
+}
+wctdt() {
+    pw create_tag_and_deploy TEST $@
+}
+wvrnt() {
+    pw view_release_notes TEST $@
+}
+wcrnt() {
+    pw create_release_notes TEST $@
+}
+
+
+wus() {
+    pw update STAG $@
+}
+wrs() {
+    pw reset STAG $@
+}
+wcs() {
+    pw commit STAG $@
+}
+wds() {
+    pw deploy STAG $@
+}
+wctds() {
+    pw create_tag_and_deploy STAG $@
+}
+wvrns() {
+    pw view_release_notes STAG $@
+}
+wcrns() {
+    pw create_release_notes STAG $@
+}
+
+
+wup() {
+    pw update PROD $@
+}
+wrp() {
+    pw reset PROD $@
+}
+wcp() {
+    pw commit PROD $@
+}
+wdp() {
+    pw deploy PROD $@
+}
+wvrnp() {
+    pw view_release_notes PROD $@
+}
+wcrnp() {
+    pw create_release_notes PROD $@
 }
 
 
 # mouse_mover.py
 mouse_mover() {
     cd ~/dev/scripts
-    $PY27 mouse_mover.py
+    python mouse_mover.py
     cd -
 }
 alias mm=mouse_mover
