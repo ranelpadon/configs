@@ -110,7 +110,11 @@ set nowritebackup
 set undofile                                                                    " Save undo history across sessions
 set undodir=$HOME/.config/nvim/undo
 
-let g:python_host_prog = expand('~/.pyenv/versions/ticketing/bin/python2')
+" Define the default Py2/Py3 versions to avoid relying in the active env.
+" Py2
+let g:python_host_prog = '/opt/homebrew/Caskroom/miniforge/base/envs/ticketing/bin/python'
+" Py3
+let g:python3_host_prog = '/opt/homebrew/Caskroom/miniforge/base/envs/py311/bin/python'
 
 " To check the buffer's filetype:
 " set filetype?
