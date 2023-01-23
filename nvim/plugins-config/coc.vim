@@ -31,8 +31,16 @@ else
     set signcolumn=yes
 endif
 
-highlight CocErrorHighlight ctermfg=Red  guifg=#e06c75
-highlight CocErrorSign  ctermfg=Red guifg=#e06c75
+
+" To find the highlight groups:
+" `:highlight Coc*`
+highlight CocErrorHighlight ctermfg=Red  guifg=#E06C75
+highlight CocErrorSign  ctermfg=Red guifg=#E06C75
+
+highlight CocExplorerFileDiagnosticError ctermfg=Yellow guifg=#D19A66
+highlight CocExplorerFileDiagnosticWarning ctermfg=Yellow guifg=#D19A66
+highlight CocExplorerFileFilenameDiagnosticError ctermfg=Yellow guifg=#D19A66
+highlight CocExplorerFileFilenameDiagnosticWarning ctermfg=Yellow guifg=#D19A66
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -107,8 +115,44 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 " Restart when COC crashed for some reason.
 nmap <Leader>cr :CocRestart<CR>
 
+
+function StartsWith(longer, shorter) abort
+    " Check if the `shorter` is found at the start index which is zero.
+    return stridx(a:longer, a:shorter) == 0
+endfunction
+
+let b:python_version = system('python --version')
+let b:is_py3 = StartsWith(b:python_version, 'Python 3')
+
+if b:is_py3
+    echom 'Py3 detected, will use a custom `coc` data folder!'
+    let g:coc_data_home = expand('~/.config/coc_py3_pyright')
+    " let g:coc_node_path = '/opt/homebrew/opt/node@12/bin/node'
+else
+    echom 'Py2 detected, will use the default `coc` data folder!'
+endif
+
+
 " Refactoring, couldn't detect `rope` Python package even it's installed.
 " Triggered also by visual selection then `:CocAction`.
 " https://github.com/neoclide/coc-python/issues/44
 " xmap ,a  <Plug>(coc-codeaction-selected)
 " nmap ,a  <Plug>(coc-codeaction-selected)
+
+" Notes for `coc-pyright` issues when using Py3/Node13:
+" To install for Node13: `:CocInstall coc-pyright@1.1.282`
+" https://github.com/fannheyward/coc-pyright/issues/834#issuecomment-1399338962
+" `coc-pyright` works both in Py2/Py3.
+
+" `coc-pyright` vs `coc-python`:
+" https://github.com/fannheyward/coc-pyright/issues/116#issue-730311715
+
+" `coc-pyright` vs `coc-jedi`:
+" https://github.com/fannheyward/coc-pyright/issues/431#issuecomment-816341062
+
+" `coc-pyright` requires rope for Refactoring.
+
+" For debugging `Coc`, run `:CocInfo` and `CocOpenLog`.
+
+" For custom coc-settings.json file/overrides:
+" `:help coc-configuration`
