@@ -12,7 +12,7 @@ fix_python_files() {
 
     for file in $files; do
         isort $file
-        autoflake $file --remove-all-unused-imports --in-place --exclude 'conf/settings/*'
+        autoflake $file --remove-all-unused-imports --ignore-pass-statements --in-place --exclude 'conf/settings/*'
     done
 }
 
