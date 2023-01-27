@@ -287,7 +287,7 @@ noremap <Leader>h :RgHTML<CR>
 " Search HTML files using the word under the cursor.
 nnoremap <silent> <Leader>rh :call RgLoader(expand('<cword>'), 0, rg_html)<CR>
 
-" Search JS Files
+" Search JS/JSX/Vue Files
 let rg_js = 'rg --type js'
 command! -nargs=* -bang RgJS call RgReloader(<q-args>, <bang>0, rg_js)
 noremap <Leader>j :RgJS<CR>
