@@ -1,6 +1,7 @@
 let g:python_copy_reference = {
-    \ 'paths': ['apps', 'conf']
+    \ 'remove_prefixes': ['apps', 'conf']
 \ }
 
 nnoremap <Leader>fi :PythonCopyReferenceDotted<CR>
-nnoremap ,fi :PythonCopyReferencePytest<CR>
+nnoremap ,fi :PythonCopyReferenceImport<CR>
+nnoremap ,Fi :PythonCopyReferencePytest<CR>
