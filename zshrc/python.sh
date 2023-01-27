@@ -135,8 +135,8 @@ create_conda_environment() {
 
 # python whitelabels.py
 pw() {
-    cd ~/dev/whitelabels/scripts/python
-    python whitelabels.py $@
+    cd ~/dev/whitelabels/scripts
+    python python/whitelabels.py $@
 }
 
 
