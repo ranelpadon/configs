@@ -274,7 +274,7 @@ nnoremap <silent> <Leader>rt :call RgLoader(expand('<cword>'), 0, rg_py_tests)<C
 
 " Search JS/JSON/Vue Files, includes the filename in matches.
 " let file_rg_json = 'rg --type js'
-let file_rg_js = 'rg --type js --type json --type-add "vue:*.vue" --type vue'
+let file_rg_js = 'rg --type js --type json --type-add "vue:*.vue" --type vue --glob "!*.min.js"'
 command! -nargs=* FileRgJS call RgLoader(<q-args>, 0, file_rg_js)
 noremap <Leader>fj :FileRgJS<CR>
 
@@ -288,7 +288,7 @@ noremap <Leader>h :RgHTML<CR>
 nnoremap <silent> <Leader>rh :call RgLoader(expand('<cword>'), 0, rg_html)<CR>
 
 " Search JS/JSX/Vue Files
-let rg_js = 'rg --type js'
+let rg_js = 'rg --type js --glob "!*.min.js"'
 command! -nargs=* -bang RgJS call RgReloader(<q-args>, <bang>0, rg_js)
 noremap <Leader>j :RgJS<CR>
 
