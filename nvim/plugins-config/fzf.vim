@@ -105,13 +105,13 @@ if g:is_mvim
 endif
 
 
-" Has significant effect in Rg inside of Vim:
+" Has significant effect in Rg performance inside of Vim:
 "   fzf window size: due to color rendering in embedded terminal.
 "   fzf preview window size: due to color rendering in bat/embedded terminal.
 "       - maybe use `bat` without theme, or don't use it all since it's not really useful.
 "   rg_initial_command: since it will load all Rg lines.
 "
-" Has significant effect in Rg outside of Vim:
+" Has significant effect in Rg performance outside of Vim:
 "   --color=never vs --color=always
 "       https://github.com/junegunn/fzf.vim/issues/488
 "       https://github.com/BurntSushi/ripgrep/issues/696
@@ -125,9 +125,9 @@ endif
 let s:rg_colors = ' --colors line:fg:red --colors path:fg:blue --colors match:fg:green '
 
 " We just need a dummy command that do nothing.
-" This will work also.
-" Run Rg in quiet mode (basically no searching/output).
-" let rg_initial_command = 'rg "" --quiet'
+" This will work also:
+"     Run Rg in quiet mode (basically no searching/output).
+"     let rg_initial_command = 'rg "" --quiet'
 let s:rg_initial_command = 'true'
 
 " {q} is the query string passed from fzf to ripgrep.
@@ -142,32 +142,6 @@ command! -bang -nargs=* Rg
 \       'rg' . s:rg_colors . ' --line-number --color=always --smart-case -- '.shellescape(<q-args>), 1,
 \       fzf#vim#with_preview({'options': '--exact --delimiter : --nth 3..'}), <bang>0
 \   )
-
-
-" `fzf.vim` example version (for reference):
-" https://github.com/junegunn/fzf.vim#example-advanced-ripgrep-integration
-" function! RgReloader(query, fullscreen, _command_fmt)
-"   let shell_command = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
-"   let rg_initial_command = printf(shell_command, shellescape(a:query))
-"   let rg_reload_command = printf(shell_command, '{q}')
-"   let fzf_options = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.rg_reload_command]}
-"   call fzf#vim#grep(rg_initial_command, 1, fzf#vim#with_preview(fzf_options), a:fullscreen)
-" endfunction
-
-
-" Ranel's previous version (for reference).
-" let g:fzf_layout = {'window': {'width': 1, 'height': 1}}
-" let g:fzf_preview_window = ['up:60%', 'ctrl-_']
-" function! RgReloader(query, fullscreen, shell_command)
-"     :wincmd l
-
-"     let shell_command = a:shell_command . s:rg_colors . ' --line-number --color=always --smart-case -- %s || true'
-"     let rg_initial_command = printf(shell_command, shellescape(a:query))
-"     let rg_reload_command = printf(shell_command, '{q}')
-"     let query_exact_match = "'" . a:query
-"     let fzf_options = {'options': '--exact --delimiter : --nth 3..'}
-"     call fzf#vim#grep(rg_initial_command, 1, fzf#vim#with_preview(fzf_options), a:fullscreen)
-" endfunction
 
 
 " On-demand search using Rg if query is non-empty. Fzf is a middleman only.
@@ -225,7 +199,6 @@ function! RgLoader(query, fullscreen, rg_base_command)
                 \ '--bind', '?:toggle-preview',
             \ ]
     \ }
-    " call fzf#vim#grep(rg_load_command, 1, fzf#vim#with_preview(fzf_options), a:fullscreen)
     call fzf#vim#grep(rg_load_command, 1, fzf#vim#with_preview(fzf_options))
 endfunction
 
@@ -233,9 +206,8 @@ endfunction
 " Search Python Files. Exclude the `test` and `migrations` files.
 " Run `rg 'foo' --debug` to check the skipped paths.
 " pyenv/virtualenv inserts a .gitignore file which skips all files (rename this file)!
-" `~/.pyenv/versions/2.7.17/envs/ticketing/.gitignore`
-" let rg_py = 'rg --mmap --glob "apps/**/*.py" ---glob "!apps/**/__init__.py" --glob "!**/test/**" --glob "!**/tests/**" --glob "!**/migrations/**"'
-let rg_py = 'rg --type py --glob "!**/test/**" --glob "!**/tests/**" --glob "!**/migrations/**"'
+" `~/.pyenv/versions/*/envs/*/.gitignore`
+let rg_py = 'rg --type py --glob "!**/{test,tests,migrations}/**"'
 command! -nargs=* -bang RgPy call RgReloader(<q-args>, <bang>0, rg_py)
 " command! RgPy call RgReloader(<q-args>, <bang>0, rg_py)
 " noremap <Leader>p :RgPy<CR>
@@ -243,27 +215,26 @@ command! -nargs=* -bang RgPy call RgReloader(<q-args>, <bang>0, rg_py)
 noremap <Leader>p :RgPy<CR>
 
 " Search Python/Django Unit Test Files
-let rg_py_tests = 'rg --type py --glob "**/test/**/*.py" --glob "**/tests/**/*.py" --glob "!**/migrations/**"'
+let rg_py_tests = 'rg --type py --glob "**/{test,tests}/**" --glob "!**/migrations/**"'
 command! -nargs=* -bang RgPyT call RgReloader(<q-args>, <bang>0, rg_py_tests)
 noremap <Leader>t :RgPyT<CR>
 
 " Search Python/Django Migration Files
-let rg_py_migrations = 'rg --type py --glob "!**/test/**" --glob "!**/tests/**" --glob "**/migrations/**/*.py"'
+let rg_py_migrations = 'rg --type py --glob "!**/{test,tests}/**" --glob "**/migrations/**/*.py"'
 command! -nargs=* -bang RgPyM call RgReloader(<q-args>, <bang>0, rg_py_migrations)
 noremap <Leader>m :RgPyM<CR>
 
 " Search Python Files. Include the ignored files.
-" Useful for scouring the `site-packages` or Django source code.
+" Useful for scouring the `site-packages` or Django source code which is under
+" the virtualenv/dotted folders.
 " Need the `--hidden` for .pyenv dotted files.
-" let rg_py_all = 'rg --type py --glob "!**/test/**" --glob "!**/migrations/**" --hidden'
-let rg_py_all = 'rg --type py --glob "!**/test/**" --glob "!**/tests/**" --glob "!**/migrations/**" --no-ignore --hidden'
+let rg_py_all = 'rg --type py --glob "!**/{test,tests,migrations}/**" --no-ignore --hidden'
 command! -nargs=* -bang RgPyAll call RgReloader(<q-args>, <bang>0, rg_py_all)
 noremap <Leader>a :RgPyAll<CR>
 
 
-" Search Python Files, includes the filename in matches. Exclude the `test` and `migrations` files.
-let file_rg_py = 'rg --type py --glob "!**/test/**" --glob "!**/tests/**" --glob "!**/migrations/**"'
-" command! -nargs=* -bang FileRgPy call RgLoader('views pk_url_kwarg = ', <bang>0, file_rg_py)
+" Search Python Files, includes the filename in matches. Exclude the `tests` and `migrations` files.
+let file_rg_py = 'rg --type py --glob "!**/{test,tests,migrations}/**"'
 command! -nargs=* -bang FileRgPy call RgLoader(<q-args>, <bang>0, file_rg_py)
 noremap <Leader>fp :FileRgPy<CR>
 
@@ -272,9 +243,9 @@ nnoremap <silent> <Leader>rp :call RgLoader(expand('<cword>'), 0, rg_py)<CR>
 nnoremap <silent> <Leader>rt :call RgLoader(expand('<cword>'), 0, rg_py_tests)<CR>
 
 
-" Search JS/JSON/Vue Files, includes the filename in matches.
-" let file_rg_json = 'rg --type js'
-let file_rg_js = 'rg --type js --type json --type-add "vue:*.vue" --type vue --glob "!*.min.js"'
+" Search JS/JSON/JSX/Vue Files, includes the filename in matches.
+" JSX/Vue are auto-included now in `--type js` by default.
+let file_rg_js = 'rg --type js --type json --glob "!*.min.js"'
 command! -nargs=* FileRgJS call RgLoader(<q-args>, 0, file_rg_js)
 noremap <Leader>fj :FileRgJS<CR>
 
