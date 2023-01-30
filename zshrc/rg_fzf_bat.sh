@@ -50,7 +50,7 @@ rph() {
 # rg-python-html-js
 # Search in Python + HTML + JS files.
 rphj() {
-    rph --type js --glop '!*.min.js' $@
+    rph --type js --glob '!*.min.js' $@
 }
 
 
