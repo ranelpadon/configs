@@ -37,7 +37,6 @@ let s:fzf_options = {
         \ ]
 \ }
 
-" command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, fzf#vim#with_preview(s:fzf_options), <bang>0)
 command! -nargs=? Files call fzf#vim#files(<q-args>, fzf#vim#with_preview(s:fzf_options), 0)
 
 
@@ -158,7 +157,6 @@ function! RgReloader(query, fullscreen, rg_base_command)
     " `--delimiter`: parse per line.
     " `--nth`: the scope of the search after parsing with delimiter.
     " Looks like `--disabled` makes the `--delimiter` and `--nth` useless and will just relay the searching to `ripgrep`.
-    " let fzf_options = {'options': ['--prompt', 'λ ', '--disabled', '--phony', '--query', a:query, '--bind', 'change:reload:'.rg_reload_command, '--delimiter', ':', '--nth', '3..']}
     let fzf_options = {
         \ 'options':
             \ [
@@ -172,7 +170,6 @@ function! RgReloader(query, fullscreen, rg_base_command)
             \ ]
     \ }
 
-    " call fzf#vim#grep(s:rg_initial_command, 1, fzf#vim#with_preview(fzf_options), a:fullscreen)
     call fzf#vim#grep(s:rg_initial_command, 1, fzf#vim#with_preview(fzf_options))
 endfunction
 
@@ -187,6 +184,7 @@ function! RgLoader(query, fullscreen, rg_base_command)
     " Hence, this will load all lines at first, then use `fzf` to query the initial data.
     " No data reloading will be done unlike in `RgReloader()`.
     let _rg_load_command = a:rg_base_command . s:rg_colors . ' --line-number --color=always --smart-case --fixed-strings %s || true'
+
     " Resolve the `%s` query string.
     let rg_load_command = printf(_rg_load_command, shellescape(a:query))
 
@@ -203,15 +201,12 @@ function! RgLoader(query, fullscreen, rg_base_command)
 endfunction
 
 
-" Search Python Files. Exclude the `test` and `migrations` files.
+" Search Python Files. Exclude the `tests` and `migrations` files.
 " Run `rg 'foo' --debug` to check the skipped paths.
 " pyenv/virtualenv inserts a .gitignore file which skips all files (rename this file)!
 " `~/.pyenv/versions/*/envs/*/.gitignore`
 let rg_py = 'rg --type py --glob "!**/{test,tests,migrations}/**"'
 command! -nargs=* -bang RgPy call RgReloader(<q-args>, <bang>0, rg_py)
-" command! RgPy call RgReloader(<q-args>, <bang>0, rg_py)
-" noremap <Leader>p :RgPy<CR>
-" noremap <Leader>p :RgReloader(<q-args>, 0, rg_py)<CR>
 noremap <Leader>p :RgPy<CR>
 
 " Search Python/Django Unit Test Files
@@ -220,7 +215,7 @@ command! -nargs=* -bang RgPyT call RgReloader(<q-args>, <bang>0, rg_py_tests)
 noremap <Leader>t :RgPyT<CR>
 
 " Search Python/Django Migration Files
-let rg_py_migrations = 'rg --type py --glob "!**/{test,tests}/**" --glob "**/migrations/**/*.py"'
+let rg_py_migrations = 'rg --type py --glob "!**/{test,tests}/**" --glob "**/migrations/**"'
 command! -nargs=* -bang RgPyM call RgReloader(<q-args>, <bang>0, rg_py_migrations)
 noremap <Leader>m :RgPyM<CR>
 
