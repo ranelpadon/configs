@@ -209,228 +209,243 @@ _cd_whitelabel() {
             open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/$1/-/pipelines"
         fi
     fi
+}
 
+
+cd_local_repo() {
     cd ~/dev/whitelabels/$1
-    gc $2
+    gc main
     gpl
     nvim
 }
 
-_cd29rsg() {
-    _cd_whitelabel 29rooms-sg main
-}
-cd29rsg() {
-    _cd_whitelabel 29rooms-sg main open_url
+
+cd_pipelines() {
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/$1/-/pipelines"
 }
 
-_cdaaj() {
-    _cd_whitelabel allaboutjazz main
+
+cdl29rsg() {
+    cd_local_repo 29rooms-sg
 }
-cdaaj() {
-    _cd_whitelabel allaboutjazz main open_url
+cdp29rsg() {
+    cd_pipelines 29rooms-sg
 }
 
-_cdatl() {
-    _cd_whitelabel asiaticketing main
+cdlaaj() {
+    cd_local_repo allaboutjazz
 }
-cdatl() {
-    _cd_whitelabel asiaticketing main open_url
-}
-
-_cdbjt() {
-    _cd_whitelabel buyjapantickets main
-}
-cdbjt() {
-    _cd_whitelabel buyjapantickets main open_url
+cdpaaj() {
+    cd_pipelines allaboutjazz
 }
 
-_cdbkt() {
-    _cd_whitelabel buyjapantickets main
+cdlatl() {
+    cd_local_repo asiaticketing
 }
-cdbkt() {
-    _cd_whitelabel buyjapantickets main open_url
-}
-
-_cdbymop() {
-    _cd_whitelabel bookyay-mop main
-}
-cdbymop() {
-    _cd_whitelabel bookyay-mop main open_url
+cdpatl() {
+    cd_pipelines asiaticketing
 }
 
-_cdbyntd() {
-    _cd_whitelabel bookyay-ntd main
+cdlbjt() {
+    cd_local_repo buyjapantickets
 }
-cdbyntd() {
-    _cd_whitelabel bookyay-ntd main open_url
-}
-
-_cddemo() {
-    _cd_whitelabel demo main
-}
-cddemo() {
-    _cd_whitelabel demo main open_url
+cdpbjt() {
+    cd_pipelines buyjapantickets
 }
 
-_cdf7() {
-    _cd_whitelabel f7 main
+cdlbkt() {
+    cd_local_repo buyjapantickets
 }
-cdf7() {
-    _cd_whitelabel f7 main open_url
-}
-
-_cdgts() {
-    _cd_whitelabel 11-skies main
-}
-cdgts() {
-    _cd_whitelabel 11-skies main open_url
+cdpbkt() {
+    cd_pipelines buyjapantickets
 }
 
-_cdhelm() {
-    _cd_whitelabel ticketing-ets-chart master
+cdlbymop() {
+    cd_local_repo bookyay-mop
 }
-cdhelm() {
-    _cd_whitelabel ticketing-ets-chart master open_url
-}
-
-_cdhkida() {
-    _cd_whitelabel hkida main
-}
-cdhkida() {
-    _cd_whitelabel hkida main open_url
+cdpbymop() {
+    cd_pipelines bookyay-mop
 }
 
-_cdhkilf() {
-    _cd_whitelabel hkilf main
+cdlbyntd() {
+    cd_local_repo bookyay-ntd
 }
-cdhkilf() {
-    _cd_whitelabel hkilf main open_url
-}
-
-_cdhkru() {
-    _cd_whitelabel hkru main
-}
-cdhkru() {
-    _cd_whitelabel hkru main open_url
+cdpbyntd() {
+    cd_pipelines bookyay-ntd
 }
 
-_cdhkt() {
-    _cd_whitelabel hkticketing main
+cdldemo() {
+    cd_local_repo demo
 }
-cdhkt() {
-    _cd_whitelabel hkticketing main open_url
+cdpdemo() {
+    cd_pipelines demo
 }
 
-_cdkgg() {
-    _cd_whitelabel kgg-kg main
+cdlf7() {
+    cd_local_repo f7
+}
+cdpf7() {
+    cd_pipelines f7
+}
+
+cdlgts() {
+    cd_local_repo 11-skies
+}
+cdpgts() {
+    cd_pipelines 11-skies
+}
+
+
+cdlhelm() {
+    cd ~/dev/ticketing-ets-chart
+    gc master
+    gpl
+    nvim
+}
+# cd_remote_repo
+cdrhelm() {
+    cd_pipelines ticketing-ets-chart master open_url
+}
+
+
+cdlhkida() {
+    cd_local_repo hkida
+}
+cdphkida() {
+    cd_pipelines hkida
+}
+
+cdlhkilf() {
+    cd_local_repo hkilf
+}
+cdphkilf() {
+    cd_pipelines hkilf
+}
+
+cdlhkru() {
+    cd_local_repo hkru
+}
+cdphkru() {
+    cd_pipelines hkru
+}
+
+cdlhkt() {
+    cd_local_repo hkticketing
+}
+cdphkt() {
+    cd_pipelines hkticketing
+}
+
+cdlkgg() {
+    cd_local_repo kgg-kg
 }
 cdkgg() {
-    _cd_whitelabel kgg-kg main open_url
+    cd_pipelines kgg-kg
 }
 
-_cdmt() {
-    _cd_whitelabel matchtic main
+cdlmt() {
+    cd_local_repo matchtic
 }
-cdmt() {
-    _cd_whitelabel matchtic main open_url
-}
-
-_cdmc() {
-    _cd_whitelabel melco main
-}
-cdmc() {
-    _cd_whitelabel melco main open_url
+cdpmt() {
+    cd_pipelines matchtic
 }
 
-_cdmcc() {
-    _cd_whitelabel melco-cyprus main
+cdlmc() {
+    cd_local_repo melco
 }
-cdmcc() {
-    _cd_whitelabel melco-cyprus main open_url
-}
-
-_cdmgm() {
-    _cd_whitelabel mgm main
-}
-cdmgm() {
-    _cd_whitelabel mgm main open_url
+cdpmc() {
+    cd_pipelines melco
 }
 
-_cdsun() {
-    _cd_whitelabel sun-entertainment main
+cdlmcc() {
+    cd_local_repo melco-cyprus
 }
-cdsun() {
-    _cd_whitelabel sun-entertainment main open_url
-}
-
-_cdswi() {
-    _cd_whitelabel swire main
-}
-cdswi() {
-    _cd_whitelabel swire main open_url
+cdpmcc() {
+    cd_pipelines melco-cyprus
 }
 
-_cdta() {
-    _cd_whitelabel tatlerasia main
+cdlmgm() {
+    cd_local_repo mgm
 }
-cdta() {
-    _cd_whitelabel tatlerasia main open_url
-}
-
-_cdtcob() {
-    _cd_whitelabel tcobmedia main
-}
-cdtcob() {
-    _cd_whitelabel tcobmedia main open_url
+cdpmgm() {
+    cd_pipelines mgm
 }
 
-_cdtkl() {
-    _cd_whitelabel tickelo main
+cdlsun() {
+    cd_local_repo sun-entertainment
 }
-cdtkl() {
-    _cd_whitelabel tickelo main open_url
-}
-
-_cdttl() {
-    _cd_whitelabel totalticketing main
-}
-cdttl() {
-    _cd_whitelabel totalticketing main open_url
+cdpsun() {
+    cd_pipelines sun-entertainment
 }
 
-_cdtwa() {
-    _cd_whitelabel thewanch main
+cdlswi() {
+    cd_local_repo swire
 }
-cdtwa() {
-    _cd_whitelabel thewanch main open_url
-}
-
-_cdxr() {
-    _cd_whitelabel clockenflap-xr main
-}
-cdxr() {
-    _cd_whitelabel clockenflap-xr main open_url
+cdpswi() {
+    cd_pipelines swire
 }
 
-_cdzip() {
-    _cd_whitelabel zipcity main
+cdlta() {
+    cd_local_repo tatlerasia
 }
-cdzip() {
-    _cd_whitelabel zipcity main open_url
-}
-
-_cdzk() {
-    _cd_whitelabel zicket main
-}
-cdzk() {
-    _cd_whitelabel zicket main open_url
+cdpta() {
+    cd_pipelines tatlerasia m
 }
 
-_cdzuni() {
-    _cd_whitelabel zuni main
+cdltcob() {
+    cd_local_repo tcobmedia
 }
-cdzuni() {
-    _cd_whitelabel zuni main open_url
+cdptcob() {
+    cd_pipelines tcobmedia
+}
+
+cdltkl() {
+    cd_local_repo tickelo
+}
+cdptkl() {
+    cd_pipelines tickelo
+}
+
+cdlttl() {
+    cd_local_repo totalticketing
+}
+cdpttl() {
+    cd_pipelines totalticketing
+}
+
+cdltwa() {
+    cd_local_repo thewanch
+}
+cdptwa() {
+    cd_pipelines thewanch
+}
+
+cdlxr() {
+    cd_local_repo clockenflap-xr
+}
+cdpxr() {
+    cd_pipelines clockenflap-xr
+}
+
+cdlzip() {
+    cd_local_repo zipcity
+}
+cdpzip() {
+    cd_pipelines zipcity
+}
+
+cdlzk() {
+    cd_local_repo zicket
+}
+cdpzk() {
+    cd_pipelines zicket
+}
+
+cdlzuni() {
+    cd_local_repo zuni
+}
+cdpzuni() {
+    cd_pipelines zuni
 }
 
 
