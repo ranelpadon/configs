@@ -213,3 +213,9 @@ mouse_mover() {
     cd -
 }
 alias mm=mouse_mover
+
+# `cd` to current env's `site-packages` folder.
+cdsp() {
+    site_packages_folder=$(python -c 'import site; print(site.getsitepackages()[0])')
+    cd $site_packages_folder
+}
