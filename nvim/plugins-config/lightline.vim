@@ -71,6 +71,12 @@ if g:is_nvim
     " let g:lightline#bufferline#click_handler_pre_command = 'wincmd l'
 endif
 
+" Moving/re-ordering buffers.
+nmap <Leader>bu <Plug>lightline#bufferline#move_previous()
+nmap <Leader>be <Plug>lightline#bufferline#move_next()
+nmap <Leader>bn <Plug>lightline#bufferline#move_first()
+nmap <Leader>bi <Plug>lightline#bufferline#move_last()
+
 " Fast buffer switching when multiple ones are opened.
 " nmap 1 <Plug>lightline#bufferline#go(1)
 " nmap 2 <Plug>lightline#bufferline#go(2)
