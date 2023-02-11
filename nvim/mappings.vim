@@ -527,7 +527,8 @@ function! GitLabFile()
     let s:uri = s:base_uri . s:relative_file_path
     exec "!open \"" . s:uri . "\""
 endfunction
-map <Leader>glf :call GitLabFile()<CR><CR>
+nnoremap <Leader>glf :call GitLabFile()<CR><CR>
+
 
 " Open GitLab file in blame mode.
 function! GitLabBlame()
@@ -537,7 +538,31 @@ function! GitLabBlame()
     let s:uri = s:base_uri . s:relative_file_path
     exec "!open \"" . s:uri . "\""
 endfunction
-map <Leader>glb :call GitLabBlame()<CR><CR>
+nnoremap <Leader>glb :call GitLabBlame()<CR><CR>
+
+
+" Open Whitelabel file.
+function! OpenWhitelabel()
+    " let s:base_uri = 'https://git.hk.asiaticketing.com/ticketflap/ticketing-v2/-/tree/ets/'
+    let base_uri = 'https://git.hk.asiaticketing.com/ticketflap/whitelabels/'
+    let whitelabel_absolute_path = expand('%:p:h')
+    let whitelabel_folders_path = expand('%:h')
+    let whitelabels_base_path = '/Users/ranelpadon/dev/whitelabels/'
+
+    " Get the whitelabel name, e.g. 'melco'.
+    let flags = ''
+    " Remove the left side part of the whitelabel.
+    let whitelabel_right_side = substitute(whitelabel_absolute_path, whitelabels_base_path, '', flags)
+    " Remove the right side part of the whitelabel.
+    let whitelabel = substitute(whitelabel_right_side, whitelabel_folders_path, '', flags)
+    " melco/-/blob/main/
+    " k8s/k8s.test/deploy/values.gl-25-multi-property-root-domains.yaml
+    let relative_file_path = expand('%')
+    let uri = base_uri . whitelabel . '-/blob/main/' . relative_file_path
+    echom uri
+    exec '!open "' . uri . '"'
+endfunction
+nnoremap <Leader>ow :call OpenWhitelabel()<CR><CR>
 
 
 " Copy Absolute Path  (/something/src/foo.txt)
