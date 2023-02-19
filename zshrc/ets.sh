@@ -399,6 +399,13 @@ cdptcob() {
     cd_pipelines tcobmedia
 }
 
+cdltfjpy() {
+    cd_local_repo ticketflap-jpy
+}
+cdptfjpy() {
+    cd_pipelines ticketflap-jpy
+}
+
 cdltkl() {
     cd_local_repo tickelo
 }
