@@ -219,3 +219,11 @@ cdsp() {
     site_packages_folder=$(python -c 'import site; print(site.getsitepackages()[0])')
     cd $site_packages_folder
 }
+
+
+pip_build_upload() {
+    rm -rf dist
+    python -m build
+    python -m twine upload --username $1 --password $2 "dist/*"
+}
+alias pbu=pip_build_upload
