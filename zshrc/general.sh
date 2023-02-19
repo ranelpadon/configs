@@ -122,3 +122,10 @@ pipe_command_output_to_file() {
 cdp() {
     cd -
 }
+
+
+# Some of helm chart values file have tabs
+# causing issue with YAML parsers.
+tabs_to_spaces() {
+    expand -t 4 $1 | sponge $1
+}
