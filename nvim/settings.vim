@@ -66,7 +66,7 @@ set cursorline                                                                  
 set colorcolumn=80                                                              " Line wrap/column marker
 set linebreak                                                                   " Break at word boundary
 set iskeyword+=-                      	                                        " Treat dash-separated words as a word text object
-set formatoptions-=cro                                                          " Stop newline continuation of comments
+set formatoptions-=cro                                                          " Stop auto-commenting for new lines.
 set whichwrap+=<,>,[,],h,l                                                      " Continue cursor to the start of new line when it reaches the edge
 
 " Fold by default to reduce clutter.
@@ -121,9 +121,6 @@ let g:python3_host_prog = '/opt/homebrew/Caskroom/miniforge/base/envs/py311/bin/
 "
 " To define the filetype commentstring, add new <FILETYPE>.vim:
 " nvim/after/ftplugin/<FILETYPE>.vim
-
-" Stop auto-commenting for new lines.
-set formatoptions-=cro
 
 " Better DX with YAML files.
 autocmd FileType yml set cursorcolumn
