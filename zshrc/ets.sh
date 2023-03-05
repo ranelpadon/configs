@@ -434,6 +434,13 @@ cdpxr() {
     cd_pipelines clockenflap-xr
 }
 
+cdlwynn() {
+    cd_local_repo wynn
+}
+cdpwynn() {
+    cd_pipelines wynn
+}
+
 cdlzip() {
     cd_local_repo zipcity
 }
