@@ -1,4 +1,4 @@
-ETS=$HOME/dev/ticketflap/ticketing
+ETS=$HOME/dev/ticketing-v2
 
 # Choose the right Py2 depending on the MacBook type.
 if [[ $M1 == 'true' ]]

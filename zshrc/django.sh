@@ -43,7 +43,7 @@ migrate_list() {
     # fab migrate:--list | grep "NodeNotFoundError\|\[ \]"
     # All results except those migrated ones.
     # fab migrate:--list | grep -v "\[X\]"
-    # $PY27 ~/dev/ticketflap/ticketing/apps/backoffice/manage.py migrate --list | grep -v "\[X\]"
+    # $PY27 ~/dev/ticketing-v2/apps/backoffice/manage.py migrate --list | grep -v "\[X\]"
     manage migrate --list | grep --fixed-strings "[ ]"
 }
 
@@ -111,7 +111,7 @@ test() {
     # echo $SETTING
 
     $PY27 \
-        ~/dev/ticketflap/ticketing/apps/$SITE/manage.py \
+        ~/dev/ticketing-v2/apps/$SITE/manage.py \
         test \
         --settings=$SETTING \
         --verbosity=1 \
