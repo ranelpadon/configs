@@ -15,6 +15,8 @@ export PYTHONIOENCODING=UTF-8
 
 if [[ $M1 == 'true' ]]
 then
+    # `conda` will throw this warning:
+    # '<frozen importlib._bootstrap>:914: ImportWarning: _SixMetaPathImporter.find_spec() not found; falling back to find_module()'
     export PY_MGR=conda
     $PY_MGR activate ticketing
     # $PY_MGR activate py311
@@ -134,75 +136,75 @@ create_conda_environment() {
 
 
 # python whitelabels.py
-pw() {
+w() {
     cd ~/dev/whitelabels/scripts
     python python/whitelabels.py $@
 }
 
 
 wut() {
-    pw update TEST $@
+    w update TEST $@
 }
 wrt() {
-    pw reset TEST $@
+    w reset TEST $@
 }
 wct() {
-    pw commit TEST $@
+    w commit TEST $@
 }
 wdt() {
-    pw deploy TEST $@
+    w deploy TEST $@
 }
 wctdt() {
-    pw create_tag_and_deploy TEST $@
+    w create_tag_and_deploy TEST $@
 }
 wvrnt() {
-    pw view_release_notes TEST $@
+    w view_release_notes TEST $@
 }
 wcrnt() {
-    pw create_release_notes TEST $@
+    w create_release_notes TEST $@
 }
 
 
 wus() {
-    pw update STAG $@
+    w update STAG $@
 }
 wrs() {
-    pw reset STAG $@
+    w reset STAG $@
 }
 wcs() {
-    pw commit STAG $@
+    w commit STAG $@
 }
 wds() {
-    pw deploy STAG $@
+    w deploy STAG $@
 }
 wctds() {
-    pw create_tag_and_deploy STAG $@
+    w create_tag_and_deploy STAG $@
 }
 wvrns() {
-    pw view_release_notes STAG $@
+    w view_release_notes STAG $@
 }
 wcrns() {
-    pw create_release_notes STAG $@
+    w create_release_notes STAG $@
 }
 
 
 wup() {
-    pw update PROD $@
+    w update PROD $@
 }
 wrp() {
-    pw reset PROD $@
+    w reset PROD $@
 }
 wcp() {
-    pw commit PROD $@
+    w commit PROD $@
 }
 wdp() {
-    pw deploy PROD $@
+    w deploy PROD $@
 }
 wvrnp() {
-    pw view_release_notes PROD $@
+    w view_release_notes PROD $@
 }
 wcrnp() {
-    pw create_release_notes PROD $@
+    w create_release_notes PROD $@
 }
 
 
