@@ -2,6 +2,10 @@ gce() {
     git checkout ets
 }
 
+gcs() {
+    git checkout staging
+}
+
 gcprod() {
     git checkout release/ets/prod/v2.0
     # git checkout release/ets/prod/v1.8.47
