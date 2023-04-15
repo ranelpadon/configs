@@ -21,7 +21,7 @@ tmux send-keys -t "Workspace:ETS-1" "cd ~/dev/ticketing-v2 && pat" Enter
 tmux send-keys -t "Workspace:ETS-2" "cd ~/dev/ticketing-v2 && pat" Enter
 tmux send-keys -t "Workspace:ETS-3" "cd ~/dev/ticketing-v2 && pat" Enter
 tmux send-keys -t "Workspace:Nvim Whitelabels" "export PYTHONWARNINGS=default && cd ~/dev/whitelabels/scripts/python && conda activate py311 && nvim" Enter
-tmux send-keys -t "Workspace:Whitelabels" "export PYTHONWARNINGS=default && cd ~/dev/whitelabels/scripts/python && conda activate py311" Enter
+tmux send-keys -t "Workspace:Whitelabels" "export PYTHONWARNINGS=default && cd ~/dev/whitelabels/scripts && conda activate py311" Enter
 tmux send-keys -t "Workspace:Desktop" "cd ~/Desktop" Enter
 
 # Activate main window
