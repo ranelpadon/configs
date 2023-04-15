@@ -78,7 +78,22 @@ rabbitmq_purge() {
     done
 }
 
+
+worker_clear() {
+    clear_pyc
+    rm celerybeat-schedule
+
+    brew_services restart rabbitmq
+    brew_services restart memcached
+
+    python apps/worker/manage.py celery purge --app=common.patcher.celery -f
+}
+
+
 worker() {
+    # Clear the previous state first.
+    worker_clear
+
     brew_services start rabbitmq
     pat
     python apps/worker/manage.py autorestart worker
@@ -93,15 +108,6 @@ worker() {
     #     --autoreload
 }
 
-worker_clear() {
-    clear_pyc
-    rm celerybeat-schedule
-
-    brew_services restart rabbitmq
-    brew_services restart memcached
-
-    python apps/worker/manage.py celery purge --app=common.patcher.celery -f
-}
 
 flower() {
     brew_services start rabbitmq
@@ -222,11 +228,14 @@ _mysql() {
 # start_local_alloserv
 alloserv() {
     # Needs to restart db, memcached, and worker.
-    pyenv activate alloserv \
+    $PY_MGR activate alloserv \
     && cd $ETS/alloserv/ \
     && python alloserv_entry.py --config alloserv/conf/local_settings.py
 }
 
+alloserv_check() {
+    curl alloserv.dev.ticketflap.net:8060/status/health
+}
 
 # Start an HTTP server from a directory, optionally specifying the port
 local_server() {
