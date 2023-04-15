@@ -1,6 +1,7 @@
 " M1 - MacVim couldn't detect the `node` path for some reason.
 if !executable('node')
-    let g:coc_node_path = '/opt/homebrew/opt/node@12/bin/node'
+    " let g:coc_node_path = '/opt/homebrew/opt/node@12/bin/node'
+    " let g:coc_node_path = '/Users/ranelpadon/dev/binaries/node-v12.22.3/bin/node'
 endif
 
 
@@ -13,7 +14,9 @@ augroup ProjectDrawer
     autocmd!
     autocmd VimEnter * call FocusEditor()
 augroup END
-nmap <Leader>e :CocCommand explorer --sources file+<CR>
+
+" Toggle explorer (`te`)
+nnoremap <Leader>te :CocCommand explorer --sources file+<CR>
 
 
 " Focus the file.
@@ -82,6 +85,9 @@ function! s:GoToDefinition()
 endfunction
 nmap <silent> gd :call <SID>GoToDefinition()<CR>zz
 
+" Use ctags
+nmap <Leader>gd <C-]>zz
+
 " `gr` conflicts with `ReplaceWithRegister`.
 " Be careful with other mapping like `gv` since it conflicts with Indent Object's `ii` for some reason.
 nmap <silent> gz <Plug>(coc-references)
@@ -124,14 +130,22 @@ endfunction
 let b:python_version = system('python --version')
 let b:is_py3 = StartsWith(b:python_version, 'Python 3')
 
+
+" Set the Python interpreter dynamically, depending on the virtualenv.
+" Instead of setting `python.pythonPath` in `coc-settings.json`.
+autocmd FileType python call coc#config('python', {'pythonPath': split(execute('!which python'), '\n')[-1]})
+
+
 if b:is_py3
     echom 'Py3 detected, will use a custom `coc` data folder!'
     let g:coc_data_home = expand('~/.config/coc_py3_pyright')
-    " let g:coc_node_path = '/opt/homebrew/opt/node@12/bin/node'
 else
     echom 'Py2 detected, will use the default `coc` data folder!'
 endif
 
+" For syntax highlighting of comments in JSONC files (JSON + Comments)
+" like in `coc-settings.json`.
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " Refactoring, couldn't detect `rope` Python package even it's installed.
 " Triggered also by visual selection then `:CocAction`.
@@ -152,7 +166,7 @@ endif
 
 " `coc-pyright` requires rope for Refactoring.
 
-" For debugging `Coc`, run `:CocInfo` and `CocOpenLog`.
+" For debugging `Coc`, run `:CocInfo` and `:CocOpenLog`.
 
 " For custom coc-settings.json file/overrides:
 " `:help coc-configuration`
