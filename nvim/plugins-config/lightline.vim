@@ -1,7 +1,7 @@
 let g:lightline = {
 \   'colorscheme': 'one',
 \   'active': {
-\       'left': [['mode', 'paste' ], ['gitbranch', 'readonly', 'filename', 'modified']],
+\       'left': [['mode', 'paste' ], ['cocstatus', 'gitbranch', 'readonly', 'filename', 'modified']],
 \       'right': [['lineinfo'], ['percent'], ['searchcount']],
 \   },
 \   'tabline': {
@@ -11,6 +11,7 @@ let g:lightline = {
 \   'component_function': {
 \       'filename': 'LightlineFilename',
 \       'gitbranch': 'gitbranch#name',
+\       'cocstatus': 'coc#status',
 \       'searchcount': 'SearchCount'
 \   },
 \   'component_expand': {
@@ -20,6 +21,11 @@ let g:lightline = {
 \       'buffers': 'tabsel'
 \   }
 \ }
+
+
+" Use autocmd to force lightline update.
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
 
 function! LightlineFilename()
     return expand('%:p:.') !=# '' ? expand('%:p:.') : '[No Name]'
@@ -76,6 +82,16 @@ nmap <Leader>bu <Plug>lightline#bufferline#move_previous()
 nmap <Leader>be <Plug>lightline#bufferline#move_next()
 nmap <Leader>bn <Plug>lightline#bufferline#move_first()
 nmap <Leader>bi <Plug>lightline#bufferline#move_last()
+
+" Tab navigation considering the tab movements above.
+" Buffers
+" Also `S-Tab` via BTT app.
+" nnoremap <C-l> :bprev<CR>
+nmap <C-u> <Plug>lightline#bufferline#go_previous()
+" noremap N [m
+" Also `Tab` via BTT app.
+" nnoremap <C-y> :bnext<CR>
+nmap <C-e> <Plug>lightline#bufferline#go_next()
 
 " Fast buffer switching when multiple ones are opened.
 " nmap 1 <Plug>lightline#bufferline#go(1)
