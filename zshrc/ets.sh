@@ -258,10 +258,10 @@ cdpbjt() {
 }
 
 cdlbkt() {
-    cd_local_repo buyjapantickets
+    cd_local_repo buykoreatickets
 }
 cdpbkt() {
-    cd_pipelines buyjapantickets
+    cd_pipelines buykoreatickets
 }
 
 cdlbymop() {
@@ -297,6 +297,13 @@ cdlgts() {
 }
 cdpgts() {
     cd_pipelines 11-skies
+}
+
+
+cdpTEST() {
+    cdpatl
+    cdpmc
+    cdpttl
 }
 
 
