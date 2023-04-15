@@ -83,6 +83,23 @@ video_trimmer() {
 alias vt=video_trimmer
 
 
+lotcd() {
+    cd ~/Desktop
+    lotc download $@
+    cd -
+}
+lotct() {
+    cd ~/Desktop
+    lotc trim $@
+    cd -
+}
+lotcm() {
+    cd ~/Desktop
+    lotc merge $@
+    cd -
+}
+
+
 unrar() {
     $PY27 "$HOME/Data/UP DGE/Resources/Codes/uvle_processor/zip_processor.py" $1
 }
