@@ -59,6 +59,19 @@ alias lazygit='_lazygit'
 # bindkey '^P' end-of-line
 
 
+# Remap the delete word/line shortcuts.
+# https://zsh.sourceforge.io/Doc/Release/Zsh-Line-Editor.html#Keymaps
+# Alternative: https://github.com/jeffreytse/zsh-vi-mode
+# Remap: C-w
+bindkey '^u' backward-kill-word
+# Remap: A-d
+bindkey '^e' kill-word
+# Remap: C-u
+bindkey '^l' backward-kill-line
+# Remap: A-k
+bindkey '^y' kill-line
+
+
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
@@ -93,6 +106,11 @@ alias nvim="$HOME/dev/binaries/nvim-osx64/bin/nvim"
 alias node13="$HOME/dev/binaries/node-v13.14.0/bin/node"
 alias npm13="$HOME/dev/binaries/node-v13.14.0/bin/npm"
 export PATH="$HOME/dev/binaries/node-v13.14.0/bin:$PATH"
+
+# Node@12
+# alias node12="$HOME/dev/binaries/node-v12.22.3/bin/node"
+# alias npm12="$HOME/dev/binaries/node-v12.22.3/bin/npm"
+# export PATH="$HOME/dev/binaries/node-v12.22.3/bin:$PATH"
 
 
 Sad() {
