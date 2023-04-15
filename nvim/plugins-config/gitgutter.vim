@@ -71,12 +71,12 @@ endfunction
 nnoremap <Leader>gg :GitGutterToggle<CR>
 
 " Across files.
-nnoremap ge :call GitGutterNextHunkAllBuffers()<CR>zz
-nnoremap gu :call GitGutterPrevHunkAllBuffers()<CR>zz
+nnoremap <Leader>e :call GitGutterNextHunkAllBuffers()<CR>zz
+nnoremap <Leader>u :call GitGutterPrevHunkAllBuffers()<CR>zz
 
 " Same file.
-nnoremap <Leader>ge :call GitGutterNextHunkCycle()<CR>zz
-nnoremap <Leader>gu :call GitGutterPrevHunkCycle()<CR>zz
+nnoremap ge :call GitGutterNextHunkCycle()<CR>zz
+nnoremap gu :call GitGutterPrevHunkCycle()<CR>zz
 
 " nnoremap ge :GitGutterNextHunk<CR>zz
 " nnoremap gu :GitGutterPrevHunk<CR>zz
