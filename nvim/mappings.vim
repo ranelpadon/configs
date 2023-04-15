@@ -1,7 +1,7 @@
 " For concistency with D (d$) and C (c$).
 nnoremap Y y$
 " Exclude the new line.
-nnoremap yy 0y$
+" nnoremap yy 0y$
 
 
 " Find and replace
@@ -413,14 +413,6 @@ let @q="g~iwf DI    '\<c-o>x\<c-o>$',\<Esc>"
 " nnoremap <Leader>q :% normal! @q<CR>
 
 
-" Buffers
-" Also `S-Tab` via BTT app.
-" nnoremap <C-l> :bprev<CR>
-nnoremap <C-u> :bprev<CR>
-" noremap N [m
-" Also `Tab` via BTT app.
-" nnoremap <C-y> :bnext<CR>
-nnoremap <C-e> :bnext<CR>
 " noremap I ]m
 " Save file.
 " Cmd+s via BTT.
@@ -554,11 +546,14 @@ function! OpenWhitelabel()
     " Remove the left side part of the whitelabel.
     let whitelabel_right_side = substitute(whitelabel_absolute_path, whitelabels_base_path, '', flags)
     " Remove the right side part of the whitelabel.
+    echom whitelabel_right_side
+    echom whitelabel_folders_path
     let whitelabel = substitute(whitelabel_right_side, whitelabel_folders_path, '', flags)
     " melco/-/blob/main/
     " k8s/k8s.test/deploy/values.gl-25-multi-property-root-domains.yaml
     let relative_file_path = expand('%')
-    let uri = base_uri . whitelabel . '-/blob/main/' . relative_file_path
+    echom whitelabel
+    let uri = base_uri . whitelabel . '/-/blob/main/' . relative_file_path
     echom uri
     exec '!open "' . uri . '"'
 endfunction
@@ -587,7 +582,10 @@ nnoremap <leader>f' :let @*=expand("%:t:r")<CR>
 " `<C-R>=` will insert the contents of `=` register.
 " https://dev.to/iggredible/the-only-vim-insert-mode-cheatsheet-you-ever-needed-nk9
 iabbrev clog console.log()<Left><C-R>=Eatchar('\s')<CR>
-iabbrev logd logger.debug()<Left><C-R>=Eatchar('\s')<CR>
+iabbrev logd logger.debug('{}'.format())<Left><Left><C-R>=Eatchar('\s')<CR>
+iabbrev loge logger.error('{}'.format())<Left><Left><C-R>=Eatchar('\s')<CR>
+iabbrev logi logger.info('{}'.format())<Left><Left><C-R>=Eatchar('\s')<CR>
+iabbrev logw logger.warning('{}'.format())<Left><Left><C-R>=Eatchar('\s')<CR>
 
 iabbrev ict ic(type())<Left><Left><C-R>=Eatchar('\s')<CR>
 iabbrev icd ic(dir())<Left><Left><C-R>=Eatchar('\s')<CR>
