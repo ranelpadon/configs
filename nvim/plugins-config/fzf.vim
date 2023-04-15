@@ -5,7 +5,7 @@
 " https://www.mankier.com/1/fzf
 " https://www.mankier.com/1/rg
 
-let g:fzf_layout = {'window': {'width': 0.75, 'height': 0.5}}
+let g:fzf_layout = {'window': {'width': 0.75, 'height': 0.75}}
 
 " Couldn't use the prescribed 'ctrl-/' in Mac,
 " so use 'ctrl-_' instead (which is triggered by 'ctrl--' also).
@@ -32,7 +32,7 @@ let s:fzf_options = {
         \ [
             \ '--prompt', 'λ ',
             \ '--exact',
-            \ '--preview-window', 'up,55%:hidden',
+            \ '--preview-window', 'up,75%:hidden',
             \ '--bind', '?:toggle-preview',
         \ ]
 \ }
@@ -62,7 +62,7 @@ function GoToTemplateFileOnCursor()
                 \ '--prompt', 'λ ',
                 \ '--exact',
                 \ '--query', query,
-                \ '--preview-window', 'up,55%:hidden',
+                \ '--preview-window', 'up,75%:hidden',
                 \ '--bind', '?:toggle-preview',
             \ ]
     \ }
@@ -164,7 +164,7 @@ function! RgReloader(query, fullscreen, rg_base_command)
                 \ '--disabled',
                 \ '--phony',
                 \ '--query', a:query,
-                \ '--preview-window', 'up,55%:hidden',
+                \ '--preview-window', 'up,75%:hidden',
                 \ '--bind', 'change:reload:' . rg_reload_command,
                 \ '--bind', '?:toggle-preview',
             \ ]
@@ -193,7 +193,7 @@ function! RgLoader(query, fullscreen, rg_base_command)
             \ [
                 \ '--prompt', 'λ ',
                 \ '--exact',
-                \ '--preview-window', 'up,55%',
+                \ '--preview-window', 'up,75%',
                 \ '--bind', '?:toggle-preview',
             \ ]
     \ }
