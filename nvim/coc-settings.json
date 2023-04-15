@@ -67,5 +67,13 @@
     "pyright.disableProgressNotifications": false,
     "pyright.inlayHints.functionReturnTypes": false,
     "pyright.inlayHints.variableTypes": false,
-    "pyright.organizeimports.provider": "isort"
+    "pyright.organizeimports.provider": "isort",
+
+    // For `coc-python` only.
+    // `coc-pyright` uses `python.analysis.extraPaths`:
+    // https://github.com/fannheyward/coc-pyright/blob/master/package.json#L118
+    "python.autoComplete.extraPaths": [
+        "/Users/ranelpadon/dev/ticketing-v2/apps",
+        "/Users/ranelpadon/dev/ticketing-v2/conf"
+    ]
 }
