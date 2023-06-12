@@ -83,18 +83,22 @@ video_trimmer() {
 alias vt=video_trimmer
 
 
-lotcd() {
+_lotc_init() {
+    $PY_MGR activate py311
     cd ~/Desktop
+}
+lotcd() {
+    _lotc_init
     lotc download $@
     cd -
 }
 lotct() {
-    cd ~/Desktop
+    _lotc_init
     lotc trim $@
     cd -
 }
 lotcm() {
-    cd ~/Desktop
+    _lotc_init
     lotc merge $@
     cd -
 }
@@ -154,8 +158,8 @@ create_conda_environment() {
 
 # python whitelabels.py
 w() {
-    cd ~/dev/whitelabels/scripts
-    python python/whitelabels.py $@
+    cd ~/dev/whitelabels/scripts/python
+    python whitelabels.py $@
 }
 
 
