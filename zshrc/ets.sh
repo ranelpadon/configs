@@ -173,7 +173,9 @@ fix_imports_ets() {
 }
 
 fix_python_files() {
-    modified_files=$(git diff --name-only | grep '.py' | grep -v 'migrations/' | grep -v 'conf/')
+    # Use `--relative` so that path still work correctly
+    # if `git diff` is run inside a sub-directory!
+    modified_files=$(git diff --name-only --relative | grep '.py' | grep -v 'migrations/' | grep -v 'conf/')
 
     # Convert newlines to spaces.
     FILES=($(echo $modified_files | tr '\n' ' '))
@@ -248,6 +250,13 @@ cdlatl() {
 }
 cdpatl() {
     cd_pipelines asiaticketing
+}
+
+cdlbase() {
+    cd_local_repo base
+}
+cdpbase() {
+    cd_pipelines base
 }
 
 cdlbjt() {
@@ -382,6 +391,13 @@ cdpmgm() {
     cd_pipelines mgm
 }
 
+cdlsjm() {
+    cd_local_repo sjm
+}
+cdpsjm() {
+    cd_pipelines sjm
+}
+
 cdlsun() {
     cd_local_repo sun-entertainment
 }
@@ -452,12 +468,37 @@ cdpwynn() {
     cd_pipelines wynn
 }
 
-cdlzip() {
-    cd_local_repo zipcity
+cdall() {
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/29rooms-sg/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/allaboutjazz/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/asiaticketing/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/base/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/buyjapantickets/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/buykoreatickets/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/bookyay-mop/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/demo/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/f7/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/hkida/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/hkru/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/hkticketing/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/kgg-kg/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/matchtic/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/melco/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/melco-cyprus/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/mgm/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/sun-entertainment/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/swire/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/tatlerasia/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/tcobmedia/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/ticketflap-jpy/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/tickelo/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/totalticketing/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/thewanch/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/wynn/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/zicket/-/settings/ci_cd#js-protected-environments-settings"
+    open "https://git.hk.asiaticketing.com/ticketflap/whitelabels/zuni/-/settings/ci_cd#js-protected-environments-settings"
 }
-cdpzip() {
-    cd_pipelines zipcity
-}
+
 
 cdlzk() {
     cd_local_repo zicket
