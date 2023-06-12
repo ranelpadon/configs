@@ -14,6 +14,11 @@ vnoremap < <gv
 vnoremap > >gv
 
 
+" Increment/decrement numbers.
+nnoremap + <C-a>
+nnoremap - <C-x>
+
+
 " Adjust current window width. Focus should be in file explorer.
 nnoremap <Leader>, :vertical resize -15 <CR>
 nnoremap <Leader>. :vertical resize +15 <CR>
