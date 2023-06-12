@@ -144,11 +144,11 @@ trd() {
 }
 
 ts() {
-    test sessions_api $1
+    test scapi $1
 }
 
-tsc() {
-    test scapi $1
+tsa() {
+    test sessions_api $1
 }
 
 tt() {
