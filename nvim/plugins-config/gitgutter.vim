@@ -1,54 +1,58 @@
 function! GitGutterNextHunkAllBuffers()
-  let line = line('.')
-  GitGutterNextHunk
-  if line('.') != line
-    return
-  endif
+    let line = line('.')
+    GitGutterNextHunk
 
-  let bufnr = bufnr('')
-  while 1
-    bnext
-    if bufnr('') == bufnr
-      return
+    if line('.') != line
+        return
     endif
-    if !empty(GitGutterGetHunks())
-      1
-      GitGutterNextHunk
-      return
-    endif
-  endwhile
+
+    let bufnr = bufnr('')
+    while 1
+        bnext
+        if bufnr('') == bufnr
+            return
+        endif
+
+        if !empty(GitGutterGetHunks())
+            1
+            GitGutterNextHunk
+            return
+        endif
+    endwhile
 endfunction
 
 
 function! GitGutterPrevHunkAllBuffers()
-  let line = line('.')
-  GitGutterPrevHunk
-  if line('.') != line
-    return
-  endif
+    let line = line('.')
+    GitGutterPrevHunk
 
-  let bufnr = bufnr('')
-  while 1
-    bprevious
-    if bufnr('') == bufnr
-      return
+    if line('.') != line
+        return
     endif
-    if !empty(GitGutterGetHunks())
-      normal! G
-      GitGutterPrevHunk
-      return
-    endif
-  endwhile
+
+    let bufnr = bufnr('')
+    while 1
+        bprevious
+        if bufnr('') == bufnr
+            return
+        endif
+
+        if !empty(GitGutterGetHunks())
+            normal! G
+            GitGutterPrevHunk
+            return
+        endif
+    endwhile
 endfunction
 
 
 " Cycle when it reaches the EOF.
 function! GitGutterNextHunkCycle()
     let line = line('.')
-    silent! GitGutterNextHunk
+    GitGutterNextHunk
 
     if line('.') == line
-        norm! gg
+        normal! gg
         " 1
         GitGutterNextHunk
     endif
@@ -61,7 +65,7 @@ function! GitGutterPrevHunkCycle()
     silent! GitGutterPrevHunk
 
     if line('.') == line
-        norm! G
+        normal! G
         " 1
         GitGutterPrevHunk
     endif
@@ -70,13 +74,16 @@ endfunction
 
 nnoremap <Leader>gg :GitGutterToggle<CR>
 
-" Across files.
-nnoremap <Leader>e :call GitGutterNextHunkAllBuffers()<CR>zz
-nnoremap <Leader>u :call GitGutterPrevHunkAllBuffers()<CR>zz
 
 " Same file.
-nnoremap ge :call GitGutterNextHunkCycle()<CR>zz
-nnoremap gu :call GitGutterPrevHunkCycle()<CR>zz
+nnoremap <Leader>e :call GitGutterNextHunkCycle()<CR>zz
+nnoremap <Leader>u :call GitGutterPrevHunkCycle()<CR>zz
+
+
+" Across files.
+nnoremap ge :call GitGutterNextHunkAllBuffers()<CR>zz
+nnoremap gu :call GitGutterPrevHunkAllBuffers()<CR>zz
+
 
 " nnoremap ge :GitGutterNextHunk<CR>zz
 " nnoremap gu :GitGutterPrevHunk<CR>zz
