@@ -94,7 +94,6 @@ worker() {
     # Clear the previous state first.
     worker_clear
 
-    brew_services start rabbitmq
     pat
     python apps/worker/manage.py autorestart worker
     # python \
