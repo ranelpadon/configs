@@ -204,6 +204,7 @@
                                 "type": "basic"
                             },
                             {
+                                "description":"Similar to F4 below, but copy the screenshot to clipboard instead of save to file",
                                 "from": {
                                     "key_code": "f3"
                                 },
